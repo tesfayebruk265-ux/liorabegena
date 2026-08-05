@@ -1,0 +1,151 @@
+const fs = require('fs');
+const filePath = 'src/context/DataContext.tsx';
+let content = fs.readFileSync(filePath, 'utf8');
+
+let changed = false;
+
+// Fix 1: Remove fallback "any active teacher" assignment in autoAssignTeacherForEnrollment
+// Replace the Fallback 2 section that picks any teacher
+const oldFallback = `    // Fallback 2: If still no teacher found, pick any active teacher
+    if (qualified.length === 0) {
+      qualified = teachers.filter(t => t.status === 'Active');
+      if (qualified.length === 0 && teachers.length > 0) {
+        qualified = [teachers[0]];
+      }
+    }
+
+    if (qualified.length === 0) {
+      return {
+        success: false,
+        message: \`No active teachers available for assignment.\`
+      };
+    }`;
+
+const newFallback = `    // IMPORTANT: No fallback to "any active teacher". Teacher assignment must be
+    // strictly based on instrument specialization. If no eligible teacher is found
+    // for the student's enrolled instrument, the enrollment remains pending
+    // teacher assignment until staff manually assigns a qualified teacher.
+    if (qualified.length === 0) {
+      return {
+        success: false,
+        message: \`No active teachers available for \${targetInstrument} instrument assignment. Manual staff assignment required.\`
+      };
+    }`;
+
+if (content.includes(oldFallback)) {
+  content = content.replace(oldFallback, newFallback);
+  changed = true;
+  console.log('SUCCESS: Removed fallback any-teacher assignment');
+} else {
+  console.log('SKIP: Could not find fallback teacher assignment block');
+}
+
+// Fix 2: Change auto-assign dependency from enrollments.length to also check for status changes
+// We need to track which enrollments have been assigned
+const oldAutoAssign = `  // Auto-scan unassigned active enrollments on startup
+  useEffect(() => {
+    const unassignedActive = enrollments.filter(e =>
+      e.status === 'Active' && (!e.assignedTeacherId || !e.assignedTeacherName || e.assignmentStatus === 'Pending Teacher Assignment')
+    );
+    if (unassignedActive.length > 0) {
+      unassignedActive.forEach(e => {
+        autoAssignTeacherForEnrollment(e.id);
+      });
+    }
+  }, [enrollments.length]);`;
+
+const newAutoAssign = `  // Auto-scan unassigned active enrollments on startup and when enrollments change
+  // This ensures teacher assignment happens when an enrollment is activated
+  // (e.g., after accountant verifies payment) not just when new enrollments are added.
+  useEffect(() => {
+    const unassignedActive = enrollments.filter(e =>
+      e.status === 'Active' && (!e.assignedTeacherId || !e.assignedTeacherName || e.assignmentStatus === 'Pending Teacher Assignment')
+    );
+    if (unassignedActive.length > 0) {
+      unassignedActive.forEach(e => {
+        autoAssignTeacherForEnrollment(e.id);
+      });
+    }
+  }, [enrollments]);`;
+
+if (content.includes(oldAutoAssign)) {
+  content = content.replace(oldAutoAssign, newAutoAssign);
+  changed = true;
+  console.log('SUCCESS: Updated auto-assign dependency to track all enrollment changes');
+} else {
+  console.log('SKIP: Could not find auto-assign useEffect block');
+}
+
+// Fix 3: In addStudentRegistration, change enrollment status from 'Active' to 'Pending Verification'
+const oldRegStatus = `        status: 'Active',
+        progressPercent: 0,
+        assignmentStatus: 'Pending Teacher Assignment'
+      };
+      return [newEnr, ...prev];`;
+
+const newRegStatus = `        status: 'Pending Verification',
+        progressPercent: 0,
+        assignmentStatus: 'Pending Teacher Assignment'
+      };
+      return [newEnr, ...prev];`;
+
+if (content.includes(oldRegStatus)) {
+  content = content.replace(oldRegStatus, newRegStatus);
+  changed = true;
+  console.log('SUCCESS: Changed addStudentRegistration enrollment status to Pending Verification');
+} else {
+  console.log('SKIP: Could not find addStudentRegistration enrollment status block');
+}
+
+// Fix 4: In addStudentRegistration, remove the auto-assign teacher call since enrollment is now Pending
+const oldAutoCall = `    setTimeout(() => {
+      autoAssignTeacherForEnrollment(activeEnrId);
+    }, 50);
+
+    // Sync user account in ab_accounts so authentication account works immediately`;
+
+const newAutoCall = `    // Note: Teacher auto-assignment is NOT triggered here because the enrollment
+    // is created with 'Pending Verification' status. Teacher assignment will happen
+    // only after the accountant verifies the payment and the enrollment becomes Active.
+
+    // Sync user account in ab_accounts so authentication account works immediately`;
+
+if (content.includes(oldAutoCall)) {
+  content = content.replace(oldAutoCall, newAutoCall);
+  changed = true;
+  console.log('SUCCESS: Removed auto-assign call from addStudentRegistration');
+} else {
+  console.log('SKIP: Could not find auto-assign call in addStudentRegistration');
+}
+
+// Fix 5: In addStudentEnrollment, don't auto-assign if status is Pending Verification
+const oldEnrAutoAssign = `    // Automatically trigger teacher assignment algorithm
+    setTimeout(() => {
+      autoAssignTeacherForEnrollment(enrollmentId);
+    }, 50);
+
+    return newEnrollment;`;
+
+const newEnrAutoAssign = `    // Only trigger teacher assignment if enrollment is Active (not Pending Verification)
+    if (newEnrollment.status === 'Active') {
+      setTimeout(() => {
+        autoAssignTeacherForEnrollment(enrollmentId);
+      }, 50);
+    }
+
+    return newEnrollment;`;
+
+if (content.includes(oldEnrAutoAssign)) {
+  content = content.replace(oldEnrAutoAssign, newEnrAutoAssign);
+  changed = true;
+  console.log('SUCCESS: Made auto-assign conditional on Active status in addStudentEnrollment');
+} else {
+  console.log('SKIP: Could not find auto-assign in addStudentEnrollment');
+}
+
+if (changed) {
+  fs.writeFileSync(filePath, content);
+  console.log('DONE: All changes saved to DataContext.tsx');
+} else {
+  console.log('NO CHANGES made to DataContext.tsx');
+}
