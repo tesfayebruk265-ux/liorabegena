@@ -43,7 +43,7 @@ export const TRANSLATIONS = {
       secondaryCTA: 'Explore Courses'
     },
     stats: {
-      students: '1000+ Active Learners',
+      students: '100+ Active Learners',
       branches: 'Hawassa Main Branch',
       teachers: '15+ Master Instructors',
       programs: '6+ Traditional Instruments'
@@ -395,7 +395,7 @@ export const TRANSLATIONS = {
       secondaryCTA: 'ትምህርቶችን ይመልከቱ'
     },
     stats: {
-      students: 'ከ 1000+ በላይ ተማሪዎች',
+      students: 'ከ 100+ በላይ ተማሪዎች',
       branches: 'ዋና ቅርንጫፍ በሐዋሳ',
       teachers: '15+ አንጋፋ አስተማሪዎች',
       programs: '6+ የዜማ መሳሪያዎች ስልጠና'
