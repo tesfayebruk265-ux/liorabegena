@@ -23,45 +23,45 @@ import { MOCK_OPERATIONAL_TASKS } from './OperationsCenter';
 const SAMPLE_STAFF_MEMBERS: BranchStaffMember[] = [
   {
     id: 's-101',
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
-    name: 'Solomon Worku',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
+    name: 'Deacon Bruk Tesfaye',
     role: 'Branch Manager',
-    email: 'solomon@abelbegena.com',
-    phone: '+251 911 234 567',
+    email: 'bruk@liorabegena.com',
+    phone: '+251 912 67 4600',
     status: 'Active',
     workingSchedule: 'Mon - Sat: 08:30 AM - 05:00 PM'
   },
   {
     id: 's-102',
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
-    name: 'Abel Begena',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
+    name: 'Lique Mezemer Bruk',
     role: 'Teacher',
-    email: 'abel@abelbegena.com',
+    email: 'teacher@liorabegena.com',
     phone: '+251 911 111 222',
     status: 'Active',
-    workingSchedule: 'Sun, Tue, Thu: Piazza & Megenagna',
+    workingSchedule: 'Sun, Tue, Thu: Hawassa Main Branch',
     assignedInstruments: ['Begena']
   },
   {
     id: 's-103',
-    branchId: 'b-[#2B2B2B]e',
-    branchName: 'Megenagna Branch',
-    name: 'Selamawit Kebede',
-    role: 'Branch Manager',
-    email: 'selamawit@abelbegena.com',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
+    name: 'Genet Assefa',
+    role: 'Registration Staff',
+    email: 'admissions@liorabegena.com',
     phone: '+251 912 345 678',
     status: 'Active',
     workingSchedule: 'Mon - Sat: 08:00 AM - 06:00 PM'
   },
   {
     id: 's-104',
-    branchId: 'b-lebu',
-    branchName: 'Lebu Branch',
-    name: 'Yared Tadesse',
-    role: 'Branch Manager',
-    email: 'yared@abelbegena.com',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
+    name: 'Yared Gebre',
+    role: 'Support Staff',
+    email: 'admin@liorabegena.com',
     phone: '+251 913 456 789',
     status: 'Active',
     workingSchedule: 'Tue - Sun: 08:30 AM - 05:30 PM'
@@ -92,8 +92,8 @@ export function StaffAndAvailabilityCenter({ lang, onNavigate, activeMode = 'sta
       title: taskTitle,
       assignedToName: taskAssignee,
       assignedToRole: 'Support Staff',
-      branchId: 'b-piazza',
-      branchName: 'Piazza Branch',
+      branchId: 'b-hawassa',
+      branchName: 'Hawassa Main Branch',
       priority: taskPriority,
       dueDate: new Date().toISOString().substring(0, 10),
       status: 'To Do',
@@ -149,7 +149,7 @@ export function StaffAndAvailabilityCenter({ lang, onNavigate, activeMode = 'sta
           </h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">
             {mode === 'staff'
-              ? 'View registration staff, accountants, support staff, and teacher availability schedules across Piazza, Megenagna, and Lebu campuses.'
+              ? 'View registration staff, accountants, support staff, and teacher availability schedules at Hawassa main Branch and online.'
               : 'Assign, prioritize, and track daily operational tasks such as classroom preparation, instrument tuning, and parent calls.'}
           </p>
         </div>

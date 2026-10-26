@@ -97,13 +97,13 @@ export function GraduationAndAlumniCenter({ lang, onNavigate, initialMode = 'gra
         <div className="max-w-4xl space-y-3 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E7DED1] text-xs font-bold text-[#E89B52] shadow-3xs">
             <GraduationCap size={14} className="text-[#C79A2B]" />
-            <span>Abel Begena Graduation & Global Alumni Network</span>
+            <span>Liora Begena Graduation & Global Alumni Network</span>
           </div>
           <h1 className="font-display font-black text-3xl sm:text-4xl text-[#2B2B2B] tracking-tight">
             Class of 2026 Graduation Recital & Alumni Heritage Network
           </h1>
           <p className="text-sm text-[#666666] leading-relaxed max-w-2xl">
-            Celebrate graduating traditional music scholars, generate guest QR invitation passes, connect with Abel Begena alumni worldwide, and access 1-on-1 mentorship pairings.
+            Celebrate graduating traditional music scholars, generate guest QR invitation passes, connect with Liora Begena alumni worldwide, and access 1-on-1 mentorship pairings.
           </p>
         </div>
       </div>

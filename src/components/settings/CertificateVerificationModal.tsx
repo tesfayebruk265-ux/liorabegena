@@ -18,8 +18,8 @@ export const CertificateVerificationModal: React.FC<CertificateVerificationProps
     courseName: 'Begena Sacred Acoustic Instrument - Level 1',
     level: 'Level 1 Graduate',
     issueDate: 'July 15, 2026',
-    issuer: 'Abel Begena Traditional Sacred Music School',
-    signatory: 'Girma Mamo & Abel Girma (Founders)',
+    issuer: 'Liora Begena Traditional Sacred Music School',
+    signatory: 'Bruk Tesfaye (Founder)',
     status: 'AUTHENTIC & VERIFIED',
     hashSignature: '0x8f29a17c4b00e9a1827419ef20182412'
   });
@@ -37,8 +37,8 @@ export const CertificateVerificationModal: React.FC<CertificateVerificationProps
         courseName: 'Begena Sacred Acoustic Instrument - Level 1',
         level: 'Level 1 Graduate',
         issueDate: 'July 15, 2026',
-        issuer: 'Abel Begena Traditional Sacred Music School',
-        signatory: 'Girma Mamo & Abel Girma (Founders)',
+        issuer: 'Liora Begena Traditional Sacred Music School',
+        signatory: 'Bruk Tesfaye (Founder)',
         status: 'AUTHENTIC & VERIFIED',
         hashSignature: `0x${Math.random().toString(16).substring(2, 10)}...`
       });
@@ -55,7 +55,7 @@ export const CertificateVerificationModal: React.FC<CertificateVerificationProps
         </div>
         <h1 className="text-2xl font-extrabold text-white">Certificate Verification Gateway</h1>
         <p className="text-xs text-amber-200 max-w-lg mx-auto">
-          Verify authentic certificates issued by Abel Begena Traditional Sacred Music School via unique ID or QR code hash.
+          Verify authentic certificates issued by Liora Begena Traditional Sacred Music School via unique ID or QR code hash.
         </p>
       </div>
 

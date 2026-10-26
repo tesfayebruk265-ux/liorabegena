@@ -47,9 +47,9 @@ export function BranchManagerPortal({ onNavigate, lang }: BranchManagerPortalPro
   const { currentUser, addNotification, logout } = useAuth();
   const { teachers, enrollments } = useData();
 
-  // Branch Selector (Piazza, Megenagna, Lebu)
-  const [selectedBranch, setSelectedBranch] = useState<'Piazza Branch' | 'Megenagna Branch' | 'Lebu Branch'>(
-    (currentUser?.branch as any) || 'Piazza Branch'
+  // Branch Selector (Hawassa Main Branch, Online)
+  const [selectedBranch, setSelectedBranch] = useState<'Hawassa Main Branch' | 'Online Campus'>(
+    (currentUser?.branch as any) || 'Hawassa Main Branch'
   );
 
   // Active Tab navigation
@@ -171,7 +171,7 @@ export function BranchManagerPortal({ onNavigate, lang }: BranchManagerPortalPro
           </div>
           <div>
             <h1 className="font-display font-black text-lg tracking-tight uppercase text-gray-800">Branch Executive Portal</h1>
-            <p className="text-[10px] tracking-wider text-[#E89B52] font-bold uppercase">Abel Begena School • Operational Command</p>
+            <p className="text-[10px] tracking-wider text-[#E89B52] font-bold uppercase">Liora Begena School • Operational Command</p>
           </div>
         </div>
 
@@ -185,9 +185,8 @@ export function BranchManagerPortal({ onNavigate, lang }: BranchManagerPortalPro
               onChange={(e) => setSelectedBranch(e.target.value as any)}
               className="p-2 border border-[#E7DED1] rounded-xl bg-[#FAF6EF] text-xs font-bold text-gray-800 outline-none cursor-pointer"
             >
-              <option value="Piazza Branch">1. Piazza Branch — Addis Ababa</option>
-              <option value="Megenagna Branch">2. Megenagna Branch — Addis Ababa</option>
-              <option value="Lebu Branch">3. Lebu Branch — Addis Ababa</option>
+              <option value="Hawassa Main Branch">Hawassa Main Branch — Center Point Tower</option>
+              <option value="Online Campus">Online International Campus</option>
             </select>
           </div>
 
@@ -335,12 +334,12 @@ export function BranchManagerPortal({ onNavigate, lang }: BranchManagerPortalPro
               <h3 className="font-display font-black text-sm uppercase tracking-wider">{selectedBranch} Information</h3>
 
               <div className="grid grid-cols-2 gap-4 bg-[#FAF6EF] p-4 rounded-xl border border-[#E7DED1]">
-                <p><strong>Branch Manager:</strong> {currentUser?.fullName || 'Teacher Solomon'}</p>
-                <p><strong>City / Subcity:</strong> Addis Ababa</p>
-                <p><strong>Operating Hours:</strong> Mon - Sun: 08:00 AM - 06:00 PM</p>
+                <p><strong>Branch Manager:</strong> {currentUser?.fullName || 'Deacon Bruk Tesfaye'}</p>
+                <p><strong>City / Address:</strong> Hawassa, Center Point Tower (1st Floor)</p>
+                <p><strong>Operating Hours:</strong> Mon - Sat: 08:30 AM - 06:30 PM</p>
                 <p><strong>Total Classrooms:</strong> {rooms.length}</p>
-                <p><strong>Phone:</strong> +251 11 123 4567</p>
-                <p><strong>Email:</strong> branch.manager@begena.com</p>
+                <p><strong>Phone:</strong> +251 912 67 4600</p>
+                <p><strong>Email:</strong> info@liorabegena.com</p>
               </div>
             </div>
           )}

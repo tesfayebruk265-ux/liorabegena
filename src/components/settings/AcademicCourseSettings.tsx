@@ -27,7 +27,7 @@ export const AcademicCourseSettings: React.FC = () => {
             <BookOpen className="w-6 h-6 text-amber-700" /> Academic Calendar & Centralized Pricing Matrix
           </h2>
           <p className="text-xs text-neutral-500 mt-1">
-            Manage course fees, 3/6/9-month packages, registration fees, online vs in-person rates, and term dates centrally.
+            Manage course fees, 3/4/6-month packages, registration fees, online vs in-person rates, and term dates centrally.
           </p>
         </div>
 
@@ -107,8 +107,8 @@ export const AcademicCourseSettings: React.FC = () => {
                 <th className="p-3">Course / Instrument</th>
                 <th className="p-3">Monthly</th>
                 <th className="p-3">3-Month</th>
+                <th className="p-3">4-Month</th>
                 <th className="p-3">6-Month</th>
-                <th className="p-3">9-Month</th>
                 <th className="p-3">Reg. Fee</th>
                 <th className="p-3">Online Rate</th>
                 <th className="p-3">In-Person Rate</th>
@@ -141,16 +141,16 @@ export const AcademicCourseSettings: React.FC = () => {
                   <td className="p-3">
                     <input
                       type="number"
-                      value={item.sixMonthOption}
-                      onChange={(e) => handlePriceChange(item.id, 'sixMonthOption', Number(e.target.value))}
+                      value={item.fourMonthOption}
+                      onChange={(e) => handlePriceChange(item.id, 'fourMonthOption', Number(e.target.value))}
                       className="w-20 bg-stone-50 border border-stone-300 rounded px-2 py-1 font-semibold"
                     />
                   </td>
                   <td className="p-3">
                     <input
                       type="number"
-                      value={item.nineMonthOption}
-                      onChange={(e) => handlePriceChange(item.id, 'nineMonthOption', Number(e.target.value))}
+                      value={item.sixMonthOption}
+                      onChange={(e) => handlePriceChange(item.id, 'sixMonthOption', Number(e.target.value))}
                       className="w-20 bg-stone-50 border border-stone-300 rounded px-2 py-1 font-semibold"
                     />
                   </td>

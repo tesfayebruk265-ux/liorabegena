@@ -31,70 +31,26 @@ import { Button, Input } from '../InteractiveComponents';
 // Mock Initial Data for Operations
 export const MOCK_BRANCHES: SchoolBranch[] = [
   {
-    id: 'b-piazza',
-    name: 'Piazza Branch',
-    code: 'PZ-01',
-    city: 'Addis Ababa',
-    subCity: 'Arada',
+    id: 'b-hawassa',
+    name: 'Hawassa Main Branch',
+    code: 'HW-01',
+    city: 'Hawassa',
+    subCity: 'Center Point',
     woreda: '01',
-    address: 'Near St. George Church & Historic Square, Arada Sub-City',
-    description: 'The historic flagship sanctuary of Abel Begena School featuring traditional wooden acoustics and master craftsman studios.',
-    latitude: 9.035,
-    longitude: 38.752,
-    managerName: 'Solomon Worku',
-    contactPhone: '+251 911 234 567',
-    emergencyPhone: '+251 911 999 111',
+    address: 'Center Point Tower, first floor, Hawassa, Ethiopia',
+    description: 'The premier main campus of Liora Begena School featuring traditional acoustic rooms, practice studios, and administrative offices.',
+    latitude: 7.050,
+    longitude: 38.467,
+    managerName: 'Deacon Bruk Tesfaye',
+    contactPhone: '+251 912 67 4600',
+    emergencyPhone: '+251 911 000 000',
     operatingHours: 'Monday - Saturday: 08:30 AM - 06:30 PM EAT',
     status: 'Active',
-    totalStudents: 340,
-    totalTeachers: 14,
-    activeCoursesCount: 8,
+    totalStudents: 720,
+    totalTeachers: 24,
+    activeCoursesCount: 3,
     classesTodayCount: 18,
     availableRoomsCount: 6
-  },
-  {
-    id: 'b-[#2B2B2B]e',
-    name: 'Megenagna Branch',
-    code: 'MG-02',
-    city: 'Addis Ababa',
-    subCity: 'Yeka',
-    woreda: '05',
-    address: 'Zefmesh Grand Mall Plaza, 4th Floor, Megenagna Junction',
-    description: 'Modern east-side campus equipped with digital practice labs, recording booths, and hybrid Google Meet streaming rigs.',
-    latitude: 9.020,
-    longitude: 38.801,
-    managerName: 'Selamawit Kebede',
-    contactPhone: '+251 912 345 678',
-    emergencyPhone: '+251 911 999 222',
-    operatingHours: 'Monday - Saturday: 08:00 AM - 07:00 PM EAT',
-    status: 'Active',
-    totalStudents: 280,
-    totalTeachers: 11,
-    activeCoursesCount: 6,
-    classesTodayCount: 14,
-    availableRoomsCount: 5
-  },
-  {
-    id: 'b-lebu',
-    name: 'Lebu Branch',
-    code: 'LB-03',
-    city: 'Addis Ababa',
-    subCity: 'Nifas Silk-Lafto',
-    woreda: '02',
-    address: 'Lebu Varnero Commercial Center, Block B',
-    description: 'South-west Addis campus serving young learners and church choir practice groups with spacious performance halls.',
-    latitude: 8.960,
-    longitude: 38.720,
-    managerName: 'Yared Tadesse',
-    contactPhone: '+251 913 456 789',
-    emergencyPhone: '+251 911 999 333',
-    operatingHours: 'Tuesday - Sunday: 08:30 AM - 06:00 PM EAT',
-    status: 'Active',
-    totalStudents: 195,
-    totalTeachers: 8,
-    activeCoursesCount: 5,
-    classesTodayCount: 10,
-    availableRoomsCount: 4
   }
 ];
 
@@ -104,8 +60,8 @@ export const MOCK_OPERATIONAL_TASKS: OperationalTask[] = [
     title: 'Prepare Classroom 102 for Begena Level 1 Sunday Class',
     assignedToName: 'Dawit Mengistu',
     assignedToRole: 'Support Staff',
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
     priority: 'Urgent',
     dueDate: '2026-07-22',
     status: 'In Progress',
@@ -117,8 +73,8 @@ export const MOCK_OPERATIONAL_TASKS: OperationalTask[] = [
     title: 'Restock Traditional Gut Strings for Krar & Begena',
     assignedToName: 'Tigist Alemu',
     assignedToRole: 'Inventory Staff',
-    branchId: 'b-[#2B2B2B]e',
-    branchName: 'Megenagna Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
     priority: 'High',
     dueDate: '2026-07-23',
     status: 'To Do',
@@ -130,8 +86,8 @@ export const MOCK_OPERATIONAL_TASKS: OperationalTask[] = [
     title: 'Confirm Makeup Class Google Meet link with Parent',
     assignedToName: 'Bethlehem Tadesse',
     assignedToRole: 'Registration Staff',
-    branchId: 'b-lebu',
-    branchName: 'Lebu Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
     priority: 'Normal',
     dueDate: '2026-07-22',
     status: 'Completed',
@@ -173,7 +129,7 @@ export function OperationsCenter({ lang, onNavigate, activeSubTab = 'overview' }
       city: 'Addis Ababa',
       subCity: newBranchSubCity,
       address: newBranchAddress || `${newBranchSubCity} Campus`,
-      description: 'Newly added branch location of Abel Begena School.',
+      description: 'Newly added branch location of Liora Begena School.',
       latitude: 9.01,
       longitude: 38.76,
       managerName: 'Assigned Staff',
@@ -201,7 +157,7 @@ export function OperationsCenter({ lang, onNavigate, activeSubTab = 'overview' }
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E89B52]/20 border border-[#E89B52]/40 text-[#E89B52] text-xs font-bold uppercase tracking-widest">
               <Building2 size={14} />
-              <span>Abel Begena Organization Operational Workspace</span>
+              <span>Liora Begena Organization Operational Workspace</span>
             </div>
 
             <div className="flex gap-2">
@@ -221,7 +177,7 @@ export function OperationsCenter({ lang, onNavigate, activeSubTab = 'overview' }
             SCHOOL OPERATIONS & BRANCH MANAGEMENT
           </h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-3xl leading-relaxed">
-            Centralized operational dashboard for branch managers, registration staff, room schedulers, inventory controllers, and school leadership across Piazza, Megenagna, and Lebu campuses.
+            Centralized operational dashboard for branch managers, registration staff, room schedulers, inventory controllers, and school leadership at Hawassa main Branch.
           </p>
         </div>
       </div>
@@ -236,7 +192,7 @@ export function OperationsCenter({ lang, onNavigate, activeSubTab = 'overview' }
           <div className="font-display font-black text-3xl text-[#2B2B2B]">
             {branches.filter((b) => b.status === 'Active').length} <span className="text-sm font-normal text-gray-400">/ {branches.length}</span>
           </div>
-          <p className="text-[10px] text-green-700 font-bold">Piazza • Megenagna • Lebu</p>
+          <p className="text-[10px] text-green-700 font-bold">Hawassa (Center Point Tower)</p>
         </div>
 
         <div className="p-5 bg-white border border-[#E7DED1] rounded-2xl space-y-2 shadow-xs">
@@ -405,7 +361,7 @@ export function OperationsCenter({ lang, onNavigate, activeSubTab = 'overview' }
             <div className="p-3.5 bg-red-50 border border-red-200 rounded-2xl space-y-1">
               <div className="flex justify-between font-bold text-red-900">
                 <span>🚨 Low Inventory Alert</span>
-                <span className="text-[10px]">Megenagna Branch</span>
+                <span className="text-[10px]">Hawassa main Branch</span>
               </div>
               <p className="text-red-800">
                 Traditional Gut Strings for Begena reached minimum threshold (2 sets remaining).
@@ -414,8 +370,8 @@ export function OperationsCenter({ lang, onNavigate, activeSubTab = 'overview' }
 
             <div className="p-3.5 bg-blue-50 border border-blue-200 rounded-2xl space-y-1">
               <div className="flex justify-between font-bold text-blue-900">
-                <span>🔄 Pending Student Branch Transfer</span>
-                <span className="text-[10px]">Lebu ➔ Piazza</span>
+                <span>🔄 Pending Student Cohort Transfer</span>
+                <span className="text-[10px]">Online ➔ Hawassa Campus</span>
               </div>
               <p className="text-blue-800">
                 Student Dawit Hailu requested transfer due to location change. Awaiting review.

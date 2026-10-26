@@ -20,12 +20,12 @@ const SAMPLE_TRANSFERS: StudentBranchTransferRequest[] = [
     id: 'tr-1',
     studentId: 'STU-2026-081',
     studentName: 'Dawit Hailu',
-    currentBranchId: 'b-lebu',
-    currentBranchName: 'Lebu Branch',
-    destinationBranchId: 'b-piazza',
-    destinationBranchName: 'Piazza Branch',
+    currentBranchId: 'b-online',
+    currentBranchName: 'Online Campus',
+    destinationBranchId: 'b-hawassa',
+    destinationBranchName: 'Hawassa Main Branch',
     reason: 'Moved Location',
-    notes: 'Family recently relocated to Arada sub-city near Piazza.',
+    notes: 'Family relocated to Hawassa near Center Point Tower.',
     requestedBy: 'Student/Parent',
     requestedDate: '2026-07-20',
     status: 'Pending Review'
@@ -34,16 +34,16 @@ const SAMPLE_TRANSFERS: StudentBranchTransferRequest[] = [
     id: 'tr-2',
     studentId: 'STU-2026-105',
     studentName: 'Saba Tesfaye',
-    currentBranchId: 'b-[#2B2B2B]e',
-    currentBranchName: 'Megenagna Branch',
-    destinationBranchId: 'b-lebu',
-    destinationBranchName: 'Lebu Branch',
+    currentBranchId: 'b-hawassa',
+    currentBranchName: 'Hawassa Main Branch',
+    destinationBranchId: 'b-online',
+    destinationBranchName: 'Online Campus',
     reason: 'Schedule Change',
-    notes: 'Sunday morning session fits better at Lebu Branch.',
+    notes: 'Online evening session fits work commitments.',
     requestedBy: 'Student',
     requestedDate: '2026-07-18',
     status: 'Approved',
-    approvedBy: 'Selamawit Kebede (Megenagna Manager)'
+    approvedBy: 'Deacon Bruk Tesfaye (Hawassa Manager)'
   }
 ];
 
@@ -58,8 +58,8 @@ export function StudentTransferCenter({ lang, onNavigate }: StudentTransferCente
   // New Request Modal State
   const [showNewModal, setShowNewModal] = useState(false);
   const [studentName, setStudentName] = useState('Dawit Hailu');
-  const [sourceBranch, setSourceBranch] = useState('Lebu Branch');
-  const [destBranch, setDestBranch] = useState('Piazza Branch');
+  const [sourceBranch, setSourceBranch] = useState('Hawassa Main Branch');
+  const [destBranch, setDestBranch] = useState('Online Campus');
   const [transferReason, setTransferReason] = useState<any>('Moved Location');
   const [notes, setNotes] = useState('');
 
@@ -119,7 +119,7 @@ export function StudentTransferCenter({ lang, onNavigate }: StudentTransferCente
             STUDENT BRANCH TRANSFER CENTER
           </h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">
-            Process student transfers between Piazza, Megenagna, and Lebu campuses. Full historical progress, practice recordings, payments, and certificates are automatically preserved without creating duplicate accounts.
+            Process student transfers between Hawassa main Branch and Online cohorts. Full historical progress, practice recordings, payments, and certificates are automatically preserved without creating duplicate accounts.
           </p>
         </div>
       </div>
@@ -203,9 +203,8 @@ export function StudentTransferCenter({ lang, onNavigate }: StudentTransferCente
                     value={sourceBranch}
                     onChange={(e) => setSourceBranch(e.target.value)}
                   >
-                    <option value="Piazza Branch">Piazza Branch</option>
-                    <option value="Megenagna Branch">Megenagna Branch</option>
-                    <option value="Lebu Branch">Lebu Branch</option>
+                    <option value="Hawassa Main Branch">Hawassa Main Branch</option>
+                    <option value="Online Campus">Online Campus</option>
                   </select>
                 </div>
 
@@ -216,9 +215,8 @@ export function StudentTransferCenter({ lang, onNavigate }: StudentTransferCente
                     value={destBranch}
                     onChange={(e) => setDestBranch(e.target.value)}
                   >
-                    <option value="Piazza Branch">Piazza Branch</option>
-                    <option value="Megenagna Branch">Megenagna Branch</option>
-                    <option value="Lebu Branch">Lebu Branch</option>
+                    <option value="Hawassa Main Branch">Hawassa Main Branch</option>
+                    <option value="Online Campus">Online Campus</option>
                   </select>
                 </div>
               </div>

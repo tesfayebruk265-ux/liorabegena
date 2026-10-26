@@ -147,7 +147,7 @@ export function printElement(element: HTMLElement) {
     <!DOCTYPE html>
     <html>
       <head>
-        <title>Official Certificate - Abel Begena School</title>
+        <title>Official Certificate - Liora Begena School</title>
         ${styles}
         <style>
           body { margin: 0; padding: 24px; background: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; }

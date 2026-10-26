@@ -22,7 +22,7 @@ export const INITIAL_POSTS: CommunityPost[] = [
     authorAvatar: '',
     category: 'Practice',
     title: 'Daily Begena Practice — Psalm 23 (Mezmur)',
-    content: 'Sharing my day 14 practice recording for Begena Level 1! Focused on smooth transitions between lower strings and resonance control. Guidance from Teacher Abel is greatly appreciated.',
+    content: 'Sharing my day 14 practice recording for Begena Level 1! Focused on smooth transitions between lower strings and resonance control. Guidance from Teacher Bruk is greatly appreciated.',
     mediaUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     mediaType: 'audio',
     practiceMeta: {
@@ -30,7 +30,7 @@ export const INITIAL_POSTS: CommunityPost[] = [
       level: 'Level 1',
       instrument: 'Begena',
       teacherFeedback: {
-        teacherName: 'Teacher Abel Nigussie',
+        teacherName: 'Teacher Bruk Nigussie',
         teacherAvatar: '',
         rating: 5,
         text: 'Beautiful reverence and steady rhythm! Your posture and pluck angle have improved significantly.',
@@ -60,7 +60,7 @@ export const INITIAL_POSTS: CommunityPost[] = [
   {
     id: 'post-2',
     authorId: 'usr-teacher-1',
-    authorName: 'Teacher Abel Nigussie',
+    authorName: 'Teacher Bruk Nigussie',
     authorRole: 'teacher',
     authorAvatar: '',
     category: 'General',
@@ -128,7 +128,7 @@ export const INITIAL_DISCUSSIONS: DiscussionThread[] = [
     id: 'disc-1',
     category: 'Begena',
     title: 'How to properly maintain natural sheep-gut strings in dry climate?',
-    content: 'Greetings everyone! During dry seasons in Addis Ababa, I notice string tension shifts. What natural oils or techniques does Abel Begena School recommend for gut string preservation?',
+    content: 'Greetings everyone! During dry seasons in Addis Ababa, I notice string tension shifts. What natural oils or techniques does Liora Begena School recommend for gut string preservation?',
     authorId: 'usr-student-1',
     authorName: 'Bruk Tesfaye',
     authorRole: 'student',
@@ -138,7 +138,7 @@ export const INITIAL_DISCUSSIONS: DiscussionThread[] = [
     likes: ['usr-student-2', 'usr-teacher-1'],
     isPinned: true,
     teacherAnswer: {
-      teacherName: 'Teacher Abel Nigussie',
+      teacherName: 'Teacher Bruk Nigussie',
       teacherAvatar: '',
       answer: 'Apply a microscopic drop of pure olive oil or traditional sesame oil once every 3 weeks along the string length, avoiding excessive oil near the leather bridge (Mebaria). Keep your Begena inside its padded fabric cover when not in use.',
       timestamp: '5 hours ago'
@@ -166,23 +166,23 @@ export const INITIAL_DISCUSSIONS: DiscussionThread[] = [
 export const INITIAL_ANNOUNCEMENTS: AnnouncementItem[] = [
   {
     id: 'ann-1',
-    title: 'URGENT: Piazza Branch Schedule Adjustment for Saturday',
-    content: 'Due to scheduled city power maintenance on Saturday morning, all morning classes at Piazza Main Branch will shift by 1 hour (starting 10:00 AM instead of 9:00 AM). Online classes remain unaffected.',
+    title: 'URGENT: Hawassa main Branch Schedule Adjustment for Saturday',
+    content: 'Due to scheduled city power maintenance on Saturday morning, all morning classes at Hawassa main Branch (Center Point Tower) will shift by 1 hour (starting 10:00 AM instead of 9:00 AM). Online classes remain unaffected.',
     priority: 'Urgent',
-    targetAudience: 'Piazza Branch Students & Parents',
-    targetBranch: 'Piazza Main Branch',
-    authorName: 'Piazza Branch Manager',
+    targetAudience: 'Hawassa Branch Students & Parents',
+    targetBranch: 'Hawassa main Branch',
+    authorName: 'Hawassa Branch Director',
     authorRole: 'branch_manager',
     date: '2026-07-21',
     isRead: false
   },
   {
     id: 'ann-2',
-    title: 'Annual Abel Begena School Cultural Exhibition & Mezmur Concert',
+    title: 'Annual Liora Begena School Cultural Exhibition & Mezmur Concert',
     content: 'We are overjoyed to announce our upcoming Annual Exhibition at National Theatre Addis Ababa. All students from Level 1 to Advanced are invited to submit practice recordings for ensemble selection.',
     priority: 'Important',
     targetAudience: 'All School Students, Parents & Staff',
-    authorName: 'Founder Abel Nigussie',
+    authorName: 'Founder Bruk Nigussie',
     authorRole: 'founder',
     date: '2026-07-19',
     image: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&q=80&w=800',
@@ -210,20 +210,20 @@ export const INITIAL_MODERATION_REPORTS: ModerationReport[] = [
 export const INITIAL_CAMPAIGNS: CommunicationCampaign[] = [
   {
     id: 'camp-1',
-    title: 'Piazza Branch Saturday Schedule Shift Notice',
+    title: 'Hawassa main Branch Saturday Schedule Shift Notice',
     channel: 'SMS',
-    targetAudience: 'Piazza Branch Registered Students',
+    targetAudience: 'Hawassa Campus Registered Students',
     status: 'Completed',
     recipientCount: 148,
     sentAt: '2026-07-21 08:30 AM',
-    messageText: 'Abel Begena Alert: Piazza Saturday morning classes move to 10:00 AM due to area power maintenance. Thank you!',
+    messageText: 'Liora Begena Alert: Hawassa Saturday morning classes move to 10:00 AM due to area power maintenance. Thank you!',
     deliveryRate: 98.6
   },
   {
     id: 'camp-2',
     title: 'National Exhibition Registration Telegram Broadcast',
     channel: 'Telegram',
-    targetAudience: 'Abel Begena Official Channel Members',
+    targetAudience: 'Liora Begena Official Channel Members',
     status: 'Completed',
     recipientCount: 1250,
     sentAt: '2026-07-19 02:00 PM',

@@ -17,6 +17,7 @@ interface AuthContextType {
   logout: () => void;
   verifyCode: (code: string, emailOverride?: string) => Promise<{ success: boolean; error?: string }>;
   resendVerificationCode: (emailOverride?: string) => Promise<{ success: boolean; error?: string; remainingSeconds?: number }>;
+  sendTelegramVerificationCode: (sharedPhone: string, emailOverride?: string) => Promise<{ success: boolean; matched: boolean; code?: string; error?: string; registeredPhone?: string }>;
   forgotPassword: (emailOrPhone: string) => Promise<{ success: boolean; error?: string }>;
   resetPassword: (code: string, newPassword: string) => Promise<{ success: boolean; error?: string }>;
   updateProfile: (fields: Partial<User>) => Promise<{ success: boolean; error?: string }>;
@@ -46,7 +47,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const INITIAL_NOTIFICATIONS: Notification[] = [
   {
     id: '1',
-    title: 'Welcome to Abel Begena School',
+    title: 'Welcome to Liora Begena School',
     description: 'Explore the traditional learning dashboard and check your progress.',
     isRead: false,
     timestamp: '2026-07-21T09:00:00Z',
@@ -73,7 +74,7 @@ const INITIAL_NOTIFICATIONS: Notification[] = [
   {
     id: '4',
     title: 'New Student Application Pending Review',
-    description: 'A new student registration is waiting for staff verification in Piazza Branch.',
+    description: 'A new student registration is waiting for staff verification in Hawassa Campus.',
     isRead: false,
     timestamp: '2026-07-21T11:00:00Z',
     category: 'registration',
@@ -107,6 +108,18 @@ function isNotificationForUser(notif: Notification, user: User | null): boolean 
 }
 
 // Helper to check if student identity has been permanently deleted
+export function normalizePhoneNumber(phone: string): string {
+  if (!phone) return '';
+  let digits = phone.replace(/\D/g, '');
+  if (digits.startsWith('251') && digits.length >= 12) {
+    return digits.slice(3);
+  }
+  if (digits.startsWith('0') && digits.length === 10) {
+    return digits.slice(1);
+  }
+  return digits;
+}
+
 export function isStudentDeleted(id?: string, email?: string, phone?: string, fullName?: string): boolean {
   try {
     const raw = localStorage.getItem('ab_deleted_students_v3');
@@ -204,7 +217,7 @@ const MOCK_ACCOUNTS: Record<string, User & { password?: string }> = {
     phone: '+251944444444',
     role: 'teacher',
     status: 'Active',
-    fullName: 'Lique Mezemer Abel Tesfaye',
+    fullName: 'Lique Mezemer Bruk Tesfaye',
     avatar: '',
     verified: true,
     language: 'en',
@@ -217,7 +230,7 @@ const MOCK_ACCOUNTS: Record<string, User & { password?: string }> = {
     phone: '+251 922 234 567',
     role: 'teacher',
     status: 'Active',
-    fullName: 'Alex T',
+    fullName: 'Seyfu T.',
     avatar: '',
     verified: true,
     language: 'en',
@@ -230,7 +243,20 @@ const MOCK_ACCOUNTS: Record<string, User & { password?: string }> = {
     phone: '+251 933 345 678',
     role: 'teacher',
     status: 'Active',
-    fullName: 'Hayle Melekot',
+    fullName: 'Abel Betsegaw',
+    avatar: '',
+    verified: true,
+    language: 'en',
+    notificationPreferences: { email: true, sms: true, push: true },
+    password: 'Password123!'
+  },
+  'hana@begena.com': {
+    id: 'tch_hana',
+    email: 'hana@begena.com',
+    phone: '+251 966 678 901',
+    role: 'teacher',
+    status: 'Active',
+    fullName: 'Hana Derese',
     avatar: '',
     verified: true,
     language: 'en',
@@ -340,7 +366,7 @@ const MOCK_ACCOUNTS: Record<string, User & { password?: string }> = {
     phone: '+251900000000',
     role: 'founder',
     status: 'Active',
-    fullName: 'Zemari Deacon Abel Tesfaye',
+    fullName: 'Deacon Bruk Tesfaye',
     avatar: '',
     verified: true,
     language: 'en',
@@ -498,7 +524,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         addNotification(
           'Accountant Approval Received! 🎓',
-          'Your tuition payment has been verified. Welcome to Abel Begena School! Full classroom and lesson access is now active.',
+          'Your tuition payment has been verified. Welcome to Liora Begena School! Full classroom and lesson access is now active.',
           'payment'
         );
       }
@@ -572,7 +598,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       email: user.email,
       verificationCode: code,
       code: code,
-      app_name: 'Abel Begena School'
+      app_name: 'Liora Begena School'
     };
 
     try {
@@ -730,9 +756,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const isVerifiedAccount = accountEntry.isVerified === true || accountEntry.verified === true;
     if (!isVerifiedAccount || accountEntry.status === 'Pending Verification') {
       localStorage.setItem('ab_pending_verify_email', accountEntry.email);
+      if (accountEntry.phone) {
+        localStorage.setItem('ab_pending_verify_phone', accountEntry.phone);
+      }
       return {
         success: false,
-        error: 'Your account is not verified. Please verify your email first.',
+        error: 'Your account is not verified. Please verify your email or phone number in Telegram to continue.',
         status: 'Pending Verification',
         unverifiedEmail: accountEntry.email,
         role: accountEntry.role
@@ -819,6 +848,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     if (!isTeacher) {
       localStorage.setItem('ab_pending_verify_email', cleanEmail);
+      localStorage.setItem('ab_pending_verify_phone', cleanPhone);
       // Immediately send verification email via EmailJS
       sendVerificationEmail(newUser, verificationCode).then((result) => {
         if (!result.success) {
@@ -973,6 +1003,124 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     setVerificationEmailNotice(`A new verification code was sent to ${targetEmail}.`);
     return { success: true };
+  };
+
+  // TELEGRAM VERIFICATION FLOW
+  const sendTelegramVerificationCode = async (
+    sharedPhone: string,
+    emailOverride?: string
+  ): Promise<{ success: boolean; matched: boolean; code?: string; error?: string; registeredPhone?: string }> => {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const targetEmail = (
+      emailOverride ||
+      currentUser?.email ||
+      localStorage.getItem('ab_pending_verify_email') ||
+      ''
+    ).trim().toLowerCase();
+
+    const mergedAccounts: Record<string, User & { password?: string }> = {
+      ...MOCK_ACCOUNTS,
+      ...accounts
+    };
+
+    let account = mergedAccounts[targetEmail];
+    if (!account) {
+      const pendingPhone = localStorage.getItem('ab_pending_verify_phone');
+      if (pendingPhone) {
+        account = Object.values(mergedAccounts).find(
+          (a) => a && normalizePhoneNumber(a.phone) === normalizePhoneNumber(pendingPhone)
+        );
+      }
+    }
+
+    if (!account) {
+      return {
+        success: false,
+        matched: false,
+        error: 'Account record not found. Please register or start verification again.'
+      };
+    }
+
+    const registeredPhone = account.phone || localStorage.getItem('ab_pending_verify_phone') || '';
+    if (!registeredPhone) {
+      return {
+        success: false,
+        matched: false,
+        error: 'No phone number registered for this account.'
+      };
+    }
+
+    const normShared = normalizePhoneNumber(sharedPhone);
+    const normRegistered = normalizePhoneNumber(registeredPhone);
+
+    if (!normShared || normShared !== normRegistered) {
+      return {
+        success: false,
+        matched: false,
+        registeredPhone,
+        error: `Phone number mismatch! Shared Telegram number (${sharedPhone}) does not match the registered phone number (${registeredPhone}).`
+      };
+    }
+
+    // Phone numbers match! Generate 6-digit verification code
+    let newCode = generate6DigitCode();
+    try {
+      const serverRes = await fetch('/api/telegram/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          registeredPhone,
+          sharedPhone,
+          email: account.email
+        })
+      });
+      const data = await serverRes.json();
+      if (data && data.matched && data.code) {
+        newCode = data.code;
+      }
+    } catch (e) {
+      console.warn('[TelegramBot API] Server call failed, using local generation:', e);
+    }
+
+    const verificationExpiry = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+    const emailKey = account.email.toLowerCase();
+    const updatedAccount = {
+      ...account,
+      verificationCode: newCode,
+      verificationExpiry,
+      lastCodeSentAt: Date.now()
+    };
+
+    const updatedAccounts = {
+      ...accounts,
+      [emailKey]: {
+        ...accounts[emailKey],
+        ...updatedAccount
+      }
+    };
+
+    syncAccounts(updatedAccounts);
+    if (currentUser && currentUser.email.toLowerCase() === emailKey) {
+      saveUserSession(updatedAccount, true);
+    }
+
+    addNotification(
+      'Telegram Verification Code Dispatched ✈️',
+      `Verification code ${newCode} was sent to verified phone number ${registeredPhone}.`,
+      'system',
+      undefined,
+      account.id,
+      account.email
+    );
+
+    return {
+      success: true,
+      matched: true,
+      code: newCode,
+      registeredPhone
+    };
   };
 
   // FORGOT PASSWORD
@@ -1506,6 +1654,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         logout,
         verifyCode,
         resendVerificationCode,
+        sendTelegramVerificationCode,
         forgotPassword,
         resetPassword,
         updateProfile,

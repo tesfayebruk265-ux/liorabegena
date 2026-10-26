@@ -124,7 +124,7 @@ export function CompetitionsCenter({ lang, onNavigate }: CompetitionsCenterProps
         <div className="max-w-4xl space-y-3 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E7DED1] text-xs font-bold text-[#E89B52] shadow-3xs">
             <Trophy size={14} className="text-[#C79A2B]" />
-            <span>Official Abel Begena Youth Music Competitions</span>
+            <span>Official Liora Begena Youth Music Competitions</span>
           </div>
           <h1 className="font-display font-black text-3xl sm:text-4xl text-[#2B2B2B] tracking-tight">
             National Begena, Krar & Sacred Harp Championships
@@ -401,7 +401,7 @@ export function CompetitionsCenter({ lang, onNavigate }: CompetitionsCenterProps
             <Trophy size={36} className="text-[#C79A2B] mx-auto" />
             <h2 className="font-display font-bold text-2xl text-[#2B2B2B]">Official Championship Leaderboard</h2>
             <p className="text-xs text-[#666666]">
-              Final verified results approved by Master Abel Begena and the Competition Board.
+              Final verified results approved by Master Liora Begena and the Competition Board.
             </p>
           </div>
 

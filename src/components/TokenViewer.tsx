@@ -83,7 +83,7 @@ export function TokenViewer() {
             <div>
               <h4 className="font-display font-bold text-lg text-[#2B2B2B]">Semantic Color Architecture</h4>
               <p className="text-xs text-[#666666] mt-0.5">
-                Complete token map for Abel Begena Traditional Music School. Anchored by natural warm neutrals (#FFFDF8, #FAF6EF, #FFFFFF) and deep charcoal text (#2B2B2B).
+                Complete token map for Liora Begena Traditional Music School. Anchored by natural warm neutrals (#FFFDF8, #FAF6EF, #FFFFFF) and deep charcoal text (#2B2B2B).
               </p>
             </div>
           </div>
@@ -466,7 +466,7 @@ export function TokenViewer() {
                     </span>
                   </div>
                   <p className="text-[10px] opacity-90 truncate">
-                    Abel Begena Course Module Card / Dashboard Panel
+                    Liora Begena Course Module Card / Dashboard Panel
                   </p>
                 </div>
               </div>

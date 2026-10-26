@@ -287,7 +287,7 @@ export function StudentDashboard({ onNavigate, lang }: DashboardProps) {
           studentId,
           course: selectedCourse || 'Begena - Level 1',
           level: 'Basic 1',
-          branch: selectedBranch || 'Piazza Branch',
+          branch: selectedBranch || 'Hawassa main Branch',
           paymentType: 'Tuition Payment',
           amount: 4500,
           paymentMethod: 'CBE',
@@ -344,7 +344,7 @@ export function StudentDashboard({ onNavigate, lang }: DashboardProps) {
         <div>
           <span className="text-[10px] tracking-widest text-[#E89B52] uppercase font-bold">ACCELERATED LEARNING</span>
           <h2 className="font-display font-black text-xl sm:text-2xl text-[#2B2B2B]">WELCOME, {currentUser?.fullName.toUpperCase()}!</h2>
-          <p className="text-xs text-gray-500">Traditional Student Portal • Bole Branch & Online</p>
+          <p className="text-xs text-gray-500">Traditional Student Portal • Hawassa main Branch & Online</p>
         </div>
         <div className="flex flex-col items-start sm:items-end gap-2 w-full md:w-auto">
           <div className="flex items-center gap-2">
@@ -593,8 +593,7 @@ export function StudentDashboard({ onNavigate, lang }: DashboardProps) {
                           value={selectedBranch}
                           onChange={(e) => setSelectedBranch(e.target.value)}
                         >
-                          <option>Bole Branch, Addis Ababa</option>
-                          <option>Megenagna Branch, Addis Ababa</option>
+                          <option>Hawassa main Branch (Center Point Tower)</option>
                           <option>Online Traditional Portal</option>
                         </select>
                       </div>
@@ -935,7 +934,7 @@ export function StudentDashboard({ onNavigate, lang }: DashboardProps) {
                       instrument: selectedCourse?.toLowerCase().includes('krar') ? 'Krar' : 'Begena',
                       level: 'Level 1 (Basic)',
                       branch: selectedBranch,
-                      teacherName: 'Zemari Deacon Abel Tesfaye',
+                      teacherName: 'Deacon Bruk Tesfaye',
                       progress: 0
                     }
                   ];
@@ -965,7 +964,7 @@ export function StudentDashboard({ onNavigate, lang }: DashboardProps) {
                                 <span className="text-[10px] font-mono font-bold uppercase bg-amber-100 text-[#E89B52] px-2.5 py-0.5 rounded-full">
                                   {instName} • {lvlName}
                                 </span>
-                                <span className="text-xs text-gray-400">• {enr.branch || 'Piazza Branch'}</span>
+                                <span className="text-xs text-gray-400">• {enr.branch || 'Hawassa main Branch'}</span>
                               </div>
                               <h3 className="font-display font-black text-lg text-gray-900 mt-1">
                                 {enr.courseName || `${instName} Course`}
@@ -1116,7 +1115,7 @@ export function StudentDashboard({ onNavigate, lang }: DashboardProps) {
                               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-amber-200/80 pb-4">
                                 <div className="space-y-1">
                                   <span className="text-[10px] font-mono tracking-widest text-[#E89B52] font-black uppercase block">
-                                    ABEL BEGENA & KRAR ACADEMY • OFFICIAL DIPLOMA
+                                    LIORA BEGENA & KRAR ACADEMY • OFFICIAL DIPLOMA
                                   </span>
                                   <h3 className="font-display font-black text-xl sm:text-2xl text-gray-900 tracking-tight">
                                     ACADEMIC CERTIFICATE OF COMPLETION
@@ -1447,7 +1446,7 @@ function LegacyParentDashboardCode() {
         fullName: currentUser?.fullName || 'Parent Guardian',
         phone: currentUser?.phone || '',
         email: currentUser?.email || '',
-        address: address || 'Addis Ababa, Piazza',
+        address: address || 'Hawassa, Center Point Tower',
         relationship: relationship || 'Father',
         emergencyName: emergencyName || 'Ayalew Kebede',
         emergencyPhone: emergencyPhone || '+251911223344',
@@ -1477,7 +1476,7 @@ function LegacyParentDashboardCode() {
       fullName: 'Abebe Kebede',
       instrument: 'Begena - Level 1',
       attendance: '94% (16 of 17 lectures)',
-      nextClass: 'Saturday 9:00 AM (Instructor Abel)',
+      nextClass: 'Saturday 9:00 AM (Instructor Bruk)',
       practiceStreak: '5 Days',
       latestNotes: 'Practiced standard Begena tuning and Mezmur #1 chords.',
       grade: 'A-',
@@ -1491,7 +1490,7 @@ function LegacyParentDashboardCode() {
     fullName: currentChildInfo?.fullName || 'Abebe Kebede',
     instrument: `${currentChildInfo?.instrument || 'Begena'} - ${currentChildInfo?.currentLevel || 'Level 1'}`,
     attendance: '94% (16 of 17 lectures)',
-    nextClass: 'Saturday 9:00 AM (Instructor Abel)',
+    nextClass: 'Saturday 9:00 AM (Instructor Bruk)',
     practiceStreak: '5 Days',
     latestNotes: 'Practiced standard Begena tuning and Mezmur #1 chords.',
     grade: 'A-',
@@ -1823,7 +1822,7 @@ function LegacyParentDashboardCode() {
             Live Practice Log
           </h3>
           <div className="p-4 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-2 text-xs">
-            <span className="text-[#E89B52] font-bold">Instructor Abel\'s Feedback:</span>
+            <span className="text-[#E89B52] font-bold">Instructor Bruk\'s Feedback:</span>
             <p className="text-gray-600 italic leading-relaxed">
               "{child.recentFeedback}"
             </p>
@@ -1914,7 +1913,7 @@ export function TeacherDashboard({ onNavigate, lang }: DashboardProps) {
   const [availableDays, setAvailableDays] = useState<string[]>(currentUser?.teacherApplication?.availableDays || ['Saturday', 'Sunday']);
   const [availableHours, setAvailableHours] = useState(currentUser?.teacherApplication?.availableHours || 'Morning (8:00 AM - 12:00 PM)');
   const [onlineAvailability, setOnlineAvailability] = useState(currentUser?.teacherApplication?.onlineAvailability ?? true);
-  const [preferredBranch, setPreferredBranch] = useState(currentUser?.teacherApplication?.preferredBranch || 'Piazza');
+  const [preferredBranch, setPreferredBranch] = useState(currentUser?.teacherApplication?.preferredBranch || 'Hawassa');
   const [documentsUploaded, setDocumentsUploaded] = useState<string[]>(currentUser?.teacherApplication?.documentsUploaded || ['Resume_Traditional_Instrument.pdf']);
 
   // Load draft progress
@@ -1941,7 +1940,7 @@ export function TeacherDashboard({ onNavigate, lang }: DashboardProps) {
             setAvailableDays(draft.availableDays || ['Saturday', 'Sunday']);
             setAvailableHours(draft.availableHours || 'Morning (8:00 AM - 12:00 PM)');
             setOnlineAvailability(draft.onlineAvailability ?? true);
-            setPreferredBranch(draft.preferredBranch || 'Piazza');
+            setPreferredBranch(draft.preferredBranch || 'Hawassa');
             setDocumentsUploaded(draft.documentsUploaded || ['Resume_Traditional_Instrument.pdf']);
           }
         } catch (e) {}
@@ -2036,7 +2035,7 @@ export function TeacherDashboard({ onNavigate, lang }: DashboardProps) {
       localStorage.removeItem(`ab_teacher_draft_${currentUser.email}`);
     }
 
-    addNotification('Application Submitted', 'Your Abel Begena School Teacher Application was submitted.', 'registration');
+    addNotification('Application Submitted', 'Your Liora Begena School Teacher Application was submitted.', 'registration');
   };
 
   const handleSandboxBypass = async () => {
@@ -2045,11 +2044,11 @@ export function TeacherDashboard({ onNavigate, lang }: DashboardProps) {
       teacherStatus: 'Hired',
       teacherApplication: {
         applicationId,
-        fullName: fullName || currentUser?.fullName || 'Instructor Abel',
+        fullName: fullName || currentUser?.fullName || 'Instructor Bruk',
         photo: photo || undefined,
         phone: phone || currentUser?.phone || '',
         email: email || currentUser?.email || '',
-        address: address || 'Addis Ababa, Piazza',
+        address: address || 'Hawassa, Center Point Tower',
         dob,
         gender,
         instruments: instruments.length > 0 ? instruments : ['Begena', 'Krar'],
@@ -2343,9 +2342,8 @@ export function TeacherDashboard({ onNavigate, lang }: DashboardProps) {
                   value={preferredBranch}
                   onChange={(e) => { setPreferredBranch(e.target.value); saveTeacherDraft({ preferredBranch: e.target.value }); }}
                 >
-                  <option value="Piazza">Piazza Branch (Central Capital)</option>
-                  <option value="Megenagna">Megenagna Branch (East Addis)</option>
-                  <option value="Lebu">Lebu Branch (South Capital)</option>
+                  <option value="Hawassa">Hawassa main Branch (Center Point Tower)</option>
+                  <option value="Online">Online Campus</option>
                 </select>
               </div>
             )}
@@ -2528,7 +2526,7 @@ export function TeacherDashboard({ onNavigate, lang }: DashboardProps) {
                 <div className="w-5 h-5 rounded-full bg-yellow-500 text-white flex items-center justify-center text-[10px] font-bold shrink-0">!</div>
                 <div>
                   <span className="block font-bold text-[#2B2B2B]">Step 2: Qualifications Audit</span>
-                  <span className="block text-[10px] text-yellow-600 font-medium animate-pulse">Lique Mezemer Abel reviewing {instruments.join(', ')} pedagogy suitability.</span>
+                  <span className="block text-[10px] text-yellow-600 font-medium animate-pulse">Lique Mezemer Bruk reviewing {instruments.join(', ')} pedagogy suitability.</span>
                 </div>
               </div>
 

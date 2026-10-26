@@ -245,7 +245,7 @@ export function MessagesCenter({ onNavigate, lang }: MessagesCenterProps) {
   // Group creation form
   const [newGroupName, setNewGroupName] = useState('');
   const [newGroupDesc, setNewGroupDesc] = useState('');
-  const [newGroupBranch, setNewGroupBranch] = useState('Piazza Main Branch');
+  const [newGroupBranch, setNewGroupBranch] = useState('Hawassa main Branch');
 
   // Broadcast form
   const [broadcastTarget, setBroadcastTarget] = useState('Begena Level 1');
@@ -521,7 +521,7 @@ export function MessagesCenter({ onNavigate, lang }: MessagesCenterProps) {
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-amber-950 mt-1">
-            Abel Begena Direct & Group Messaging
+            Liora Begena Direct & Group Messaging
           </h1>
           <p className="text-sm text-stone-600 mt-0.5">
             Connect securely with teachers, fellow students, branch staff, and administration.
@@ -1094,9 +1094,7 @@ export function MessagesCenter({ onNavigate, lang }: MessagesCenterProps) {
                   onChange={(e) => setNewGroupBranch(e.target.value)}
                   className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500/20"
                 >
-                  <option value="Piazza Main Branch">Piazza Main Branch</option>
-                  <option value="Megenagna Branch">Megenagna Branch</option>
-                  <option value="Bole Branch">Bole Branch</option>
+                  <option value="Hawassa main Branch">Hawassa main Branch (Center Point Tower)</option>
                   <option value="Online International Branch">Online International Branch</option>
                 </select>
               </div>

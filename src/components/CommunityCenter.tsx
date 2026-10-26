@@ -299,7 +299,7 @@ export function CommunityCenter({ onNavigate, lang, initialTab = 'feed' }: Commu
         <div>
           <div className="flex items-center gap-2">
             <span className="px-3 py-1 bg-amber-100 text-amber-900 rounded-full text-xs font-semibold tracking-wide uppercase">
-              Abel Begena Community
+              Liora Begena Community
             </span>
             <span className="text-xs text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded border border-amber-200">
               Spiritual & Educational Social Network
@@ -856,11 +856,17 @@ export function CommunityCenter({ onNavigate, lang, initialTab = 'feed' }: Commu
             return (
               <div key={teacher.id} className="bg-white rounded-2xl border border-stone-200 p-5 space-y-4 shadow-2xs text-xs">
                 <div className="flex items-center gap-3">
-                  <img
-                    src={teacher.photo}
-                    alt={teacher.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-amber-800"
-                  />
+                  {teacher.photo ? (
+                    <img
+                      src={teacher.photo}
+                      alt={teacher.name}
+                      className="w-14 h-14 rounded-full object-cover border-2 border-amber-800"
+                    />
+                  ) : (
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#3B2818] to-[#1C120A] border-2 border-amber-800 flex items-center justify-center text-[#E89B52] font-black text-xl shrink-0 shadow-inner">
+                      {teacher.name?.charAt(0) || 'T'}
+                    </div>
+                  )}
                   <div>
                     <h3 className="font-bold text-sm text-stone-900">{teacher.name}</h3>
                     <p className="text-amber-800 font-semibold">{teacher.instrument} Master</p>
@@ -922,7 +928,7 @@ export function CommunityCenter({ onNavigate, lang, initialTab = 'feed' }: Commu
         <div className="bg-white p-6 rounded-2xl border border-stone-200 max-w-3xl mx-auto space-y-4 text-xs">
           <h2 className="text-lg font-bold text-amber-950 flex items-center gap-2">
             <Shield className="w-5 h-5 text-amber-800" />
-            Abel Begena Community Rules & Guidelines
+            Liora Begena Community Rules & Guidelines
           </h2>
           <p className="text-stone-600">
             Our platform is dedicated to sacred music, spiritual heritage, and respectful learning.

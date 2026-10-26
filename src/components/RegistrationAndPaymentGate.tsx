@@ -50,7 +50,7 @@ export function RegistrationAndPaymentGate({
           </h1>
 
           <p className="text-sm text-gray-300 leading-relaxed max-w-2xl">
-            Access to Abel Begena’s interactive video tutorials, practice studio, audio guides, mezmur notation sheets, and live classes is strictly reserved for students who have fully finalized their registration and tuition payment.
+            Access to Liora Begena’s interactive video tutorials, practice studio, audio guides, mezmur notation sheets, and live classes is strictly reserved for students who have fully finalized their registration and tuition payment.
           </p>
         </div>
 

@@ -51,7 +51,7 @@ export function StoreCheckoutView({
 
   // Fulfillment Mode
   const [fulfillmentType, setFulfillmentType] = useState<'Branch Pickup' | 'Delivery'>('Branch Pickup');
-  const [selectedPickupBranch, setSelectedPickupBranch] = useState<'Piazza' | 'Megenagna' | 'Lebu'>('Piazza');
+  const [selectedPickupBranch, setSelectedPickupBranch] = useState<'Hawassa'>('Hawassa');
 
   // Delivery Address
   const [deliveryCity, setDeliveryCity] = useState('Addis Ababa');
@@ -104,14 +104,9 @@ export function StoreCheckoutView({
         customerEmail,
         customerRole: currentUser?.role || 'Guest Customer',
         fulfillmentType,
-        pickupBranchId: fulfillmentType === 'Branch Pickup' ? `b-${selectedPickupBranch.toLowerCase()}` : undefined,
-        pickupBranchName: fulfillmentType === 'Branch Pickup' ? `${selectedPickupBranch} Campus` : undefined,
-        pickupAddress:
-          selectedPickupBranch === 'Piazza'
-            ? 'Piazza Campus, Church Street, Addis Ababa'
-            : selectedPickupBranch === 'Megenagna'
-            ? 'Megenagna Campus, Lem Hotel Area, Addis Ababa'
-            : 'Lebu Campus, Varnero Junction, Addis Ababa',
+        pickupBranchId: 'b-hawassa',
+        pickupBranchName: 'Hawassa main Branch',
+        pickupAddress: 'Hawassa main Branch, Center Point Tower, First Floor, Hawassa, Ethiopia',
         expectedPickupDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().substring(0, 10),
         deliveryAddress:
           fulfillmentType === 'Delivery'
@@ -172,7 +167,7 @@ export function StoreCheckoutView({
             <span>Secure Order Checkout</span>
           </div>
           <h1 className="font-display font-black text-2xl sm:text-3xl text-white tracking-wide uppercase">
-            ABEL BEGENA SCHOOL STORE CHECKOUT
+            LIORA BEGENA SCHOOL STORE CHECKOUT
           </h1>
           <p className="text-xs sm:text-sm text-gray-300">
             Finalize customer details, select pickup campus, submit payment receipt, and reserve your instruments.
@@ -253,8 +248,8 @@ export function StoreCheckoutView({
               >
                 <Building2 size={20} className="text-[#E89B52] shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-bold text-sm block">Campus Pickup (FREE)</span>
-                  <span className="text-xs text-gray-500">Collect directly at Piazza, Megenagna, or Lebu.</span>
+                  <span className="font-bold text-sm block">Branch Pickup (FREE)</span>
+                  <span className="text-xs text-gray-500">Collect directly at Hawassa main Branch (Center Point Tower).</span>
                 </div>
               </button>
 
@@ -279,23 +274,15 @@ export function StoreCheckoutView({
           {/* CAMPUS PICKUP OPTIONS */}
           {fulfillmentType === 'Branch Pickup' && (
             <div className="bg-[#FAF6EF] p-5 rounded-2xl border border-[#E7DED1] space-y-3">
-              <label className="text-xs font-bold text-[#2B2B2B] block">Select Pickup Campus Location:</label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {(['Piazza', 'Megenagna', 'Lebu'] as const).map((branch) => (
-                  <button
-                    key={branch}
-                    type="button"
-                    onClick={() => setSelectedPickupBranch(branch)}
-                    className={`p-3 rounded-xl border text-xs text-left transition cursor-pointer ${
-                      selectedPickupBranch === branch
-                        ? 'bg-[#2B2B2B] text-white border-[#2B2B2B] font-bold'
-                        : 'bg-white border-[#E7DED1] text-gray-800'
-                    }`}
-                  >
-                    <span className="block font-bold">{branch} Campus</span>
-                    <span className="text-[10px] font-mono opacity-80">Mon-Sat: 8:30 AM - 6:00 PM</span>
-                  </button>
-                ))}
+              <label className="text-xs font-bold text-[#2B2B2B] block">Pickup Location:</label>
+              <div className="grid grid-cols-1 gap-3">
+                <button
+                  type="button"
+                  className="p-3.5 rounded-xl border text-xs text-left transition bg-[#2B2B2B] text-white border-[#2B2B2B] font-bold"
+                >
+                  <span className="block font-bold">Hawassa main Branch — Center Point Tower, 1st Floor</span>
+                  <span className="text-[10px] font-mono opacity-80">Monday - Saturday: 8:00 AM - 6:30 PM • Hawassa, Ethiopia</span>
+                </button>
               </div>
             </div>
           )}
@@ -387,13 +374,13 @@ export function StoreCheckoutView({
                     <>
                       Commercial Bank of Ethiopia (CBE) <br />
                       Account Number: <b>1000223344556</b> <br />
-                      Account Name: <b>Abel Begena School</b>
+                      Account Name: <b>Liora Begena School</b>
                     </>
                   ) : (
                     <>
                       Telebirr Merchant Code / Phone <br />
                       Number: <b>0911223344</b> <br />
-                      Name: <b>Abel Begena Academy Store</b>
+                      Name: <b>Liora Begena Academy Store</b>
                     </>
                   )}
                 </div>

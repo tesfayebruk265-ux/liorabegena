@@ -51,7 +51,7 @@ interface ApplicationRecord {
   selectedCourseName: string;
   selectedLevelName: string;
   learningMode: 'In-Person' | 'Online';
-  selectedBranch: 'Piazza Branch' | 'Megenagna Branch' | 'Lebu Branch' | 'Virtual Gate';
+  selectedBranch: 'Hawassa Campus' | 'Virtual Gate';
   durationMonths: number;
   frequency: string;
   scheduleDayTime: string;
@@ -233,7 +233,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
   const [selectedCourseFilter, setSelectedCourseFilter] = useState<string>('All');
 
   // Multi-branch Isolation check
-  const staffAssignedBranch = currentUser?.branch || 'Piazza Branch'; // default branch for staff
+  const staffAssignedBranch = currentUser?.branch || 'Hawassa Main Branch'; // default branch for staff
 
   // Helper to compute student attendance percentage from real marked attendance records
   const getStudentAttendancePercent = (studentId?: string, studentEmail?: string, studentName?: string): number | undefined => {
@@ -496,7 +496,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
           instrumentOwned: ps.instrumentOwned || ps.instrument || 'Traditional Begena',
           course: ps.courseName ? ps.courseName.split('-')[0].trim() : (ps.instrument || 'Begena'),
           level: ps.level || 'Basic 1',
-          branch: ps.branch || 'Piazza Branch',
+          branch: ps.branch || 'Hawassa Campus',
           mode: ps.learningMode === 'Online' ? 'Online' : 'In-Person',
           schedule: ps.scheduleDayTime || ps.schedule || (ps.scheduleDays ? (Array.isArray(ps.scheduleDays) ? ps.scheduleDays.join('/') : ps.scheduleDays) : null) || (ps.scheduleFrequency ? `${ps.scheduleFrequency} Program` : null) || '5 Days Program',
           durationMonths: ps.durationMonths || 3,
@@ -504,9 +504,9 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
           enrollmentDate: ps.registeredAt ? ps.registeredAt.split('T')[0] : '2026-07-21',
           status: ps.status === 'Approved' ? 'Active' : ps.status === 'Suspended' ? 'Suspended' : 'Pending',
           photo: ps.photoUrl || '',
-          registrationFeeETB: ps.registrationFeeETB || 500,
-          courseFeeETB: ps.courseFeeETB || 1500,
-          totalFeeETB: ps.totalFeeETB || ((ps.registrationFeeETB || 500) + (ps.courseFeeETB || 1500)),
+          registrationFeeETB: ps.registrationFeeETB || 200,
+          courseFeeETB: ps.courseFeeETB || 930,
+          totalFeeETB: ps.totalFeeETB || ((ps.registrationFeeETB || 200) + (ps.courseFeeETB || 930)),
           paymentMethod: ps.paymentMethod || 'Cash',
           paymentStatus: (ps.paymentStatus as string) === 'Approved' || (ps.paymentStatus as string) === 'Verified' || (ps.status as string) === 'Approved' ? 'Verified' : 'Pending Verification',
           paymentReference: ps.paymentReference || 'REF-CASH-2026',
@@ -526,7 +526,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
         ...st,
         gender: st.gender || 'Male',
         age: st.age || 21,
-        address: st.address || 'Piazza, Addis Ababa',
+        address: st.address || 'Hawassa, Center Point Tower',
         emergencyContact: st.emergencyContact || 'Parent (+251911223344)',
         emergencyName: st.emergencyName || 'Parent / Guardian',
         emergencyPhone: st.emergencyPhone || '+251911223344',
@@ -535,9 +535,9 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
         churchAffiliation: st.churchAffiliation || 'EOTC St. Mary',
         begenaExp: st.begenaExp || 'Beginner Practice',
         instrumentOwned: st.instrumentOwned || 'Traditional Begena',
-        registrationFeeETB: st.registrationFeeETB || 500,
-        courseFeeETB: st.courseFeeETB || 1500,
-        totalFeeETB: st.totalFeeETB || 2000,
+        registrationFeeETB: st.registrationFeeETB || 200,
+        courseFeeETB: st.courseFeeETB || 930,
+        totalFeeETB: st.totalFeeETB || 1130,
         paymentMethod: st.paymentMethod || 'Cash',
         paymentStatus: st.paymentStatus || 'Verified',
         registrationSource: st.registrationSource || 'Front Desk Registration',
@@ -578,7 +578,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
         instrumentOwned: Array.isArray(app.instrumentOwned) ? app.instrumentOwned.join(', ') : app.instrumentOwned || 'None',
         course: app.selectedCourseName || 'Begena',
         level: app.selectedLevelName || 'Basic 1',
-        branch: app.selectedBranch || 'Piazza Branch',
+        branch: app.selectedBranch || 'Hawassa Campus',
         mode: app.learningMode || 'In-Person',
         schedule: app.scheduleDayTime || app.frequency || 'Standard Schedule',
         durationMonths: app.durationMonths || 3,
@@ -586,9 +586,9 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
         enrollmentDate: app.submittedAt ? app.submittedAt.split(' ')[0] : '2026-07-21',
         status: isAppVerified ? 'Active' : 'Pending',
         photo: '',
-        registrationFeeETB: app.registrationFeeETB || 500,
-        courseFeeETB: app.courseFeeETB || 1500,
-        totalFeeETB: app.totalETB || 2000,
+        registrationFeeETB: app.registrationFeeETB || 200,
+        courseFeeETB: app.courseFeeETB || 930,
+        totalFeeETB: app.totalETB || 1130,
         paymentMethod: app.paymentMethod || 'Cash',
         paymentStatus: isAppVerified ? 'Verified' : 'Pending Verification',
         paymentReference: app.receiptUrl ? 'Receipt Uploaded' : 'N/A',
@@ -615,9 +615,9 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
 
         let realTeacher = matchingEnr?.assignedTeacherName;
         if (!realTeacher) {
-          if (s.assignedTeacherName && s.assignedTeacherName !== 'Lique Mezemer Abel') {
+          if (s.assignedTeacherName && s.assignedTeacherName !== 'Lique Mezemer Bruk') {
             realTeacher = s.assignedTeacherName;
-          } else if (s.teacherName && s.teacherName !== 'Lique Mezemer Abel') {
+          } else if (s.teacherName && s.teacherName !== 'Lique Mezemer Bruk') {
             realTeacher = s.teacherName;
           } else {
             realTeacher = s.assignedTeacherName || 'Not Assigned Yet';
@@ -672,7 +672,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
           id: optionId,
           studentName: st.fullName,
           courseName: st.course ? `${st.course} - ${st.level}` : 'Begena Course',
-          assignedTeacherName: st.teacherName && st.teacherName !== 'Lique Mezemer Abel' ? st.teacherName : undefined
+          assignedTeacherName: st.teacherName && st.teacherName !== 'Lique Mezemer Bruk' ? st.teacherName : undefined
         });
         if (st.id) addedKeys.add(st.id.toLowerCase());
         if (st.email) addedKeys.add(st.email.toLowerCase());
@@ -750,8 +750,8 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
     emergencyPhone: '',
     emergencyRel: 'Parent',
     country: 'Ethiopia',
-    city: 'Addis Ababa',
-    subcity: 'Piazza',
+    city: 'Hawassa',
+    subcity: 'Center Point',
     woreda: '01',
     address: '',
     occupationType: 'student',
@@ -761,15 +761,15 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
     instrumentOwned: [] as string[],
     churchAffiliation: '',
     selectedCourseName: 'Begena',
-    selectedLevelName: 'Basic 1',
+    selectedLevelName: 'Begena Level 1',
     learningMode: 'In-Person',
-    selectedBranch: 'Piazza Branch',
-    scheduleDayTime: 'Mon / Wed / Fri - 09:00 AM - 11:00 AM',
-    durationMonths: 6,
-    frequency: '3 days per week',
+    selectedBranch: 'Hawassa Campus',
+    scheduleDayTime: 'Mon / Tue / Wed / Thu / Fri - 09:00 AM - 10:00 AM',
+    durationMonths: 3,
+    frequency: '5 days per week, 1 hour per day',
     paymentMethod: 'Cash',
-    registrationFeeETB: 500, // Configurable registration fee
-    courseFeeETB: 4500,
+    registrationFeeETB: 200, // Configurable registration fee
+    courseFeeETB: 930,
     receiptUrl: ''
   });
 
@@ -803,7 +803,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
 
   const handleFinalSubmitRegistration = () => {
     const appId = `APP-2026-${Math.floor(100 + Math.random() * 900)}`;
-    const branchCode = regFormData.selectedBranch.includes('Piazza') ? 'PZ' : regFormData.selectedBranch.includes('Megenagna') ? 'MG' : 'LB';
+    const branchCode = 'HW';
     const studentId = `ABS-${branchCode}-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
     const newApp: ApplicationRecord = {
@@ -903,7 +903,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
   // APPLICATION APPROVAL WORKFLOW
   // ----------------------------------------------------
   const handleApproveApplication = (app: ApplicationRecord) => {
-    const branchCode = app.selectedBranch.includes('Piazza') ? 'PZ' : app.selectedBranch.includes('Megenagna') ? 'MG' : 'LB';
+    const branchCode = 'HW';
     const generatedId = app.studentId || `ABS-${branchCode}-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
     // Update app status
@@ -1037,7 +1037,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
   // ----------------------------------------------------
   // ATTENDANCE RECORDING WORKFLOW
   // ----------------------------------------------------
-  const [attBranch, setAttBranch] = useState('Piazza Branch');
+  const [attBranch, setAttBranch] = useState('Hawassa Campus');
   const [attCourse, setAttCourse] = useState('Begena');
   const [attDate, setAttDate] = useState(() => new Date().toISOString().split('T')[0]);
   const [attendanceSheet, setAttendanceSheet] = useState<Record<string, 'Present' | 'Absent' | 'Late'>>({});
@@ -1091,8 +1091,8 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
   // STUDENT TRANSFER WORKFLOW
   // ----------------------------------------------------
   const [transferStudentId, setTransferStudentId] = useState<string>('ABS-PZ-2026-0010');
-  const [targetTransferBranch, setTargetTransferBranch] = useState<'Piazza Branch' | 'Megenagna Branch' | 'Lebu Branch'>('Megenagna Branch');
-  const [transferReason, setTransferReason] = useState('Relocation closer to Megenagna branch');
+  const [targetTransferBranch, setTargetTransferBranch] = useState<'Hawassa Campus' | 'Virtual Gate'>('Virtual Gate');
+  const [transferReason, setTransferReason] = useState('Relocation to online studies');
 
   const handleExecuteTransfer = () => {
     const st = students.find(s => s.id === transferStudentId);
@@ -1126,8 +1126,8 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
   // ----------------------------------------------------
   const [newClsCourse, setNewClsCourse] = useState('Begena');
   const [newClsLevel, setNewClsLevel] = useState('Basic 1');
-  const [newClsTeacher, setNewClsTeacher] = useState('Lique Mezemer Abel');
-  const [newClsBranch, setNewClsBranch] = useState('Piazza Branch');
+  const [newClsTeacher, setNewClsTeacher] = useState('Lique Mezemer Bruk');
+  const [newClsBranch, setNewClsBranch] = useState('Hawassa Campus');
   const [newClsRoom, setNewClsRoom] = useState('Room 102');
   const [newClsDay, setNewClsDay] = useState('Mon / Wed / Fri');
   const [newClsTime, setNewClsTime] = useState('09:00 AM - 11:00 AM');
@@ -1176,7 +1176,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
             <Building className="text-[#E89B52]" size={20} />
           </div>
           <div>
-            <h1 className="font-display font-black text-lg tracking-tight uppercase text-gray-800">Abel Begena Front Desk</h1>
+            <h1 className="font-display font-black text-lg tracking-tight uppercase text-gray-800">Liora Begena Front Desk</h1>
             <p className="text-[10px] tracking-wider text-[#E89B52] font-bold uppercase">Registrar Operations • {staffAssignedBranch}</p>
           </div>
         </div>
@@ -1567,9 +1567,9 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
                   <div className="space-y-3">
                     <label className="block font-bold text-gray-700">Select Learning Mode</label>
                     <div className="grid grid-cols-2 gap-4">
-                      <div onClick={() => setRegFormData({ ...regFormData, learningMode: 'In-Person', selectedBranch: 'Piazza Branch' })} className={`p-4 rounded-xl border cursor-pointer font-bold ${regFormData.learningMode === 'In-Person' ? 'border-[#E89B52] bg-[#FAF6EF]' : 'border-[#E7DED1]'}`}>
+                      <div onClick={() => setRegFormData({ ...regFormData, learningMode: 'In-Person', selectedBranch: 'Hawassa Main Branch' })} className={`p-4 rounded-xl border cursor-pointer font-bold ${regFormData.learningMode === 'In-Person' ? 'border-[#E89B52] bg-[#FAF6EF]' : 'border-[#E7DED1]'}`}>
                         <span className="block text-sm">Physical / On-Campus</span>
-                        <span className="text-[10px] text-gray-400">Attends physical branch studio</span>
+                        <span className="text-[10px] text-gray-400">Hawassa Center Point Tower</span>
                       </div>
                       <div onClick={() => setRegFormData({ ...regFormData, learningMode: 'Online', selectedBranch: 'Virtual Gate' })} className={`p-4 rounded-xl border cursor-pointer font-bold ${regFormData.learningMode === 'Online' ? 'border-[#E89B52] bg-[#FAF6EF]' : 'border-[#E7DED1]'}`}>
                         <span className="block text-sm">Online / Virtual Gate</span>
@@ -1582,11 +1582,12 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
                 {regStep === 8 && (
                   <div className="space-y-3">
                     <label className="block font-bold text-gray-700">Select Branch</label>
-                    <div className="grid grid-cols-3 gap-3">
-                      {['Piazza Branch', 'Megenagna Branch', 'Lebu Branch'].map(b => (
+                    <div className="grid grid-cols-1 max-w-sm mx-auto gap-3">
+                      {['Hawassa Main Branch'].map(b => (
                         <div key={b} onClick={() => setRegFormData({ ...regFormData, selectedBranch: b as any })} className={`p-4 rounded-xl border cursor-pointer font-bold text-center ${regFormData.selectedBranch === b ? 'border-[#E89B52] bg-[#FAF6EF]' : 'border-[#E7DED1]'}`}>
                           <Building className="mx-auto mb-1 text-[#E89B52]" size={18} />
                           <span className="block">{b}</span>
+                          <span className="block text-[10px] text-gray-500 font-normal">Center Point Tower, 1st Floor</span>
                         </div>
                       ))}
                     </div>
@@ -2071,7 +2072,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
                                 <div key={enr.id} className="p-2.5 bg-[#FAF6EF]/60 border border-[#E7DED1] rounded-xl flex items-center justify-between text-xs gap-2">
                                   <div className="min-w-0">
                                     <p className="font-bold text-gray-800 truncate">{enr.studentName}</p>
-                                    <p className="text-[10px] text-gray-500 truncate">{enr.courseName} • {enr.branch || 'Piazza'}</p>
+                                    <p className="text-[10px] text-gray-500 truncate">{enr.courseName} • {enr.branch || 'Hawassa Campus'}</p>
                                   </div>
                                   <button
                                     onClick={() => {
@@ -2618,9 +2619,8 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
                 <div>
                   <label className="block font-bold mb-1">Target New Branch</label>
                   <select value={targetTransferBranch} onChange={(e) => setTargetTransferBranch(e.target.value as any)} className="w-full p-2.5 border rounded bg-white">
-                    <option value="Piazza Branch">Piazza Branch</option>
-                    <option value="Megenagna Branch">Megenagna Branch</option>
-                    <option value="Lebu Branch">Lebu Branch</option>
+                    <option value="Hawassa Main Branch">Hawassa Main Branch</option>
+                    <option value="Virtual Gate">Virtual Gate (Online)</option>
                   </select>
                 </div>
 
@@ -2709,7 +2709,7 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
 
             <div className="bg-[#FAF6EF] border-2 border-[#E89B52] p-4 rounded-2xl text-left space-y-3 relative shadow-md">
               <div className="flex justify-between items-center border-b border-[#E7DED1] pb-2">
-                <span className="font-black text-[10px] uppercase tracking-wider text-[#E89B52]">Abel Begena School</span>
+                <span className="font-black text-[10px] uppercase tracking-wider text-[#E89B52]">Liora Begena School</span>
                 <span className="text-[8px] font-mono bg-[#E89B52] text-white px-1.5 py-0.5 rounded font-bold">VERIFIED ID</span>
               </div>
               <div className="flex gap-3 items-center">
@@ -2814,13 +2814,13 @@ export function RegistrationStaffPortal({ onNavigate, lang }: RegistrationStaffP
                     <span className="text-[10px] font-mono font-bold uppercase bg-amber-100 text-[#E89B52] px-2 py-0.5 rounded">
                       ID: {attendanceModalStudent.studentRegistrationId || attendanceModalStudent.id}
                     </span>
-                    <span className="text-xs text-gray-400">• {attendanceModalStudent.branch || 'Piazza Branch'}</span>
+                    <span className="text-xs text-gray-400">• {attendanceModalStudent.branch || 'Hawassa Campus'}</span>
                   </div>
                   <h3 className="font-display font-black text-lg text-gray-900 mt-0.5">
                     {attendanceModalStudent.fullName || attendanceModalStudent.name}
                   </h3>
                   <p className="text-xs text-gray-500">
-                    {attendanceModalStudent.course} ({attendanceModalStudent.level || 'Level 1'}) • Teacher: {attendanceModalStudent.teacherName || 'Zemari Deacon Abel'}
+                    {attendanceModalStudent.course} ({attendanceModalStudent.level || 'Level 1'}) • Teacher: {attendanceModalStudent.teacherName || 'Zemari Deacon Bruk'}
                   </p>
                 </div>
               </div>

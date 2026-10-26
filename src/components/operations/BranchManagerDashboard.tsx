@@ -47,8 +47,8 @@ const SAMPLE_BRANCH_STUDENTS: StudentSearchRecord[] = [
     course: 'Begena - Level 1',
     instrument: 'Begena',
     level: 'Beginner',
-    teacherName: 'Abel Begena',
-    branchName: 'Piazza Branch',
+    teacherName: 'Liora Begena',
+    branchName: 'Hawassa main Branch',
     enrollmentStatus: 'Active',
     learningMode: 'Physical',
     attendanceRate: 95,
@@ -63,7 +63,7 @@ const SAMPLE_BRANCH_STUDENTS: StudentSearchRecord[] = [
     instrument: 'Krar',
     level: 'Intermediate',
     teacherName: 'Bethlehem Tadesse',
-    branchName: 'Piazza Branch',
+    branchName: 'Hawassa main Branch',
     enrollmentStatus: 'Active',
     learningMode: 'Hybrid',
     attendanceRate: 90,
@@ -78,7 +78,7 @@ const SAMPLE_BRANCH_STUDENTS: StudentSearchRecord[] = [
     instrument: 'Masenqo',
     level: 'Beginner',
     teacherName: 'Yonas Tadesse',
-    branchName: 'Piazza Branch',
+    branchName: 'Hawassa main Branch',
     enrollmentStatus: 'Pending Transfer',
     learningMode: 'Physical',
     attendanceRate: 65,
@@ -93,7 +93,7 @@ interface BranchManagerDashboardProps {
 
 export function BranchManagerDashboard({ lang, onNavigate }: BranchManagerDashboardProps) {
   const { currentUser } = useAuth();
-  const [activeBranch, setActiveBranch] = useState('Piazza Branch');
+  const [activeBranch, setActiveBranch] = useState('Hawassa main Branch');
 
   // Search & Filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -135,9 +135,7 @@ export function BranchManagerDashboard({ lang, onNavigate }: BranchManagerDashbo
                 value={activeBranch}
                 onChange={(e) => setActiveBranch(e.target.value)}
               >
-                <option value="Piazza Branch" className="bg-[#2B2B2B]">Piazza Branch</option>
-                <option value="Megenagna Branch" className="bg-[#2B2B2B]">Megenagna Branch</option>
-                <option value="Lebu Branch" className="bg-[#2B2B2B]">Lebu Branch</option>
+                <option value="Hawassa main Branch" className="bg-[#2B2B2B]">Hawassa main Branch (Center Point Tower)</option>
               </select>
             </div>
           </div>

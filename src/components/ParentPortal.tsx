@@ -253,7 +253,7 @@ export function ParentPortal({ onNavigate, lang }: ParentPortalProps) {
               Parent & Family Portal
             </h1>
             <p className="text-[10px] tracking-wider text-[#E89B52] font-bold uppercase">
-              Abel Begena School • Family Learning & Guardian Desk
+              Liora Begena School • Family Learning & Guardian Desk
             </p>
           </div>
         </div>
@@ -549,7 +549,7 @@ export function ParentPortal({ onNavigate, lang }: ParentPortalProps) {
                     <span className="text-[9px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-mono">ALL BRANCHES</span>
                   </div>
                   <p className="text-gray-600 text-xs leading-relaxed">
-                    Dear Parents, Founder Abel and the faculty invite you to attend our quarterly student harp recital on Saturday, August 1st at Piazza Branch main auditorium. Refreshments will be served.
+                    Dear Parents, Founder Bruk and the faculty invite you to attend our quarterly student harp recital on Saturday, August 1st at Piazza Branch main auditorium. Refreshments will be served.
                   </p>
                 </div>
               </div>

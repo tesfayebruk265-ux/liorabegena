@@ -67,7 +67,7 @@ export function LearningCenter({
     { id: 'b2', title: 'በስመ አብ (Besme Ab) Slow Practice Track', type: 'mezmur', course: 'Begena - Level 1' }
   ]);
   const [notes, setNotes] = useState([
-    { id: 'n1', target: 'Lesson 3 — Hand Position', text: 'Ask Teacher Abel about left thumb angle during Sunday class.', timestamp: '12:45' }
+    { id: 'n1', target: 'Lesson 3 — Hand Position', text: 'Ask Teacher Bruk about left thumb angle during Sunday class.', timestamp: '12:45' }
   ]);
   const [newNoteText, setNewNoteText] = useState('');
 
@@ -91,7 +91,7 @@ export function LearningCenter({
             </div>
             <div>
               <span className="font-display font-black text-sm text-white tracking-wide block">
-                ABEL BEGENA LEARNING CENTER
+                LIORA BEGENA LEARNING CENTER
               </span>
               <span className="text-[10px] text-amber-400 font-mono block">Digital Music Academy Portal</span>
             </div>

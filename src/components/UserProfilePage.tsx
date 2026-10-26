@@ -49,7 +49,7 @@ export function UserProfilePage({ lang, onNavigate }: UserProfilePageProps) {
   );
   const [gender, setGender] = useState<'Male' | 'Female' | 'Other'>(currentUser?.gender || 'Male');
   const [age, setAge] = useState(currentUser?.age || 20);
-  const [branch, setBranch] = useState(currentUser?.branch || 'Piazza Branch');
+  const [branch, setBranch] = useState(currentUser?.branch || 'Hawassa Main Branch');
 
   // Password fields
   const [currentPassword, setCurrentPassword] = useState('');
@@ -249,7 +249,7 @@ export function UserProfilePage({ lang, onNavigate }: UserProfilePageProps) {
               </p>
 
               <div className="text-[11px] text-gray-500 flex items-center gap-3 pt-1">
-                <span className="flex items-center gap-1"><Building size={12} className="text-[#E89B52]" /> {currentUser.branch || 'Piazza Central Branch'}</span>
+                <span className="flex items-center gap-1"><Building size={12} className="text-[#E89B52]" /> {currentUser.branch || 'Hawassa Main Branch'}</span>
                 <span>•</span>
                 <span className="flex items-center gap-1"><Clock size={12} className="text-[#E89B52]" /> Account Status: <strong className="text-emerald-700">{currentUser.status || 'Active'}</strong></span>
               </div>
@@ -488,10 +488,7 @@ export function UserProfilePage({ lang, onNavigate }: UserProfilePageProps) {
                     onChange={(e) => setBranch(e.target.value)}
                     className="w-full p-2.5 bg-white border border-[#E7DED1] rounded-lg outline-none focus:border-[#E89B52] font-semibold text-gray-800"
                   >
-                    <option value="Piazza Branch">Piazza Branch</option>
-                    <option value="Megenagna Branch">Megenagna Branch</option>
-                    <option value="Lebu Branch">Lebu Branch</option>
-                    <option value="Central Headquarters">Central Headquarters</option>
+                    <option value="Hawassa Main Branch">Hawassa Main Branch</option>
                     <option value="Online">Online Campus</option>
                   </select>
                 </div>
@@ -621,7 +618,7 @@ export function UserProfilePage({ lang, onNavigate }: UserProfilePageProps) {
               <Bell size={16} className="text-[#E89B52]" />
               Notification Subscriptions
             </h3>
-            <p className="text-[11px] text-gray-400">Choose how Abel Begena School updates you regarding classes and payments.</p>
+            <p className="text-[11px] text-gray-400">Choose how Liora Begena School updates you regarding classes and payments.</p>
           </div>
 
           <div className="space-y-4 max-w-lg text-xs">
@@ -654,7 +651,7 @@ export function UserProfilePage({ lang, onNavigate }: UserProfilePageProps) {
             <div className="flex items-center justify-between p-3.5 bg-[#FAF6EF] rounded-xl border border-[#E7DED1]">
               <div>
                 <span className="block font-bold text-gray-800">Browser / In-App Notifications</span>
-                <span className="block text-[10px] text-gray-500">Real-time alerts when logged into Abel Begena portal.</span>
+                <span className="block text-[10px] text-gray-500">Real-time alerts when logged into Liora Begena portal.</span>
               </div>
               <input
                 type="checkbox"
@@ -697,8 +694,8 @@ export function UserProfilePage({ lang, onNavigate }: UserProfilePageProps) {
 
             <div className="p-4 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-1">
               <span className="text-[10px] font-bold text-gray-400 uppercase">Primary Branch</span>
-              <span className="block font-bold text-base text-[#2B2B2B]">{currentUser.branch || 'Piazza Central Branch'}</span>
-              <p className="text-[10px] text-gray-500">Addis Ababa, Ethiopia.</p>
+              <span className="block font-bold text-base text-[#2B2B2B]">{currentUser.branch || 'Hawassa main Branch'}</span>
+              <p className="text-[10px] text-gray-500">Center Point Tower, Hawassa, Ethiopia.</p>
             </div>
           </div>
         </div>

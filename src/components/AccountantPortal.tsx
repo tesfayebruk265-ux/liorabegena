@@ -27,7 +27,7 @@ export interface FinancialTransaction {
   studentId: string;
   course: string;
   level: string;
-  branch: 'Piazza Branch' | 'Megenagna Branch' | 'Lebu Branch';
+  branch: string;
   paymentType: 'Registration Fee' | 'Monthly Tuition' | 'Full Course Fee' | 'Instrument Purchase' | 'Other';
   amount: number;
   paymentMethod: 'CBE' | 'Telebirr' | 'Cash';
@@ -45,8 +45,9 @@ export interface CoursePricingConfig {
   courseName: string;
   level: string;
   threeMonthFeeETB: number;
+  fourMonthFeeETB: number;
   sixMonthFeeETB: number;
-  nineMonthFeeETB: number;
+  nineMonthFeeETB?: number;
   effectiveDate: string;
 }
 
@@ -159,12 +160,12 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
       try { return JSON.parse(saved); } catch (e) {}
     }
     return [
-      { courseName: 'Begena', level: 'Basic 1 / Basic 2 / Basic 3', threeMonthFeeETB: 3000, sixMonthFeeETB: 5000, nineMonthFeeETB: 7000, effectiveDate: '2026-01-01' },
-      { courseName: 'Krar', level: 'Basic / Intermediate / Advanced', threeMonthFeeETB: 2800, sixMonthFeeETB: 4800, nineMonthFeeETB: 6500, effectiveDate: '2026-01-01' },
-      { courseName: 'Masenqo', level: 'Basic / Advanced', threeMonthFeeETB: 3000, sixMonthFeeETB: 5200, nineMonthFeeETB: 7200, effectiveDate: '2026-01-01' },
-      { courseName: 'Washint', level: 'Basic / Advanced', threeMonthFeeETB: 2500, sixMonthFeeETB: 4200, nineMonthFeeETB: 6000, effectiveDate: '2026-01-01' },
-      { courseName: 'Vocal (Zema)', level: 'Basic / Advanced', threeMonthFeeETB: 3200, sixMonthFeeETB: 5500, nineMonthFeeETB: 7500, effectiveDate: '2026-01-01' },
-      { courseName: 'Kebero', level: 'Basic / Advanced', threeMonthFeeETB: 2500, sixMonthFeeETB: 4200, nineMonthFeeETB: 6000, effectiveDate: '2026-01-01' }
+      { courseName: 'Begena', level: 'Basic 1 / Basic 2 / Basic 3', threeMonthFeeETB: 3000, fourMonthFeeETB: 4000, sixMonthFeeETB: 5000, effectiveDate: '2026-01-01' },
+      { courseName: 'Krar', level: 'Basic / Intermediate / Advanced', threeMonthFeeETB: 2800, fourMonthFeeETB: 3800, sixMonthFeeETB: 4800, effectiveDate: '2026-01-01' },
+      { courseName: 'Masenqo', level: 'Basic / Advanced', threeMonthFeeETB: 3000, fourMonthFeeETB: 4100, sixMonthFeeETB: 5200, effectiveDate: '2026-01-01' },
+      { courseName: 'Washint', level: 'Basic / Advanced', threeMonthFeeETB: 2500, fourMonthFeeETB: 3400, sixMonthFeeETB: 4200, effectiveDate: '2026-01-01' },
+      { courseName: 'Vocal (Zema)', level: 'Basic / Advanced', threeMonthFeeETB: 3200, fourMonthFeeETB: 4400, sixMonthFeeETB: 5500, effectiveDate: '2026-01-01' },
+      { courseName: 'Kebero', level: 'Basic / Advanced', threeMonthFeeETB: 2500, fourMonthFeeETB: 3400, sixMonthFeeETB: 4200, effectiveDate: '2026-01-01' }
     ];
   });
 
@@ -189,7 +190,7 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
       try { return JSON.parse(saved); } catch (e) {}
     }
     return [
-      { id: 'EXP-101', category: 'Teacher Payments', description: 'Faculty stipends for July 2026 - Lique Mezemer Abel', amount: 12000, date: '2026-07-20', branch: 'Piazza Branch', paymentMethod: 'CBE', vendor: 'Faculty Payroll', createdBy: 'Martha Hailu', status: 'Approved' },
+      { id: 'EXP-101', category: 'Teacher Payments', description: 'Faculty stipends for July 2026 - Lique Mezemer Bruk', amount: 12000, date: '2026-07-20', branch: 'Piazza Branch', paymentMethod: 'CBE', vendor: 'Faculty Payroll', createdBy: 'Martha Hailu', status: 'Approved' },
       { id: 'EXP-102', category: 'Rent', description: 'Monthly facility lease - Piazza Branch', amount: 25000, date: '2026-07-01', branch: 'Piazza Branch', paymentMethod: 'CBE', vendor: 'Piazza Real Estate', createdBy: 'Martha Hailu', status: 'Approved' },
       { id: 'EXP-103', category: 'Instrument Maintenance', description: 'Begena string replacements & tuning tools', amount: 3500, date: '2026-07-15', branch: 'Central', paymentMethod: 'Cash', vendor: 'Traditional Artisan Workshop', createdBy: 'Martha Hailu', status: 'Approved' }
     ];
@@ -261,11 +262,10 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
     let changed = false;
     let updatedTxns = [...transactions];
 
-    const normalizeBranch = (b?: string): 'Piazza Branch' | 'Megenagna Branch' | 'Lebu Branch' => {
-      if (!b) return 'Piazza Branch';
-      if (b.includes('Megenagna')) return 'Megenagna Branch';
-      if (b.includes('Lebu')) return 'Lebu Branch';
-      return 'Piazza Branch';
+    const normalizeBranch = (b?: string): string => {
+      if (!b) return 'Hawassa Main Branch';
+      if (b.toLowerCase().includes('online')) return 'Online Campus';
+      return 'Hawassa Main Branch';
     };
 
     // 1. Scan submitted applications from `ab_applications_v3`
@@ -374,9 +374,8 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
   const courseFeeRevenue = totalRevenue - regFeeRevenue;
 
   // Branch Specific Revenue Metrics
-  const piazzaRevenue = verifiedTxns.filter(t => t.branch === 'Piazza Branch').reduce((sum, t) => sum + t.amount, 0);
-  const megenagnaRevenue = verifiedTxns.filter(t => t.branch === 'Megenagna Branch').reduce((sum, t) => sum + t.amount, 0);
-  const lebuRevenue = verifiedTxns.filter(t => t.branch === 'Lebu Branch').reduce((sum, t) => sum + t.amount, 0);
+  const hawassaRevenue = verifiedTxns.filter(t => t.branch === 'Hawassa Main Branch' || !t.branch?.toLowerCase().includes('online')).reduce((sum, t) => sum + t.amount, 0);
+  const onlineRevenue = verifiedTxns.filter(t => t.branch === 'Online Campus' || t.branch?.toLowerCase().includes('online')).reduce((sum, t) => sum + t.amount, 0);
 
   // ----------------------------------------------------
   // TRANSACTION AUDIT WORKFLOW (Requirement 7)
@@ -492,7 +491,7 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
             branch: targetTxn.branch,
             mode: matchingApp?.learningMode || 'In-Person',
             schedule: matchingApp?.scheduleDayTime || 'Standard Schedule',
-            teacherName: 'Lique Mezemer Abel',
+            teacherName: 'Lique Mezemer Bruk',
             enrollmentDate: new Date().toISOString().split('T')[0],
             status: 'Active',
             studentStatus: 'Enrollment Active',
@@ -844,7 +843,7 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
 
   // Export helper
   const handleExportFinancials = (format: string, reportName: string) => {
-    alert(`Exporting ${reportName} in ${format.toUpperCase()} format...\nDocument generated with Abel Begena School Seal.`);
+    alert(`Exporting ${reportName} in ${format.toUpperCase()} format...\nDocument generated with Liora Begena School Seal.`);
   };
 
   // ----------------------------------------------------
@@ -875,7 +874,7 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
           </div>
           <div>
             <h1 className="font-display font-black text-lg tracking-tight uppercase text-gray-800">Financial Management Office</h1>
-            <p className="text-[10px] tracking-wider text-[#E89B52] font-bold uppercase">Abel Begena School • Chief Accountant Portal</p>
+            <p className="text-[10px] tracking-wider text-[#E89B52] font-bold uppercase">Liora Begena School • Chief Accountant Portal</p>
           </div>
         </div>
 
@@ -1064,16 +1063,12 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
                   <span className="block text-[10px] font-mono font-bold text-gray-400 uppercase">Branch Revenue Distribution</span>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center p-2 bg-[#FAF6EF] rounded-xl">
-                      <span className="font-bold text-gray-700">Piazza Branch:</span>
-                      <span className="font-mono font-bold">{piazzaRevenue.toLocaleString()} ETB</span>
+                      <span className="font-bold text-gray-700">Hawassa Main Branch:</span>
+                      <span className="font-mono font-bold">{hawassaRevenue.toLocaleString()} ETB</span>
                     </div>
                     <div className="flex justify-between items-center p-2 bg-[#FAF6EF] rounded-xl">
-                      <span className="font-bold text-gray-700">Megenagna Branch:</span>
-                      <span className="font-mono font-bold">{megenagnaRevenue.toLocaleString()} ETB</span>
-                    </div>
-                    <div className="flex justify-between items-center p-2 bg-[#FAF6EF] rounded-xl">
-                      <span className="font-bold text-gray-700">Lebu Branch:</span>
-                      <span className="font-mono font-bold">{lebuRevenue.toLocaleString()} ETB</span>
+                      <span className="font-bold text-gray-700">Online Campus:</span>
+                      <span className="font-mono font-bold">{onlineRevenue.toLocaleString()} ETB</span>
                     </div>
                   </div>
                 </div>
@@ -1154,9 +1149,8 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
 
                 <select value={filterBranch} onChange={(e) => setFilterBranch(e.target.value)} className="p-2 border border-[#E7DED1] rounded-lg bg-white font-bold">
                   <option value="All">All Branches</option>
-                  <option value="Piazza Branch">Piazza Branch</option>
-                  <option value="Megenagna Branch">Megenagna Branch</option>
-                  <option value="Lebu Branch">Lebu Branch</option>
+                  <option value="Hawassa Main Branch">Hawassa Main Branch</option>
+                  <option value="Online Campus">Online Campus</option>
                 </select>
 
                 <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="p-2 border border-[#E7DED1] rounded-lg bg-white font-bold">
@@ -1334,8 +1328,8 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
                         <th className="p-3">Course Name</th>
                         <th className="p-3">Levels Covered</th>
                         <th className="p-3">3-Month Term</th>
+                        <th className="p-3">4-Month Term</th>
                         <th className="p-3">6-Month Term</th>
-                        <th className="p-3">9-Month Term</th>
                         <th className="p-3">Effective Date</th>
                       </tr>
                     </thead>
@@ -1345,8 +1339,8 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
                           <td className="p-3 font-bold text-gray-800">{pr.courseName}</td>
                           <td className="p-3 text-gray-500">{pr.level}</td>
                           <td className="p-3 font-mono font-bold text-gray-800">{pr.threeMonthFeeETB} ETB</td>
+                          <td className="p-3 font-mono font-bold text-blue-700">{pr.fourMonthFeeETB || Math.round(pr.threeMonthFeeETB * 1.3)} ETB</td>
                           <td className="p-3 font-mono font-bold text-[#E89B52]">{pr.sixMonthFeeETB} ETB</td>
-                          <td className="p-3 font-mono font-bold text-green-700">{pr.nineMonthFeeETB} ETB</td>
                           <td className="p-3 font-mono text-[10px] text-gray-400">{pr.effectiveDate}</td>
                         </tr>
                       ))}
@@ -1443,7 +1437,7 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
                 {verifiedTxns.map(t => (
                   <div key={t.id} className="p-4 border border-[#E7DED1] rounded-2xl bg-[#FAF6EF]/20 space-y-3">
                     <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                      <span className="font-display font-black text-sm uppercase text-gray-800">Abel Begena School Receipt</span>
+                      <span className="font-display font-black text-sm uppercase text-gray-800">Liora Begena School Receipt</span>
                       <span className="font-mono text-[10px] font-bold text-[#E89B52]">{t.id}</span>
                     </div>
 
@@ -1568,26 +1562,19 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
             <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-2xs space-y-6 animate-fadeIn text-xs">
               <h3 className="font-display font-black text-sm uppercase tracking-wider">Branch Financial Performance Comparison</h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 border border-[#E7DED1] rounded-2xl bg-[#FAF6EF]/20 space-y-2">
-                  <span className="font-bold text-sm block">1. Piazza Branch</span>
-                  <p><strong>Gross Inflow:</strong> {piazzaRevenue.toLocaleString()} ETB</p>
+                  <span className="font-bold text-sm block">1. Hawassa Main Branch (Center Point Tower)</span>
+                  <p><strong>Gross Inflow:</strong> {hawassaRevenue.toLocaleString()} ETB</p>
                   <p><strong>Approved Expenses:</strong> 25,000 ETB</p>
-                  <p className="font-bold text-green-700"><strong>Net Margin:</strong> {(piazzaRevenue - 25000).toLocaleString()} ETB</p>
+                  <p className="font-bold text-green-700"><strong>Net Margin:</strong> {(hawassaRevenue - 25000).toLocaleString()} ETB</p>
                 </div>
 
                 <div className="p-4 border border-[#E7DED1] rounded-2xl bg-[#FAF6EF]/20 space-y-2">
-                  <span className="font-bold text-sm block">2. Megenagna Branch</span>
-                  <p><strong>Gross Inflow:</strong> {megenagnaRevenue.toLocaleString()} ETB</p>
-                  <p><strong>Approved Expenses:</strong> 18,000 ETB</p>
-                  <p className="font-bold text-green-700"><strong>Net Margin:</strong> {(megenagnaRevenue - 18000).toLocaleString()} ETB</p>
-                </div>
-
-                <div className="p-4 border border-[#E7DED1] rounded-2xl bg-[#FAF6EF]/20 space-y-2">
-                  <span className="font-bold text-sm block">3. Lebu Branch</span>
-                  <p><strong>Gross Inflow:</strong> {lebuRevenue.toLocaleString()} ETB</p>
-                  <p><strong>Approved Expenses:</strong> 15,000 ETB</p>
-                  <p className="font-bold text-green-700"><strong>Net Margin:</strong> {(lebuRevenue - 15000).toLocaleString()} ETB</p>
+                  <span className="font-bold text-sm block">2. Online Campus (Global Virtual Hub)</span>
+                  <p><strong>Gross Inflow:</strong> {onlineRevenue.toLocaleString()} ETB</p>
+                  <p><strong>Approved Expenses:</strong> 12,000 ETB</p>
+                  <p className="font-bold text-green-700"><strong>Net Margin:</strong> {(onlineRevenue - 12000).toLocaleString()} ETB</p>
                 </div>
               </div>
             </div>
@@ -1730,7 +1717,7 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
           <div className="fixed inset-0 bg-[#2B2B2B]/75 backdrop-blur-xs z-50 flex items-center justify-center p-4">
             <motion.div className="bg-white border border-[#E7DED1] max-w-sm w-full rounded-2xl p-6 text-left space-y-4 shadow-2xl">
               <div className="flex justify-between items-center border-b border-gray-100 pb-3">
-                <span className="font-display font-black text-sm uppercase">Abel Begena Official Receipt</span>
+                <span className="font-display font-black text-sm uppercase">Liora Begena Official Receipt</span>
                 <button onClick={() => setActiveReceiptModal(null)} className="text-gray-400 hover:text-black">
                   <X size={18} />
                 </button>
@@ -1738,7 +1725,7 @@ export function AccountantPortal({ onNavigate, lang }: AccountantPortalProps) {
 
               <div className="space-y-3 text-xs border p-4 rounded-xl bg-[#FAF6EF]">
                 <div className="text-center space-y-1 border-b border-gray-200 pb-3">
-                  <h3 className="font-display font-black text-base uppercase">Abel Begena School</h3>
+                  <h3 className="font-display font-black text-base uppercase">Liora Begena School</h3>
                   <span className="text-[10px] text-[#E89B52] font-mono font-bold block">OFFICIAL PAYMENT RECEIPT</span>
                   <span className="font-mono text-[9px] text-gray-400">Receipt ID: {activeReceiptModal.id}</span>
                 </div>

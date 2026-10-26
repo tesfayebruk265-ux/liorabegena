@@ -188,8 +188,8 @@ export function CertificatesCenter({ lang, onNavigate, initialCertNumber }: Cert
       branchName: currentUser.branch || 'Piazza Headquarters',
       completionDate: new Date().toISOString().split('T')[0],
       issuedDate: new Date().toISOString().split('T')[0],
-      issuedBy: 'Abel Begena Academic Board',
-      authorizedSignature: 'Zemari Deacon Abel Tesfaye',
+      issuedBy: 'Liora Begena Academic Board',
+      authorizedSignature: 'Deacon Bruk Tesfaye',
       qrVerificationUrl: `/verify/certificate/${newCertNumber}`,
       status: 'Active',
       physicalStatus: 'Prepared'
@@ -244,8 +244,8 @@ export function CertificatesCenter({ lang, onNavigate, initialCertNumber }: Cert
       branchName: currentUser.branch || 'Piazza Headquarters',
       completionDate: new Date().toISOString().split('T')[0],
       issuedDate: new Date().toISOString().split('T')[0],
-      issuedBy: 'Abel Begena Academic Board',
-      authorizedSignature: 'Zemari Deacon Abel Tesfaye',
+      issuedBy: 'Liora Begena Academic Board',
+      authorizedSignature: 'Deacon Bruk Tesfaye',
       qrVerificationUrl: `/verify/certificate/${newCertNumber}`,
       status: 'Active',
       physicalStatus: 'Prepared'
@@ -287,13 +287,13 @@ export function CertificatesCenter({ lang, onNavigate, initialCertNumber }: Cert
         <div className="max-w-4xl space-y-3 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E7DED1] text-xs font-bold text-[#E89B52] shadow-3xs">
             <Award size={14} className="text-[#C79A2B]" />
-            <span>Abel Begena Verified Digital Certificate System</span>
+            <span>Liora Begena Verified Digital Certificate System</span>
           </div>
           <h1 className="font-display font-black text-3xl sm:text-4xl text-[#2B2B2B] tracking-tight">
             Digital Certificates & Public QR Verification Engine
           </h1>
           <p className="text-sm text-[#666666] leading-relaxed max-w-2xl">
-            Official Abel Begena School graduation certificates with encrypted QR verification, automated course completion checks, and physical collection tracking.
+            Official Liora Begena School graduation certificates with encrypted QR verification, automated course completion checks, and physical collection tracking.
           </p>
         </div>
       </div>
@@ -464,7 +464,7 @@ export function CertificatesCenter({ lang, onNavigate, initialCertNumber }: Cert
                         <Award size={36} />
                       </div>
                       <p className="font-display font-bold text-xs uppercase tracking-widest text-[#C79A2B]">
-                        Abel Begena School of Sacred Traditional Music
+                        Liora Begena School of Sacred Traditional Music
                       </p>
                       <h2 className="font-display font-black text-2xl sm:text-3xl text-[#2B2B2B] tracking-tight">
                         Certificate of Completion & Mastery

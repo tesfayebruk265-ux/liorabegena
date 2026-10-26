@@ -21,7 +21,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     name: 'Handcrafted 10-String Sacred Begena Instrument',
     category: 'Begena',
     instrumentType: 'Begena',
-    brand: 'Abel Begena Master Workshop',
+    brand: 'Liora Begena Master Workshop',
     description: 'Masterfully carved traditional 10-string Begena (Harp of David) crafted from aged Wanza hardwood with an authentic parchment soundboard skin and hand-twisted ox-gut strings. Produces deep, resonant acoustic vibrations suitable for liturgical mezmur and spiritual meditation.',
     priceETB: 18500,
     costETB: 12000,
@@ -30,9 +30,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     condition: 'New',
     stockQuantity: 7,
     branchStock: [
-      { branchId: 'b-piazza', branchName: 'Piazza Branch', quantity: 3 },
-      { branchId: 'b-megenagna', branchName: 'Megenagna Branch', quantity: 2 },
-      { branchId: 'b-lebu', branchName: 'Lebu Branch', quantity: 1 },
+      { branchId: 'b-hawassa', branchName: 'Hawassa Main Branch', quantity: 6 },
       { branchId: 'b-warehouse', branchName: 'Online Warehouse', quantity: 1 }
     ],
     images: [
@@ -65,7 +63,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     name: 'Master Ox-Gut String Set for 10-String Begena',
     category: 'Strings',
     instrumentType: 'Begena',
-    brand: 'Abel Begena Genuine Strings',
+    brand: 'Liora Begena Genuine Strings',
     description: 'Authentic 10-piece ox-gut string set prepared following centuries-old Ethiopian traditional curing techniques. Formulated for warm, low-frequency resonance and exceptional tensile strength.',
     priceETB: 450,
     costETB: 180,
@@ -74,9 +72,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     condition: 'New',
     stockQuantity: 45,
     branchStock: [
-      { branchId: 'b-piazza', branchName: 'Piazza Branch', quantity: 20 },
-      { branchId: 'b-megenagna', branchName: 'Megenagna Branch', quantity: 15 },
-      { branchId: 'b-lebu', branchName: 'Lebu Branch', quantity: 10 }
+      { branchId: 'b-hawassa', branchName: 'Hawassa Main Branch', quantity: 45 }
     ],
     images: [
       STORE_IMAGE_2,
@@ -105,7 +101,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     name: 'Acoustic 6-String Traditional Krar Instrument',
     category: 'Krar',
     instrumentType: 'Krar',
-    brand: 'Abel Begena Crafts',
+    brand: 'Liora Begena Crafts',
     description: 'Elegant 6-string acoustic Kirar/Krar crafted with seasoned wood bowl, goat-hide resonator soundboard, and high-tension nylon strings. Perfect for both traditional pentatonic mezmur and modern Ethiopian melody playing.',
     priceETB: 6200,
     costETB: 3800,
@@ -114,9 +110,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     condition: 'New',
     stockQuantity: 12,
     branchStock: [
-      { branchId: 'b-piazza', branchName: 'Piazza Branch', quantity: 5 },
-      { branchId: 'b-megenagna', branchName: 'Megenagna Branch', quantity: 4 },
-      { branchId: 'b-lebu', branchName: 'Lebu Branch', quantity: 3 }
+      { branchId: 'b-hawassa', branchName: 'Hawassa Main Branch', quantity: 12 }
     ],
     images: [
       STORE_IMAGE_3,
@@ -146,7 +140,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     name: 'High-Tension Nylon String Set for 6-String Krar',
     category: 'Strings',
     instrumentType: 'Krar',
-    brand: 'Abel Begena Genuine Strings',
+    brand: 'Liora Begena Genuine Strings',
     description: 'Precision-manufactured high-tension nylon strings designed specifically for 6-string acoustic and electric Krars.',
     priceETB: 280,
     costETB: 110,
@@ -155,9 +149,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     condition: 'New',
     stockQuantity: 60,
     branchStock: [
-      { branchId: 'b-piazza', branchName: 'Piazza Branch', quantity: 25 },
-      { branchId: 'b-megenagna', branchName: 'Megenagna Branch', quantity: 20 },
-      { branchId: 'b-lebu', branchName: 'Lebu Branch', quantity: 15 }
+      { branchId: 'b-hawassa', branchName: 'Hawassa Main Branch', quantity: 60 }
     ],
     images: [
       STORE_IMAGE_4
@@ -180,7 +172,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     name: 'Heavy-Duty Padded Begena Gig Bag Carrying Case',
     category: 'Accessories',
     instrumentType: 'Begena',
-    brand: 'Abel Begena Accessories',
+    brand: 'Liora Begena Accessories',
     description: 'Water-resistant nylon gig bag with 15mm high-density foam padding, dual shoulder straps, reinforced handle, and large zippered pouch for mezmur scorebooks and spare strings.',
     priceETB: 1850,
     costETB: 950,
@@ -189,9 +181,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     condition: 'New',
     stockQuantity: 18,
     branchStock: [
-      { branchId: 'b-piazza', branchName: 'Piazza Branch', quantity: 8 },
-      { branchId: 'b-megenagna', branchName: 'Megenagna Branch', quantity: 6 },
-      { branchId: 'b-lebu', branchName: 'Lebu Branch', quantity: 4 }
+      { branchId: 'b-hawassa', branchName: 'Hawassa Main Branch', quantity: 18 }
     ],
     images: [
       STORE_IMAGE_5
@@ -215,8 +205,8 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     name: 'Comprehensive Begena Notation & Mezmur Study Guide Book',
     category: 'Learning Materials',
     instrumentType: 'Begena',
-    brand: 'Abel Begena Academy Press',
-    description: 'The definitive textbook authored by Founder Abel Begena covering traditional notation system, sacred scales (Tizita, Bati, Ambassel, Anchihoye), tuning theory, and 45 transcribed classic Ethiopian Orthodox mezmurs.',
+    brand: 'Liora Begena Academy Press',
+    description: 'The definitive textbook authored by Founder Liora Begena covering traditional notation system, sacred scales (Tizita, Bati, Ambassel, Anchihoye), tuning theory, and 45 transcribed classic Ethiopian Orthodox mezmurs.',
     priceETB: 750,
     costETB: 300,
     sku: 'AB-PUB-BK-01',
@@ -224,16 +214,14 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     condition: 'New',
     stockQuantity: 35,
     branchStock: [
-      { branchId: 'b-piazza', branchName: 'Piazza Branch', quantity: 15 },
-      { branchId: 'b-megenagna', branchName: 'Megenagna Branch', quantity: 12 },
-      { branchId: 'b-lebu', branchName: 'Lebu Branch', quantity: 8 }
+      { branchId: 'b-hawassa', branchName: 'Hawassa Main Branch', quantity: 35 }
     ],
     images: [
       STORE_IMAGE_1
     ],
     specifications: {
       'Pages': '180 Pages (Amharic & English Annotations)',
-      'Publisher': 'Abel Begena School Press',
+      'Publisher': 'Liora Begena School Press',
       'Format': 'Hardcover Deluxe Edition'
     },
     status: 'Active',
@@ -249,7 +237,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     name: 'Handmade Single-String Masenqo Instrument with Bow',
     category: 'Masenqo',
     instrumentType: 'Masenqo',
-    brand: 'Abel Begena Artisans',
+    brand: 'Liora Begena Artisans',
     description: 'Authentic Ethiopian single-string bowed lute with square diamond wooden resonator box, horsehair string, and ergonomic curved horsehair bow.',
     priceETB: 5400,
     costETB: 3200,
@@ -258,9 +246,7 @@ export const SAMPLE_STORE_PRODUCTS: StoreProductExtended[] = [
     condition: 'New',
     stockQuantity: 6,
     branchStock: [
-      { branchId: 'b-piazza', branchName: 'Piazza Branch', quantity: 2 },
-      { branchId: 'b-megenagna', branchName: 'Megenagna Branch', quantity: 2 },
-      { branchId: 'b-lebu', branchName: 'Lebu Branch', quantity: 2 }
+      { branchId: 'b-hawassa', branchName: 'Hawassa Main Branch', quantity: 6 }
     ],
     images: [
       STORE_IMAGE_3
@@ -302,7 +288,7 @@ export const SAMPLE_QUESTIONS: ProductQuestion[] = [
     question: 'Is this 10-string Begena suitable for a complete beginner in Level 1?',
     date: '2026-07-02',
     answer: 'Yes! This instrument is specifically tuned and set up by our master instructors for students entering Begena Level 1.',
-    answeredBy: 'Abel Begena (Founder)',
+    answeredBy: 'Liora Begena (Founder)',
     answeredDate: '2026-07-03'
   }
 ];

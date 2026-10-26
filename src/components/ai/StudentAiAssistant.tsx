@@ -61,11 +61,11 @@ export const StudentAiAssistant: React.FC<StudentAiAssistantProps> = ({
       id: 'MSG-INIT',
       role: 'assistant',
       content:
-        'Selam! I am your Abel Begena AI Learning Assistant. How can I help you today? You can ask me to explain a lesson, generate a practice plan, create a quiz, or guide your Begena tuning.',
+        'Selam! I am your Liora Begena AI Learning Assistant. How can I help you today? You can ask me to explain a lesson, generate a practice plan, create a quiz, or guide your Begena tuning.',
       timestamp: '10:00 AM',
       isAiGenerated: true,
       confidence: 'High',
-      sourceCitations: [{ title: 'Begena Level 1 Curriculum', module: 'Abel Begena School' }]
+      sourceCitations: [{ title: 'Begena Level 1 Curriculum', module: 'Liora Begena School' }]
     }
   ]);
   const [inputQuery, setInputQuery] = useState('');
@@ -241,7 +241,7 @@ export const StudentAiAssistant: React.FC<StudentAiAssistantProps> = ({
                   AI
                 </div>
                 <div>
-                  <h3 className="font-bold text-neutral-800 text-sm">Abel Begena AI Learning Assistant</h3>
+                  <h3 className="font-bold text-neutral-800 text-sm">Liora Begena AI Learning Assistant</h3>
                   <p className="text-xs text-neutral-500">Connected to Begena Curriculum & St. Yared Liturgical Theory</p>
                 </div>
               </div>
@@ -308,7 +308,7 @@ export const StudentAiAssistant: React.FC<StudentAiAssistantProps> = ({
               {isLoading && (
                 <div className="flex gap-3 items-center text-sm text-neutral-500 bg-stone-50 p-3 rounded-xl border border-stone-200 w-fit">
                   <Sparkles className="w-4 h-4 text-amber-600 animate-spin" />
-                  <span>Thinking with Abel Begena Knowledge Engine...</span>
+                  <span>Thinking with Liora Begena Knowledge Engine...</span>
                 </div>
               )}
             </div>
@@ -379,7 +379,7 @@ export const StudentAiAssistant: React.FC<StudentAiAssistantProps> = ({
                 <Sparkles className="w-4 h-4 text-amber-700" /> AI Safety & Transparency
               </h4>
               <p className="text-xs text-amber-800/90 leading-relaxed">
-                All AI suggestions are derived strictly from official Abel Begena School course manuals. The AI does not replace your human instructor.
+                All AI suggestions are derived strictly from official Liora Begena School course manuals. The AI does not replace your human instructor.
               </p>
             </div>
           </div>

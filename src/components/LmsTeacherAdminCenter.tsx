@@ -627,7 +627,7 @@ export function LmsTeacherAdminCenter({
                   <TiletPattern className="opacity-20 text-[#E89B52] scale-150" />
                   <div className="relative z-10 space-y-4">
                     <span className="text-xs font-mono tracking-widest text-[#E89B52] uppercase block">
-                      ABEL BEGENA SCHOOL • ETHIOPIA
+                      LIORA BEGENA SCHOOL • ETHIOPIA
                     </span>
                     <h3 className="font-display font-black text-2xl sm:text-3xl tracking-wide text-amber-200">
                       CERTIFICATE OF COMPLETION
@@ -643,13 +643,13 @@ export function LmsTeacherAdminCenter({
 
                     <div className="pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
                       <div>
-                        <span>Authorized Signatory: <b>Teacher Abel Begena</b></span>
+                        <span>Authorized Signatory: <b>Teacher Liora Begena</b></span>
                       </div>
                       <div className="flex items-center gap-2 bg-white/10 p-2 rounded-xl border border-white/10">
                         <QrCode size={28} className="text-amber-400" />
                         <div className="text-[10px] text-left">
                           <span className="block font-mono font-bold text-white">{certCode}</span>
-                          <span>Verified on Abel Begena Registry</span>
+                          <span>Verified on Liora Begena Registry</span>
                         </div>
                       </div>
                     </div>

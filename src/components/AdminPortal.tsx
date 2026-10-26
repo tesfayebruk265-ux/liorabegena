@@ -90,7 +90,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
   } = useData();
 
   // Active Role View Context - directly determined by current user's role
-  const activeRoleView = (currentUser?.role === 'founder' 
+  const activeRoleView = (currentUser?.role === 'founder'
     ? 'founder'
     : currentUser?.role === 'super_admin'
       ? 'super_admin'
@@ -158,47 +158,50 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
   const [users, setUsers] = useState<SystemUser[]>(() => {
     const saved = localStorage.getItem('ab_all_users_v3');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
+      try { return JSON.parse(saved); } catch (e) { }
     }
     return [
-      { id: 'usr_1', fullName: 'Abel Begena', email: 'founder@begena.com', phone: '+251911000001', role: 'founder', branch: 'Central Headquarters', status: 'ACTIVE', createdDate: '2026-01-01', lastLogin: 'Today, 09:12 AM' },
-      { id: 'usr_2', fullName: 'Yared Gebre', email: 'admin@begena.com', phone: '+251911000002', role: 'admin', branch: 'Piazza Branch', status: 'ACTIVE', createdDate: '2026-01-05', lastLogin: 'Today, 08:30 AM' },
-      { id: 'usr_3', fullName: 'Super Admin System', email: 'superadmin@begena.com', phone: '+251911000000', role: 'super_admin', branch: 'Central Headquarters', status: 'ACTIVE', createdDate: '2026-01-01', lastLogin: 'Today, 10:00 AM' },
-      { id: 'usr_4', fullName: 'Martha Hailu', email: 'accountant@begena.com', phone: '+251911223344', role: 'accountant', branch: 'Piazza Branch', status: 'ACTIVE', createdDate: '2026-02-10', lastLogin: 'Today, 08:45 AM' },
-      { id: 'usr_5', fullName: 'Genet Assefa', email: 'hanasaba@begena.com', phone: '+251911334455', role: 'registration_staff', branch: 'Piazza Branch', status: 'ACTIVE', createdDate: '2026-02-12', lastLogin: 'Today, 09:00 AM' },
-      { id: 'usr_6', fullName: 'Lique Mezemer Abel', email: 'teacher@begena.com', phone: '+251911445566', role: 'teacher', branch: 'Piazza Branch', status: 'ACTIVE', createdDate: '2026-01-15', lastLogin: 'Yesterday, 04:15 PM' }
+      { id: 'usr_1', fullName: 'Liora Begena', email: 'founder@begena.com', phone: '+251911000001', role: 'founder', branch: 'Hawassa Main Branch', status: 'ACTIVE', createdDate: '2026-01-01', lastLogin: 'Today, 09:12 AM' },
+      { id: 'usr_2', fullName: 'Yared Gebre', email: 'admin@begena.com', phone: '+251911000002', role: 'admin', branch: 'Hawassa Main Branch', status: 'ACTIVE', createdDate: '2026-01-05', lastLogin: 'Today, 08:30 AM' },
+      { id: 'usr_3', fullName: 'Super Admin System', email: 'superadmin@begena.com', phone: '+251911000000', role: 'super_admin', branch: 'Hawassa Main Branch', status: 'ACTIVE', createdDate: '2026-01-01', lastLogin: 'Today, 10:00 AM' },
+      { id: 'usr_4', fullName: 'Martha Hailu', email: 'accountant@begena.com', phone: '+251911223344', role: 'accountant', branch: 'Hawassa Main Branch', status: 'ACTIVE', createdDate: '2026-02-10', lastLogin: 'Today, 08:45 AM' },
+      { id: 'usr_5', fullName: 'Genet Assefa', email: 'hanasaba@begena.com', phone: '+251911334455', role: 'registration_staff', branch: 'Hawassa Main Branch', status: 'ACTIVE', createdDate: '2026-02-12', lastLogin: 'Today, 09:00 AM' },
+      { id: 'usr_6', fullName: 'Lique Mezemer Bruk', email: 'teacher@begena.com', phone: '+251911445566', role: 'teacher', branch: 'Hawassa Main Branch', status: 'ACTIVE', createdDate: '2026-01-15', lastLogin: 'Yesterday, 04:15 PM' }
     ];
   });
 
   const [branches, setBranches] = useState<BranchRecord[]>(() => {
-    const saved = localStorage.getItem('ab_branches_v3');
+    const saved = localStorage.getItem('liora_branches_v1') || localStorage.getItem('ab_branches_v3');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].name?.includes('Hawassa')) {
+          return parsed;
+        }
+      } catch (e) { }
     }
     return [
-      { id: 'br_1', name: 'Piazza Branch', location: 'Arada, Near St. George Church', manager: 'Sileshi Worku', phone: '+251911889900', studentsCount: 340, teachersCount: 10, revenueETB: 125000, status: 'Active' },
-      { id: 'br_2', name: 'Megenagna Branch', location: 'Megenagna Square, Zefmesh Grand Mall', manager: 'Solomon Wolde', phone: '+251911778899', studentsCount: 220, teachersCount: 8, revenueETB: 85000, status: 'Active' },
-      { id: 'br_3', name: 'Lebu Branch', location: 'Lebu Varnero, Royal Plaza 3rd Floor', manager: 'Bethlehem Demeke', phone: '+251911667788', studentsCount: 160, teachersCount: 6, revenueETB: 62000, status: 'Active' }
+      { id: 'br_1', name: 'Hawassa Main Branch', location: 'Center Point Tower, first floor, Hawassa, Ethiopia', manager: 'Deacon Bruk Tesfaye', phone: '+251 912 67 4600', studentsCount: 720, teachersCount: 24, revenueETB: 272000, status: 'Active' }
     ];
   });
 
   const [courses, setCourses] = useState<CourseRecord[]>(() => {
     const saved = localStorage.getItem('ab_courses_v3');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
+      try { return JSON.parse(saved); } catch (e) { }
     }
     return [
-      { id: 'crs_1', name: 'Begena', category: 'Spiritual Harp', levels: ['Basic 1', 'Basic 2', 'Basic 3'], teachersCount: 8, studentsCount: 420, branches: ['Piazza Branch', 'Megenagna Branch', 'Lebu Branch'], threeMonthFeeETB: 3000, status: 'Active' },
-      { id: 'crs_2', name: 'Krar', category: 'Traditional Lyre', levels: ['Basic', 'Intermediate', 'Advanced'], teachersCount: 6, studentsCount: 180, branches: ['Piazza Branch', 'Megenagna Branch'], threeMonthFeeETB: 2800, status: 'Active' },
-      { id: 'crs_3', name: 'Masenqo', category: 'Single-String Lute', levels: ['Basic', 'Advanced'], teachersCount: 4, studentsCount: 90, branches: ['Piazza Branch', 'Lebu Branch'], threeMonthFeeETB: 3000, status: 'Active' },
-      { id: 'crs_4', name: 'Washint', category: 'Traditional Flute', levels: ['Basic', 'Advanced'], teachersCount: 3, studentsCount: 60, branches: ['Megenagna Branch'], threeMonthFeeETB: 2500, status: 'Active' }
+      { id: 'crs_1', name: 'Begena', category: 'Spiritual Harp', levels: ['Basic 1', 'Basic 2', 'Basic 3'], teachersCount: 8, studentsCount: 420, branches: ['Hawassa Main Branch'], threeMonthFeeETB: 3000, status: 'Active' },
+      { id: 'crs_2', name: 'Krar', category: 'Traditional Lyre', levels: ['Basic', 'Intermediate', 'Advanced'], teachersCount: 6, studentsCount: 180, branches: ['Hawassa Main Branch'], threeMonthFeeETB: 2800, status: 'Active' },
+      { id: 'crs_3', name: 'Masenqo', category: 'Single-String Lute', levels: ['Basic', 'Advanced'], teachersCount: 4, studentsCount: 90, branches: ['Hawassa Main Branch'], threeMonthFeeETB: 3000, status: 'Active' },
+      { id: 'crs_4', name: 'Washint', category: 'Traditional Flute', levels: ['Basic', 'Advanced'], teachersCount: 3, studentsCount: 60, branches: ['Hawassa Main Branch'], threeMonthFeeETB: 2500, status: 'Active' }
     ];
   });
 
   const [certificates, setCertificates] = useState<CertificateRecord[]>(() => {
     const saved = localStorage.getItem('ab_certificates_v3');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
+      try { return JSON.parse(saved); } catch (e) { }
     }
     return [];
   });
@@ -206,17 +209,17 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>(() => {
     const saved = localStorage.getItem('ab_announcements_v3');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
+      try { return JSON.parse(saved); } catch (e) { }
     }
     return [
-      { id: 'anc_1', title: 'Grand Begena Recital & Spiritual Harmony Night', content: 'All students are invited to join Founder Abel at Piazza Branch main auditorium.', target: 'All Students & Parents', channels: ['In-App', 'Push', 'Telegram'], date: '2026-07-20', publishedBy: 'Yared Gebre (Admin)', status: 'Published' }
+      { id: 'anc_1', title: 'Grand Begena Recital & Spiritual Harmony Night', content: 'All students are invited to join Founder Bruk at Hawassa main Branch auditorium.', target: 'All Students & Parents', channels: ['In-App', 'Push', 'Telegram'], date: '2026-07-20', publishedBy: 'Liora Admin', status: 'Published' }
     ];
   });
 
   const [auditLogs, setAuditLogs] = useState<{ id: string; user: string; role: string; action: string; target: string; time: string }[]>(() => {
     const saved = localStorage.getItem('ab_system_audit_v3');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) {}
+      try { return JSON.parse(saved); } catch (e) { }
     }
     return [
       { id: 'log_1', user: currentUser?.fullName || 'Yared Gebre', role: 'Admin', action: 'System Initialization', target: 'Phase 8 Master Control Panel', time: 'Today, 08:30 AM' }
@@ -239,7 +242,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
         try {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed)) setUsers(parsed);
-        } catch (e) {}
+        } catch (e) { }
       }
     };
 
@@ -274,7 +277,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
     email: '',
     phone: '',
     role: 'student' as UserRole,
-    branch: 'Piazza Branch'
+    branch: 'Hawassa main Branch'
   });
 
   const handleCreateUser = () => {
@@ -299,7 +302,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
     addNotification('User Created', `Created user account for ${newUserForm.fullName} [${newUserForm.role}]`, 'system');
     logAction('Created System User', `${newUserForm.fullName} (${newUserForm.role})`);
     setIsAddUserOpen(false);
-    setNewUserForm({ fullName: '', email: '', phone: '', role: 'student', branch: 'Piazza Branch' });
+    setNewUserForm({ fullName: '', email: '', phone: '', role: 'student', branch: 'Hawassa main Branch' });
   };
 
   const handleToggleUserStatus = (userId: string) => {
@@ -336,7 +339,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
       course: certForm.course,
       level: certForm.level,
       issueDate: new Date().toISOString().split('T')[0],
-      issuedBy: currentUser?.fullName || 'Abel Begena',
+      issuedBy: currentUser?.fullName || 'Liora Begena',
       qrCodeUrl: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ABS-${certId}`,
       status: 'Valid'
     };
@@ -385,8 +388,8 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
     return u;
   }).filter(u => {
     const matchesSearch = (u.fullName || '').toLowerCase().includes(globalSearch.toLowerCase()) ||
-                          (u.email || '').toLowerCase().includes(globalSearch.toLowerCase()) ||
-                          (u.role || '').toLowerCase().includes(globalSearch.toLowerCase());
+      (u.email || '').toLowerCase().includes(globalSearch.toLowerCase()) ||
+      (u.role || '').toLowerCase().includes(globalSearch.toLowerCase());
     const matchesRole = roleFilter === 'All' || u.role === roleFilter;
     const matchesBranch = branchFilter === 'All' || u.branch === branchFilter;
     return matchesSearch && matchesRole && matchesBranch;
@@ -405,7 +408,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
               {activeRoleView === 'founder' ? 'Founder Executive Summit' : 'Admin Control Center'}
             </h1>
             <p className="text-[10px] tracking-wider text-[#E89B52] font-bold uppercase">
-              Abel Begena School • Master Digital Ecosystem Control
+              Liora Begena School • Master Digital Ecosystem Control
             </p>
           </div>
         </div>
@@ -541,10 +544,10 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                       {activeRoleView === 'founder' ? 'EXECUTIVE FOUNDER SUMMIT' : 'ACADEMIC MANAGEMENT OVERVIEW'}
                     </span>
                     <h2 className="font-display font-black text-2xl uppercase tracking-tight">
-                      {activeRoleView === 'founder' ? 'FOUNDER ABEL EXECUTIVE DESK' : 'ABEL BEGENA SCHOOL DIGITAL CONTROL'}
+                      {activeRoleView === 'founder' ? 'FOUNDER BRUK EXECUTIVE DESK' : 'LIORA BEGENA SCHOOL DIGITAL CONTROL'}
                     </h2>
                     <p className="text-xs text-gray-300 mt-1">
-                      Organization-wide performance across Piazza, Megenagna, and Lebu branches.
+                      Organization-wide performance for Hawassa main Branch & online students.
                     </p>
                   </div>
                   <Button variant="primary" size="sm" onClick={() => setIsAddUserOpen(true)} className="gap-1.5 shrink-0 bg-[#E89B52] text-white">
@@ -568,7 +571,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                   <div className="flex items-baseline gap-2 mt-1">
                     <span className="text-2xl font-black font-mono text-[#E89B52]">24 Instructors</span>
                   </div>
-                  <span className="text-[9px] text-gray-400 font-bold block mt-1">Active across 3 campuses</span>
+                  <span className="text-[9px] text-gray-400 font-bold block mt-1">Active at Hawassa Main Branch</span>
                 </div>
 
                 <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl shadow-2xs">
@@ -580,11 +583,11 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                 </div>
 
                 <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl shadow-2xs">
-                  <span className="block text-[10px] font-mono text-gray-400 uppercase font-bold">Active Campuses</span>
+                  <span className="block text-[10px] font-mono text-gray-400 uppercase font-bold">Active Campus</span>
                   <div className="flex items-baseline gap-2 mt-1">
-                    <span className="text-2xl font-black font-mono text-[#2B2B2B]">3 Branches</span>
+                    <span className="text-2xl font-black font-mono text-[#2B2B2B]">1 Main Branch</span>
                   </div>
-                  <span className="text-[9px] text-gray-400 font-bold block mt-1">Piazza • Megenagna • Lebu</span>
+                  <span className="text-[9px] text-gray-400 font-bold block mt-1">Hawassa (Center Point Tower)</span>
                 </div>
               </div>
 
@@ -595,7 +598,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                     <h3 className="font-display font-black text-sm uppercase tracking-wider">
                       Strategic Growth Trajectory & Revenue Metrics
                     </h3>
-                    <p className="text-[11px] text-gray-400">Multi-branch enrollment performance from Jan 2026 to present.</p>
+                    <p className="text-[11px] text-gray-400">Hawassa main branch & online enrollment performance from Jan 2026 to present.</p>
                   </div>
                   <span className="px-2.5 py-1 bg-green-50 text-green-700 rounded-full font-mono font-bold text-[10px] border border-green-200">
                     Growth Index: +142% YTD
@@ -696,11 +699,9 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                 </select>
 
                 <select value={branchFilter} onChange={(e) => setBranchFilter(e.target.value)} className="p-2 border border-[#E7DED1] rounded-lg bg-white font-bold">
-                  <option value="All">All Branches</option>
-                  <option value="Piazza Branch">Piazza Branch</option>
-                  <option value="Megenagna Branch">Megenagna Branch</option>
-                  <option value="Lebu Branch">Lebu Branch</option>
-                  <option value="Central Headquarters">Central Headquarters</option>
+                  <option value="All">All Locations</option>
+                  <option value="Hawassa main Branch">Hawassa main Branch</option>
+                  <option value="Online">Online Campus</option>
                 </select>
               </div>
 
@@ -732,9 +733,8 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                         <td className="p-3">{u.branch}</td>
                         <td className="p-3 text-gray-500 font-mono text-[10px]">{u.lastLogin}</td>
                         <td className="p-3">
-                          <span className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold ${
-                            u.status === 'ACTIVE' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'
-                          }`}>
+                          <span className={`px-2 py-0.5 rounded text-[9px] font-mono font-bold ${u.status === 'ACTIVE' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'
+                            }`}>
                             {u.status}
                           </span>
                         </td>
@@ -744,9 +744,8 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                           </Button>
                           <button
                             onClick={() => handleToggleUserStatus(u.id)}
-                            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border ${
-                              u.status === 'ACTIVE' ? 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100' : 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
-                            }`}
+                            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border ${u.status === 'ACTIVE' ? 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100' : 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
+                              }`}
                           >
                             {u.status === 'ACTIVE' ? 'Suspend' : 'Activate'}
                           </button>
@@ -1033,7 +1032,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                       phone: phone || '+251900000000',
                       photo: '',
                       specializations: specs,
-                      branches: ['Piazza Branch', 'Bole Branch', 'Megenagna Branch'],
+                      branches: ['Hawassa main Branch'],
                       supportsOnline: true,
                       supportsInPerson: true,
                       capacity: 20,
@@ -1202,60 +1201,60 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                                 </div>
                               </div>
                             </td>
-                          <td className="p-3">
-                            <span className="font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                              🎵 {enr.courseName || enr.instrument}
-                            </span>
-                            <div className="text-[10px] text-gray-500 mt-1">{enr.level}</div>
-                          </td>
-                          <td className="p-3">
-                            <div className="font-bold text-gray-800">{enr.branch}</div>
-                            <span className="text-[10px] text-gray-500">{enr.learningMode}</span>
-                          </td>
-                          <td className="p-3">
-                            {enr.assignedTeacherName ? (
-                              <div>
-                                <div className="font-bold text-gray-900">{enr.assignedTeacherName}</div>
-                                <div className="text-[10px] text-gray-400">{enr.assignedTeacherEmail}</div>
-                                <span className="text-[9px] text-gray-400 block mt-0.5">Assigned by: {enr.assignedBy || 'System'}</span>
-                              </div>
-                            ) : (
-                              <span className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded border border-red-200">
-                                ⚠️ Pending Teacher
+                            <td className="p-3">
+                              <span className="font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                                🎵 {enr.courseName || enr.instrument}
                               </span>
-                            )}
-                          </td>
-                          <td className="p-3">
-                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${enr.assignmentStatus === 'Assigned' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-amber-50 text-amber-800 border border-amber-200'}`}>
-                              {enr.assignmentStatus}
-                            </span>
-                            <div className="text-[10px] text-gray-400 mt-1">Progress: {enr.progressPercent || 0}%</div>
-                          </td>
-                          <td className="p-3 text-right space-x-1">
-                            <button
-                              onClick={() => {
-                                const res = autoAssignTeacherForEnrollment(enr.id);
-                                alert(res.message);
-                              }}
-                              className="px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded text-[10px] font-bold cursor-pointer transition-colors"
-                            >
-                              ⚡ Auto-Assign
-                            </button>
-                            <button
-                              onClick={() => {
-                                setReassigningEnrollment(enr);
-                                const targetInst = (enr.instrument || enr.courseName || '').toLowerCase();
-                                const qualified = teachers.filter(t => t.specializations.some(s => targetInst.includes(s.toLowerCase()) || s.toLowerCase().includes(targetInst)));
-                                setSelectedTargetTeacherId(qualified[0]?.id || teachers[0]?.id || '');
-                              }}
-                              className="px-2.5 py-1 bg-[#2B2B2B] hover:bg-black text-white rounded text-[10px] font-bold cursor-pointer transition-colors"
-                            >
-                              ✏️ Reassign
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                              <div className="text-[10px] text-gray-500 mt-1">{enr.level}</div>
+                            </td>
+                            <td className="p-3">
+                              <div className="font-bold text-gray-800">{enr.branch}</div>
+                              <span className="text-[10px] text-gray-500">{enr.learningMode}</span>
+                            </td>
+                            <td className="p-3">
+                              {enr.assignedTeacherName ? (
+                                <div>
+                                  <div className="font-bold text-gray-900">{enr.assignedTeacherName}</div>
+                                  <div className="text-[10px] text-gray-400">{enr.assignedTeacherEmail}</div>
+                                  <span className="text-[9px] text-gray-400 block mt-0.5">Assigned by: {enr.assignedBy || 'System'}</span>
+                                </div>
+                              ) : (
+                                <span className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded border border-red-200">
+                                  ⚠️ Pending Teacher
+                                </span>
+                              )}
+                            </td>
+                            <td className="p-3">
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${enr.assignmentStatus === 'Assigned' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-amber-50 text-amber-800 border border-amber-200'}`}>
+                                {enr.assignmentStatus}
+                              </span>
+                              <div className="text-[10px] text-gray-400 mt-1">Progress: {enr.progressPercent || 0}%</div>
+                            </td>
+                            <td className="p-3 text-right space-x-1">
+                              <button
+                                onClick={() => {
+                                  const res = autoAssignTeacherForEnrollment(enr.id);
+                                  alert(res.message);
+                                }}
+                                className="px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded text-[10px] font-bold cursor-pointer transition-colors"
+                              >
+                                ⚡ Auto-Assign
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setReassigningEnrollment(enr);
+                                  const targetInst = (enr.instrument || enr.courseName || '').toLowerCase();
+                                  const qualified = teachers.filter(t => t.specializations.some(s => targetInst.includes(s.toLowerCase()) || s.toLowerCase().includes(targetInst)));
+                                  setSelectedTargetTeacherId(qualified[0]?.id || teachers[0]?.id || '');
+                                }}
+                                className="px-2.5 py-1 bg-[#2B2B2B] hover:bg-black text-white rounded text-[10px] font-bold cursor-pointer transition-colors"
+                              >
+                                ✏️ Reassign
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>
@@ -1337,10 +1336,8 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                     onChange={(e) => setNewUserForm({ ...newUserForm, branch: e.target.value })}
                     className="w-full p-2.5 border border-[#E7DED1] rounded-xl bg-white font-bold"
                   >
-                    <option value="Piazza Branch">Piazza Branch</option>
-                    <option value="Megenagna Branch">Megenagna Branch</option>
-                    <option value="Lebu Branch">Lebu Branch</option>
-                    <option value="Central Headquarters">Central Headquarters</option>
+                    <option value="Hawassa main Branch">Hawassa main Branch</option>
+                    <option value="Online">Online Campus</option>
                   </select>
                 </div>
               </div>
@@ -1518,9 +1515,8 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                   >
                     <option value="All Students & Parents">All Students & Parents</option>
                     <option value="All Faculty Teachers">All Faculty Teachers</option>
-                    <option value="Piazza Branch Only">Piazza Branch Only</option>
-                    <option value="Megenagna Branch Only">Megenagna Branch Only</option>
-                    <option value="Lebu Branch Only">Lebu Branch Only</option>
+                    <option value="Hawassa main Branch Only">Hawassa main Branch Only</option>
+                    <option value="Online Students Only">Online Students Only</option>
                   </select>
                 </div>
 
@@ -1702,7 +1698,7 @@ export function AdminPortal({ onNavigate, lang, initialMode = 'admin' }: AdminPo
                       levels: ['Basic 1', 'Basic 2', 'Advanced'],
                       teachersCount: 2,
                       studentsCount: 0,
-                      branches: ['Piazza Branch', 'Megenagna Branch', 'Lebu Branch'],
+                      branches: ['Hawassa Main Branch'],
                       threeMonthFeeETB: courseForm.fee || 3000,
                       status: 'Active'
                     };

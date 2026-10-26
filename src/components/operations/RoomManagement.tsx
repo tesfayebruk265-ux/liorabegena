@@ -21,8 +21,8 @@ import { Button, Input } from '../InteractiveComponents';
 const SAMPLE_ROOM_LIST: ClassRoom[] = [
   {
     id: 'r-101',
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
     name: 'Room 101 - Begena Sanctuary',
     roomNumber: '101',
     capacity: 20,
@@ -32,8 +32,8 @@ const SAMPLE_ROOM_LIST: ClassRoom[] = [
   },
   {
     id: 'r-102',
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
     name: 'Room 102 - Krar & Strings Studio',
     roomNumber: '102',
     capacity: 15,
@@ -43,8 +43,8 @@ const SAMPLE_ROOM_LIST: ClassRoom[] = [
   },
   {
     id: 'r-201',
-    branchId: 'b-[#2B2B2B]e',
-    branchName: 'Megenagna Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
     name: 'Room 201 - Digital Recording & Streaming Lab',
     roomNumber: '201',
     capacity: 25,
@@ -54,8 +54,8 @@ const SAMPLE_ROOM_LIST: ClassRoom[] = [
   },
   {
     id: 'r-301',
-    branchId: 'b-lebu',
-    branchName: 'Lebu Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa Main Branch',
     name: 'Room 301 - Main Choir & Performance Hall',
     roomNumber: '301',
     capacity: 50,
@@ -86,8 +86,8 @@ export function RoomManagement({ lang, onNavigate }: RoomManagementProps) {
     if (!newRoomName) return;
     const r: ClassRoom = {
       id: `r-${Date.now()}`,
-      branchId: newBranchName === 'Piazza Branch' ? 'b-piazza' : newBranchName === 'Megenagna Branch' ? 'b-[#2B2B2B]e' : 'b-lebu',
-      branchName: newBranchName,
+      branchId: 'b-hawassa',
+      branchName: newBranchName || 'Hawassa Main Branch',
       name: newRoomName,
       roomNumber: newRoomNumber,
       capacity: newCapacity,
@@ -142,10 +142,8 @@ export function RoomManagement({ lang, onNavigate }: RoomManagementProps) {
           value={selectedBranch}
           onChange={(e) => setSelectedBranch(e.target.value)}
         >
-          <option value="all">All Campuses</option>
-          <option value="Piazza Branch">Piazza Branch</option>
-          <option value="Megenagna Branch">Megenagna Branch</option>
-          <option value="Lebu Branch">Lebu Branch</option>
+          <option value="all">All Locations</option>
+          <option value="Hawassa Main Branch">Hawassa Main Branch</option>
         </select>
       </div>
 
@@ -226,9 +224,7 @@ export function RoomManagement({ lang, onNavigate }: RoomManagementProps) {
                   value={newBranchName}
                   onChange={(e) => setNewBranchName(e.target.value)}
                 >
-                  <option value="Piazza Branch">Piazza Branch</option>
-                  <option value="Megenagna Branch">Megenagna Branch</option>
-                  <option value="Lebu Branch">Lebu Branch</option>
+                  <option value="Hawassa Main Branch">Hawassa Main Branch</option>
                 </select>
               </div>
 

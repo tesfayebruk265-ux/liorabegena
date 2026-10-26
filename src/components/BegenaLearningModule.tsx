@@ -152,7 +152,7 @@ const DEFAULT_MODULES: BegenaModule[] = [
 const getYouTubeEmbedUrl = (url: string): string | null => {
   if (!url) return null;
   if (url.includes('youtube.com/embed/')) return url;
-  
+
   const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
   const match = url.match(regExp);
 
@@ -269,7 +269,7 @@ const DEFAULT_MEZMURS: BegenaMezmur[] = [
     category: 'ትዝታ ቅኝት',
     difficulty: 'Beginner',
     level: 'Basic 1',
-    teacher: 'አቶ ታፈሰ / Abel Begena',
+    teacher: 'አቶ ታፈሰ / Liora Begena',
     audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
     videoUrl: 'https://www.youtube.com/embed/2GpKxNl_KW0',
     notation: '2 3 1  3 1 5  1 5 4  5 4 2  2 4 5  4 5 1  5 1 3  1 3 2',
@@ -629,7 +629,7 @@ const DEFAULT_MEZMURS: BegenaMezmur[] = [
     category: 'ትዝታ ቅኝት',
     difficulty: 'Intermediate',
     level: 'Basic 1',
-    teacher: 'አቶ ታፈሰ / Abel Begena',
+    teacher: 'አቶ ታፈሰ / Liora Begena',
     audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3',
     videoUrl: 'https://www.youtube.com/embed/2GpKxNl_KW0',
     notation: '2 4 2 3 1 1 5 5 1 3 1 5 2 2 4 2 3 1 1 5 5 1 3 1 5 2',
@@ -979,7 +979,7 @@ const CHERENET_MEZMURS: CherenetMezmur[] = [
   {
     id: 'cher_3',
     title: 'መች ይረሳል',
-    artist: 'አቤል ተስፋዬ',
+    artist: 'ብሩክ ተስፋዬ',
     notation: '52 -52-45131551-1 52 -52-4513 -2332- 42-2 5422- 4 -23151551 -1 5422- 4 -23151551 -1 1513-1- 23151551 -1 1513-1- 23154222 -2',
     lyrics: `መች ይረሳል የዋለልን ውለታ
 ቸርነቱ እፁብ ፍቅሩ የጌታ
@@ -1053,7 +1053,7 @@ const CHERENET_MEZMURS: CherenetMezmur[] = [
   {
     id: 'cher_5',
     title: 'ሠላምህ ይብዛላት',
-    artist: 'አቤል ተስፋዬ በገና (በተማሪዎች የሚሰራ)',
+    artist: 'ብሩክ ተስፋዬ በገና (በተማሪዎች የሚሰራ)',
     notation: '2315513 4324551',
     noteBreakdown: [
       { section: 'አዝማች', notation: '2315513…' },
@@ -1464,7 +1464,7 @@ const CHERENET_CONVERTED_MEZMURS: BegenaMezmur[] = CHERENET_MEZMURS.map((c) => (
   category: 'ቸርነት ቅኝት',
   difficulty: 'Intermediate',
   level: 'Basic 2',
-  teacher: c?.artist || 'ዘማሪ / Abel Begena',
+  teacher: c?.artist || 'ዘማሪ / Liora Begena',
   audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
   videoUrl: 'https://www.youtube.com/embed/2GpKxNl_KW0',
   notation: c?.notation || '',
@@ -1482,7 +1482,7 @@ const SELAMTA_CONVERTED_MEZMURS: BegenaMezmur[] = SELAMTA_MEZMURS.map((s) => ({
   category: 'ሰላምታ ቅኝት',
   difficulty: 'Intermediate',
   level: 'Basic 3',
-  teacher: s?.artist || 'መጋቤ ስብሐት አለሙ አጋ / Abel Begena',
+  teacher: s?.artist || 'መጋቤ ስብሐት አለሙ አጋ / Liora Begena',
   audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',
   videoUrl: 'https://www.youtube.com/embed/2GpKxNl_KW0',
   notation: Array.isArray(s?.notation) ? s.notation.join(' ') : (s?.notation || ''),
@@ -1923,7 +1923,7 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
   const finishTimer = () => {
     setTimerActive(false);
     const durationMins = Math.max(1, Math.round(timerSeconds / 60));
-    
+
     // Add practice log
     const newLog: PracticeLog = {
       date: new Date().toISOString().split('T')[0],
@@ -2055,12 +2055,12 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
         mode === 'cherenet'
           ? cherenetMap
           : mode === 'selamta'
-          ? selamtaMap
-          : mode === 'bati'
-          ? batiMap
-          : mode === 'ambassel'
-          ? ambasselMap
-          : tizitaMap;
+            ? selamtaMap
+            : mode === 'bati'
+              ? batiMap
+              : mode === 'ambassel'
+                ? ambasselMap
+                : tizitaMap;
 
       let freq: number | undefined;
       const trimmedNote = note.trim();
@@ -2114,7 +2114,7 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
       buzzOsc.stop(now + Math.min(duration, 1.4));
 
       setTimeout(() => {
-        audioCtx.close().catch(() => {});
+        audioCtx.close().catch(() => { });
       }, duration * 1000 + 100);
     } catch (e) {
       console.warn('AudioContext not supported or blocked in iframe', e);
@@ -2223,7 +2223,7 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
       // Simulate finish recording after 3 seconds
       setIsRecordingSim(false);
       setRecordedVideoSimUrl('https://www.w3schools.com/html/mov_bbb.mp4');
-      addNotification('Recording Completed', 'Video preview generated. Ready to submit to Abel Begena.', 'system');
+      addNotification('Recording Completed', 'Video preview generated. Ready to submit to Liora Begena.', 'system');
     }, 3000);
   };
 
@@ -2233,11 +2233,11 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
       assignments.map((a) =>
         a.id === asgId
           ? {
-              ...a,
-              status: 'Submitted',
-              submissionNotes: notes,
-              submittedVideoUrl: recordedVideoSimUrl || 'https://www.w3schools.com/html/mov_bbb.mp4'
-            }
+            ...a,
+            status: 'Submitted',
+            submissionNotes: notes,
+            submittedVideoUrl: recordedVideoSimUrl || 'https://www.w3schools.com/html/mov_bbb.mp4'
+          }
           : a
       )
     );
@@ -2250,7 +2250,7 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
 
     addNotification(
       'Performance Submitted!',
-      'Your video recording has been safely delivered to Lique Mezemer Abel for review.',
+      'Your video recording has been safely delivered to Lique Mezemer Bruk for review.',
       'lesson'
     );
   };
@@ -2261,10 +2261,10 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
       mezmurs.map((m) =>
         m.id === mezId
           ? {
-              ...m,
-              status: 'Submitted for Review',
-              studentRecordingUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
-            }
+            ...m,
+            status: 'Submitted for Review',
+            studentRecordingUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+          }
           : m
       )
     );
@@ -2281,11 +2281,11 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
       assignments.map((a) =>
         a.id === asgId
           ? {
-              ...a,
-              status: isApprove ? 'Approved' : 'Needs Revision',
-              teacherFeedback: teacherFeedbackInput || 'Excellent finger positioning. Pluck is clean.',
-              grade: isApprove ? 'A' : 'C+'
-            }
+            ...a,
+            status: isApprove ? 'Approved' : 'Needs Revision',
+            teacherFeedback: teacherFeedbackInput || 'Excellent finger positioning. Pluck is clean.',
+            grade: isApprove ? 'A' : 'C+'
+          }
           : a
       )
     );
@@ -2299,11 +2299,11 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
       mezmurs.map((m) =>
         m.id === mezId
           ? {
-              ...m,
-              status: isApprove ? 'Approved' : 'Needs Improvement',
-              teacherFeedback: teacherFeedbackInput || 'Beautiful resonance, work on steady tempo.',
-              teacherScore: Number(teacherScoreInput) || 95
-            }
+            ...m,
+            status: isApprove ? 'Approved' : 'Needs Improvement',
+            teacherFeedback: teacherFeedbackInput || 'Beautiful resonance, work on steady tempo.',
+            teacherScore: Number(teacherScoreInput) || 95
+          }
           : m
       )
     );
@@ -2487,13 +2487,13 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
 
   return (
     <div className="space-y-6">
-      
+
       {/* ----------------- PORTAL CONTROLLER HEADER ----------------- */}
       <div className="bg-[#FAF6EF] border-2 border-[#E7DED1] p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 opacity-10 pointer-events-none">
           <TiletPattern />
         </div>
-        
+
         <div className="space-y-2.5">
           <div className="flex flex-wrap gap-2 items-center">
             <span className="text-[10px] bg-[#6F4E37] text-white px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">
@@ -2545,7 +2545,7 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
           </p>
           <div className="p-4 bg-[#FAF6EF] rounded-xl max-w-sm mx-auto border border-[#E7DED1] text-left text-xs text-gray-500 space-y-1">
             <span className="block font-bold text-[#6F4E37]">Ecosystem Schedule:</span>
-            <p>• {activeCourse.toUpperCase()} Level 1 materials undergo review by Lique Mezemer Abel.</p>
+            <p>• {activeCourse.toUpperCase()} Level 1 materials undergo review by Lique Mezemer Bruk.</p>
             <p>• Live class portals are active under the Begena curriculum.</p>
           </div>
           <Button variant="primary" size="sm" onClick={() => setActiveCourse('begena')}>
@@ -2554,847 +2554,1985 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
         </div>
       ) : (
         <>
-        {/* ==========================================================
+          {/* ==========================================================
            BEGENA CORE DIGITAL CLASSROOM EXPERIENCE
            ========================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* LEFT RAIL NAVIGATION */}
-          <div className="lg:col-span-1 space-y-4">
-            <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl shadow-xs space-y-3 text-left">
-              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                Begena Academic Chapters
-              </h3>
-              
-              <nav className="flex flex-col gap-1.5">
-                {CHAPTER_TABS.map((item) => {
-                  const unlocked = isChapterUnlocked(item.id);
-                  const completed = getChapterCompletionStatus(item.id);
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        if (unlocked) {
-                          setActiveSubTab(item.id as any);
-                          if (!unlockedChapterIds.includes(item.id)) {
-                            setUnlockedChapterIds((prev) => [...prev, item.id]);
+            {/* LEFT RAIL NAVIGATION */}
+            <div className="lg:col-span-1 space-y-4">
+              <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl shadow-xs space-y-3 text-left">
+                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                  Begena Academic Chapters
+                </h3>
+
+                <nav className="flex flex-col gap-1.5">
+                  {CHAPTER_TABS.map((item) => {
+                    const unlocked = isChapterUnlocked(item.id);
+                    const completed = getChapterCompletionStatus(item.id);
+
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => {
+                          if (unlocked) {
+                            setActiveSubTab(item.id as any);
+                            if (!unlockedChapterIds.includes(item.id)) {
+                              setUnlockedChapterIds((prev) => [...prev, item.id]);
+                            }
+                          } else {
+                            addNotification(
+                              'Chapter Locked',
+                              `Please complete previous chapter requirements to unlock ${item.label}.`,
+                              'system'
+                            );
                           }
-                        } else {
-                          addNotification(
-                            'Chapter Locked',
-                            `Please complete previous chapter requirements to unlock ${item.label}.`,
-                            'system'
-                          );
-                        }
-                      }}
-                      className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-bold uppercase transition-all flex justify-between items-center cursor-pointer ${
-                        activeSubTab === item.id
-                          ? 'bg-[#6F4E37] text-white shadow-xs'
-                          : unlocked
-                          ? 'bg-[#FAF6EF]/50 hover:bg-[#FAF6EF] text-[#6F4E37] border border-[#E7DED1]/60'
-                          : 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed opacity-75'
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        {!unlocked ? (
-                          <Lock size={12} className="text-gray-400 shrink-0" />
-                        ) : completed ? (
-                          <CheckCircle2 size={12} className="text-emerald-500 shrink-0" />
-                        ) : null}
-                        <span>{item.label}</span>
-                      </div>
-                      
-                      <span className={`text-[10px] px-2 py-0.5 rounded font-mono ${
-                        activeSubTab === item.id ? 'bg-white/20 text-white' : unlocked ? 'bg-[#E7DED1] text-gray-600' : 'bg-gray-200 text-gray-400'
-                      }`}>
-                        {item.count !== undefined && item.count}{(item as any).max !== undefined && `/${(item as any).max}`}{(item as any).suffix || ''}
-                        {item.id === 'certificate-progress' && (!unlocked ? 'Locked' : 'Ready')}
-                      </span>
-                    </button>
-                  );
-                })}
-              </nav>
+                        }}
+                        className={`w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-bold uppercase transition-all flex justify-between items-center cursor-pointer ${activeSubTab === item.id
+                            ? 'bg-[#6F4E37] text-white shadow-xs'
+                            : unlocked
+                              ? 'bg-[#FAF6EF]/50 hover:bg-[#FAF6EF] text-[#6F4E37] border border-[#E7DED1]/60'
+                              : 'bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed opacity-75'
+                          }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          {!unlocked ? (
+                            <Lock size={12} className="text-gray-400 shrink-0" />
+                          ) : completed ? (
+                            <CheckCircle2 size={12} className="text-emerald-500 shrink-0" />
+                          ) : null}
+                          <span>{item.label}</span>
+                        </div>
 
-              {/* QUICK STATUS CARD */}
-              <div className="border-t border-[#FAF6EF] pt-4 mt-3 space-y-2.5 text-xs text-gray-500">
-                <div className="flex justify-between font-medium">
-                  <span>Current Level:</span>
-                  <span className="font-bold text-[#6F4E37]">Basic 1 (Level 1)</span>
-                </div>
-                <div className="flex justify-between font-medium">
-                  <span>Current Progress:</span>
-                  <span className="font-bold text-green-600">{courseProgressPercent}%</span>
-                </div>
-                <div className="flex justify-between font-medium">
-                  <span>Primary Teacher:</span>
-                  <span className="font-bold text-[#6F4E37]">
-                    {(() => {
-                      const userEnr = enrollments.find(e => e.studentEmail?.toLowerCase() === currentUser?.email?.toLowerCase());
-                      if (userEnr && String(userEnr.learningMode || '').toLowerCase().includes('in-person')) {
-                        return 'On-Site Campus Faculty (In-Person)';
-                      }
-                      return userEnr?.assignedTeacherName || 'Zemari Deacon Abel Tesfaye (Online)';
-                    })()}
-                  </span>
-                </div>
-                <div className="flex justify-between font-medium">
-                  <span>Attendance Rate:</span>
-                  <span className="font-bold text-green-600">96%</span>
-                </div>
-              </div>
-            </div>
+                        <span className={`text-[10px] px-2 py-0.5 rounded font-mono ${activeSubTab === item.id ? 'bg-white/20 text-white' : unlocked ? 'bg-[#E7DED1] text-gray-600' : 'bg-gray-200 text-gray-400'
+                          }`}>
+                          {item.count !== undefined && item.count}{(item as any).max !== undefined && `/${(item as any).max}`}{(item as any).suffix || ''}
+                          {item.id === 'certificate-progress' && (!unlocked ? 'Locked' : 'Ready')}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </nav>
 
-            {/* NESTED PRACTICE STATUS AD */}
-            <div className="bg-[#FAF6EF] border border-[#E7DED1] p-4 rounded-2xl text-left space-y-3 relative overflow-hidden">
-              <span className="text-[9px] font-bold tracking-widest text-[#E89B52] uppercase block">
-                Today's practice
-              </span>
-              <div className="flex justify-between items-end">
-                <div>
-                  <h4 className="font-display font-black text-xl text-[#2B2B2B]">
-                    {practiceLogs[0]?.date === new Date().toISOString().split('T')[0] ? practiceLogs[0].duration : 0} Mins
-                  </h4>
-                  <p className="text-[10px] text-gray-400">Target: 45 Mins</p>
-                </div>
-                <span className="text-sm">{getPracticeStars(practiceLogs[0]?.duration || 0)}</span>
-              </div>
-              <Button
-                variant="primary"
-                size="sm"
-                className="w-full text-[10px] font-bold uppercase py-1 h-8 shadow-xs"
-                onClick={() => setActiveSubTab('practice-tracker')}
-              >
-                Practice Now →
-              </Button>
-            </div>
-
-            {/* STANDALONE VIRTUAL BEGENA STUDIO INDEPENDENT BUTTON */}
-            <div className="bg-[#120a05] border-2 border-[#3d2414] p-3 rounded-2xl shadow-md space-y-2 text-left">
-              <span className="text-[10px] font-mono font-bold text-amber-400/90 uppercase tracking-widest block">
-                የበገና ልምምድ (Independent Tool)
-              </span>
-              <button
-                onClick={() => setActiveSubTab('virtual-begena')}
-                className={`w-full text-left px-3.5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex justify-between items-center cursor-pointer border shadow-sm ${
-                  activeSubTab === 'virtual-begena'
-                    ? 'bg-[#3e2717] text-amber-300 border-amber-500 ring-2 ring-amber-400/60 shadow-lg'
-                    : 'bg-gradient-to-r from-[#2b180d] to-[#3e2717] text-amber-100 hover:from-[#3e2717] hover:to-[#4e321e] border-amber-800/80 hover:border-amber-600'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <Sliders size={16} className="text-amber-400 shrink-0" />
-                  <span> Virtual Begena Studio</span>
-                </div>
-                <span className="text-[10px] bg-amber-500/20 text-amber-300 font-mono font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
-                  10 Strings
-                </span>
-              </button>
-            </div>
-          </div>
-
-          {/* MAIN CLASSROOM WORKSPACE CONTENT */}
-          <div className="lg:col-span-3 space-y-6">
-
-            {/* ---------------- VIRTUAL BEGENA STUDIO SUBTAB ---------------- */}
-            {activeSubTab === 'virtual-begena' && (
-              <div className="space-y-6">
-                <BegenaScaleSimulatorBoard
-                  scaleKey="tizita"
-                  title="ቨርቹዋል የበገና 10 አውታሮች ድርደራ (Virtual Begena Studio)"
-                  subtitle="ለእያንዳንዱ መዝሙርና ቅኝት ከተሰጡት አውታሮች እና ድምፆች ጋር በቀጥታም ሆነ በተገላቢጦሽ (Reverse) በመጫወት ይለማመዱ"
-                  allowScaleChange={true}
-                />
-              </div>
-            )}
-
-            {/* ---------------- SUBTAB 1: ROADMAP WORKSPACE ---------------- */}
-            {activeSubTab === 'roadmap' && (
-              <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
-                <div className="flex justify-between items-start flex-col sm:flex-row gap-4 border-b border-[#FAF6EF] pb-4">
-                  <div>
-                    <div className="inline-block bg-[#6F4E37] text-white font-black text-sm px-3.5 py-1 rounded-md mb-2 tracking-wide shadow-xs">
-                      ቤሲክ አንድ
-                    </div>
-                    <h3 className="font-display font-black text-lg text-[#2B2B2B]">
-                      ምዕራፍ አንድ ፡ የበገና ስርአተ ትምህርት መንገድ (Curriculum Roadmap)
-                    </h3>
-                    <p className="text-xs text-gray-500">
-                      የቤሲክ አንድ ደረጃ ትምህርት እና የዝርዝር ምዕራፎች ማውጫ
-                    </p>
+                {/* QUICK STATUS CARD */}
+                <div className="border-t border-[#FAF6EF] pt-4 mt-3 space-y-2.5 text-xs text-gray-500">
+                  <div className="flex justify-between font-medium">
+                    <span>Current Level:</span>
+                    <span className="font-bold text-[#6F4E37]">Basic 1 (Level 1)</span>
                   </div>
+                  <div className="flex justify-between font-medium">
+                    <span>Current Progress:</span>
+                    <span className="font-bold text-green-600">{courseProgressPercent}%</span>
+                  </div>
+                  <div className="flex justify-between font-medium">
+                    <span>Primary Teacher:</span>
+                    <span className="font-bold text-[#6F4E37]">
+                      {(() => {
+                        const userEnr = enrollments.find(e => e.studentEmail?.toLowerCase() === currentUser?.email?.toLowerCase());
+                        if (userEnr && String(userEnr.learningMode || '').toLowerCase().includes('in-person')) {
+                          return 'On-Site Campus Faculty (In-Person)';
+                        }
+                        return userEnr?.assignedTeacherName || 'Deacon Bruk Tesfaye (Online)';
+                      })()}
+                    </span>
+                  </div>
+                  <div className="flex justify-between font-medium">
+                    <span>Attendance Rate:</span>
+                    <span className="font-bold text-green-600">96%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* NESTED PRACTICE STATUS AD */}
+              <div className="bg-[#FAF6EF] border border-[#E7DED1] p-4 rounded-2xl text-left space-y-3 relative overflow-hidden">
+                <span className="text-[9px] font-bold tracking-widest text-[#E89B52] uppercase block">
+                  Today's practice
+                </span>
+                <div className="flex justify-between items-end">
+                  <div>
+                    <h4 className="font-display font-black text-xl text-[#2B2B2B]">
+                      {practiceLogs[0]?.date === new Date().toISOString().split('T')[0] ? practiceLogs[0].duration : 0} Mins
+                    </h4>
+                    <p className="text-[10px] text-gray-400">Target: 45 Mins</p>
+                  </div>
+                  <span className="text-sm">{getPracticeStars(practiceLogs[0]?.duration || 0)}</span>
+                </div>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="w-full text-[10px] font-bold uppercase py-1 h-8 shadow-xs"
+                  onClick={() => setActiveSubTab('practice-tracker')}
+                >
+                  Practice Now →
+                </Button>
+              </div>
+
+              {/* STANDALONE VIRTUAL BEGENA STUDIO INDEPENDENT BUTTON */}
+              <div className="bg-[#120a05] border-2 border-[#3d2414] p-3 rounded-2xl shadow-md space-y-2 text-left">
+                <span className="text-[10px] font-mono font-bold text-amber-400/90 uppercase tracking-widest block">
+                  የበገና ልምምድ (Independent Tool)
+                </span>
+                <button
+                  onClick={() => setActiveSubTab('virtual-begena')}
+                  className={`w-full text-left px-3.5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex justify-between items-center cursor-pointer border shadow-sm ${activeSubTab === 'virtual-begena'
+                      ? 'bg-[#3e2717] text-amber-300 border-amber-500 ring-2 ring-amber-400/60 shadow-lg'
+                      : 'bg-gradient-to-r from-[#2b180d] to-[#3e2717] text-amber-100 hover:from-[#3e2717] hover:to-[#4e321e] border-amber-800/80 hover:border-amber-600'
+                    }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Sliders size={16} className="text-amber-400 shrink-0" />
+                    <span> Virtual Begena Studio</span>
+                  </div>
+                  <span className="text-[10px] bg-amber-500/20 text-amber-300 font-mono font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
+                    10 Strings
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            {/* MAIN CLASSROOM WORKSPACE CONTENT */}
+            <div className="lg:col-span-3 space-y-6">
+
+              {/* ---------------- VIRTUAL BEGENA STUDIO SUBTAB ---------------- */}
+              {activeSubTab === 'virtual-begena' && (
+                <div className="space-y-6">
+                  <BegenaScaleSimulatorBoard
+                    scaleKey="tizita"
+                    title="ቨርቹዋል የበገና 10 አውታሮች ድርደራ (Virtual Begena Studio)"
+                    subtitle="ለእያንዳንዱ መዝሙርና ቅኝት ከተሰጡት አውታሮች እና ድምፆች ጋር በቀጥታም ሆነ በተገላቢጦሽ (Reverse) በመጫወት ይለማመዱ"
+                    allowScaleChange={true}
+                  />
+                </div>
+              )}
+
+              {/* ---------------- SUBTAB 1: ROADMAP WORKSPACE ---------------- */}
+              {activeSubTab === 'roadmap' && (
+                <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
+                  <div className="flex justify-between items-start flex-col sm:flex-row gap-4 border-b border-[#FAF6EF] pb-4">
+                    <div>
+                      <div className="inline-block bg-[#6F4E37] text-white font-black text-sm px-3.5 py-1 rounded-md mb-2 tracking-wide shadow-xs">
+                        ቤሲክ አንድ
+                      </div>
+                      <h3 className="font-display font-black text-lg text-[#2B2B2B]">
+                        ምዕራፍ አንድ ፡ የበገና ስርአተ ትምህርት መንገድ (Curriculum Roadmap)
+                      </h3>
+                      <p className="text-xs text-gray-500">
+                        የቤሲክ አንድ ደረጃ ትምህርት እና የዝርዝር ምዕራፎች ማውጫ
+                      </p>
+                    </div>
+                    {isSimulatorTeacherMode && (
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => {
+                          setNewModuleTitle('');
+                          setEditingModuleId(null);
+                          setActiveSubTab('roadmap');
+                        }}
+                        className="gap-1 text-xs"
+                      >
+                        <Plus size={14} /> Add Curriculum Module
+                      </Button>
+                    )}
+                  </div>
+
+                  {/* TEACHER CURRICULUM EDITOR FORM */}
                   {isSimulatorTeacherMode && (
+                    <form onSubmit={handleAddModule} className="bg-red-50/50 border border-red-100 p-4 rounded-xl space-y-3 text-xs">
+                      <span className="font-bold text-red-800 block">
+                        {editingModuleId ? 'Edit Module Details' : 'Publish New Curriculum Module'}
+                      </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <Input
+                          required
+                          placeholder="Module Title (e.g. Traditional Vibrato)"
+                          value={newModuleTitle}
+                          onChange={(e) => setNewModuleTitle(e.target.value)}
+                        />
+                        <Input
+                          placeholder="Short description of technical outcomes"
+                          value={newModuleDesc}
+                          onChange={(e) => setNewModuleDesc(e.target.value)}
+                        />
+                      </div>
+                      <div className="flex gap-2 justify-end">
+                        <Button type="button" variant="ghost" size="sm" onClick={() => { setNewModuleTitle(''); setEditingModuleId(null); }}>
+                          Cancel
+                        </Button>
+                        <Button type="submit" variant="destructive" size="sm">
+                          {editingModuleId ? 'Save Changes' : 'Publish Module'}
+                        </Button>
+                      </div>
+                    </form>
+                  )}
+
+                  {/* EXACT ROADMAP BREAKDOWN CARDS */}
+                  <div className="space-y-6">
+                    {/* ምዕራፍ አንድ */}
+                    <div className="bg-[#FAF6EF]/50 border border-[#E7DED1] rounded-2xl p-5 shadow-xs space-y-3.5 hover:border-[#6F4E37]/40 transition-all">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E7DED1] pb-3 gap-2">
+                        <h4 className="font-bold text-base text-[#6F4E37] font-display">
+                          ምዕራፍ አንድ ፡ የበገና ምንነት እና ታሪካዊ ዳራ
+                        </h4>
+                        <Button
+                          variant="tertiary"
+                          size="sm"
+                          className="text-[11px] font-bold uppercase py-1 h-8 text-[#6F4E37] bg-white border border-[#E7DED1]"
+                          onClick={() => {
+                            setSelectedLessonId('les_1_1');
+                            setActiveSubTab('lesson-page');
+                          }}
+                        >
+                          ወደ ትምህርቱ ሂድ (Study) →
+                        </Button>
+                      </div>
+                      <div className="space-y-2 text-xs text-gray-800 font-medium pl-2">
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና ታሪክ</span></div>
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና ምንነት</span></div>
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና አገልግሎት ጥቅሞች</span></div>
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና አይነቶች</span></div>
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>ከበገና ደርዳሪያን ምን ይጠበቃል</span></div>
+                      </div>
+                    </div>
+
+                    {/* ምዕራፍ ሁለት */}
+                    <div className="bg-[#FAF6EF]/50 border border-[#E7DED1] rounded-2xl p-5 shadow-xs space-y-3.5 hover:border-[#6F4E37]/40 transition-all">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E7DED1] pb-3 gap-2">
+                        <h4 className="font-bold text-base text-[#6F4E37] font-display">
+                          ምዕራፍ ሁለት፡ የበገና ክፍሎች አሰራራቸው እና ምሳሌነታቸው
+                        </h4>
+                        <Button
+                          variant="tertiary"
+                          size="sm"
+                          className="text-[11px] font-bold uppercase py-1 h-8 text-[#6F4E37] bg-white border border-[#E7DED1]"
+                          onClick={() => {
+                            setSelectedLessonId('les_1_2');
+                            setActiveSubTab('lesson-page');
+                          }}
+                        >
+                          ወደ ትምህርቱ ሂድ (Study) →
+                        </Button>
+                      </div>
+                      <div className="space-y-2 text-xs text-gray-800 font-medium pl-2">
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና አካል ክፍሎች</span></div>
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና አያያዝ</span></div>
+                      </div>
+                    </div>
+
+                    {/* ምዕራፍ ሶስት */}
+                    <div className="bg-[#FAF6EF]/50 border border-[#E7DED1] rounded-2xl p-5 shadow-xs space-y-3.5 hover:border-[#6F4E37]/40 transition-all">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E7DED1] pb-3 gap-2">
+                        <h4 className="font-bold text-base text-[#6F4E37] font-display">
+                          ምዕራፍ ሶስት፡ ዜማ እና የበገና ቅኝቶች
+                        </h4>
+                        <Button
+                          variant="tertiary"
+                          size="sm"
+                          className="text-[11px] font-bold uppercase py-1 h-8 text-[#6F4E37] bg-white border border-[#E7DED1]"
+                          onClick={() => {
+                            setSelectedLessonId('les_1_3');
+                            setActiveSubTab('lesson-page');
+                          }}
+                        >
+                          ወደ ትምህርቱ ሂድ (Study) →
+                        </Button>
+                      </div>
+                      <div className="space-y-2 text-xs text-gray-800 font-medium pl-2">
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>የቤተክርስቲያናችን ዜማ</span></div>
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>ቅዱስ ያሬድ</span></div>
+                        <div className="flex items-center gap-2.5"><span>📌</span> <span>የ ድምጾች ሳይንሳዊ አጠራር</span></div>
+                      </div>
+                    </div>
+
+                    {/* ምዕራፍ አራት */}
+                    <div className="bg-[#FAF6EF]/50 border border-[#E7DED1] rounded-2xl p-5 shadow-xs space-y-4 hover:border-[#6F4E37]/40 transition-all">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E7DED1] pb-3 gap-2">
+                        <h4 className="font-bold text-base text-[#6F4E37] font-display">
+                          ምዕራፍ አራት፡ ቅኝቶች እና ተግባራዊ ልምምዳቸው
+                        </h4>
+                        <Button
+                          variant="tertiary"
+                          size="sm"
+                          className="text-[11px] font-bold uppercase py-1 h-8 text-[#6F4E37] bg-white border border-[#E7DED1]"
+                          onClick={() => {
+                            setSelectedLessonId('les_1_4');
+                            setActiveSubTab('lesson-page');
+                          }}
+                        >
+                          ወደ ትምህርቱ ሂድ (Study) →
+                        </Button>
+                      </div>
+
+                      <div className="space-y-3 text-xs text-gray-800 font-medium pl-2">
+                        <div className="flex items-center gap-2.5 font-bold text-amber-900"><span>📌</span> <span>የ ቅኝት አመሰራረት</span></div>
+                        <div className="flex items-center gap-2.5 font-bold text-amber-900"><span>📌</span> <span>ጣት ማፍታታት</span></div>
+                        <div className="flex items-center gap-2.5 font-bold text-amber-900"><span>📌</span> <span>ቅኝቶች</span></div>
+
+                        {/* Nested Scales Hierarchy */}
+                        <div className="pl-4 sm:pl-6 space-y-5 border-l-2 border-amber-300/70 ml-2 pt-1">
+                          {/* ትዝታ */}
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 font-bold text-[#6F4E37] text-xs sm:text-sm">
+                              <span>📍</span> <span>ትዝታ</span>
+                            </div>
+                            <div className="pl-4 sm:pl-6 space-y-2 text-gray-700">
+                              <div className="flex items-center gap-2"><span>🔹</span> <span>ቅኝት አመሰራረት</span></div>
+                              <div className="flex items-center gap-2 font-semibold text-gray-800"><span>🔹</span> <span>ትዝታ ቅኝት ላይ ያሉ መዝሙሮች</span></div>
+                              <div className="pl-4 sm:pl-6 space-y-1.5 text-gray-600 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1">
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ርግብ እና ዋኔን</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ገብረ መንፈስ ቅዱስ</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>አቤቱ ደግ ሰው</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ኢትዮጲያ ሆይ ተነሽ</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ስቀለው ስቀለው</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>አየሁኝ በ ህልሜ</span></div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* ቸርነት/አንቺሆዬ */}
+                          <div className="space-y-2 pt-2">
+                            <div className="flex items-center gap-2 font-bold text-[#6F4E37] text-xs sm:text-sm">
+                              <span>📍</span> <span>ቸርነት/አንቺሆዬ</span>
+                            </div>
+                            <div className="pl-4 sm:pl-6 space-y-2 text-gray-700">
+                              <div className="flex items-center gap-2"><span>🔹</span> <span>ቅኝት አመሰራረት</span></div>
+                              <div className="flex items-center gap-2 font-semibold text-gray-800"><span>🔹</span> <span>ቸርነት ቅኝት ላይ ያሉ መዝሙሮች</span></div>
+                              <div className="pl-4 sm:pl-6 space-y-1.5 text-gray-600 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1">
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ስለቸርነትህ</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>መጾሙን ይጾማል</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>መች ይረሳል</span></div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* ሰላምታ */}
+                          <div className="space-y-2 pt-2">
+                            <div className="flex items-center gap-2 font-bold text-[#6F4E37] text-xs sm:text-sm">
+                              <span>📍</span> <span>ሰላምታ</span>
+                            </div>
+                            <div className="pl-4 sm:pl-6 space-y-2 text-gray-700">
+                              <div className="flex items-center gap-2"><span>🔹</span> <span>ቅኝት አመሰራረት</span></div>
+                              <div className="flex items-center gap-2 font-semibold text-gray-800"><span>🔹</span> <span>ሰላምታ ቅኝት ላይ ያሉ መዝሙሮች</span></div>
+                              <div className="pl-4 sm:pl-6 space-y-1.5 text-gray-600 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1">
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ሆዴ ልመድ</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>በጌቴ ሰማኒ</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>በመስቀል ተሰቅሎ</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>አባታችን</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ሰላም ለማርያም</span></div>
+                                <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ድንግል ስልሽ</span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Chapter 1 Navigation Footer */}
+                  {renderChapterNavFooter('roadmap')}
+                </div>
+              )}
+
+              {/* ---------------- SUBTAB 2: CHAPTER 2 (የበገና ምንነት እና ታሪካዊ ዳራ) ---------------- */}
+              {activeSubTab === 'lesson-page' && (
+                <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
+                  {activeCh2Module === null ? (
+                    <>
+                      {/* CHAPTER 2 HEADER */}
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#FAF6EF] pb-4">
+                        <div>
+                          <span className="text-[10px] font-mono text-[#E89B52] uppercase font-bold tracking-wider">
+                            ቤሲክ አንድ ፡ ምዕራፍ ሁለት
+                          </span>
+                          <h3 className="font-display font-black text-lg text-[#2B2B2B] mt-0.5">
+                            ምዕራፍ ሁለት፡ የበገና ምንነት እና ታሪካዊ ዳራ
+                          </h3>
+                          <p className="text-xs text-gray-500 mt-1">
+                            ከዚህ በታች ያሉትን የበገና መሠረታዊ ትምህርቶች አርእስት ይጫኑ፤ የእያንዳንዱን ትምህርት ዝርዝር ይዘት ያንብቡ::
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 5 MODULE BUTTON CARDS */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {CHAPTER_2_MODULES.map((mod) => (
+                          <div
+                            key={mod.id}
+                            className="bg-[#FAF6EF]/60 border border-[#E7DED1] rounded-2xl p-5 shadow-xs flex flex-col justify-between space-y-4 hover:border-[#6F4E37]/50 hover:shadow-sm transition-all group"
+                          >
+                            <div className="space-y-2">
+                              <div className="flex items-center gap-2">
+                                <span className="text-2xl">{mod.icon}</span>
+                                <h4 className="font-bold text-base text-[#6F4E37] font-display group-hover:text-[#5a3e2b]">
+                                  {mod.title}
+                                </h4>
+                              </div>
+                              <p className="text-xs text-gray-600 leading-relaxed pl-1">
+                                {mod.shortDesc}
+                              </p>
+                            </div>
+
+                            <div className="pt-2">
+                              <Button
+                                variant="primary"
+                                size="sm"
+                                onClick={() => setActiveCh2Module(mod.id)}
+                                className="w-full justify-between text-xs font-bold py-2 bg-[#6F4E37] hover:bg-[#5a3e2b] text-white rounded-xl cursor-pointer"
+                              >
+                                <span>ትምህርቱን አብራራ / View Module Content</span>
+                                <ChevronRight size={14} />
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* MODULE DETAILED CONTENT VIEW */}
+                      {(() => {
+                        const selectedMod = CHAPTER_2_MODULES.find((m) => m.id === activeCh2Module) || CHAPTER_2_MODULES[0];
+                        return (
+                          <div className="space-y-6">
+                            {/* TOP BAR / BACK BUTTON */}
+                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#FAF6EF] pb-4">
+                              <button
+                                onClick={() => setActiveCh2Module(null)}
+                                className="flex items-center gap-2 text-xs font-bold text-[#6F4E37] bg-[#FAF6EF] hover:bg-[#f3ebd8] px-3.5 py-2 rounded-xl border border-[#E7DED1] transition-all cursor-pointer"
+                              >
+                                <ArrowLeft size={14} />
+                                <span>← ወደ ምዕራፍ ሁለት ማውጫ ተመለስ (Back to Chapter 2 List)</span>
+                              </button>
+
+                              <span className="text-xs font-mono font-bold text-[#E89B52] bg-[#FAF6EF] px-3 py-1 rounded-lg border border-[#E7DED1]">
+                                ምዕራፍ 2 ፡ {selectedMod.title}
+                              </span>
+                            </div>
+
+                            {/* MODULE READING BODY */}
+                            <div className="space-y-6 bg-[#FAF6EF]/30 border border-[#E7DED1] p-6 rounded-2xl">
+                              <div className="flex items-center gap-3 pb-3 border-b border-[#E7DED1]">
+                                <span className="text-3xl">{selectedMod.icon}</span>
+                                <div>
+                                  <h3 className="font-display font-black text-xl text-[#2B2B2B]">
+                                    {selectedMod.content.headline}
+                                  </h3>
+                                  <p className="text-xs text-gray-500 mt-0.5">
+                                    መሠረታዊ የበገና ትምህርት ንባብ እና ጥናታዊ ማብራሪያ
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* SECTIONS */}
+                              <div className="space-y-5">
+                                {selectedMod.content.sections.map((sec, idx) => (
+                                  <div key={idx} className="bg-white border border-[#E7DED1] p-5 rounded-xl space-y-2.5 shadow-2xs">
+                                    <h4 className="font-bold text-sm text-[#6F4E37] flex items-center gap-2">
+                                      <span className="w-2.5 h-2.5 rounded-full bg-[#E89B52]" />
+                                      {sec.subTitle}
+                                    </h4>
+                                    <div className="text-xs text-gray-700 leading-relaxed font-sans whitespace-pre-line pl-4">
+                                      {sec.text}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+
+                              {/* MODULE FOOTER ACTIONS */}
+                              <div className="flex flex-wrap gap-3 justify-between items-center pt-4 border-t border-[#E7DED1]">
+                                <button
+                                  onClick={() => setActiveCh2Module(null)}
+                                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer"
+                                >
+                                  <ArrowLeft size={14} />
+                                  <span>ወደ ማውጫ ተመለስ</span>
+                                </button>
+
+                                <div className="flex gap-2">
+                                  {(() => {
+                                    const currentIdx = CHAPTER_2_MODULES.findIndex((m) => m.id === selectedMod?.id);
+                                    const nextMod = currentIdx < CHAPTER_2_MODULES.length - 1 ? CHAPTER_2_MODULES[currentIdx + 1] : null;
+                                    return nextMod ? (
+                                      <button
+                                        onClick={() => setActiveCh2Module(nextMod.id)}
+                                        className="px-4 py-2 bg-[#6F4E37] hover:bg-[#5a3e2b] text-white rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer"
+                                      >
+                                        <span>ቀጣይ ክፍል ({nextMod.title})</span>
+                                        <ChevronRight size={14} />
+                                      </button>
+                                    ) : (
+                                      <button
+                                        onClick={() => setActiveSubTab('exercises')}
+                                        className="px-4 py-2 bg-[#E89B52] hover:bg-[#d4863e] text-white rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer"
+                                      >
+                                        <span>ወደ ምዕራፍ ሶስት ሂድ (Go to Chapter 3)</span>
+                                        <ChevronRight size={14} />
+                                      </button>
+                                    );
+                                  })()}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </>
+                  )}
+                  {/* Chapter 2 Navigation Footer */}
+                  {renderChapterNavFooter('lesson-page')}
+                </div>
+              )}
+
+              {/* ---------------- SUBTAB 3: BEGENA PARTS & HANDLING (CHAPTER 3) ---------------- */}
+              {activeSubTab === 'exercises' && (
+                <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
+                  <div className="flex justify-between items-center border-b border-[#FAF6EF] pb-4">
+                    <div>
+                      <h3 className="font-display font-black text-base text-[#2B2B2B] uppercase">
+                        ምዕራፍ ሶስት ፡ የበገና ክፍሎች አሰራራቸው እና ምሳሌነታቸው
+                      </h3>
+                      <p className="text-xs text-gray-500">
+                        የበገና አካል ክፍሎች፣ የአሰራር ጥበብ፣ ሃይማኖታዊ ምሳሌነታቸው እና የበገና ትክክለኛ አያያዝ ስርዓት
+                      </p>
+                    </div>
                     <Button
                       variant="secondary"
                       size="sm"
-                      onClick={() => {
-                        setNewModuleTitle('');
-                        setEditingModuleId(null);
-                        setActiveSubTab('roadmap');
-                      }}
-                      className="gap-1 text-xs"
+                      onClick={() => setShowBegenaInfo(true)}
+                      className="text-xs bg-amber-50 border border-amber-200 text-[#6F4E37] font-bold"
                     >
-                      <Plus size={14} /> Add Curriculum Module
+                      📖 Read About Begena
                     </Button>
-                  )}
-                </div>
-
-                {/* TEACHER CURRICULUM EDITOR FORM */}
-                {isSimulatorTeacherMode && (
-                  <form onSubmit={handleAddModule} className="bg-red-50/50 border border-red-100 p-4 rounded-xl space-y-3 text-xs">
-                    <span className="font-bold text-red-800 block">
-                      {editingModuleId ? 'Edit Module Details' : 'Publish New Curriculum Module'}
-                    </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <Input
-                        required
-                        placeholder="Module Title (e.g. Traditional Vibrato)"
-                        value={newModuleTitle}
-                        onChange={(e) => setNewModuleTitle(e.target.value)}
-                      />
-                      <Input
-                        placeholder="Short description of technical outcomes"
-                        value={newModuleDesc}
-                        onChange={(e) => setNewModuleDesc(e.target.value)}
-                      />
-                    </div>
-                    <div className="flex gap-2 justify-end">
-                      <Button type="button" variant="ghost" size="sm" onClick={() => { setNewModuleTitle(''); setEditingModuleId(null); }}>
-                        Cancel
-                      </Button>
-                      <Button type="submit" variant="destructive" size="sm">
-                        {editingModuleId ? 'Save Changes' : 'Publish Module'}
-                      </Button>
-                    </div>
-                  </form>
-                )}
-
-                {/* EXACT ROADMAP BREAKDOWN CARDS */}
-                <div className="space-y-6">
-                  {/* ምዕራፍ አንድ */}
-                  <div className="bg-[#FAF6EF]/50 border border-[#E7DED1] rounded-2xl p-5 shadow-xs space-y-3.5 hover:border-[#6F4E37]/40 transition-all">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E7DED1] pb-3 gap-2">
-                      <h4 className="font-bold text-base text-[#6F4E37] font-display">
-                        ምዕራፍ አንድ ፡ የበገና ምንነት እና ታሪካዊ ዳራ
-                      </h4>
-                      <Button
-                        variant="tertiary"
-                        size="sm"
-                        className="text-[11px] font-bold uppercase py-1 h-8 text-[#6F4E37] bg-white border border-[#E7DED1]"
-                        onClick={() => {
-                          setSelectedLessonId('les_1_1');
-                          setActiveSubTab('lesson-page');
-                        }}
-                      >
-                        ወደ ትምህርቱ ሂድ (Study) →
-                      </Button>
-                    </div>
-                    <div className="space-y-2 text-xs text-gray-800 font-medium pl-2">
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና ታሪክ</span></div>
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና ምንነት</span></div>
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና አገልግሎት ጥቅሞች</span></div>
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና አይነቶች</span></div>
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>ከበገና ደርዳሪያን ምን ይጠበቃል</span></div>
-                    </div>
                   </div>
 
-                  {/* ምዕራፍ ሁለት */}
-                  <div className="bg-[#FAF6EF]/50 border border-[#E7DED1] rounded-2xl p-5 shadow-xs space-y-3.5 hover:border-[#6F4E37]/40 transition-all">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E7DED1] pb-3 gap-2">
-                      <h4 className="font-bold text-base text-[#6F4E37] font-display">
-                        ምዕራፍ ሁለት፡ የበገና ክፍሎች አሰራራቸው እና ምሳሌነታቸው
-                      </h4>
-                      <Button
-                        variant="tertiary"
-                        size="sm"
-                        className="text-[11px] font-bold uppercase py-1 h-8 text-[#6F4E37] bg-white border border-[#E7DED1]"
-                        onClick={() => {
-                          setSelectedLessonId('les_1_2');
-                          setActiveSubTab('lesson-page');
-                        }}
-                      >
-                        ወደ ትምህርቱ ሂድ (Study) →
-                      </Button>
-                    </div>
-                    <div className="space-y-2 text-xs text-gray-800 font-medium pl-2">
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና አካል ክፍሎች</span></div>
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>የበገና አያያዝ</span></div>
-                    </div>
-                  </div>
+                  {/* CHAPTER 3 WORKSPACE GRID */}
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                  {/* ምዕራፍ ሶስት */}
-                  <div className="bg-[#FAF6EF]/50 border border-[#E7DED1] rounded-2xl p-5 shadow-xs space-y-3.5 hover:border-[#6F4E37]/40 transition-all">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E7DED1] pb-3 gap-2">
-                      <h4 className="font-bold text-base text-[#6F4E37] font-display">
-                        ምዕራፍ ሶስት፡ ዜማ እና የበገና ቅኝቶች
-                      </h4>
-                      <Button
-                        variant="tertiary"
-                        size="sm"
-                        className="text-[11px] font-bold uppercase py-1 h-8 text-[#6F4E37] bg-white border border-[#E7DED1]"
-                        onClick={() => {
-                          setSelectedLessonId('les_1_3');
-                          setActiveSubTab('lesson-page');
-                        }}
-                      >
-                        ወደ ትምህርቱ ሂድ (Study) →
-                      </Button>
-                    </div>
-                    <div className="space-y-2 text-xs text-gray-800 font-medium pl-2">
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>የቤተክርስቲያናችን ዜማ</span></div>
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>ቅዱስ ያሬድ</span></div>
-                      <div className="flex items-center gap-2.5"><span>📌</span> <span>የ ድምጾች ሳይንሳዊ አጠራር</span></div>
-                    </div>
-                  </div>
-
-                  {/* ምዕራፍ አራት */}
-                  <div className="bg-[#FAF6EF]/50 border border-[#E7DED1] rounded-2xl p-5 shadow-xs space-y-4 hover:border-[#6F4E37]/40 transition-all">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E7DED1] pb-3 gap-2">
-                      <h4 className="font-bold text-base text-[#6F4E37] font-display">
-                        ምዕራፍ አራት፡ ቅኝቶች እና ተግባራዊ ልምምዳቸው
-                      </h4>
-                      <Button
-                        variant="tertiary"
-                        size="sm"
-                        className="text-[11px] font-bold uppercase py-1 h-8 text-[#6F4E37] bg-white border border-[#E7DED1]"
-                        onClick={() => {
-                          setSelectedLessonId('les_1_4');
-                          setActiveSubTab('lesson-page');
-                        }}
-                      >
-                        ወደ ትምህርቱ ሂድ (Study) →
-                      </Button>
-                    </div>
-
-                    <div className="space-y-3 text-xs text-gray-800 font-medium pl-2">
-                      <div className="flex items-center gap-2.5 font-bold text-amber-900"><span>📌</span> <span>የ ቅኝት አመሰራረት</span></div>
-                      <div className="flex items-center gap-2.5 font-bold text-amber-900"><span>📌</span> <span>ጣት ማፍታታት</span></div>
-                      <div className="flex items-center gap-2.5 font-bold text-amber-900"><span>📌</span> <span>ቅኝቶች</span></div>
-
-                      {/* Nested Scales Hierarchy */}
-                      <div className="pl-4 sm:pl-6 space-y-5 border-l-2 border-amber-300/70 ml-2 pt-1">
-                        {/* ትዝታ */}
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 font-bold text-[#6F4E37] text-xs sm:text-sm">
-                            <span>📍</span> <span>ትዝታ</span>
-                          </div>
-                          <div className="pl-4 sm:pl-6 space-y-2 text-gray-700">
-                            <div className="flex items-center gap-2"><span>🔹</span> <span>ቅኝት አመሰራረት</span></div>
-                            <div className="flex items-center gap-2 font-semibold text-gray-800"><span>🔹</span> <span>ትዝታ ቅኝት ላይ ያሉ መዝሙሮች</span></div>
-                            <div className="pl-4 sm:pl-6 space-y-1.5 text-gray-600 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1">
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ርግብ እና ዋኔን</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ገብረ መንፈስ ቅዱስ</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>አቤቱ ደግ ሰው</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ኢትዮጲያ ሆይ ተነሽ</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ስቀለው ስቀለው</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>አየሁኝ በ ህልሜ</span></div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* ቸርነት/አንቺሆዬ */}
-                        <div className="space-y-2 pt-2">
-                          <div className="flex items-center gap-2 font-bold text-[#6F4E37] text-xs sm:text-sm">
-                            <span>📍</span> <span>ቸርነት/አንቺሆዬ</span>
-                          </div>
-                          <div className="pl-4 sm:pl-6 space-y-2 text-gray-700">
-                            <div className="flex items-center gap-2"><span>🔹</span> <span>ቅኝት አመሰራረት</span></div>
-                            <div className="flex items-center gap-2 font-semibold text-gray-800"><span>🔹</span> <span>ቸርነት ቅኝት ላይ ያሉ መዝሙሮች</span></div>
-                            <div className="pl-4 sm:pl-6 space-y-1.5 text-gray-600 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1">
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ስለቸርነትህ</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>መጾሙን ይጾማል</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>መች ይረሳል</span></div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* ሰላምታ */}
-                        <div className="space-y-2 pt-2">
-                          <div className="flex items-center gap-2 font-bold text-[#6F4E37] text-xs sm:text-sm">
-                            <span>📍</span> <span>ሰላምታ</span>
-                          </div>
-                          <div className="pl-4 sm:pl-6 space-y-2 text-gray-700">
-                            <div className="flex items-center gap-2"><span>🔹</span> <span>ቅኝት አመሰራረት</span></div>
-                            <div className="flex items-center gap-2 font-semibold text-gray-800"><span>🔹</span> <span>ሰላምታ ቅኝት ላይ ያሉ መዝሙሮች</span></div>
-                            <div className="pl-4 sm:pl-6 space-y-1.5 text-gray-600 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1">
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ሆዴ ልመድ</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>በጌቴ ሰማኒ</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>በመስቀል ተሰቅሎ</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>አባታችን</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ሰላም ለማርያም</span></div>
-                              <div className="flex items-center gap-1.5 bg-white p-2 rounded-lg border border-amber-100/80 shadow-2xs"><span>🔸</span> <span>ድንግል ስልሽ</span></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Chapter 1 Navigation Footer */}
-                {renderChapterNavFooter('roadmap')}
-              </div>
-            )}
-
-            {/* ---------------- SUBTAB 2: CHAPTER 2 (የበገና ምንነት እና ታሪካዊ ዳራ) ---------------- */}
-            {activeSubTab === 'lesson-page' && (
-              <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
-                {activeCh2Module === null ? (
-                  <>
-                    {/* CHAPTER 2 HEADER */}
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#FAF6EF] pb-4">
-                      <div>
-                        <span className="text-[10px] font-mono text-[#E89B52] uppercase font-bold tracking-wider">
-                          ቤሲክ አንድ ፡ ምዕራፍ ሁለት
-                        </span>
-                        <h3 className="font-display font-black text-lg text-[#2B2B2B] mt-0.5">
-                          ምዕራፍ ሁለት፡ የበገና ምንነት እና ታሪካዊ ዳራ
-                        </h3>
-                        <p className="text-xs text-gray-500 mt-1">
-                          ከዚህ በታች ያሉትን የበገና መሠረታዊ ትምህርቶች አርእስት ይጫኑ፤ የእያንዳንዱን ትምህርት ዝርዝር ይዘት ያንብቡ::
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* 5 MODULE BUTTON CARDS */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {CHAPTER_2_MODULES.map((mod) => (
-                        <div
-                          key={mod.id}
-                          className="bg-[#FAF6EF]/60 border border-[#E7DED1] rounded-2xl p-5 shadow-xs flex flex-col justify-between space-y-4 hover:border-[#6F4E37]/50 hover:shadow-sm transition-all group"
-                        >
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2">
-                              <span className="text-2xl">{mod.icon}</span>
-                              <h4 className="font-bold text-base text-[#6F4E37] font-display group-hover:text-[#5a3e2b]">
-                                {mod.title}
-                              </h4>
-                            </div>
-                            <p className="text-xs text-gray-600 leading-relaxed pl-1">
-                              {mod.shortDesc}
-                            </p>
-                          </div>
-
-                          <div className="pt-2">
-                            <Button
-                              variant="primary"
-                              size="sm"
-                              onClick={() => setActiveCh2Module(mod.id)}
-                              className="w-full justify-between text-xs font-bold py-2 bg-[#6F4E37] hover:bg-[#5a3e2b] text-white rounded-xl cursor-pointer"
-                            >
-                              <span>ትምህርቱን አብራራ / View Module Content</span>
-                              <ChevronRight size={14} />
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {/* MODULE DETAILED CONTENT VIEW */}
-                    {(() => {
-                      const selectedMod = CHAPTER_2_MODULES.find((m) => m.id === activeCh2Module) || CHAPTER_2_MODULES[0];
-                      return (
-                        <div className="space-y-6">
-                          {/* TOP BAR / BACK BUTTON */}
-                          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#FAF6EF] pb-4">
+                    {/* MODULES & DETAILED EXPLANATION COLUMN (2 Cols) */}
+                    <div className="lg:col-span-2 space-y-5">
+                      {/* Module Selection Tabs */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {CHAPTER_3_MODULES.map((mod) => {
+                          const isActive = activeCh3Module === mod.id;
+                          return (
                             <button
-                              onClick={() => setActiveCh2Module(null)}
-                              className="flex items-center gap-2 text-xs font-bold text-[#6F4E37] bg-[#FAF6EF] hover:bg-[#f3ebd8] px-3.5 py-2 rounded-xl border border-[#E7DED1] transition-all cursor-pointer"
+                              key={mod.id}
+                              onClick={() => setActiveCh3Module(mod.id)}
+                              className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${isActive
+                                  ? 'bg-[#6F4E37] text-white border-[#6F4E37] shadow-md'
+                                  : 'bg-[#FAF6EF]/60 hover:bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1]'
+                                }`}
                             >
-                              <ArrowLeft size={14} />
-                              <span>← ወደ ምዕራፍ ሁለት ማውጫ ተመለስ (Back to Chapter 2 List)</span>
-                            </button>
-
-                            <span className="text-xs font-mono font-bold text-[#E89B52] bg-[#FAF6EF] px-3 py-1 rounded-lg border border-[#E7DED1]">
-                              ምዕራፍ 2 ፡ {selectedMod.title}
-                            </span>
-                          </div>
-
-                          {/* MODULE READING BODY */}
-                          <div className="space-y-6 bg-[#FAF6EF]/30 border border-[#E7DED1] p-6 rounded-2xl">
-                            <div className="flex items-center gap-3 pb-3 border-b border-[#E7DED1]">
-                              <span className="text-3xl">{selectedMod.icon}</span>
-                              <div>
-                                <h3 className="font-display font-black text-xl text-[#2B2B2B]">
-                                  {selectedMod.content.headline}
-                                </h3>
-                                <p className="text-xs text-gray-500 mt-0.5">
-                                  መሠረታዊ የበገና ትምህርት ንባብ እና ጥናታዊ ማብራሪያ
+                              <div className="space-y-1">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-lg">{mod.icon}</span>
+                                  <span className="font-bold text-sm">{mod.title}</span>
+                                </div>
+                                <p className={`text-[11px] line-clamp-1 ${isActive ? 'text-amber-100' : 'text-gray-500'}`}>
+                                  {mod.shortDesc}
                                 </p>
                               </div>
+                              <ChevronRight size={16} className={isActive ? 'text-white' : 'text-gray-400'} />
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Active Module Full Detailed Explained Content */}
+                      {(() => {
+                        const selectedMod = CHAPTER_3_MODULES.find((m) => m.id === activeCh3Module) || CHAPTER_3_MODULES[0];
+                        return (
+                          <div className="bg-[#FAF6EF]/40 border border-[#E7DED1] p-5 rounded-2xl space-y-4">
+                            <div className="flex justify-between items-center border-b border-[#E7DED1] pb-3">
+                              <div className="flex items-center gap-2">
+                                <span className="text-2xl">{selectedMod.icon}</span>
+                                <h4 className="font-display font-black text-base text-[#2B2B2B]">
+                                  {selectedMod.content.headline}
+                                </h4>
+                              </div>
+                              <span className="text-[10px] bg-[#6F4E37] text-white px-2.5 py-1 rounded-full font-bold uppercase">
+                                Chapter 3 Lesson
+                              </span>
                             </div>
 
-                            {/* SECTIONS */}
-                            <div className="space-y-5">
+                            <div className="space-y-4">
                               {selectedMod.content.sections.map((sec, idx) => (
-                                <div key={idx} className="bg-white border border-[#E7DED1] p-5 rounded-xl space-y-2.5 shadow-2xs">
-                                  <h4 className="font-bold text-sm text-[#6F4E37] flex items-center gap-2">
-                                    <span className="w-2.5 h-2.5 rounded-full bg-[#E89B52]" />
+                                <div key={idx} className="bg-white p-4 rounded-xl border border-[#E7DED1]/80 shadow-2xs space-y-2">
+                                  <h5 className="font-bold text-sm text-[#6F4E37] flex items-center gap-1.5">
+                                    <BookOpen size={14} className="text-[#E89B52]" />
                                     {sec.subTitle}
-                                  </h4>
-                                  <div className="text-xs text-gray-700 leading-relaxed font-sans whitespace-pre-line pl-4">
+                                  </h5>
+                                  <p className="text-xs text-gray-700 leading-relaxed whitespace-pre-line">
                                     {sec.text}
-                                  </div>
+                                  </p>
                                 </div>
                               ))}
                             </div>
 
-                            {/* MODULE FOOTER ACTIONS */}
-                            <div className="flex flex-wrap gap-3 justify-between items-center pt-4 border-t border-[#E7DED1]">
+                            <div className="pt-2 flex justify-end">
                               <button
-                                onClick={() => setActiveCh2Module(null)}
-                                className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer"
+                                onClick={() => {
+                                  if (selectedMod?.id === 'parts') {
+                                    setActiveCh3Module('handling');
+                                  } else {
+                                    setActiveSubTab('mezmur-library');
+                                  }
+                                }}
+                                className="px-4 py-2 bg-[#6F4E37] hover:bg-[#5a3e2b] text-white rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer"
                               >
-                                <ArrowLeft size={14} />
-                                <span>ወደ ማውጫ ተመለስ</span>
+                                <span>{selectedMod?.id === 'parts' ? 'ቀጣይ፡ የበገና አያያዝ (Next Module) →' : 'ወደ ምዕራፍ አራት ሂድ (Go to Chapter 4) →'}</span>
                               </button>
-
-                              <div className="flex gap-2">
-                                {(() => {
-                                  const currentIdx = CHAPTER_2_MODULES.findIndex((m) => m.id === selectedMod?.id);
-                                  const nextMod = currentIdx < CHAPTER_2_MODULES.length - 1 ? CHAPTER_2_MODULES[currentIdx + 1] : null;
-                                  return nextMod ? (
-                                    <button
-                                      onClick={() => setActiveCh2Module(nextMod.id)}
-                                      className="px-4 py-2 bg-[#6F4E37] hover:bg-[#5a3e2b] text-white rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer"
-                                    >
-                                      <span>ቀጣይ ክፍል ({nextMod.title})</span>
-                                      <ChevronRight size={14} />
-                                    </button>
-                                  ) : (
-                                    <button
-                                      onClick={() => setActiveSubTab('exercises')}
-                                      className="px-4 py-2 bg-[#E89B52] hover:bg-[#d4863e] text-white rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer"
-                                    >
-                                      <span>ወደ ምዕራፍ ሶስት ሂድ (Go to Chapter 3)</span>
-                                      <ChevronRight size={14} />
-                                    </button>
-                                  );
-                                })()}
-                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })()}
-                  </>
-                )}
-                {/* Chapter 2 Navigation Footer */}
-                {renderChapterNavFooter('lesson-page')}
-              </div>
-            )}
-
-            {/* ---------------- SUBTAB 3: BEGENA PARTS & HANDLING (CHAPTER 3) ---------------- */}
-            {activeSubTab === 'exercises' && (
-              <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
-                <div className="flex justify-between items-center border-b border-[#FAF6EF] pb-4">
-                  <div>
-                    <h3 className="font-display font-black text-base text-[#2B2B2B] uppercase">
-                      ምዕራፍ ሶስት ፡ የበገና ክፍሎች አሰራራቸው እና ምሳሌነታቸው
-                    </h3>
-                    <p className="text-xs text-gray-500">
-                      የበገና አካል ክፍሎች፣ የአሰራር ጥበብ፣ ሃይማኖታዊ ምሳሌነታቸው እና የበገና ትክክለኛ አያያዝ ስርዓት
-                    </p>
-                  </div>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => setShowBegenaInfo(true)}
-                    className="text-xs bg-amber-50 border border-amber-200 text-[#6F4E37] font-bold"
-                  >
-                    📖 Read About Begena
-                  </Button>
-                </div>
-
-                {/* CHAPTER 3 WORKSPACE GRID */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  
-                  {/* MODULES & DETAILED EXPLANATION COLUMN (2 Cols) */}
-                  <div className="lg:col-span-2 space-y-5">
-                    {/* Module Selection Tabs */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {CHAPTER_3_MODULES.map((mod) => {
-                        const isActive = activeCh3Module === mod.id;
-                        return (
-                          <button
-                            key={mod.id}
-                            onClick={() => setActiveCh3Module(mod.id)}
-                            className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
-                              isActive
-                                ? 'bg-[#6F4E37] text-white border-[#6F4E37] shadow-md'
-                                : 'bg-[#FAF6EF]/60 hover:bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1]'
-                            }`}
-                          >
-                            <div className="space-y-1">
-                              <div className="flex items-center gap-2">
-                                <span className="text-lg">{mod.icon}</span>
-                                <span className="font-bold text-sm">{mod.title}</span>
-                              </div>
-                              <p className={`text-[11px] line-clamp-1 ${isActive ? 'text-amber-100' : 'text-gray-500'}`}>
-                                {mod.shortDesc}
-                              </p>
-                            </div>
-                            <ChevronRight size={16} className={isActive ? 'text-white' : 'text-gray-400'} />
-                          </button>
                         );
-                      })}
+                      })()}
                     </div>
 
-                    {/* Active Module Full Detailed Explained Content */}
-                    {(() => {
-                      const selectedMod = CHAPTER_3_MODULES.find((m) => m.id === activeCh3Module) || CHAPTER_3_MODULES[0];
-                      return (
-                        <div className="bg-[#FAF6EF]/40 border border-[#E7DED1] p-5 rounded-2xl space-y-4">
-                          <div className="flex justify-between items-center border-b border-[#E7DED1] pb-3">
-                            <div className="flex items-center gap-2">
-                              <span className="text-2xl">{selectedMod.icon}</span>
-                              <h4 className="font-display font-black text-base text-[#2B2B2B]">
-                                {selectedMod.content.headline}
-                              </h4>
-                            </div>
-                            <span className="text-[10px] bg-[#6F4E37] text-white px-2.5 py-1 rounded-full font-bold uppercase">
-                              Chapter 3 Lesson
-                            </span>
-                          </div>
+                    {/* VIDEO PLAYER COLUMN (1 Col) - LEAVING VIDEO AS IS */}
+                    <div className="lg:col-span-1 space-y-4">
+                      <div className="bg-[#FAF6EF]/60 border border-[#E7DED1] p-3 rounded-xl space-y-2">
+                        <span className="text-[10px] font-bold text-[#6F4E37] uppercase tracking-wider block">
+                          📹 Demonstration Video
+                        </span>
+                        <div className="aspect-video bg-black rounded-lg overflow-hidden relative group border border-gray-800 shadow-sm">
+                          {getYouTubeEmbedUrl(activeLesson.videoUrl) ? (
+                            <iframe
+                              src={getYouTubeEmbedUrl(activeLesson.videoUrl)!}
+                              title={activeLesson.title}
+                              className="w-full h-full border-0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                            />
+                          ) : (
+                            <video
+                              ref={videoPlayerRef}
+                              src={activeLesson.videoUrl}
+                              className="w-full h-full object-cover"
+                              controls
+                            />
+                          )}
+                        </div>
 
-                          <div className="space-y-4">
-                            {selectedMod.content.sections.map((sec, idx) => (
-                              <div key={idx} className="bg-white p-4 rounded-xl border border-[#E7DED1]/80 shadow-2xs space-y-2">
-                                <h5 className="font-bold text-sm text-[#6F4E37] flex items-center gap-1.5">
-                                  <BookOpen size={14} className="text-[#E89B52]" />
-                                  {sec.subTitle}
-                                </h5>
-                                <p className="text-xs text-gray-700 leading-relaxed whitespace-pre-line">
-                                  {sec.text}
-                                </p>
-                              </div>
+                        {/* Speed Controls */}
+                        <div className="flex justify-between items-center text-[10px] pt-1">
+                          <span className="text-gray-500 font-medium">Speed:</span>
+                          <div className="flex gap-1">
+                            {[1.0, 1.25, 1.5].map((speed) => (
+                              <button
+                                key={speed}
+                                onClick={() => {
+                                  setPlaybackSpeed(speed);
+                                  if (videoPlayerRef.current) videoPlayerRef.current.playbackRate = speed;
+                                }}
+                                className={`px-2 py-0.5 text-[9px] rounded font-bold cursor-pointer ${playbackSpeed === speed ? 'bg-[#6F4E37] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                  }`}
+                              >
+                                {speed}x
+                              </button>
                             ))}
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                          <div className="pt-2 flex justify-end">
+                  {/* Chapter 3 Navigation Footer */}
+                  {renderChapterNavFooter('exercises')}
+                </div>
+              )}
+
+              {/* ---------------- SUBTAB 4: CHAPTER 4 - ትዝታ ቅኝት ---------------- */}
+              {activeSubTab === 'mezmur-library' && (
+                <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
+                  {/* Chapter Header */}
+                  <div className="flex justify-between items-start flex-col sm:flex-row gap-4 border-b border-[#E7DED1] pb-4">
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase tracking-wider block mb-1">
+                        Chapter 4 Curriculum (ምዕራፍ አራት)
+                      </span>
+                      <h3 className="font-display font-black text-xl text-[#2B2B2B]">
+                        ምዕራፍ አራት ፡ ትዝታ ቅኝት
+                      </h3>
+                      <p className="text-xs text-gray-500 mt-1">
+                        የ ቅኝት አመሰራረት፣ ጣት ማፍታታት እና በትዝታ ቅኝት ላይ ያሉ መዝሙሮች
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Chapter 4 Module Selector Bar */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {CHAPTER_4_MODULES.map((mod) => (
+                      <button
+                        key={mod.id}
+                        onClick={() => setActiveCh4Module(mod.id as any)}
+                        className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${activeCh4Module === mod.id
+                            ? 'bg-[#FAF6EF] border-[#6F4E37] ring-1 ring-[#6F4E37]/30 shadow-xs'
+                            : 'bg-white border-gray-200 hover:border-gray-300'
+                          }`}
+                      >
+                        <span className="text-2xl">{mod.icon}</span>
+                        <div className="space-y-1">
+                          <h4 className="font-bold text-xs text-[#2B2B2B]">{mod.title}</h4>
+                          <p className="text-[11px] text-gray-500 leading-tight">{mod.shortDesc}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* MODULE 1: የ ቅኝት አመሰራረት (Finger practice chords) */}
+                  {activeCh4Module === 'formation' && (
+                    <div className="space-y-6 bg-[#FAF6EF]/30 border border-[#E7DED1] p-5 rounded-xl">
+                      <BegenaScaleSimulatorBoard
+                        scaleKey="tizita"
+                        title="ትዝታ ቅኝት የበገና ድርደራ (Tizita Virtual Begena Studio)"
+                        subtitle="በገና 10 አውታሮች ይዟል። ተጫዋች አውታሮች 1፣ 4፣ 6፣ 8 እና 10 (1=#1፣ 4=#2፣ 6=#3፣ 8=#4፣ 10=#5) ሲሆኑ standard የድርደራ ቅደም ተከተል 2 → 3 → 1 → 5 → 4 → 2 እና Reverse 2 → 4 → 5 → 1 → 3 → 2 ነው።"
+                        allowScaleChange={false}
+                      />
+
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#E7DED1] pb-3">
+                        <div>
+                          <h4 className="font-bold text-sm text-[#2B2B2B]">📌 የ ቅኝት አመሰራረት - FINGER PRACTICE CHORDS</h4>
+                          <p className="text-xs text-gray-500">የቀኝና የግራ እጅ ድርደራ ቅደም ተከተል በቦርድ ቁጥሮችና ድምጾች</p>
+                        </div>
+                        <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-[#E7DED1] text-xs">
+                          <span className="font-bold text-gray-500">Display mode:</span>
+                          <div className="flex gap-1">
                             <button
-                              onClick={() => {
-                                if (selectedMod?.id === 'parts') {
-                                  setActiveCh3Module('handling');
-                                } else {
-                                  setActiveSubTab('mezmur-library');
-                                }
-                              }}
-                              className="px-4 py-2 bg-[#6F4E37] hover:bg-[#5a3e2b] text-white rounded-xl text-xs font-bold flex items-center gap-2 cursor-pointer"
+                              onClick={() => setTunerDisplayMode('both')}
+                              className={`px-2 py-0.5 rounded text-[10px] font-bold ${tunerDisplayMode === 'both' ? 'bg-[#6F4E37] text-white' : 'bg-gray-100 text-gray-600'}`}
                             >
-                              <span>{selectedMod?.id === 'parts' ? 'ቀጣይ፡ የበገና አያያዝ (Next Module) →' : 'ወደ ምዕራፍ አራት ሂድ (Go to Chapter 4) →'}</span>
+                              Both
+                            </button>
+                            <button
+                              onClick={() => setTunerDisplayMode('tuner')}
+                              className={`px-2 py-0.5 rounded text-[10px] font-bold ${tunerDisplayMode === 'tuner' ? 'bg-[#6F4E37] text-white' : 'bg-gray-100 text-gray-600'}`}
+                            >
+                              Tuner
+                            </button>
+                            <button
+                              onClick={() => setTunerDisplayMode('no')}
+                              className={`px-2 py-0.5 rounded text-[10px] font-bold ${tunerDisplayMode === 'no' ? 'bg-[#6F4E37] text-white' : 'bg-gray-100 text-gray-600'}`}
+                            >
+                              No.
                             </button>
                           </div>
                         </div>
-                      );
-                    })()}
-                  </div>
-
-                  {/* VIDEO PLAYER COLUMN (1 Col) - LEAVING VIDEO AS IS */}
-                  <div className="lg:col-span-1 space-y-4">
-                    <div className="bg-[#FAF6EF]/60 border border-[#E7DED1] p-3 rounded-xl space-y-2">
-                      <span className="text-[10px] font-bold text-[#6F4E37] uppercase tracking-wider block">
-                        📹 Demonstration Video
-                      </span>
-                      <div className="aspect-video bg-black rounded-lg overflow-hidden relative group border border-gray-800 shadow-sm">
-                        {getYouTubeEmbedUrl(activeLesson.videoUrl) ? (
-                          <iframe
-                            src={getYouTubeEmbedUrl(activeLesson.videoUrl)!}
-                            title={activeLesson.title}
-                            className="w-full h-full border-0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                          />
-                        ) : (
-                          <video
-                            ref={videoPlayerRef}
-                            src={activeLesson.videoUrl}
-                            className="w-full h-full object-cover"
-                            controls
-                          />
-                        )}
                       </div>
 
-                      {/* Speed Controls */}
-                      <div className="flex justify-between items-center text-[10px] pt-1">
-                        <span className="text-gray-500 font-medium">Speed:</span>
-                        <div className="flex gap-1">
-                          {[1.0, 1.25, 1.5].map((speed) => (
-                            <button
-                              key={speed}
-                              onClick={() => {
-                                setPlaybackSpeed(speed);
-                                if (videoPlayerRef.current) videoPlayerRef.current.playbackRate = speed;
-                              }}
-                              className={`px-2 py-0.5 text-[9px] rounded font-bold cursor-pointer ${
-                                playbackSpeed === speed ? 'bg-[#6F4E37] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                              }`}
+                      {/* Interactive Sequence Player Box */}
+                      <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-6">
+                        {/* FORWARD SEQUENCE */}
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="font-bold text-[#6F4E37]">FORWARD SEQUENCE: 2 3 1 5 4 2</span>
+                            <span className="text-[10px] text-gray-400 font-mono">Click card to pluck string</span>
+                          </div>
+                          <div className="grid grid-cols-6 gap-2">
+                            {[
+                              { num: '2', tone: 'C' },
+                              { num: '3', tone: 'D' },
+                              { num: '1', tone: 'E' },
+                              { num: '5', tone: 'G' },
+                              { num: '4', tone: 'A' },
+                              { num: '2', tone: 'C' }
+                            ].map((item, idx) => (
+                              <button
+                                type="button"
+                                key={idx}
+                                onClick={() => playBegenaNote(item.num)}
+                                className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${activeSequenceIndex === idx
+                                    ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-md'
+                                    : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
+                                  }`}
+                                title={`Click to pluck Begena string ${item.num}`}
+                              >
+                                <span className="block font-black text-base font-mono">{item.num}</span>
+                                <span className="block text-[10px] opacity-80 uppercase font-bold">{item.tone}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* REVERSE SEQUENCE */}
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="font-bold text-[#C79A2B]">REVERSE SEQUENCE: 2 4 5 1 3 2</span>
+                            <span className="text-[10px] text-gray-400 font-mono">Click card to pluck string</span>
+                          </div>
+                          <div className="grid grid-cols-6 gap-2">
+                            {[
+                              { num: '2', tone: 'C' },
+                              { num: '4', tone: 'A' },
+                              { num: '5', tone: 'G' },
+                              { num: '1', tone: 'E' },
+                              { num: '3', tone: 'D' },
+                              { num: '2', tone: 'C' }
+                            ].map((item, idx) => (
+                              <button
+                                type="button"
+                                key={idx}
+                                onClick={() => playBegenaNote(item.num)}
+                                className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${activeReverseSequenceIndex === idx
+                                    ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-md'
+                                    : 'bg-amber-50/50 text-[#2B2B2B] border-amber-100 hover:border-[#C79A2B]'
+                                  }`}
+                                title={`Click to pluck Begena string ${item.num}`}
+                              >
+                                <span className="block font-black text-base font-mono">{item.num}</span>
+                                <span className="block text-[10px] opacity-80 uppercase font-bold">{item.tone}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* TEMPO CONTROL & PLAY BUTTONS */}
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100">
+                          <div className="flex items-center gap-3 w-full sm:w-auto">
+                            <span className="text-xs font-bold text-gray-600 font-mono">Tempo: {tempo} BPM</span>
+                            <input
+                              type="range"
+                              min="40"
+                              max="120"
+                              value={tempo}
+                              onChange={(e) => setTempo(Number(e.target.value))}
+                              className="w-32 accent-[#6F4E37]"
+                            />
+                          </div>
+
+                          <div className="flex gap-2 w-full sm:w-auto justify-end">
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              onClick={() => playNotationSequence('2 3 1 5 4 2', false)}
+                              disabled={isPlayingSequence}
+                              className="text-xs font-bold gap-1 text-[#6F4E37]"
                             >
-                              {speed}x
+                              <Play size={14} /> Forward
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              onClick={() => playNotationSequence('2 4 5 1 3 2', true)}
+                              disabled={isPlayingSequence}
+                              className="text-xs font-bold gap-1 text-[#C79A2B]"
+                            >
+                              <Play size={14} /> Reverse
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="primary"
+                              onClick={() => playCombinedSequence('2 3 1 5 4 2')}
+                              disabled={isPlayingSequence}
+                              className="text-xs font-bold gap-1 bg-[#6F4E37]"
+                            >
+                              <RotateCw size={14} /> Both
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Explanatory Principles Box */}
+                      <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-3 text-xs leading-relaxed text-gray-700">
+                        <h5 className="font-bold text-sm text-[#2B2B2B]">የ ቅኝት አመሰራረት መመሪያዎችና ትምህርት</h5>
+                        <ul className="list-disc pl-5 space-y-2">
+                          <li><b>ትዝታ ቅኝት፦</b> በበገና ልምምድ ውስጥ የመጀመሪያውና ዋነኛው የፔንታቶኒክ (የአምስት ድምፆች) ቅኝት ነው።</li>
+                          <li><b>ድርደራ፦</b> ድርደራው የሚጀምረው ከአውታር 2 (C) ሲሆን፣ በጣት ቅደም ተከተል 2 ➔ 3 ➔ 1 ➔ 5 ➔ 4 ➔ 2 ይደረደራል።</li>
+                          <li><b>ቴክኒክ፦</b> አንደኛውን አውታር ብለን የሚቀጥለው ላይ ከማረፋችን በፊት የመጀመሪያው አውታር ንዝረቱን እስኪጨርስ መጠበቅ አለብን።</li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* MODULE 2: ጣት ማፍታታት (Dexterity Exercises) */}
+                  {activeCh4Module === 'dexterity' && (
+                    <div className="space-y-6 bg-[#FAF6EF]/30 border border-[#E7DED1] p-5 rounded-xl">
+                      <div className="border-b border-[#E7DED1] pb-3">
+                        <h4 className="font-bold text-sm text-[#2B2B2B]">📌 ጣት ማፍታታት - Practical Finger Dexterity Chords</h4>
+                        <p className="text-xs text-gray-500">የጣቶቻችን አቀማመጥ፣ ፍጥነትና የድምፅ ጥራት ማሻሻያ ተግባራዊ  ልምምዶች።</p>
+                      </div>
+
+                      {/* FIRST PRACTICE DRILL */}
+                      <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-4">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase block">PRACTICE DRILL 1</span>
+                            <h5 className="font-bold text-sm text-[#2B2B2B]">የመጀመሪያው ጣት ማፍታታት ልምምድ (First Practice)</h5>
+                          </div>
+                          <Button
+                            size="sm"
+                            variant="primary"
+                            onClick={() => playNotationSequence('2 2 2 3 3 3 1 1 1 5 5 5 4 4 4 2 2 2')}
+                            disabled={isPlayingSequence}
+                            className="gap-1 text-xs bg-[#6F4E37]"
+                          >
+                            <Play size={14} /> Play First Practice
+                          </Button>
+                        </div>
+
+                        <div className="p-4 bg-[#FAF6EF] rounded-xl border border-[#E7DED1]">
+                          <div className="text-xs font-mono font-bold text-gray-500 mb-2">SEQUENCE:</div>
+                          <div className="flex flex-wrap gap-2">
+                            {'2 2 2 3 3 3 1 1 1 5 5 5 4 4 4 2 2 2'.split(' ').map((note, idx) => (
+                              <button
+                                key={idx}
+                                type="button"
+                                onClick={() => playBegenaNote(note)}
+                                className={`min-w-[2.2rem] px-2 py-1.5 rounded-lg flex flex-col items-center justify-center font-mono font-bold text-xs cursor-pointer transition-all ${activeSequenceIndex === idx
+                                    ? 'bg-[#6F4E37] text-white scale-110 shadow-sm border border-[#6F4E37]'
+                                    : 'bg-white text-gray-800 border border-gray-200 hover:border-[#6F4E37]'
+                                  }`}
+                              >
+                                <span className="block font-black text-xs font-mono">{note}</span>
+                                <span className={`block text-[10px] font-bold uppercase ${activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#E89B52]'
+                                  }`}>
+                                  {getNoteTone(note, 'tizita')}
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* SECOND PRACTICE DRILL */}
+                      <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-4">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase block">PRACTICE DRILL 2</span>
+                            <h5 className="font-bold text-sm text-[#2B2B2B]">ሁለተኛው ጣት ማፍታታት ልምምድ (Second Practice)</h5>
+                          </div>
+                          <Button
+                            size="sm"
+                            variant="primary"
+                            onClick={() => playNotationSequence('2 3 1 3 1 5 1 5 4 5 4 2 2 4 5 4 5 1 5 1 3 1 3 2')}
+                            disabled={isPlayingSequence}
+                            className="gap-1 text-xs bg-[#6F4E37]"
+                          >
+                            <Play size={14} /> Play Second Practice
+                          </Button>
+                        </div>
+
+                        <div className="space-y-3">
+                          {/* Line 1 */}
+                          <div className="p-4 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-1">
+                            <span className="text-[10px] font-mono font-bold text-[#6F4E37] uppercase block">LINE 1:</span>
+                            <div className="flex flex-wrap gap-2 pt-1">
+                              {'2 3 1 3 1 5 1 5 4 5 4 2'.split(' ').map((note, idx) => (
+                                <button
+                                  key={idx}
+                                  type="button"
+                                  onClick={() => playBegenaNote(note)}
+                                  className={`min-w-[2.2rem] px-2 py-1.5 rounded-lg flex flex-col items-center justify-center font-mono font-bold text-xs cursor-pointer transition-all ${activeSequenceIndex === idx
+                                      ? 'bg-[#6F4E37] text-white scale-110 shadow-sm border border-[#6F4E37]'
+                                      : 'bg-white text-gray-800 border border-gray-200 hover:border-[#6F4E37]'
+                                    }`}
+                                >
+                                  <span className="block font-black text-xs font-mono">{note}</span>
+                                  <span className={`block text-[10px] font-bold uppercase ${activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#E89B52]'
+                                    }`}>
+                                    {getNoteTone(note, 'tizita')}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Line 2 */}
+                          <div className="p-4 bg-amber-50/40 rounded-xl border border-amber-100 space-y-1">
+                            <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase block">LINE 2:</span>
+                            <div className="flex flex-wrap gap-2 pt-1">
+                              {'2 4 5 4 5 1 5 1 3 1 3 2'.split(' ').map((note, idx) => (
+                                <button
+                                  key={idx + 12}
+                                  type="button"
+                                  onClick={() => playBegenaNote(note)}
+                                  className={`min-w-[2.2rem] px-2 py-1.5 rounded-lg flex flex-col items-center justify-center font-mono font-bold text-xs cursor-pointer transition-all ${activeSequenceIndex === idx + 12
+                                      ? 'bg-[#C79A2B] text-white scale-110 shadow-sm border border-[#C79A2B]'
+                                      : 'bg-white text-gray-800 border border-gray-200 hover:border-[#C79A2B]'
+                                    }`}
+                                >
+                                  <span className="block font-black text-xs font-mono">{note}</span>
+                                  <span className={`block text-[10px] font-bold uppercase ${activeSequenceIndex === idx + 12 ? 'text-amber-200' : 'text-[#E89B52]'
+                                    }`}>
+                                    {getNoteTone(note, 'tizita')}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* MODULE 3: ትዝታ ቅኝት ላይ ያሉ መዝሙሮች (Tizita Scale Mezmurs Only) */}
+                  {activeCh4Module === 'mezmurs' && (() => {
+                    const filteredLibraryMezmurs = mezmurs.filter((m) => {
+                      if (!m) return false;
+                      const cat = m.category || '';
+                      const isTizita = cat.includes('ትዝታ') || (!cat.includes('ቸርነት') && !cat.includes('አንቺ') && !cat.includes('ሰላምታ'));
+
+                      const q = (librarySearchQuery || '').toLowerCase().trim();
+                      const matchesSearch =
+                        !q ||
+                        (m.title || '').toLowerCase().includes(q) ||
+                        (m.amharicTitle || '').toLowerCase().includes(q) ||
+                        cat.toLowerCase().includes(q) ||
+                        (m.lyrics || '').toLowerCase().includes(q) ||
+                        (m.teacher || '').toLowerCase().includes(q);
+
+                      return isTizita && matchesSearch;
+                    });
+
+                    const tizitaMezmursList = mezmurs.filter((m) => m && ((m.category || '').includes('ትዝታ') || (!(m.category || '').includes('ቸርነት') && !(m.category || '').includes('አንቺ') && !(m.category || '').includes('ሰላምታ'))));
+                    const currentMezmur = mezmurs.find((m) => m && m.id === selectedMezmurId && ((m.category || '').includes('ትዝታ') || (!(m.category || '').includes('ቸርነት') && !(m.category || '').includes('አንቺ') && !(m.category || '').includes('ሰላምታ')))) || filteredLibraryMezmurs[0] || tizitaMezmursList[0] || mezmurs[0];
+
+                    const currentScaleMode: 'tizita' | 'cherenet' | 'selamta' = 'tizita';
+
+                    return (
+                      <div className="space-y-6">
+                        {/* HEADER BANNER & SEARCH BAR FOR TIZITA MEZMURS */}
+                        <div className="bg-[#FAF6EF]/70 p-4 rounded-xl border border-[#E7DED1] space-y-3">
+                          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                            <div>
+                              <h4 className="font-bold text-sm text-[#2B2B2B] flex items-center gap-2">
+                                <span>📜</span>
+                                <span>ትዝታ ቅኝት ላይ ያሉ መዝሙሮች ({tizitaMezmursList.length})</span>
+                              </h4>
+                              <p className="text-xs text-gray-500 mt-0.5">
+                                በትዝታ ቅኝት የተደረደሩና የተቃኙ የተቀደሱ መዝሙራት ስብስብ። (Chapter 4 Tizita Scale Mezmurs)
+                              </p>
+                            </div>
+
+                            <div className="relative w-full md:w-64">
+                              <Input
+                                type="text"
+                                placeholder="መዝሙር ፈልግ... (Search)..."
+                                value={librarySearchQuery}
+                                onChange={(e) => setLibrarySearchQuery(e.target.value)}
+                                className="text-xs pl-8 bg-white border-[#E7DED1] focus:border-[#6F4E37] w-full"
+                              />
+                              <Search size={14} className="absolute left-2.5 top-2.5 text-gray-400" />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                          {/* MEZMURS LIST (LEFT RAIL) */}
+                          <div className="lg:col-span-1 space-y-3 max-h-[700px] overflow-y-auto pr-1">
+                            <div className="flex justify-between items-center text-xs pb-1 font-bold text-gray-500">
+                              <span>በትዝታ ቅኝት የተገኘ መዝሙር ({filteredLibraryMezmurs.length})</span>
+                              <span className="text-[10px] text-amber-800 bg-amber-100 px-2 py-0.5 rounded font-mono font-bold">
+                                ትዝታ ቅኝት (TIZITA)
+                              </span>
+                            </div>
+
+                            {filteredLibraryMezmurs.length === 0 ? (
+                              <div className="p-8 text-center bg-gray-50 rounded-xl border border-dashed border-gray-200 text-xs text-gray-500">
+                                ምንም መዝሙር አልተገኘም። (No mezmurs found for this search/filter).
+                              </div>
+                            ) : (
+                              filteredLibraryMezmurs.map((m) => {
+                                const isSelected = currentMezmur?.id === m.id;
+                                const cat = m?.category || '';
+                                const badgeStyle = cat.includes('ቸርነት') || cat.includes('አንቺ')
+                                  ? 'bg-purple-100 text-purple-800 border-purple-200'
+                                  : cat.includes('ሰላምታ')
+                                    ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                                    : 'bg-amber-100 text-amber-800 border-amber-200';
+
+                                return (
+                                  <button
+                                    key={m.id}
+                                    onClick={() => setSelectedMezmurId(m.id)}
+                                    className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer ${isSelected
+                                        ? 'bg-[#FAF6EF] border-[#6F4E37] ring-1 ring-[#6F4E37]/30 shadow-xs'
+                                        : 'bg-white border-gray-200 hover:border-gray-300'
+                                      }`}
+                                  >
+                                    <div className="flex justify-between items-center text-[9px] font-mono font-bold mb-1.5">
+                                      <span className={`px-2 py-0.5 rounded border text-[9px] font-bold ${badgeStyle}`}>
+                                        {m.category}
+                                      </span>
+                                      <span className="text-gray-400">{m.difficulty}</span>
+                                    </div>
+
+                                    <div className="space-y-0.5">
+                                      <h4 className="font-bold text-xs text-[#2B2B2B]">{m.title}</h4>
+                                      <span className="block text-xs font-serif text-[#6F4E37]">{m.amharicTitle}</span>
+                                    </div>
+
+                                    <div className="mt-2.5 flex justify-between items-center text-[10px]">
+                                      <span className="text-gray-400 font-mono truncate max-w-[140px]">{m.teacher}</span>
+                                      <span className={`px-2 py-0.5 rounded font-bold uppercase text-[9px] ${m.status === 'Completed' || m.status === 'Approved'
+                                          ? 'bg-green-100 text-green-800'
+                                          : 'bg-amber-100 text-amber-800'
+                                        }`}>
+                                        {m.status}
+                                      </span>
+                                    </div>
+                                  </button>
+                                );
+                              })
+                            )}
+                          </div>
+
+                          {/* ACTIVE MEZMUR WORKSPACE PANEL (RIGHT SIDE) */}
+                          <div className="lg:col-span-2 space-y-5 bg-[#FAF6EF]/20 border border-[#E7DED1] p-5 rounded-xl text-xs">
+
+                            <div className="flex justify-between items-start border-b border-[#E7DED1]/60 pb-3">
+                              <div>
+                                <div className="flex items-center gap-2 mb-1">
+                                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase bg-amber-100 text-amber-800 border-amber-200">
+                                    {currentMezmur.category}
+                                  </span>
+                                </div>
+                                <h4 className="font-bold text-base text-[#2B2B2B]">{currentMezmur.title}</h4>
+                                <span className="text-xs text-[#6F4E37] font-serif block mt-0.5">{currentMezmur.amharicTitle}</span>
+                              </div>
+                              <span className="text-[10px] bg-green-50 text-green-700 border border-green-200 px-2.5 py-1 rounded font-bold">
+                                ዘማሪ/ደራሲ፡ {currentMezmur.teacher}
+                              </span>
+                            </div>
+
+                            {/* DEMO AUDIO TRACK PLAYER */}
+                            <div className="p-4 bg-white rounded-xl border border-[#E7DED1] space-y-3">
+                              <div className="flex justify-between items-center font-bold text-[10px] text-gray-400">
+                                <span>INSTRUMENT DEMONSTRATION TRACK</span>
+                                <span className="text-green-600 font-mono uppercase">
+                                  Scale: {currentScaleMode} Active
+                                </span>
+                              </div>
+
+                              <div className="flex items-center gap-3">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    if (isPlayingSequence) {
+                                      setIsPlayingSequence(false);
+                                    } else {
+                                      playNotationSequence(currentMezmur.notation, false, undefined, currentScaleMode);
+                                    }
+                                  }}
+                                  className="w-9 h-9 rounded-full bg-[#6F4E37] text-white flex items-center justify-center cursor-pointer shadow-xs hover:bg-[#5a3f2c]"
+                                >
+                                  {isPlayingSequence ? <Pause size={16} /> : <Play size={16} className="ml-0.5" />}
+                                </button>
+                                <div>
+                                  <span className="block font-bold text-gray-800">{currentMezmur.title} Begena String Pluck Demo</span>
+                                  <span className="text-[10px] text-gray-400">Authentic Ethiopian Begena tone ({currentScaleMode.toUpperCase()} scale)</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* NOTATION AND LYRICS */}
+                            <div className="space-y-4">
+                              {/* NOTATION SEQUENCE */}
+                              <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-3">
+                                <div className="flex justify-between items-center border-b pb-2">
+                                  <span className="text-[10px] font-bold text-gray-500 uppercase font-mono">
+                                    የበገና ድርደራ ቁጥር (Begena Playing Number Notation)
+                                  </span>
+                                  <Button
+                                    variant="secondary"
+                                    size="sm"
+                                    onClick={() => playNotationSequence(currentMezmur.notation, false, undefined, currentScaleMode)}
+                                    disabled={isPlayingSequence}
+                                    className="text-[10px] uppercase font-bold py-1 h-7 text-[#6F4E37] gap-1 cursor-pointer"
+                                  >
+                                    <Play size={12} /> Pluck Sequence
+                                  </Button>
+                                </div>
+
+                                <div className="p-3 bg-[#FAF6EF] rounded-lg border border-[#E7DED1] font-mono text-xs leading-relaxed text-[#2B2B2B] font-bold tracking-wide flex flex-wrap gap-1.5">
+                                  {parseNotationToNotes(currentMezmur.notation).map((item, idx) => (
+                                    item === '-' ? (
+                                      <span
+                                        key={idx}
+                                        className={`px-2 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[1.8rem] transition-all ${activeSequenceIndex === idx
+                                            ? 'bg-amber-500 text-white border-amber-600 scale-110 shadow-sm'
+                                            : 'bg-amber-50/80 text-amber-800 border-amber-200/80'
+                                          }`}
+                                        title="Rest / Pause"
+                                      >
+                                        <span className="block font-black text-xs font-mono">-</span>
+                                        <span className="block text-[9px] font-bold uppercase text-amber-700">Rest</span>
+                                      </span>
+                                    ) : (
+                                      <button
+                                        key={idx}
+                                        type="button"
+                                        onClick={() => playBegenaNote(item, undefined, currentScaleMode)}
+                                        className={`px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[2.2rem] transition-all cursor-pointer ${activeSequenceIndex === idx
+                                            ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-110 shadow-sm'
+                                            : 'bg-white text-[#2B2B2B] border-[#E7DED1] hover:bg-amber-50 hover:border-[#6F4E37] hover:scale-105 shadow-2xs'
+                                          }`}
+                                        title={`Click to pluck Begena string ${item} (${getNoteTone(item, currentScaleMode)})`}
+                                      >
+                                        <span className="block font-black text-xs font-mono">{item}</span>
+                                        <span className={`block text-[10px] font-bold uppercase ${activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#E89B52]'
+                                          }`}>
+                                          {getNoteTone(item, currentScaleMode)}
+                                        </span>
+                                      </button>
+                                    )
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* AUTHORIZED HYMN LYRICS */}
+                              <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-2">
+                                <span className="text-[10px] font-bold text-gray-500 block uppercase border-b pb-2 font-mono">
+                                  የመዝሙሩ ግጥም (Authorized Hymn Lyrics)
+                                </span>
+                                <p className="text-xs font-serif leading-loose whitespace-pre-line text-gray-800 pt-2">
+                                  {currentMezmur.lyrics}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
+
+                  {/* Chapter 4 Navigation Footer */}
+                  {renderChapterNavFooter('mezmur-library')}
+                </div>
+              )}
+
+              {/* ---------------- SUBTAB 5: CHAPTER 5 CHERENET / ANCHI HOYE SCALE ---------------- */}
+              {activeSubTab === 'cherenet-scale' && (
+                <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
+                  {/* Header Banner */}
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#FAF6EF] p-5 rounded-xl border border-[#E7DED1]">
+                    <div>
+                      <span className="text-[10px] font-bold text-[#E89B52] uppercase tracking-wider block mb-1 font-mono">
+                        CHAPTER 5 ፡ ምዕራፍ አምስት
+                      </span>
+                      <h3 className="font-display font-black text-xl text-[#2B2B2B]">
+                        ቸርነት/አንቺ ሆዬ ቅኝት (Cherenet / Anchi Hoye Scale)
+                      </h3>
+                      <p className="text-xs text-gray-600 mt-1">
+                        የ ቸርነት ቅኝት አመሰራረት፣ የጣቶች ልምምድ ቾርድ እና በዚሁ ቅኝት ላይ ያሉ የተቀደሱ መዝሙሮች::
+                      </p>
+                    </div>
+
+                    {/* Module switcher tabs inside Chapter 5 */}
+                    <div className="flex bg-white p-1 rounded-xl border border-[#E7DED1] gap-1 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setActiveCh5Module('formation')}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${activeCh5Module === 'formation'
+                            ? 'bg-[#6F4E37] text-white shadow-xs'
+                            : 'text-gray-600 hover:text-[#6F4E37]'
+                          }`}
+                      >
+                        📌 የ ቅኝት አመሰራረት
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveCh5Module('mezmurs')}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${activeCh5Module === 'mezmurs'
+                            ? 'bg-[#6F4E37] text-white shadow-xs'
+                            : 'text-gray-600 hover:text-[#6F4E37]'
+                          }`}
+                      >
+                        📌 ቸርነት ቅኝት ላይ ያሉ መዝሙሮች ({CHERENET_MEZMURS.length})
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* MODULE 1: የ ቅኝት አመሰራረት */}
+                  {activeCh5Module === 'formation' && (
+                    <div className="space-y-6">
+                      {/* Tuner Symbol & Frequency Value Mapping Card */}
+                      <div className="bg-[#FAF6EF] border border-[#E7DED1] p-5 rounded-xl space-y-4">
+                        <div className="flex justify-between items-center border-b border-[#E7DED1] pb-3">
+                          <div>
+                            <h4 className="font-bold text-sm text-[#2B2B2B]">የ ቅኝት አመሰራረት እና የቱነር እሴቶች</h4>
+                            <p className="text-xs text-gray-600">
+                              በ ቸርነት/አንቺ ሆዬ ቅኝት የቱነር ምልክቶችና የእያንዳንዱ አውታር የኖታ እሴት እንደሚከተለው ይለወጣል::
+                            </p>
+                          </div>
+                          <span className="text-xs font-mono font-bold bg-[#6F4E37] text-white px-2.5 py-1 rounded-md">
+                            CHERENET TUNING
+                          </span>
+                        </div>
+
+                        {/* Tuner Values Mapping Grid */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+                          {[
+                            { num: '2', tone: 'C', noteName: 'C3 (2nd String)', desc: '2 ➔ C' },
+                            { num: '3', tone: 'C#', noteName: 'C#3 (3rd String)', desc: '3 ➔ C#' },
+                            { num: '1', tone: 'F', noteName: 'F3 (1st String)', desc: '1 ➔ F' },
+                            { num: '5', tone: 'F#', noteName: 'F#3 (5th String)', desc: '5 ➔ F#' },
+                            { num: '4', tone: 'A', noteName: 'A3 (4th String)', desc: '4 ➔ A' },
+                            { num: '2', tone: 'C', noteName: 'C3 (Octave/Root)', desc: '2 ➔ C' }
+                          ].map((item, idx) => (
+                            <button
+                              key={idx}
+                              type="button"
+                              onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
+                              className="bg-white p-3.5 rounded-xl border border-[#E7DED1] hover:border-[#6F4E37] text-center space-y-1 transition-all cursor-pointer hover:scale-105 shadow-2xs"
+                              title={`Click to pluck ${item.desc} in Cherenet scale`}
+                            >
+                              <span className="text-xs font-bold text-[#E89B52] block font-mono">{item.desc}</span>
+                              <span className="block text-xl font-black text-[#6F4E37] font-mono">{item.num}</span>
+                              <span className="block text-xs font-bold text-gray-800 font-mono">{item.tone}</span>
+                              <span className="text-[10px] text-gray-400 block">{item.noteName}</span>
                             </button>
                           ))}
                         </div>
                       </div>
+
+                      {/* Finger Practice Chords Section (Forward & Reverse Flows) */}
+                      <div className="bg-white border border-[#E7DED1] p-5 rounded-xl space-y-5">
+                        <div>
+                          <h4 className="font-bold text-sm text-[#2B2B2B]">Finger Practice Chords (የጣቶች ልምምድ ቾርድ)</h4>
+                          <p className="text-xs text-gray-600">
+                            በ ቸርነት ቅኝት ላይ የ ጣቶች የቾርድ ድርደራ በሁለት ፍሰቶች ይከናወናል:: እያንዳንዱን ካርድ በመጫን የአኮስቲክ በገና ድምፅ ያዳምጡ::
+                          </p>
+                        </div>
+
+                        {/* FORWARD FLOW (2 3 1 5 4 2) */}
+                        <div className="p-4 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-3">
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="font-bold text-[#6F4E37]">FORWARD FLOW (2 3 1 5 4 2)</span>
+                            <span className="text-[10px] text-gray-500 font-mono">Top Row: 2, 3, 1, 5 | Bottom Row: 4, 2</span>
+                          </div>
+
+                          {/* Top Row: 2 (C), 3 (C#), 1 (F), 5 (F#) */}
+                          <div className="grid grid-cols-4 gap-2">
+                            {[
+                              { num: '2', tone: 'C' },
+                              { num: '3', tone: 'C#' },
+                              { num: '1', tone: 'F' },
+                              { num: '5', tone: 'F#' }
+                            ].map((item, idx) => (
+                              <button
+                                type="button"
+                                key={idx}
+                                onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
+                                className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${activeSequenceIndex === idx
+                                    ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-md'
+                                    : 'bg-white text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
+                                  }`}
+                              >
+                                <span className="block font-black text-base font-mono">{item.num}</span>
+                                <span className="block text-[11px] font-bold text-[#E89B52] uppercase">{item.tone}</span>
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Bottom Row: 4 (A), 2 (C) */}
+                          <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
+                            {[
+                              { num: '4', tone: 'A' },
+                              { num: '2', tone: 'C' }
+                            ].map((item, idx) => (
+                              <button
+                                type="button"
+                                key={idx}
+                                onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
+                                className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${activeSequenceIndex === idx + 4
+                                    ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-md'
+                                    : 'bg-white text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
+                                  }`}
+                              >
+                                <span className="block font-black text-base font-mono">{item.num}</span>
+                                <span className="block text-[11px] font-bold text-[#E89B52] uppercase">{item.tone}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* BACKWARD / REVERSE FLOW (2 4 5 1 3 2) */}
+                        <div className="p-4 bg-amber-50/50 rounded-xl border border-amber-200/60 space-y-3">
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="font-bold text-[#C79A2B]">BACKWARD / REVERSE FLOW (2 4 5 1 3 2)</span>
+                            <span className="text-[10px] text-gray-500 font-mono">Top Row: 2, 4, 5, 1 | Bottom Row: 3, 2</span>
+                          </div>
+
+                          {/* Top Row: 2 (C), 4 (A), 5 (F#), 1 (F) */}
+                          <div className="grid grid-cols-4 gap-2">
+                            {[
+                              { num: '2', tone: 'C' },
+                              { num: '4', tone: 'A' },
+                              { num: '5', tone: 'F#' },
+                              { num: '1', tone: 'F' }
+                            ].map((item, idx) => (
+                              <button
+                                type="button"
+                                key={idx}
+                                onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
+                                className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${activeReverseSequenceIndex === idx
+                                    ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-md'
+                                    : 'bg-white text-[#2B2B2B] border-amber-200 hover:border-[#C79A2B]'
+                                  }`}
+                              >
+                                <span className="block font-black text-base font-mono">{item.num}</span>
+                                <span className="block text-[11px] font-bold text-[#C79A2B] uppercase">{item.tone}</span>
+                              </button>
+                            ))}
+                          </div>
+
+                          {/* Bottom Row: 3 (C#), 2 (C) */}
+                          <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
+                            {[
+                              { num: '3', tone: 'C#' },
+                              { num: '2', tone: 'C' }
+                            ].map((item, idx) => (
+                              <button
+                                type="button"
+                                key={idx}
+                                onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
+                                className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${activeReverseSequenceIndex === idx + 4
+                                    ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-md'
+                                    : 'bg-white text-[#2B2B2B] border-amber-200 hover:border-[#C79A2B]'
+                                  }`}
+                              >
+                                <span className="block font-black text-base font-mono">{item.num}</span>
+                                <span className="block text-[11px] font-bold text-[#C79A2B] uppercase">{item.tone}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* TEMPO CONTROL & AUDIO PLAYER CONTROLS */}
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100">
+                          <div className="flex items-center gap-3 w-full sm:w-auto">
+                            <span className="text-xs font-bold text-gray-600 font-mono">Tempo: {tempo} BPM</span>
+                            <input
+                              type="range"
+                              min="40"
+                              max="120"
+                              value={tempo}
+                              onChange={(e) => setTempo(Number(e.target.value))}
+                              className="w-32 accent-[#6F4E37]"
+                            />
+                          </div>
+
+                          <div className="flex gap-2 w-full sm:w-auto justify-end">
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              onClick={() => playNotationSequence('2 3 1 5 4 2', false, undefined, 'cherenet')}
+                              disabled={isPlayingSequence}
+                              className="text-xs font-bold gap-1 text-[#6F4E37]"
+                            >
+                              <Play size={14} /> Play Forward
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              onClick={() => playNotationSequence('2 4 5 1 3 2', true, undefined, 'cherenet')}
+                              disabled={isPlayingSequence}
+                              className="text-xs font-bold gap-1 text-[#C79A2B]"
+                            >
+                              <Play size={14} /> Play Reverse
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="primary"
+                              onClick={() => playCombinedSequence('2 3 1 5 4 2', '2 4 5 1 3 2', 'cherenet')}
+                              disabled={isPlayingSequence}
+                              className="text-xs font-bold gap-1 bg-[#6F4E37]"
+                            >
+                              <RotateCw size={14} /> Play Both
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* MODULE 2: ቸርነት ቅኝት ላይ ያሉ መዝሙሮች */}
+                  {activeCh5Module === 'mezmurs' && (
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                      {/* MEZMURS LIST RAIL */}
+                      <div className="lg:col-span-1 space-y-3">
+                        <div className="flex justify-between items-center text-xs text-gray-500 font-mono px-1">
+                          <span>SELECT MEZMUR</span>
+                          <span>{CHERENET_MEZMURS.length} MEZMURS</span>
+                        </div>
+
+                        {CHERENET_MEZMURS.map((m) => {
+                          const isMastered = completedCherenetMezmurs.includes(m.id);
+                          return (
+                            <button
+                              key={m.id}
+                              type="button"
+                              onClick={() => setSelectedCherenetMezmurId(m.id)}
+                              className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer ${selectedCherenetMezmurId === m.id
+                                  ? 'bg-[#FAF6EF] border-[#6F4E37] shadow-xs'
+                                  : 'bg-white border-gray-200 hover:border-gray-300'
+                                }`}
+                            >
+                              <div className="flex justify-between items-start">
+                                <h4 className="font-bold text-sm text-[#2B2B2B]">{m.title}</h4>
+                                {isMastered && (
+                                  <CheckCircle2 size={16} className="text-green-600 shrink-0 mt-0.5" />
+                                )}
+                              </div>
+                              <span className="text-xs text-gray-500 block mt-1">{m.artist}</span>
+                              <div className="mt-2 flex items-center gap-1.5">
+                                <span className="text-[10px] font-mono font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">
+                                  ቸርነት ቅኝት
+                                </span>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* ACTIVE MEZMUR DETAIL DISPLAY */}
+                      <div className="lg:col-span-2 space-y-5 bg-[#FAF6EF]/30 border border-[#E7DED1] p-6 rounded-xl">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#E7DED1] pb-4">
+                          <div>
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-[10px] font-mono font-bold bg-[#6F4E37] text-white px-2 py-0.5 rounded">
+                                CHERENET SCALE MEZMUR
+                              </span>
+                              {activeCherenetMezmur && completedCherenetMezmurs.includes(activeCherenetMezmur.id) && (
+                                <span className="text-[10px] font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded flex items-center gap-1">
+                                  <CheckCircle2 size={10} /> Mastered
+                                </span>
+                              )}
+                            </div>
+                            <h3 className="font-display font-black text-xl text-[#2B2B2B]">
+                              {activeCherenetMezmur?.title || ''}
+                            </h3>
+                            <p className="text-xs text-gray-500">{activeCherenetMezmur?.artist || ''}</p>
+                          </div>
+
+                          <Button
+                            variant={activeCherenetMezmur && completedCherenetMezmurs.includes(activeCherenetMezmur.id) ? 'secondary' : 'primary'}
+                            size="sm"
+                            onClick={() => {
+                              if (!activeCherenetMezmur) return;
+                              if (completedCherenetMezmurs.includes(activeCherenetMezmur.id)) {
+                                setCompletedCherenetMezmurs(completedCherenetMezmurs.filter(id => id !== activeCherenetMezmur.id));
+                              } else {
+                                setCompletedCherenetMezmurs([...completedCherenetMezmurs, activeCherenetMezmur.id]);
+                                addNotification('Mezmur Completed', `Marked "${activeCherenetMezmur.title}" as mastered!`, 'achievement');
+                              }
+                            }}
+                            className="text-xs font-bold gap-1 shrink-0"
+                          >
+                            <CheckCircle2 size={14} />
+                            {activeCherenetMezmur && completedCherenetMezmurs.includes(activeCherenetMezmur.id) ? 'Mastered' : 'Mark as Mastered'}
+                          </Button>
+                        </div>
+
+                        {/* AUDIO PLUCK DEMONSTRATION */}
+                        <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-3">
+                          <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+                            <span className="text-[10px] font-bold text-gray-500 uppercase font-mono">
+                              የበገና ድርደራ ቁጥር (Cherenet Sound Audio Pluck)
+                            </span>
+                            <Button
+                              variant="secondary"
+                              size="sm"
+                              onClick={() => playNotationSequence(activeCherenetMezmur.notation, false, undefined, 'cherenet')}
+                              disabled={isPlayingSequence}
+                              className="text-[10px] uppercase font-bold py-1 h-7 text-[#6F4E37] gap-1 cursor-pointer"
+                            >
+                              <Play size={12} /> Pluck Sequence
+                            </Button>
+                          </div>
+
+                          {/* Interactive Number Notation Buttons */}
+                          <div className="p-3 bg-[#FAF6EF] rounded-lg border border-[#E7DED1] font-mono text-xs leading-relaxed text-[#2B2B2B] font-bold tracking-wide flex flex-wrap gap-1.5">
+                            {parseNotationToNotes(activeCherenetMezmur.notation).map((item, idx) => (
+                              item === '-' ? (
+                                <span
+                                  key={idx}
+                                  className={`px-2 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[1.8rem] transition-all ${activeSequenceIndex === idx
+                                      ? 'bg-amber-500 text-white border-amber-600 scale-110 shadow-sm'
+                                      : 'bg-amber-50/80 text-amber-800 border-amber-200/80'
+                                    }`}
+                                  title="Rest / Pause"
+                                >
+                                  <span className="block font-black text-xs font-mono">-</span>
+                                  <span className="block text-[9px] font-bold uppercase text-amber-700">Rest</span>
+                                </span>
+                              ) : (
+                                <button
+                                  key={idx}
+                                  type="button"
+                                  onClick={() => playBegenaNote(item, undefined, 'cherenet')}
+                                  className={`px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[2.2rem] transition-all cursor-pointer ${activeSequenceIndex === idx
+                                      ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-110 shadow-sm'
+                                      : 'bg-white text-[#2B2B2B] border-[#E7DED1] hover:bg-amber-50 hover:border-[#6F4E37] hover:scale-105 shadow-2xs'
+                                    }`}
+                                  title={`Click to pluck Cherenet string ${item} (${getNoteTone(item, 'cherenet')})`}
+                                >
+                                  <span className="block font-black text-xs font-mono">{item}</span>
+                                  <span className={`block text-[10px] font-bold uppercase ${activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#E89B52]'
+                                    }`}>
+                                    {getNoteTone(item, 'cherenet')}
+                                  </span>
+                                </button>
+                              )
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* DETAILED NOTATION BREAKDOWN IF PRESENT */}
+                        {activeCherenetMezmur.noteBreakdown && activeCherenetMezmur.noteBreakdown.length > 0 && (
+                          <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-3">
+                            <span className="text-[10px] font-bold text-gray-500 uppercase block font-mono border-b border-gray-100 pb-2">
+                              የድርደራ ክፍሎች breakdown (Click any number to play independently)
+                            </span>
+                            <div className="space-y-3">
+                              {activeCherenetMezmur.noteBreakdown.map((sec, sIdx) => (
+                                <div key={sIdx} className="p-3 bg-[#FAF6EF]/70 rounded-xl border border-[#E7DED1] space-y-2">
+                                  <div className="flex justify-between items-center">
+                                    <span className="font-bold text-xs text-[#2B2B2B] flex items-center gap-1.5">
+                                      <span className="w-2 h-2 rounded-full bg-[#6F4E37]"></span>
+                                      {sec.section}
+                                    </span>
+                                    <Button
+                                      variant="secondary"
+                                      size="sm"
+                                      onClick={() => playNotationSequence(sec.notation, false, undefined, 'cherenet')}
+                                      disabled={isPlayingSequence}
+                                      className="text-[10px] py-0.5 px-2.5 h-6 text-[#6F4E37] gap-1 cursor-pointer font-bold uppercase"
+                                    >
+                                      <Play size={10} /> Play Section
+                                    </Button>
+                                  </div>
+
+                                  {/* Interactive Number Buttons for this Verse / Section */}
+                                  <div className="flex flex-wrap gap-1.5 font-mono pt-1">
+                                    {parseNotationToNotes(sec.notation).map((num, nIdx) => (
+                                      num === '-' ? (
+                                        <span
+                                          key={nIdx}
+                                          className="px-2 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[1.8rem] bg-amber-50/80 text-amber-800 border-amber-200/80"
+                                          title="Rest / Pause"
+                                        >
+                                          <span className="block font-black text-xs font-mono">-</span>
+                                          <span className="block text-[9px] font-bold uppercase text-amber-700">Rest</span>
+                                        </span>
+                                      ) : (
+                                        <button
+                                          key={nIdx}
+                                          type="button"
+                                          onClick={() => playBegenaNote(num, undefined, 'cherenet')}
+                                          className="px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[2.2rem] transition-all cursor-pointer bg-white text-[#2B2B2B] border-[#E7DED1] hover:bg-[#6F4E37] hover:text-white hover:scale-110 shadow-2xs group"
+                                          title={`Click to play Cherenet string ${num} (${getNoteTone(num, 'cherenet')})`}
+                                        >
+                                          <span className="block font-black text-xs font-mono group-hover:text-white">{num}</span>
+                                          <span className="block text-[10px] font-bold text-[#E89B52] group-hover:text-amber-200 uppercase">{getNoteTone(num, 'cherenet')}</span>
+                                        </button>
+                                      )
+                                    ))}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* FULL LYRICS */}
+                        <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-2">
+                          <span className="text-[10px] font-bold text-gray-500 block uppercase border-b border-gray-100 pb-2 font-mono">
+                            የመዝሙሩ ግጥም (Full Amharic Lyrics)
+                          </span>
+                          <p className="text-xs font-serif leading-loose whitespace-pre-line text-gray-800 pt-2">
+                            {activeCherenetMezmur.lyrics}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Chapter 5 Navigation Footer */}
+                  {renderChapterNavFooter('cherenet-scale')}
+                </div>
+              )}
+
+              {/* ---------------- SUBTAB 6: CHAPTER 6 (ቅኝቶች እና ተግባራዊ ልምምዳቸው) ---------------- */}
+              {activeSubTab === 'assignments' && (
+                <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
+                  {/* CHAPTER HEADER */}
+                  <div className="border-b border-[#FAF6EF] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase tracking-wider block">CHAPTER 6</span>
+                      <h3 className="font-display font-black text-lg text-[#2B2B2B]">
+                        ምዕራፍ አራት፡ ቅኝቶች እና ተግባራዊ ልምምዳቸው
+                      </h3>
+                      <p className="text-xs text-gray-500 mt-1">
+                        የ ቅኝት አመሰራረት፣ የጣቶች ልምምድ ድርደራ እና በሰላምታ ቅኝት የተዘጋጁ 8 የተቀደሱ መዝሙራት።
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-3 py-1 bg-[#FAF6EF] border border-[#E7DED1] rounded-full text-xs font-bold text-[#6F4E37] flex items-center gap-1.5">
+                        <Music size={14} /> ሰላምታ ቅኝት
+                      </span>
                     </div>
                   </div>
-                </div>
 
-                {/* Chapter 3 Navigation Footer */}
-                {renderChapterNavFooter('exercises')}
-              </div>
-            )}
-
-            {/* ---------------- SUBTAB 4: CHAPTER 4 - ትዝታ ቅኝት ---------------- */}
-            {activeSubTab === 'mezmur-library' && (
-              <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
-                {/* Chapter Header */}
-                <div className="flex justify-between items-start flex-col sm:flex-row gap-4 border-b border-[#E7DED1] pb-4">
-                  <div>
-                    <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase tracking-wider block mb-1">
-                      Chapter 4 Curriculum (ምዕራፍ አራት)
-                    </span>
-                    <h3 className="font-display font-black text-xl text-[#2B2B2B]">
-                      ምዕራፍ አራት ፡ ትዝታ ቅኝት
-                    </h3>
-                    <p className="text-xs text-gray-500 mt-1">
-                      የ ቅኝት አመሰራረት፣ ጣት ማፍታታት እና በትዝታ ቅኝት ላይ ያሉ መዝሙሮች
-                    </p>
+                  {/* MODULE SELECTOR GRID */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {CHAPTER_6_MODULES.map((mod) => {
+                      const isActive = activeCh6Module === mod.id;
+                      return (
+                        <button
+                          key={mod.id}
+                          type="button"
+                          onClick={() => setActiveCh6Module(mod.id as any)}
+                          className={`p-4 rounded-xl border text-left transition-all flex items-start gap-3 cursor-pointer ${isActive
+                              ? 'bg-[#6F4E37] text-white border-[#6F4E37] shadow-sm'
+                              : 'bg-[#FAF6EF]/50 text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]/50 hover:bg-[#FAF6EF]'
+                            }`}
+                        >
+                          <span className="text-2xl mt-0.5">{mod.icon}</span>
+                          <div>
+                            <h4 className={`font-bold text-sm ${isActive ? 'text-white' : 'text-[#2B2B2B]'}`}>
+                              {mod.title}
+                            </h4>
+                            <p className={`text-xs mt-1 leading-relaxed ${isActive ? 'text-amber-100/90' : 'text-gray-500'}`}>
+                              {mod.shortDesc}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
-                </div>
 
-                {/* Chapter 4 Module Selector Bar */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {CHAPTER_4_MODULES.map((mod) => (
-                    <button
-                      key={mod.id}
-                      onClick={() => setActiveCh4Module(mod.id as any)}
-                      className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
-                        activeCh4Module === mod.id
-                          ? 'bg-[#FAF6EF] border-[#6F4E37] ring-1 ring-[#6F4E37]/30 shadow-xs'
-                          : 'bg-white border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <span className="text-2xl">{mod.icon}</span>
-                      <div className="space-y-1">
-                        <h4 className="font-bold text-xs text-[#2B2B2B]">{mod.title}</h4>
-                        <p className="text-[11px] text-gray-500 leading-tight">{mod.shortDesc}</p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                  {/* MODULE 1: የ ቅኝት አመሰራረት */}
+                  {activeCh6Module === 'formation' && (
+                    <div className="space-y-6 bg-[#FAF6EF]/30 border border-[#E7DED1] p-5 rounded-xl">
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#E7DED1] pb-3">
+                        <div>
+                          <h4 className="font-bold text-sm text-[#2B2B2B]">📌 የ ቅኝት አመሰራረት (Finger Practice Chords)</h4>
+                          <p className="text-xs text-gray-500">የጣቶች ድርደራ በሰላምታ ቅኝት፦ 2 (C) ➔ 3 (D) ➔ 1 (F) ➔ 5 (G) ➔ 4 (A) ➔ 2 (C)</p>
+                        </div>
 
-                {/* MODULE 1: የ ቅኝት አመሰራረት (Finger practice chords) */}
-                {activeCh4Module === 'formation' && (
-                  <div className="space-y-6 bg-[#FAF6EF]/30 border border-[#E7DED1] p-5 rounded-xl">
-                    <BegenaScaleSimulatorBoard
-                      scaleKey="tizita"
-                      title="ትዝታ ቅኝት የበገና ድርደራ (Tizita Virtual Begena Studio)"
-                      subtitle="በገና 10 አውታሮች ይዟል። ተጫዋች አውታሮች 1፣ 4፣ 6፣ 8 እና 10 (1=#1፣ 4=#2፣ 6=#3፣ 8=#4፣ 10=#5) ሲሆኑ standard የድርደራ ቅደም ተከተል 2 → 3 → 1 → 5 → 4 → 2 እና Reverse 2 → 4 → 5 → 1 → 3 → 2 ነው።"
-                      allowScaleChange={false}
-                    />
-
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#E7DED1] pb-3">
-                      <div>
-                        <h4 className="font-bold text-sm text-[#2B2B2B]">📌 የ ቅኝት አመሰራረት - FINGER PRACTICE CHORDS</h4>
-                        <p className="text-xs text-gray-500">የቀኝና የግራ እጅ ድርደራ ቅደም ተከተል በቦርድ ቁጥሮችና ድምጾች</p>
-                      </div>
-                      <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-[#E7DED1] text-xs">
-                        <span className="font-bold text-gray-500">Display mode:</span>
-                        <div className="flex gap-1">
+                        {/* Display Mode Selector */}
+                        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-[#E7DED1] text-xs font-bold">
+                          <span className="text-[10px] text-gray-400 px-2 font-mono uppercase">Display:</span>
                           <button
+                            type="button"
                             onClick={() => setTunerDisplayMode('both')}
-                            className={`px-2 py-0.5 rounded text-[10px] font-bold ${tunerDisplayMode === 'both' ? 'bg-[#6F4E37] text-white' : 'bg-gray-100 text-gray-600'}`}
+                            className={`px-2 py-1 rounded text-xs transition-colors ${tunerDisplayMode === 'both' ? 'bg-[#6F4E37] text-white' : 'text-gray-600 hover:text-black'
+                              }`}
                           >
                             Both
                           </button>
                           <button
+                            type="button"
                             onClick={() => setTunerDisplayMode('tuner')}
-                            className={`px-2 py-0.5 rounded text-[10px] font-bold ${tunerDisplayMode === 'tuner' ? 'bg-[#6F4E37] text-white' : 'bg-gray-100 text-gray-600'}`}
+                            className={`px-2 py-1 rounded text-xs transition-colors ${tunerDisplayMode === 'tuner' ? 'bg-[#6F4E37] text-white' : 'text-gray-600 hover:text-black'
+                              }`}
                           >
                             Tuner
                           </button>
                           <button
+                            type="button"
                             onClick={() => setTunerDisplayMode('no')}
-                            className={`px-2 py-0.5 rounded text-[10px] font-bold ${tunerDisplayMode === 'no' ? 'bg-[#6F4E37] text-white' : 'bg-gray-100 text-gray-600'}`}
+                            className={`px-2 py-1 rounded text-xs transition-colors ${tunerDisplayMode === 'no' ? 'bg-[#6F4E37] text-white' : 'text-gray-600 hover:text-black'
+                              }`}
                           >
                             No.
                           </button>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Interactive Sequence Player Box */}
-                    <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-6">
-                      {/* FORWARD SEQUENCE */}
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="font-bold text-[#6F4E37]">FORWARD SEQUENCE: 2 3 1 5 4 2</span>
-                          <span className="text-[10px] text-gray-400 font-mono">Click card to pluck string</span>
+                      {/* TUNER VALUES MAPPING SUMMARY CARD */}
+                      <div className="bg-white p-4 rounded-xl border border-[#E7DED1] space-y-2">
+                        <div className="text-xs font-bold text-[#6F4E37] uppercase tracking-wider font-mono">
+                          SELAMTA TUNER SYMBOLS & VALUES
                         </div>
-                        <div className="grid grid-cols-6 gap-2">
-                          {[
-                            { num: '2', tone: 'C' },
-                            { num: '3', tone: 'D' },
-                            { num: '1', tone: 'E' },
-                            { num: '5', tone: 'G' },
-                            { num: '4', tone: 'A' },
-                            { num: '2', tone: 'C' }
-                          ].map((item, idx) => (
-                            <button
-                              type="button"
-                              key={idx}
-                              onClick={() => playBegenaNote(item.num)}
-                              className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${
-                                activeSequenceIndex === idx
-                                  ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-md'
-                                  : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
-                              }`}
-                              title={`Click to pluck Begena string ${item.num}`}
-                            >
-                              <span className="block font-black text-base font-mono">{item.num}</span>
-                              <span className="block text-[10px] opacity-80 uppercase font-bold">{item.tone}</span>
-                            </button>
-                          ))}
+                        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 pt-1 text-center font-mono">
+                          <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
+                            <span className="block text-xs font-bold text-gray-400">STRING 2</span>
+                            <span className="block text-sm font-black text-[#2B2B2B]">2 ➔ C</span>
+                          </div>
+                          <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
+                            <span className="block text-xs font-bold text-gray-400">STRING 3</span>
+                            <span className="block text-sm font-black text-[#2B2B2B]">3 ➔ D</span>
+                          </div>
+                          <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
+                            <span className="block text-xs font-bold text-gray-400">STRING 1</span>
+                            <span className="block text-sm font-black text-[#2B2B2B]">1 ➔ F</span>
+                          </div>
+                          <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
+                            <span className="block text-xs font-bold text-gray-400">STRING 5</span>
+                            <span className="block text-sm font-black text-[#2B2B2B]">5 ➔ G</span>
+                          </div>
+                          <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
+                            <span className="block text-xs font-bold text-gray-400">STRING 4</span>
+                            <span className="block text-sm font-black text-[#2B2B2B]">4 ➔ A</span>
+                          </div>
+                          <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
+                            <span className="block text-xs font-bold text-gray-400">STRING 2</span>
+                            <span className="block text-sm font-black text-[#2B2B2B]">2 ➔ C</span>
+                          </div>
                         </div>
                       </div>
 
-                      {/* REVERSE SEQUENCE */}
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="font-bold text-[#C79A2B]">REVERSE SEQUENCE: 2 4 5 1 3 2</span>
-                          <span className="text-[10px] text-gray-400 font-mono">Click card to pluck string</span>
+                      {/* FORWARD FLOW & REVERSE FLOW CARDS */}
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                        {/* FORWARD FLOW */}
+                        <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-4 shadow-xs">
+                          <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+                            <h5 className="font-bold text-sm text-[#2B2B2B] flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-green-500" /> Forward Flow (2 3 1 5 4 2)
+                            </h5>
+                            <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">To Strum</span>
+                          </div>
+
+                          {/* TOP ROW */}
+                          <div>
+                            <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">
+                              TOP ROW (2, 3, 1, 5)
+                            </span>
+                            <div className="grid grid-cols-4 gap-2">
+                              {[
+                                { num: '2', tuner: 'C' },
+                                { num: '3', tuner: 'D' },
+                                { num: '1', tuner: 'F' },
+                                { num: '5', tuner: 'G' }
+                              ].map((item, idx) => (
+                                <button
+                                  key={idx}
+                                  type="button"
+                                  onClick={() => playBegenaNote(item.num, undefined, 'selamta')}
+                                  className={`p-3 rounded-lg border flex flex-col items-center justify-center font-mono cursor-pointer transition-all ${activeSequenceIndex === idx
+                                      ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-sm'
+                                      : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
+                                    }`}
+                                >
+                                  {tunerDisplayMode !== 'tuner' && (
+                                    <span className="font-black text-base">{item.num}</span>
+                                  )}
+                                  {tunerDisplayMode !== 'no' && (
+                                    <span className={`text-xs font-bold ${activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#C79A2B]'}`}>
+                                      ({item.tuner})
+                                    </span>
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* BOTTOM ROW */}
+                          <div>
+                            <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">
+                              BOTTOM ROW (4, 2)
+                            </span>
+                            <div className="grid grid-cols-2 gap-2">
+                              {[
+                                { num: '4', tuner: 'A' },
+                                { num: '2', tuner: 'C' }
+                              ].map((item, idx) => (
+                                <button
+                                  key={idx}
+                                  type="button"
+                                  onClick={() => playBegenaNote(item.num, undefined, 'selamta')}
+                                  className={`p-3 rounded-lg border flex flex-col items-center justify-center font-mono cursor-pointer transition-all ${activeSequenceIndex === idx + 4
+                                      ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-sm'
+                                      : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
+                                    }`}
+                                >
+                                  {tunerDisplayMode !== 'tuner' && (
+                                    <span className="font-black text-base">{item.num}</span>
+                                  )}
+                                  {tunerDisplayMode !== 'no' && (
+                                    <span className={`text-xs font-bold ${activeSequenceIndex === idx + 4 ? 'text-amber-200' : 'text-[#C79A2B]'}`}>
+                                      ({item.tuner})
+                                    </span>
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
                         </div>
-                        <div className="grid grid-cols-6 gap-2">
-                          {[
-                            { num: '2', tone: 'C' },
-                            { num: '4', tone: 'A' },
-                            { num: '5', tone: 'G' },
-                            { num: '1', tone: 'E' },
-                            { num: '3', tone: 'D' },
-                            { num: '2', tone: 'C' }
-                          ].map((item, idx) => (
-                            <button
-                              type="button"
-                              key={idx}
-                              onClick={() => playBegenaNote(item.num)}
-                              className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${
-                                activeReverseSequenceIndex === idx
-                                  ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-md'
-                                  : 'bg-amber-50/50 text-[#2B2B2B] border-amber-100 hover:border-[#C79A2B]'
-                              }`}
-                              title={`Click to pluck Begena string ${item.num}`}
-                            >
-                              <span className="block font-black text-base font-mono">{item.num}</span>
-                              <span className="block text-[10px] opacity-80 uppercase font-bold">{item.tone}</span>
-                            </button>
-                          ))}
+
+                        {/* BACKWARD / REVERSE FLOW */}
+                        <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-4 shadow-xs">
+                          <div className="flex justify-between items-center border-b border-gray-100 pb-2">
+                            <h5 className="font-bold text-sm text-[#2B2B2B] flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-amber-500" /> Reverse Flow (2 4 5 1 3 2)
+                            </h5>
+                            <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">To Strum</span>
+                          </div>
+
+                          {/* TOP ROW */}
+                          <div>
+                            <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">
+                              TOP ROW (2, 4, 5, 1)
+                            </span>
+                            <div className="grid grid-cols-4 gap-2">
+                              {[
+                                { num: '2', tuner: 'C' },
+                                { num: '4', tuner: 'A' },
+                                { num: '5', tuner: 'G' },
+                                { num: '1', tuner: 'F' }
+                              ].map((item, idx) => (
+                                <button
+                                  key={idx}
+                                  type="button"
+                                  onClick={() => playBegenaNote(item.num, undefined, 'selamta')}
+                                  className={`p-3 rounded-lg border flex flex-col items-center justify-center font-mono cursor-pointer transition-all ${activeReverseSequenceIndex === idx
+                                      ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-sm'
+                                      : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#C79A2B]'
+                                    }`}
+                                >
+                                  {tunerDisplayMode !== 'tuner' && (
+                                    <span className="font-black text-base">{item.num}</span>
+                                  )}
+                                  {tunerDisplayMode !== 'no' && (
+                                    <span className={`text-xs font-bold ${activeReverseSequenceIndex === idx ? 'text-amber-100' : 'text-[#6F4E37]'}`}>
+                                      ({item.tuner})
+                                    </span>
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* BOTTOM ROW */}
+                          <div>
+                            <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">
+                              BOTTOM ROW (3, 2)
+                            </span>
+                            <div className="grid grid-cols-2 gap-2">
+                              {[
+                                { num: '3', tuner: 'D' },
+                                { num: '2', tuner: 'C' }
+                              ].map((item, idx) => (
+                                <button
+                                  key={idx}
+                                  type="button"
+                                  onClick={() => playBegenaNote(item.num, undefined, 'selamta')}
+                                  className={`p-3 rounded-lg border flex flex-col items-center justify-center font-mono cursor-pointer transition-all ${activeReverseSequenceIndex === idx + 4
+                                      ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-sm'
+                                      : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#C79A2B]'
+                                    }`}
+                                >
+                                  {tunerDisplayMode !== 'tuner' && (
+                                    <span className="font-black text-base">{item.num}</span>
+                                  )}
+                                  {tunerDisplayMode !== 'no' && (
+                                    <span className={`text-xs font-bold ${activeReverseSequenceIndex === idx + 4 ? 'text-amber-100' : 'text-[#6F4E37]'}`}>
+                                      ({item.tuner})
+                                    </span>
+                                  )}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
                         </div>
+
                       </div>
 
                       {/* TEMPO CONTROL & PLAY BUTTONS */}
-                      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100">
+                      <div className="bg-white p-4 rounded-xl border border-[#E7DED1] flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="flex items-center gap-3 w-full sm:w-auto">
                           <span className="text-xs font-bold text-gray-600 font-mono">Tempo: {tempo} BPM</span>
                           <input
@@ -3411,7 +4549,7 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
                           <Button
                             size="sm"
                             variant="secondary"
-                            onClick={() => playNotationSequence('2 3 1 5 4 2', false)}
+                            onClick={() => playNotationSequence('2 3 1 5 4 2', false, undefined, 'selamta')}
                             disabled={isPlayingSequence}
                             className="text-xs font-bold gap-1 text-[#6F4E37]"
                           >
@@ -3420,7 +4558,7 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
                           <Button
                             size="sm"
                             variant="secondary"
-                            onClick={() => playNotationSequence('2 4 5 1 3 2', true)}
+                            onClick={() => playNotationSequence('2 4 5 1 3 2', true, undefined, 'selamta')}
                             disabled={isPlayingSequence}
                             className="text-xs font-bold gap-1 text-[#C79A2B]"
                           >
@@ -3429,7 +4567,7 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
                           <Button
                             size="sm"
                             variant="primary"
-                            onClick={() => playCombinedSequence('2 3 1 5 4 2')}
+                            onClick={() => playCombinedSequence('2 3 1 5 4 2', '2 4 5 1 3 2', 'selamta')}
                             disabled={isPlayingSequence}
                             className="text-xs font-bold gap-1 bg-[#6F4E37]"
                           >
@@ -3438,1864 +4576,687 @@ export function BegenaLearningModule({ onNavigate, lang, enrollment }: BegenaLea
                         </div>
                       </div>
                     </div>
+                  )}
 
-                    {/* Explanatory Principles Box */}
-                    <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-3 text-xs leading-relaxed text-gray-700">
-                      <h5 className="font-bold text-sm text-[#2B2B2B]">የ ቅኝት አመሰራረት መመሪያዎችና ትምህርት</h5>
-                      <ul className="list-disc pl-5 space-y-2">
-                        <li><b>ትዝታ ቅኝት፦</b> በበገና ልምምድ ውስጥ የመጀመሪያውና ዋነኛው የፔንታቶኒክ (የአምስት ድምፆች) ቅኝት ነው።</li>
-                        <li><b>ድርደራ፦</b> ድርደራው የሚጀምረው ከአውታር 2 (C) ሲሆን፣ በጣት ቅደም ተከተል 2 ➔ 3 ➔ 1 ➔ 5 ➔ 4 ➔ 2 ይደረደራል።</li>
-                        <li><b>ቴክኒክ፦</b> አንደኛውን አውታር ብለን የሚቀጥለው ላይ ከማረፋችን በፊት የመጀመሪያው አውታር ንዝረቱን እስኪጨርስ መጠበቅ አለብን።</li>
-                      </ul>
-                    </div>
-                  </div>
-                )}
-
-                {/* MODULE 2: ጣት ማፍታታት (Dexterity Exercises) */}
-                {activeCh4Module === 'dexterity' && (
-                  <div className="space-y-6 bg-[#FAF6EF]/30 border border-[#E7DED1] p-5 rounded-xl">
-                    <div className="border-b border-[#E7DED1] pb-3">
-                      <h4 className="font-bold text-sm text-[#2B2B2B]">📌 ጣት ማፍታታት - Practical Finger Dexterity Chords</h4>
-                      <p className="text-xs text-gray-500">የጣቶቻችን አቀማመጥ፣ ፍጥነትና የድምፅ ጥራት ማሻሻያ ተግባራዊ  ልምምዶች።</p>
-                    </div>
-
-                    {/* FIRST PRACTICE DRILL */}
-                    <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-4">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase block">PRACTICE DRILL 1</span>
-                          <h5 className="font-bold text-sm text-[#2B2B2B]">የመጀመሪያው ጣት ማፍታታት ልምምድ (First Practice)</h5>
-                        </div>
-                        <Button
-                          size="sm"
-                          variant="primary"
-                          onClick={() => playNotationSequence('2 2 2 3 3 3 1 1 1 5 5 5 4 4 4 2 2 2')}
-                          disabled={isPlayingSequence}
-                          className="gap-1 text-xs bg-[#6F4E37]"
-                        >
-                          <Play size={14} /> Play First Practice
-                        </Button>
-                      </div>
-
-                      <div className="p-4 bg-[#FAF6EF] rounded-xl border border-[#E7DED1]">
-                        <div className="text-xs font-mono font-bold text-gray-500 mb-2">SEQUENCE:</div>
-                        <div className="flex flex-wrap gap-2">
-                          {'2 2 2 3 3 3 1 1 1 5 5 5 4 4 4 2 2 2'.split(' ').map((note, idx) => (
-                            <button
-                              key={idx}
-                              type="button"
-                              onClick={() => playBegenaNote(note)}
-                              className={`min-w-[2.2rem] px-2 py-1.5 rounded-lg flex flex-col items-center justify-center font-mono font-bold text-xs cursor-pointer transition-all ${
-                                activeSequenceIndex === idx
-                                  ? 'bg-[#6F4E37] text-white scale-110 shadow-sm border border-[#6F4E37]'
-                                  : 'bg-white text-gray-800 border border-gray-200 hover:border-[#6F4E37]'
-                              }`}
-                            >
-                              <span className="block font-black text-xs font-mono">{note}</span>
-                              <span className={`block text-[10px] font-bold uppercase ${
-                                activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#E89B52]'
-                              }`}>
-                                {getNoteTone(note, 'tizita')}
-                              </span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SECOND PRACTICE DRILL */}
-                    <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-4">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase block">PRACTICE DRILL 2</span>
-                          <h5 className="font-bold text-sm text-[#2B2B2B]">ሁለተኛው ጣት ማፍታታት ልምምድ (Second Practice)</h5>
-                        </div>
-                        <Button
-                          size="sm"
-                          variant="primary"
-                          onClick={() => playNotationSequence('2 3 1 3 1 5 1 5 4 5 4 2 2 4 5 4 5 1 5 1 3 1 3 2')}
-                          disabled={isPlayingSequence}
-                          className="gap-1 text-xs bg-[#6F4E37]"
-                        >
-                          <Play size={14} /> Play Second Practice
-                        </Button>
-                      </div>
-
-                      <div className="space-y-3">
-                        {/* Line 1 */}
-                        <div className="p-4 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-1">
-                          <span className="text-[10px] font-mono font-bold text-[#6F4E37] uppercase block">LINE 1:</span>
-                          <div className="flex flex-wrap gap-2 pt-1">
-                            {'2 3 1 3 1 5 1 5 4 5 4 2'.split(' ').map((note, idx) => (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => playBegenaNote(note)}
-                                className={`min-w-[2.2rem] px-2 py-1.5 rounded-lg flex flex-col items-center justify-center font-mono font-bold text-xs cursor-pointer transition-all ${
-                                  activeSequenceIndex === idx
-                                    ? 'bg-[#6F4E37] text-white scale-110 shadow-sm border border-[#6F4E37]'
-                                    : 'bg-white text-gray-800 border border-gray-200 hover:border-[#6F4E37]'
-                                }`}
-                              >
-                                <span className="block font-black text-xs font-mono">{note}</span>
-                                <span className={`block text-[10px] font-bold uppercase ${
-                                  activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#E89B52]'
-                                }`}>
-                                  {getNoteTone(note, 'tizita')}
-                                </span>
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Line 2 */}
-                        <div className="p-4 bg-amber-50/40 rounded-xl border border-amber-100 space-y-1">
-                          <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase block">LINE 2:</span>
-                          <div className="flex flex-wrap gap-2 pt-1">
-                            {'2 4 5 4 5 1 5 1 3 1 3 2'.split(' ').map((note, idx) => (
-                              <button
-                                key={idx + 12}
-                                type="button"
-                                onClick={() => playBegenaNote(note)}
-                                className={`min-w-[2.2rem] px-2 py-1.5 rounded-lg flex flex-col items-center justify-center font-mono font-bold text-xs cursor-pointer transition-all ${
-                                  activeSequenceIndex === idx + 12
-                                    ? 'bg-[#C79A2B] text-white scale-110 shadow-sm border border-[#C79A2B]'
-                                    : 'bg-white text-gray-800 border border-gray-200 hover:border-[#C79A2B]'
-                                }`}
-                              >
-                                <span className="block font-black text-xs font-mono">{note}</span>
-                                <span className={`block text-[10px] font-bold uppercase ${
-                                  activeSequenceIndex === idx + 12 ? 'text-amber-200' : 'text-[#E89B52]'
-                                }`}>
-                                  {getNoteTone(note, 'tizita')}
-                                </span>
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* MODULE 3: ትዝታ ቅኝት ላይ ያሉ መዝሙሮች (Tizita Scale Mezmurs Only) */}
-                {activeCh4Module === 'mezmurs' && (() => {
-                  const filteredLibraryMezmurs = mezmurs.filter((m) => {
-                    if (!m) return false;
-                    const cat = m.category || '';
-                    const isTizita = cat.includes('ትዝታ') || (!cat.includes('ቸርነት') && !cat.includes('አንቺ') && !cat.includes('ሰላምታ'));
-
-                    const q = (librarySearchQuery || '').toLowerCase().trim();
-                    const matchesSearch =
-                      !q ||
-                      (m.title || '').toLowerCase().includes(q) ||
-                      (m.amharicTitle || '').toLowerCase().includes(q) ||
-                      cat.toLowerCase().includes(q) ||
-                      (m.lyrics || '').toLowerCase().includes(q) ||
-                      (m.teacher || '').toLowerCase().includes(q);
-
-                    return isTizita && matchesSearch;
-                  });
-
-                  const tizitaMezmursList = mezmurs.filter((m) => m && ((m.category || '').includes('ትዝታ') || (!(m.category || '').includes('ቸርነት') && !(m.category || '').includes('አንቺ') && !(m.category || '').includes('ሰላምታ'))));
-                  const currentMezmur = mezmurs.find((m) => m && m.id === selectedMezmurId && ((m.category || '').includes('ትዝታ') || (!(m.category || '').includes('ቸርነት') && !(m.category || '').includes('አንቺ') && !(m.category || '').includes('ሰላምታ')))) || filteredLibraryMezmurs[0] || tizitaMezmursList[0] || mezmurs[0];
-
-                  const currentScaleMode: 'tizita' | 'cherenet' | 'selamta' = 'tizita';
-
-                  return (
+                  {/* MODULE 2: ሰላምታ ቅኝት ላይ ያሉ መዝሙሮች */}
+                  {activeCh6Module === 'mezmurs' && (
                     <div className="space-y-6">
-                      {/* HEADER BANNER & SEARCH BAR FOR TIZITA MEZMURS */}
-                      <div className="bg-[#FAF6EF]/70 p-4 rounded-xl border border-[#E7DED1] space-y-3">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-                          <div>
-                            <h4 className="font-bold text-sm text-[#2B2B2B] flex items-center gap-2">
-                              <span>📜</span>
-                              <span>ትዝታ ቅኝት ላይ ያሉ መዝሙሮች ({tizitaMezmursList.length})</span>
-                            </h4>
-                            <p className="text-xs text-gray-500 mt-0.5">
-                              በትዝታ ቅኝት የተደረደሩና የተቃኙ የተቀደሱ መዝሙራት ስብስብ። (Chapter 4 Tizita Scale Mezmurs)
-                            </p>
-                          </div>
+                      {/* SEARCH & TITLE BAR */}
+                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#FAF6EF]/50 p-4 rounded-xl border border-[#E7DED1]">
+                        <div>
+                          <h4 className="font-bold text-sm text-[#2B2B2B]">
+                            📌 ሰላምታ ቅኝት ላይ ያሉ መዝሙሮች ({SELAMTA_MEZMURS.length})
+                          </h4>
+                          <p className="text-xs text-gray-500">
+                            በሰላምታ ቅኝት የተቀናበሩ የተቀደሱ የበገና መዝሙራት ሙሉ ጽሑፍና የድርደራ ቁጥሮች።
+                          </p>
+                        </div>
 
-                          <div className="relative w-full md:w-64">
-                            <Input
-                              type="text"
-                              placeholder="መዝሙር ፈልግ... (Search)..."
-                              value={librarySearchQuery}
-                              onChange={(e) => setLibrarySearchQuery(e.target.value)}
-                              className="text-xs pl-8 bg-white border-[#E7DED1] focus:border-[#6F4E37] w-full"
-                            />
-                            <Search size={14} className="absolute left-2.5 top-2.5 text-gray-400" />
-                          </div>
+                        <div className="relative w-full sm:w-64">
+                          <Search size={14} className="absolute left-3 top-3 text-gray-400" />
+                          <input
+                            type="text"
+                            placeholder="መዝሙር ፈልግ..."
+                            value={searchSelamtaQuery}
+                            onChange={(e) => setSearchSelamtaQuery(e.target.value)}
+                            className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-[#E7DED1] rounded-lg focus:outline-none focus:border-[#6F4E37]"
+                          />
                         </div>
                       </div>
 
+                      {/* TWO-COLUMN MEZMUR VIEW */}
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        {/* MEZMURS LIST (LEFT RAIL) */}
-                        <div className="lg:col-span-1 space-y-3 max-h-[700px] overflow-y-auto pr-1">
-                          <div className="flex justify-between items-center text-xs pb-1 font-bold text-gray-500">
-                            <span>በትዝታ ቅኝት የተገኘ መዝሙር ({filteredLibraryMezmurs.length})</span>
-                            <span className="text-[10px] text-amber-800 bg-amber-100 px-2 py-0.5 rounded font-mono font-bold">
-                              ትዝታ ቅኝት (TIZITA)
-                            </span>
-                          </div>
 
-                          {filteredLibraryMezmurs.length === 0 ? (
-                            <div className="p-8 text-center bg-gray-50 rounded-xl border border-dashed border-gray-200 text-xs text-gray-500">
-                              ምንም መዝሙር አልተገኘም። (No mezmurs found for this search/filter).
-                            </div>
-                          ) : (
-                            filteredLibraryMezmurs.map((m) => {
-                              const isSelected = currentMezmur?.id === m.id;
-                              const cat = m?.category || '';
-                              const badgeStyle = cat.includes('ቸርነት') || cat.includes('አንቺ')
-                                ? 'bg-purple-100 text-purple-800 border-purple-200'
-                                : cat.includes('ሰላምታ')
-                                ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
-                                : 'bg-amber-100 text-amber-800 border-amber-200';
-
-                              return (
-                                <button
-                                  key={m.id}
-                                  onClick={() => setSelectedMezmurId(m.id)}
-                                  className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer ${
-                                    isSelected
-                                      ? 'bg-[#FAF6EF] border-[#6F4E37] ring-1 ring-[#6F4E37]/30 shadow-xs'
-                                      : 'bg-white border-gray-200 hover:border-gray-300'
+                        {/* MEZMUR LIST RAIL */}
+                        <div className="lg:col-span-1 space-y-2 max-h-[600px] overflow-y-auto pr-1">
+                          {SELAMTA_MEZMURS.filter((m) =>
+                            m && ((m.title && m.title.includes(searchSelamtaQuery)) || (m.artist && m.artist.includes(searchSelamtaQuery)))
+                          ).map((m, idx) => {
+                            const isSelected = activeSelamtaMezmur?.id === m.id;
+                            return (
+                              <button
+                                key={m.id}
+                                type="button"
+                                onClick={() => setSelectedSelamtaMezmurId(m.id)}
+                                className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer ${isSelected
+                                    ? 'bg-[#6F4E37] text-white border-[#6F4E37] shadow-sm'
+                                    : 'bg-white text-[#2B2B2B] border-gray-200 hover:border-[#6F4E37]/50 hover:bg-[#FAF6EF]/50'
                                   }`}
-                                >
-                                  <div className="flex justify-between items-center text-[9px] font-mono font-bold mb-1.5">
-                                    <span className={`px-2 py-0.5 rounded border text-[9px] font-bold ${badgeStyle}`}>
-                                      {m.category}
-                                    </span>
-                                    <span className="text-gray-400">{m.difficulty}</span>
-                                  </div>
-                                  
-                                  <div className="space-y-0.5">
-                                    <h4 className="font-bold text-xs text-[#2B2B2B]">{m.title}</h4>
-                                    <span className="block text-xs font-serif text-[#6F4E37]">{m.amharicTitle}</span>
-                                  </div>
-
-                                  <div className="mt-2.5 flex justify-between items-center text-[10px]">
-                                    <span className="text-gray-400 font-mono truncate max-w-[140px]">{m.teacher}</span>
-                                    <span className={`px-2 py-0.5 rounded font-bold uppercase text-[9px] ${
-                                      m.status === 'Completed' || m.status === 'Approved'
-                                        ? 'bg-green-100 text-green-800'
-                                        : 'bg-amber-100 text-amber-800'
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className={`text-[10px] font-mono font-bold ${isSelected ? 'text-amber-200' : 'text-gray-400'}`}>
+                                    #{idx + 1}
+                                  </span>
+                                  <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold ${isSelected ? 'bg-white/20 text-white' : 'bg-[#FAF6EF] text-[#6F4E37]'
                                     }`}>
-                                      {m.status}
-                                    </span>
-                                  </div>
-                                </button>
-                              );
-                            })
-                          )}
+                                    ሰላምታ
+                                  </span>
+                                </div>
+                                <h5 className={`font-bold text-sm mt-1 ${isSelected ? 'text-white' : 'text-[#2B2B2B]'}`}>
+                                  {m.title}
+                                </h5>
+                                <p className={`text-xs mt-0.5 ${isSelected ? 'text-amber-100/80' : 'text-gray-500'}`}>
+                                  {m.artist}
+                                </p>
+                              </button>
+                            );
+                          })}
                         </div>
 
-                        {/* ACTIVE MEZMUR WORKSPACE PANEL (RIGHT SIDE) */}
-                        <div className="lg:col-span-2 space-y-5 bg-[#FAF6EF]/20 border border-[#E7DED1] p-5 rounded-xl text-xs">
-                          
-                          <div className="flex justify-between items-start border-b border-[#E7DED1]/60 pb-3">
+                        {/* ACTIVE MEZMUR DISPLAY PANEL */}
+                        <div className="lg:col-span-2 space-y-5 bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs">
+
+                          {/* HEADER */}
+                          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-4">
                             <div>
-                              <div className="flex items-center gap-2 mb-1">
-                                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border uppercase bg-amber-100 text-amber-800 border-amber-200">
-                                  {currentMezmur.category}
-                                </span>
-                              </div>
-                              <h4 className="font-bold text-base text-[#2B2B2B]">{currentMezmur.title}</h4>
-                              <span className="text-xs text-[#6F4E37] font-serif block mt-0.5">{currentMezmur.amharicTitle}</span>
-                            </div>
-                            <span className="text-[10px] bg-green-50 text-green-700 border border-green-200 px-2.5 py-1 rounded font-bold">
-                              ዘማሪ/ደራሲ፡ {currentMezmur.teacher}
-                            </span>
-                          </div>
-
-                          {/* DEMO AUDIO TRACK PLAYER */}
-                          <div className="p-4 bg-white rounded-xl border border-[#E7DED1] space-y-3">
-                            <div className="flex justify-between items-center font-bold text-[10px] text-gray-400">
-                              <span>INSTRUMENT DEMONSTRATION TRACK</span>
-                              <span className="text-green-600 font-mono uppercase">
-                                Scale: {currentScaleMode} Active
-                              </span>
+                              <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase">SELECTED MEZMUR</span>
+                              <h4 className="font-display font-black text-lg text-[#2B2B2B]">
+                                {activeSelamtaMezmur?.title || ''}
+                              </h4>
+                              <p className="text-xs text-gray-500">{activeSelamtaMezmur?.artist || ''}</p>
                             </div>
 
-                            <div className="flex items-center gap-3">
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  if (isPlayingSequence) {
-                                    setIsPlayingSequence(false);
-                                  } else {
-                                    playNotationSequence(currentMezmur.notation, false, undefined, currentScaleMode);
-                                  }
-                                }}
-                                className="w-9 h-9 rounded-full bg-[#6F4E37] text-white flex items-center justify-center cursor-pointer shadow-xs hover:bg-[#5a3f2c]"
+                            {activeSelamtaMezmur?.notation && activeSelamtaMezmur.notation.length > 0 && activeSelamtaMezmur.notation[0] !== '22…' && (
+                              <Button
+                                size="sm"
+                                variant="primary"
+                                onClick={() => playNotationSequence(activeSelamtaMezmur.notation.join(' '), false, undefined, 'selamta')}
+                                disabled={isPlayingSequence}
+                                className="gap-1.5 text-xs bg-[#6F4E37]"
                               >
-                                {isPlayingSequence ? <Pause size={16} /> : <Play size={16} className="ml-0.5" />}
-                              </button>
-                              <div>
-                                <span className="block font-bold text-gray-800">{currentMezmur.title} Begena String Pluck Demo</span>
-                                <span className="text-[10px] text-gray-400">Authentic Ethiopian Begena tone ({currentScaleMode.toUpperCase()} scale)</span>
-                              </div>
-                            </div>
+                                <Play size={14} /> Play Plucking Sound
+                              </Button>
+                            )}
                           </div>
 
-                          {/* NOTATION AND LYRICS */}
-                          <div className="space-y-4">
-                            {/* NOTATION SEQUENCE */}
-                            <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-3">
-                              <div className="flex justify-between items-center border-b pb-2">
-                                <span className="text-[10px] font-bold text-gray-500 uppercase font-mono">
-                                  የበገና ድርደራ ቁጥር (Begena Playing Number Notation)
-                                </span>
-                                <Button
-                                  variant="secondary"
-                                  size="sm"
-                                  onClick={() => playNotationSequence(currentMezmur.notation, false, undefined, currentScaleMode)}
-                                  disabled={isPlayingSequence}
-                                  className="text-[10px] uppercase font-bold py-1 h-7 text-[#6F4E37] gap-1 cursor-pointer"
-                                >
-                                  <Play size={12} /> Pluck Sequence
-                                </Button>
-                              </div>
-                              
-                              <div className="p-3 bg-[#FAF6EF] rounded-lg border border-[#E7DED1] font-mono text-xs leading-relaxed text-[#2B2B2B] font-bold tracking-wide flex flex-wrap gap-1.5">
-                                {parseNotationToNotes(currentMezmur.notation).map((item, idx) => (
-                                  item === '-' ? (
-                                    <span
-                                      key={idx}
-                                      className={`px-2 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[1.8rem] transition-all ${
-                                        activeSequenceIndex === idx
-                                          ? 'bg-amber-500 text-white border-amber-600 scale-110 shadow-sm'
-                                          : 'bg-amber-50/80 text-amber-800 border-amber-200/80'
-                                      }`}
-                                      title="Rest / Pause"
-                                    >
-                                      <span className="block font-black text-xs font-mono">-</span>
-                                      <span className="block text-[9px] font-bold uppercase text-amber-700">Rest</span>
-                                    </span>
-                                  ) : (
-                                    <button
-                                      key={idx}
-                                      type="button"
-                                      onClick={() => playBegenaNote(item, undefined, currentScaleMode)}
-                                      className={`px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[2.2rem] transition-all cursor-pointer ${
-                                        activeSequenceIndex === idx
-                                          ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-110 shadow-sm'
-                                          : 'bg-white text-[#2B2B2B] border-[#E7DED1] hover:bg-amber-50 hover:border-[#6F4E37] hover:scale-105 shadow-2xs'
-                                      }`}
-                                      title={`Click to pluck Begena string ${item} (${getNoteTone(item, currentScaleMode)})`}
-                                    >
-                                      <span className="block font-black text-xs font-mono">{item}</span>
-                                      <span className={`block text-[10px] font-bold uppercase ${
-                                        activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#E89B52]'
-                                      }`}>
-                                        {getNoteTone(item, currentScaleMode)}
-                                      </span>
-                                    </button>
-                                  )
+                          {/* NOTATION CHORDS BOX */}
+                          {activeSelamtaMezmur?.notation && activeSelamtaMezmur.notation.length > 0 && (
+                            <div className="p-4 bg-[#FAF6EF] border border-[#E7DED1] rounded-xl space-y-2">
+                              <span className="text-[10px] font-mono font-bold text-[#6F4E37] uppercase block">
+                                🎵 PLUCKING NOTATION CHORDS (በቦርድ ቁጥሮች)
+                              </span>
+                              <div className="space-y-1.5 font-mono font-bold text-xs text-[#2B2B2B] leading-relaxed">
+                                {activeSelamtaMezmur.notation.map((line, idx) => (
+                                  <div key={idx} className="p-2 bg-white rounded border border-[#E7DED1]/60 tracking-wider">
+                                    {line}
+                                  </div>
                                 ))}
                               </div>
                             </div>
+                          )}
 
-                            {/* AUTHORIZED HYMN LYRICS */}
-                            <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-2">
-                              <span className="text-[10px] font-bold text-gray-500 block uppercase border-b pb-2 font-mono">
-                                የመዝሙሩ ግጥም (Authorized Hymn Lyrics)
-                              </span>
-                              <p className="text-xs font-serif leading-loose whitespace-pre-line text-gray-800 pt-2">
-                                {currentMezmur.lyrics}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })()}
-
-                {/* Chapter 4 Navigation Footer */}
-                {renderChapterNavFooter('mezmur-library')}
-              </div>
-            )}
-
-            {/* ---------------- SUBTAB 5: CHAPTER 5 CHERENET / ANCHI HOYE SCALE ---------------- */}
-            {activeSubTab === 'cherenet-scale' && (
-              <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
-                {/* Header Banner */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#FAF6EF] p-5 rounded-xl border border-[#E7DED1]">
-                  <div>
-                    <span className="text-[10px] font-bold text-[#E89B52] uppercase tracking-wider block mb-1 font-mono">
-                      CHAPTER 5 ፡ ምዕራፍ አምስት
-                    </span>
-                    <h3 className="font-display font-black text-xl text-[#2B2B2B]">
-                      ቸርነት/አንቺ ሆዬ ቅኝት (Cherenet / Anchi Hoye Scale)
-                    </h3>
-                    <p className="text-xs text-gray-600 mt-1">
-                      የ ቸርነት ቅኝት አመሰራረት፣ የጣቶች ልምምድ ቾርድ እና በዚሁ ቅኝት ላይ ያሉ የተቀደሱ መዝሙሮች::
-                    </p>
-                  </div>
-
-                  {/* Module switcher tabs inside Chapter 5 */}
-                  <div className="flex bg-white p-1 rounded-xl border border-[#E7DED1] gap-1 shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => setActiveCh5Module('formation')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                        activeCh5Module === 'formation'
-                          ? 'bg-[#6F4E37] text-white shadow-xs'
-                          : 'text-gray-600 hover:text-[#6F4E37]'
-                      }`}
-                    >
-                      📌 የ ቅኝት አመሰራረት
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveCh5Module('mezmurs')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                        activeCh5Module === 'mezmurs'
-                          ? 'bg-[#6F4E37] text-white shadow-xs'
-                          : 'text-gray-600 hover:text-[#6F4E37]'
-                      }`}
-                    >
-                      📌 ቸርነት ቅኝት ላይ ያሉ መዝሙሮች ({CHERENET_MEZMURS.length})
-                    </button>
-                  </div>
-                </div>
-
-                {/* MODULE 1: የ ቅኝት አመሰራረት */}
-                {activeCh5Module === 'formation' && (
-                  <div className="space-y-6">
-                    {/* Tuner Symbol & Frequency Value Mapping Card */}
-                    <div className="bg-[#FAF6EF] border border-[#E7DED1] p-5 rounded-xl space-y-4">
-                      <div className="flex justify-between items-center border-b border-[#E7DED1] pb-3">
-                        <div>
-                          <h4 className="font-bold text-sm text-[#2B2B2B]">የ ቅኝት አመሰራረት እና የቱነር እሴቶች</h4>
-                          <p className="text-xs text-gray-600">
-                            በ ቸርነት/አንቺ ሆዬ ቅኝት የቱነር ምልክቶችና የእያንዳንዱ አውታር የኖታ እሴት እንደሚከተለው ይለወጣል::
-                          </p>
-                        </div>
-                        <span className="text-xs font-mono font-bold bg-[#6F4E37] text-white px-2.5 py-1 rounded-md">
-                          CHERENET TUNING
-                        </span>
-                      </div>
-
-                      {/* Tuner Values Mapping Grid */}
-                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                        {[
-                          { num: '2', tone: 'C', noteName: 'C3 (2nd String)', desc: '2 ➔ C' },
-                          { num: '3', tone: 'C#', noteName: 'C#3 (3rd String)', desc: '3 ➔ C#' },
-                          { num: '1', tone: 'F', noteName: 'F3 (1st String)', desc: '1 ➔ F' },
-                          { num: '5', tone: 'F#', noteName: 'F#3 (5th String)', desc: '5 ➔ F#' },
-                          { num: '4', tone: 'A', noteName: 'A3 (4th String)', desc: '4 ➔ A' },
-                          { num: '2', tone: 'C', noteName: 'C3 (Octave/Root)', desc: '2 ➔ C' }
-                        ].map((item, idx) => (
-                          <button
-                            key={idx}
-                            type="button"
-                            onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
-                            className="bg-white p-3.5 rounded-xl border border-[#E7DED1] hover:border-[#6F4E37] text-center space-y-1 transition-all cursor-pointer hover:scale-105 shadow-2xs"
-                            title={`Click to pluck ${item.desc} in Cherenet scale`}
-                          >
-                            <span className="text-xs font-bold text-[#E89B52] block font-mono">{item.desc}</span>
-                            <span className="block text-xl font-black text-[#6F4E37] font-mono">{item.num}</span>
-                            <span className="block text-xs font-bold text-gray-800 font-mono">{item.tone}</span>
-                            <span className="text-[10px] text-gray-400 block">{item.noteName}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Finger Practice Chords Section (Forward & Reverse Flows) */}
-                    <div className="bg-white border border-[#E7DED1] p-5 rounded-xl space-y-5">
-                      <div>
-                        <h4 className="font-bold text-sm text-[#2B2B2B]">Finger Practice Chords (የጣቶች ልምምድ ቾርድ)</h4>
-                        <p className="text-xs text-gray-600">
-                          በ ቸርነት ቅኝት ላይ የ ጣቶች የቾርድ ድርደራ በሁለት ፍሰቶች ይከናወናል:: እያንዳንዱን ካርድ በመጫን የአኮስቲክ በገና ድምፅ ያዳምጡ::
-                        </p>
-                      </div>
-
-                      {/* FORWARD FLOW (2 3 1 5 4 2) */}
-                      <div className="p-4 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-3">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="font-bold text-[#6F4E37]">FORWARD FLOW (2 3 1 5 4 2)</span>
-                          <span className="text-[10px] text-gray-500 font-mono">Top Row: 2, 3, 1, 5 | Bottom Row: 4, 2</span>
-                        </div>
-
-                        {/* Top Row: 2 (C), 3 (C#), 1 (F), 5 (F#) */}
-                        <div className="grid grid-cols-4 gap-2">
-                          {[
-                            { num: '2', tone: 'C' },
-                            { num: '3', tone: 'C#' },
-                            { num: '1', tone: 'F' },
-                            { num: '5', tone: 'F#' }
-                          ].map((item, idx) => (
-                            <button
-                              type="button"
-                              key={idx}
-                              onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
-                              className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${
-                                activeSequenceIndex === idx
-                                  ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-md'
-                                  : 'bg-white text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
-                              }`}
-                            >
-                              <span className="block font-black text-base font-mono">{item.num}</span>
-                              <span className="block text-[11px] font-bold text-[#E89B52] uppercase">{item.tone}</span>
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Bottom Row: 4 (A), 2 (C) */}
-                        <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
-                          {[
-                            { num: '4', tone: 'A' },
-                            { num: '2', tone: 'C' }
-                          ].map((item, idx) => (
-                            <button
-                              type="button"
-                              key={idx}
-                              onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
-                              className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${
-                                activeSequenceIndex === idx + 4
-                                  ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-md'
-                                  : 'bg-white text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
-                              }`}
-                            >
-                              <span className="block font-black text-base font-mono">{item.num}</span>
-                              <span className="block text-[11px] font-bold text-[#E89B52] uppercase">{item.tone}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* BACKWARD / REVERSE FLOW (2 4 5 1 3 2) */}
-                      <div className="p-4 bg-amber-50/50 rounded-xl border border-amber-200/60 space-y-3">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="font-bold text-[#C79A2B]">BACKWARD / REVERSE FLOW (2 4 5 1 3 2)</span>
-                          <span className="text-[10px] text-gray-500 font-mono">Top Row: 2, 4, 5, 1 | Bottom Row: 3, 2</span>
-                        </div>
-
-                        {/* Top Row: 2 (C), 4 (A), 5 (F#), 1 (F) */}
-                        <div className="grid grid-cols-4 gap-2">
-                          {[
-                            { num: '2', tone: 'C' },
-                            { num: '4', tone: 'A' },
-                            { num: '5', tone: 'F#' },
-                            { num: '1', tone: 'F' }
-                          ].map((item, idx) => (
-                            <button
-                              type="button"
-                              key={idx}
-                              onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
-                              className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${
-                                activeReverseSequenceIndex === idx
-                                  ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-md'
-                                  : 'bg-white text-[#2B2B2B] border-amber-200 hover:border-[#C79A2B]'
-                              }`}
-                            >
-                              <span className="block font-black text-base font-mono">{item.num}</span>
-                              <span className="block text-[11px] font-bold text-[#C79A2B] uppercase">{item.tone}</span>
-                            </button>
-                          ))}
-                        </div>
-
-                        {/* Bottom Row: 3 (C#), 2 (C) */}
-                        <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
-                          {[
-                            { num: '3', tone: 'C#' },
-                            { num: '2', tone: 'C' }
-                          ].map((item, idx) => (
-                            <button
-                              type="button"
-                              key={idx}
-                              onClick={() => playBegenaNote(item.num, undefined, 'cherenet')}
-                              className={`p-3 rounded-xl border text-center transition-all cursor-pointer hover:scale-105 ${
-                                activeReverseSequenceIndex === idx + 4
-                                  ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-md'
-                                  : 'bg-white text-[#2B2B2B] border-amber-200 hover:border-[#C79A2B]'
-                              }`}
-                            >
-                              <span className="block font-black text-base font-mono">{item.num}</span>
-                              <span className="block text-[11px] font-bold text-[#C79A2B] uppercase">{item.tone}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* TEMPO CONTROL & AUDIO PLAYER CONTROLS */}
-                      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-gray-100">
-                        <div className="flex items-center gap-3 w-full sm:w-auto">
-                          <span className="text-xs font-bold text-gray-600 font-mono">Tempo: {tempo} BPM</span>
-                          <input
-                            type="range"
-                            min="40"
-                            max="120"
-                            value={tempo}
-                            onChange={(e) => setTempo(Number(e.target.value))}
-                            className="w-32 accent-[#6F4E37]"
-                          />
-                        </div>
-
-                        <div className="flex gap-2 w-full sm:w-auto justify-end">
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={() => playNotationSequence('2 3 1 5 4 2', false, undefined, 'cherenet')}
-                            disabled={isPlayingSequence}
-                            className="text-xs font-bold gap-1 text-[#6F4E37]"
-                          >
-                            <Play size={14} /> Play Forward
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={() => playNotationSequence('2 4 5 1 3 2', true, undefined, 'cherenet')}
-                            disabled={isPlayingSequence}
-                            className="text-xs font-bold gap-1 text-[#C79A2B]"
-                          >
-                            <Play size={14} /> Play Reverse
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="primary"
-                            onClick={() => playCombinedSequence('2 3 1 5 4 2', '2 4 5 1 3 2', 'cherenet')}
-                            disabled={isPlayingSequence}
-                            className="text-xs font-bold gap-1 bg-[#6F4E37]"
-                          >
-                            <RotateCw size={14} /> Play Both
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* MODULE 2: ቸርነት ቅኝት ላይ ያሉ መዝሙሮች */}
-                {activeCh5Module === 'mezmurs' && (
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* MEZMURS LIST RAIL */}
-                    <div className="lg:col-span-1 space-y-3">
-                      <div className="flex justify-between items-center text-xs text-gray-500 font-mono px-1">
-                        <span>SELECT MEZMUR</span>
-                        <span>{CHERENET_MEZMURS.length} MEZMURS</span>
-                      </div>
-
-                      {CHERENET_MEZMURS.map((m) => {
-                        const isMastered = completedCherenetMezmurs.includes(m.id);
-                        return (
-                          <button
-                            key={m.id}
-                            type="button"
-                            onClick={() => setSelectedCherenetMezmurId(m.id)}
-                            className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer ${
-                              selectedCherenetMezmurId === m.id
-                                ? 'bg-[#FAF6EF] border-[#6F4E37] shadow-xs'
-                                : 'bg-white border-gray-200 hover:border-gray-300'
-                            }`}
-                          >
-                            <div className="flex justify-between items-start">
-                              <h4 className="font-bold text-sm text-[#2B2B2B]">{m.title}</h4>
-                              {isMastered && (
-                                <CheckCircle2 size={16} className="text-green-600 shrink-0 mt-0.5" />
-                              )}
-                            </div>
-                            <span className="text-xs text-gray-500 block mt-1">{m.artist}</span>
-                            <div className="mt-2 flex items-center gap-1.5">
-                              <span className="text-[10px] font-mono font-bold bg-amber-100 text-amber-900 px-2 py-0.5 rounded">
-                                ቸርነት ቅኝት
-                              </span>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {/* ACTIVE MEZMUR DETAIL DISPLAY */}
-                    <div className="lg:col-span-2 space-y-5 bg-[#FAF6EF]/30 border border-[#E7DED1] p-6 rounded-xl">
-                      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#E7DED1] pb-4">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[10px] font-mono font-bold bg-[#6F4E37] text-white px-2 py-0.5 rounded">
-                              CHERENET SCALE MEZMUR
+                          {/* LYRICS DISPLAY */}
+                          <div className="space-y-3 pt-2">
+                            <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block">
+                              📜 ቃላተ መዝሙር (FULL LYRICS)
                             </span>
-                            {activeCherenetMezmur && completedCherenetMezmurs.includes(activeCherenetMezmur.id) && (
-                              <span className="text-[10px] font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded flex items-center gap-1">
-                                <CheckCircle2 size={10} /> Mastered
-                              </span>
-                            )}
+                            <div className="p-5 bg-[#FAF6EF]/30 border border-[#E7DED1] rounded-xl text-sm leading-relaxed text-[#2B2B2B] whitespace-pre-wrap font-serif">
+                              {activeSelamtaMezmur?.lyrics || ''}
+                            </div>
                           </div>
-                          <h3 className="font-display font-black text-xl text-[#2B2B2B]">
-                            {activeCherenetMezmur?.title || ''}
-                          </h3>
-                          <p className="text-xs text-gray-500">{activeCherenetMezmur?.artist || ''}</p>
+
+                          {/* PREV / NEXT MEZMUR NAV */}
+                          <div className="flex justify-between items-center pt-4 border-t border-gray-100 text-xs">
+                            {(() => {
+                              const curIdx = SELAMTA_MEZMURS.findIndex((m) => m && m.id === activeSelamtaMezmur?.id);
+                              const prevM = curIdx > 0 ? SELAMTA_MEZMURS[curIdx - 1] : null;
+                              const nextM = curIdx < SELAMTA_MEZMURS.length - 1 ? SELAMTA_MEZMURS[curIdx + 1] : null;
+                              return (
+                                <>
+                                  {prevM ? (
+                                    <button
+                                      type="button"
+                                      onClick={() => setSelectedSelamtaMezmurId(prevM.id)}
+                                      className="text-[#6F4E37] font-bold hover:underline cursor-pointer"
+                                    >
+                                      ← {prevM.title}
+                                    </button>
+                                  ) : <div />}
+
+                                  {nextM ? (
+                                    <button
+                                      type="button"
+                                      onClick={() => setSelectedSelamtaMezmurId(nextM.id)}
+                                      className="text-[#6F4E37] font-bold hover:underline cursor-pointer"
+                                    >
+                                      {nextM.title} →
+                                    </button>
+                                  ) : <div />}
+                                </>
+                              );
+                            })()}
+                          </div>
+
                         </div>
 
-                        <Button
-                          variant={activeCherenetMezmur && completedCherenetMezmurs.includes(activeCherenetMezmur.id) ? 'secondary' : 'primary'}
-                          size="sm"
-                          onClick={() => {
-                            if (!activeCherenetMezmur) return;
-                            if (completedCherenetMezmurs.includes(activeCherenetMezmur.id)) {
-                              setCompletedCherenetMezmurs(completedCherenetMezmurs.filter(id => id !== activeCherenetMezmur.id));
-                            } else {
-                              setCompletedCherenetMezmurs([...completedCherenetMezmurs, activeCherenetMezmur.id]);
-                              addNotification('Mezmur Completed', `Marked "${activeCherenetMezmur.title}" as mastered!`, 'achievement');
-                            }
-                          }}
-                          className="text-xs font-bold gap-1 shrink-0"
-                        >
-                          <CheckCircle2 size={14} />
-                          {activeCherenetMezmur && completedCherenetMezmurs.includes(activeCherenetMezmur.id) ? 'Mastered' : 'Mark as Mastered'}
-                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Chapter Navigation Footer */}
+                  {renderChapterNavFooter('assignments')}
+                </div>
+              )}
+
+              {/* ---------------- CHAPTER 7: BEGENA EXAM (FORMERLY CHAPTER 8) ---------------- */}
+              {activeSubTab === 'chapter-8' && (
+                <div className="bg-white border border-[#E7DED1] p-8 md:p-12 rounded-2xl shadow-xs space-y-8 text-center max-w-3xl mx-auto my-4 relative overflow-hidden">
+                  {/* Background decorative ornament */}
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-[#FAF6EF] rounded-full blur-3xl -z-0 pointer-events-none opacity-60" />
+                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#E89B52]/10 rounded-full blur-3xl -z-0 pointer-events-none opacity-60" />
+
+                  {/* HEADER BADGE */}
+                  <div className="relative z-10 space-y-3">
+                    <span className="px-3.5 py-1 bg-[#FAF6EF] border border-[#E7DED1] rounded-full text-xs font-mono font-bold text-[#6F4E37] tracking-wider uppercase inline-flex items-center gap-2">
+                      <Award size={14} className="text-[#C79A2B]" /> CHAPTER 7 • BEGENA FINAL EXAMINATION
+                    </span>
+                    <h3 className="font-display font-black text-2xl md:text-3xl text-[#2B2B2B]">
+                      ምዕራፍ ሰባት ፡ የበገና መጨረሻ ፈተና እና ምዘና
+                    </h3>
+                    <p className="text-xs text-gray-500 font-mono">Official Final Examination Gateway</p>
+                  </div>
+
+                  {/* ELEGANT EXAM ANNOUNCEMENT CARD */}
+                  <div className="relative z-10 bg-radial from-[#FAF6EF] to-[#F5EFE6] border-2 border-[#E7DED1] p-8 md:p-10 rounded-2xl shadow-sm text-left space-y-6">
+                    <div className="w-14 h-14 bg-[#6F4E37] text-[#C79A2B] rounded-2xl flex items-center justify-center mx-auto shadow-md border border-[#C79A2B]/40">
+                      <FileText size={28} />
+                    </div>
+
+                    <div className="text-center space-y-4">
+                      <p className="text-base md:text-lg text-[#2B2B2B] leading-relaxed font-serif font-medium italic">
+                        "እንኳን ደስ አለዎ! መሰረታዊ የበገና ትምህርቶትን በሚገባ ስላጠናቀቁ የሚቀርዎት ፈተና መውሰድ ነው። የተማሩትን ቅኝቶች መሰረታዊ ልዩነት እንዲሁም የተማሯቸውን መዝሙሮች በማስታወስ እና ልምምድ በማድረግ ለፈተናው ይዘጋጁ። ፈተናው በመማሪያ ክፍሎት ውስጥ የሚሰጥ ይሆናል።  ሊዮራ በገና"
+                      </p>
+                    </div>
+
+                    {/* SIGNATURE & INSTRUCTOR CREDIT */}
+                    <div className="pt-6 border-t border-[#E7DED1] flex flex-col sm:flex-row items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-[#6F4E37] text-white flex items-center justify-center font-bold text-sm font-display">
+                          AB
+                        </div>
+                        <div className="text-left">
+                          <span className="block font-bold text-sm text-[#2B2B2B]">Liora Begena</span>
+                          <span className="block text-[11px] text-[#C79A2B] font-mono font-bold">Master Instructor & Guide</span>
+                        </div>
                       </div>
 
-                      {/* AUDIO PLUCK DEMONSTRATION */}
-                      <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-3">
-                        <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                          <span className="text-[10px] font-bold text-gray-500 uppercase font-mono">
-                            የበገና ድርደራ ቁጥር (Cherenet Sound Audio Pluck)
-                          </span>
-                          <Button
-                            variant="secondary"
-                            size="sm"
-                            onClick={() => playNotationSequence(activeCherenetMezmur.notation, false, undefined, 'cherenet')}
-                            disabled={isPlayingSequence}
-                            className="text-[10px] uppercase font-bold py-1 h-7 text-[#6F4E37] gap-1 cursor-pointer"
-                          >
-                            <Play size={12} /> Pluck Sequence
-                          </Button>
-                        </div>
+                      <Button
+                        size="sm"
+                        variant="primary"
+                        onClick={() => markChapterCompletedAndAdvance('chapter-8')}
+                        className="bg-[#6F4E37] text-white px-5 py-2.5 rounded-xl font-bold text-xs gap-2 shadow-sm hover:bg-[#5a3e2b]"
+                      >
+                        <Award size={16} /> Complete Chapter 7 & Proceed →
+                      </Button>
+                    </div>
+                  </div>
 
-                        {/* Interactive Number Notation Buttons */}
-                        <div className="p-3 bg-[#FAF6EF] rounded-lg border border-[#E7DED1] font-mono text-xs leading-relaxed text-[#2B2B2B] font-bold tracking-wide flex flex-wrap gap-1.5">
-                          {parseNotationToNotes(activeCherenetMezmur.notation).map((item, idx) => (
-                            item === '-' ? (
-                              <span
-                                key={idx}
-                                className={`px-2 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[1.8rem] transition-all ${
-                                  activeSequenceIndex === idx
-                                    ? 'bg-amber-500 text-white border-amber-600 scale-110 shadow-sm'
-                                    : 'bg-amber-50/80 text-amber-800 border-amber-200/80'
-                                }`}
-                                title="Rest / Pause"
-                              >
-                                <span className="block font-black text-xs font-mono">-</span>
-                                <span className="block text-[9px] font-bold uppercase text-amber-700">Rest</span>
-                              </span>
-                            ) : (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => playBegenaNote(item, undefined, 'cherenet')}
-                                className={`px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[2.2rem] transition-all cursor-pointer ${
-                                  activeSequenceIndex === idx
-                                    ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-110 shadow-sm'
-                                    : 'bg-white text-[#2B2B2B] border-[#E7DED1] hover:bg-amber-50 hover:border-[#6F4E37] hover:scale-105 shadow-2xs'
-                                }`}
-                                title={`Click to pluck Cherenet string ${item} (${getNoteTone(item, 'cherenet')})`}
-                              >
-                                <span className="block font-black text-xs font-mono">{item}</span>
-                                <span className={`block text-[10px] font-bold uppercase ${
-                                  activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#E89B52]'
-                                }`}>
-                                  {getNoteTone(item, 'cherenet')}
-                                </span>
-                              </button>
-                            )
-                          ))}
-                        </div>
+                  {/* Chapter Navigation Footer */}
+                  <div className="relative z-10 text-left">
+                    {renderChapterNavFooter('chapter-8')}
+                  </div>
+                </div>
+              )}
+
+              {/* ---------------- PRACTICE TRACKER SECTION -------- */}
+              {activeSubTab === 'practice-tracker' && (
+                <div className="bg-white border border-[#E7DED1] p-6 md:p-10 rounded-2xl shadow-xs space-y-8">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#E7DED1] pb-6">
+                    <div>
+                      <span className="px-3 py-1 bg-[#FAF6EF] border border-[#E7DED1] rounded-full text-xs font-mono font-bold text-[#6F4E37] tracking-wider uppercase inline-flex items-center gap-1.5 mb-2">
+                        <Award size={13} className="text-[#C79A2B]" /> PRACTICE TRACKER
+                      </span>
+                      <h3 className="font-display font-black text-2xl text-[#2B2B2B]">
+                        የበገና ልምምድ ከታወቀ ምዝገብ
+                      </h3>
+                      <p className="text-xs text-gray-500 font-mono mt-1">
+                        Daily practice tracking, performance logs, and masterclass solo renditions
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Practice Tracker Widgets */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="bg-[#FAF6EF] border border-[#E7DED1] p-6 rounded-2xl text-center space-y-2">
+                      <span className="text-3xl font-black text-[#6F4E37] font-display">{totalMinutesThisWeek} mins</span>
+                      <span className="block text-xs font-bold text-gray-500 uppercase">Total Practice This Week</span>
+                    </div>
+                    <div className="bg-[#FAF6EF] border border-[#E7DED1] p-6 rounded-2xl text-center space-y-2">
+                      <span className="text-3xl font-black text-[#C79A2B] font-display">{getPracticeStars(totalMinutesThisWeek)}</span>
+                      <span className="block text-xs font-bold text-gray-500 uppercase">Practice Rating Star</span>
+                    </div>
+                    <div className="bg-[#FAF6EF] border border-[#E7DED1] p-6 rounded-2xl text-center space-y-2">
+                      <span className="text-3xl font-black text-emerald-600 font-display">{practiceLogs.length} Sessions</span>
+                      <span className="block text-xs font-bold text-gray-500 uppercase">Logged Practice Entries</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* -------- CERTIFICATE GATEWAY -------- */}
+              {activeSubTab === 'certificate-progress' && (
+                <div className="bg-white border border-[#E7DED1] p-6 md:p-8 rounded-2xl shadow-xs space-y-6 text-center max-w-2xl mx-auto">
+                  <div className="space-y-2">
+                    <Award size={48} className="mx-auto text-[#C79A2B] animate-bounce" />
+                    <h3 className="font-display font-black text-lg text-[#2B2B2B] uppercase">
+                      Begena Proficiency Certificate Gateway
+                    </h3>
+                    <p className="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
+                      Verify your exam completion & instructor verification code to receive your official certificate.
+                    </p>
+                  </div>
+
+                  {/* MANDATORY NOTICE BANNER AS REQUESTED */}
+                  <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 border-2 border-[#C79A2B] p-5 rounded-2xl text-left shadow-xs space-y-2">
+                    <div className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-full bg-[#6F4E37] text-amber-300 flex items-center justify-center shrink-0 font-bold mt-0.5">
+                        <Award size={20} />
                       </div>
-
-                      {/* DETAILED NOTATION BREAKDOWN IF PRESENT */}
-                      {activeCherenetMezmur.noteBreakdown && activeCherenetMezmur.noteBreakdown.length > 0 && (
-                        <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-3">
-                          <span className="text-[10px] font-bold text-gray-500 uppercase block font-mono border-b border-gray-100 pb-2">
-                            የድርደራ ክፍሎች breakdown (Click any number to play independently)
-                          </span>
-                          <div className="space-y-3">
-                            {activeCherenetMezmur.noteBreakdown.map((sec, sIdx) => (
-                              <div key={sIdx} className="p-3 bg-[#FAF6EF]/70 rounded-xl border border-[#E7DED1] space-y-2">
-                                <div className="flex justify-between items-center">
-                                  <span className="font-bold text-xs text-[#2B2B2B] flex items-center gap-1.5">
-                                    <span className="w-2 h-2 rounded-full bg-[#6F4E37]"></span>
-                                    {sec.section}
-                                  </span>
-                                  <Button
-                                    variant="secondary"
-                                    size="sm"
-                                    onClick={() => playNotationSequence(sec.notation, false, undefined, 'cherenet')}
-                                    disabled={isPlayingSequence}
-                                    className="text-[10px] py-0.5 px-2.5 h-6 text-[#6F4E37] gap-1 cursor-pointer font-bold uppercase"
-                                  >
-                                    <Play size={10} /> Play Section
-                                  </Button>
-                                </div>
-
-                                {/* Interactive Number Buttons for this Verse / Section */}
-                                <div className="flex flex-wrap gap-1.5 font-mono pt-1">
-                                  {parseNotationToNotes(sec.notation).map((num, nIdx) => (
-                                    num === '-' ? (
-                                      <span
-                                        key={nIdx}
-                                        className="px-2 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[1.8rem] bg-amber-50/80 text-amber-800 border-amber-200/80"
-                                        title="Rest / Pause"
-                                      >
-                                        <span className="block font-black text-xs font-mono">-</span>
-                                        <span className="block text-[9px] font-bold uppercase text-amber-700">Rest</span>
-                                      </span>
-                                    ) : (
-                                      <button
-                                        key={nIdx}
-                                        type="button"
-                                        onClick={() => playBegenaNote(num, undefined, 'cherenet')}
-                                        className="px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold flex flex-col items-center justify-center min-w-[2.2rem] transition-all cursor-pointer bg-white text-[#2B2B2B] border-[#E7DED1] hover:bg-[#6F4E37] hover:text-white hover:scale-110 shadow-2xs group"
-                                        title={`Click to play Cherenet string ${num} (${getNoteTone(num, 'cherenet')})`}
-                                      >
-                                        <span className="block font-black text-xs font-mono group-hover:text-white">{num}</span>
-                                        <span className="block text-[10px] font-bold text-[#E89B52] group-hover:text-amber-200 uppercase">{getNoteTone(num, 'cherenet')}</span>
-                                      </button>
-                                    )
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* FULL LYRICS */}
-                      <div className="p-4 bg-white border border-[#E7DED1] rounded-xl space-y-2">
-                        <span className="text-[10px] font-bold text-gray-500 block uppercase border-b border-gray-100 pb-2 font-mono">
-                          የመዝሙሩ ግጥም (Full Amharic Lyrics)
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-bold text-[#6F4E37] uppercase tracking-wider block">
+                          Important Certificate Requirement / የምስክር ወረቀት መመሪያ
                         </span>
-                        <p className="text-xs font-serif leading-loose whitespace-pre-line text-gray-800 pt-2">
-                          {activeCherenetMezmur.lyrics}
+                        <p className="text-xs font-bold text-gray-800 leading-relaxed">
+                          To take you certificate, Please make sure you passed the exam you take by the teacher, Make sure to finish your all payments.
                         </p>
                       </div>
                     </div>
                   </div>
-                )}
 
-                {/* Chapter 5 Navigation Footer */}
-                {renderChapterNavFooter('cherenet-scale')}
-              </div>
-            )}
-
-            {/* ---------------- SUBTAB 6: CHAPTER 6 (ቅኝቶች እና ተግባራዊ ልምምዳቸው) ---------------- */}
-            {activeSubTab === 'assignments' && (
-              <div className="bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs space-y-6 text-left">
-                {/* CHAPTER HEADER */}
-                <div className="border-b border-[#FAF6EF] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <div>
-                    <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase tracking-wider block">CHAPTER 6</span>
-                    <h3 className="font-display font-black text-lg text-[#2B2B2B]">
-                      ምዕራፍ አራት፡ ቅኝቶች እና ተግባራዊ ልምምዳቸው
-                    </h3>
-                    <p className="text-xs text-gray-500 mt-1">
-                      የ ቅኝት አመሰራረት፣ የጣቶች ልምምድ ድርደራ እና በሰላምታ ቅኝት የተዘጋጁ 8 የተቀደሱ መዝሙራት።
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 bg-[#FAF6EF] border border-[#E7DED1] rounded-full text-xs font-bold text-[#6F4E37] flex items-center gap-1.5">
-                      <Music size={14} /> ሰላምታ ቅኝት
-                    </span>
-                  </div>
-                </div>
-
-                {/* MODULE SELECTOR GRID */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {CHAPTER_6_MODULES.map((mod) => {
-                    const isActive = activeCh6Module === mod.id;
-                    return (
-                      <button
-                        key={mod.id}
-                        type="button"
-                        onClick={() => setActiveCh6Module(mod.id as any)}
-                        className={`p-4 rounded-xl border text-left transition-all flex items-start gap-3 cursor-pointer ${
-                          isActive
-                            ? 'bg-[#6F4E37] text-white border-[#6F4E37] shadow-sm'
-                            : 'bg-[#FAF6EF]/50 text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]/50 hover:bg-[#FAF6EF]'
-                        }`}
-                      >
-                        <span className="text-2xl mt-0.5">{mod.icon}</span>
-                        <div>
-                          <h4 className={`font-bold text-sm ${isActive ? 'text-white' : 'text-[#2B2B2B]'}`}>
-                            {mod.title}
-                          </h4>
-                          <p className={`text-xs mt-1 leading-relaxed ${isActive ? 'text-amber-100/90' : 'text-gray-500'}`}>
-                            {mod.shortDesc}
-                          </p>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* MODULE 1: የ ቅኝት አመሰራረት */}
-                {activeCh6Module === 'formation' && (
-                  <div className="space-y-6 bg-[#FAF6EF]/30 border border-[#E7DED1] p-5 rounded-xl">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#E7DED1] pb-3">
-                      <div>
-                        <h4 className="font-bold text-sm text-[#2B2B2B]">📌 የ ቅኝት አመሰራረት (Finger Practice Chords)</h4>
-                        <p className="text-xs text-gray-500">የጣቶች ድርደራ በሰላምታ ቅኝት፦ 2 (C) ➔ 3 (D) ➔ 1 (F) ➔ 5 (G) ➔ 4 (A) ➔ 2 (C)</p>
-                      </div>
-
-                      {/* Display Mode Selector */}
-                      <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-[#E7DED1] text-xs font-bold">
-                        <span className="text-[10px] text-gray-400 px-2 font-mono uppercase">Display:</span>
-                        <button
-                          type="button"
-                          onClick={() => setTunerDisplayMode('both')}
-                          className={`px-2 py-1 rounded text-xs transition-colors ${
-                            tunerDisplayMode === 'both' ? 'bg-[#6F4E37] text-white' : 'text-gray-600 hover:text-black'
-                          }`}
-                        >
-                          Both
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setTunerDisplayMode('tuner')}
-                          className={`px-2 py-1 rounded text-xs transition-colors ${
-                            tunerDisplayMode === 'tuner' ? 'bg-[#6F4E37] text-white' : 'text-gray-600 hover:text-black'
-                          }`}
-                        >
-                          Tuner
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setTunerDisplayMode('no')}
-                          className={`px-2 py-1 rounded text-xs transition-colors ${
-                            tunerDisplayMode === 'no' ? 'bg-[#6F4E37] text-white' : 'text-gray-600 hover:text-black'
-                          }`}
-                        >
-                          No.
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* TUNER VALUES MAPPING SUMMARY CARD */}
-                    <div className="bg-white p-4 rounded-xl border border-[#E7DED1] space-y-2">
-                      <div className="text-xs font-bold text-[#6F4E37] uppercase tracking-wider font-mono">
-                        SELAMTA TUNER SYMBOLS & VALUES
-                      </div>
-                      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 pt-1 text-center font-mono">
-                        <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
-                          <span className="block text-xs font-bold text-gray-400">STRING 2</span>
-                          <span className="block text-sm font-black text-[#2B2B2B]">2 ➔ C</span>
-                        </div>
-                        <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
-                          <span className="block text-xs font-bold text-gray-400">STRING 3</span>
-                          <span className="block text-sm font-black text-[#2B2B2B]">3 ➔ D</span>
-                        </div>
-                        <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
-                          <span className="block text-xs font-bold text-gray-400">STRING 1</span>
-                          <span className="block text-sm font-black text-[#2B2B2B]">1 ➔ F</span>
-                        </div>
-                        <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
-                          <span className="block text-xs font-bold text-gray-400">STRING 5</span>
-                          <span className="block text-sm font-black text-[#2B2B2B]">5 ➔ G</span>
-                        </div>
-                        <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
-                          <span className="block text-xs font-bold text-gray-400">STRING 4</span>
-                          <span className="block text-sm font-black text-[#2B2B2B]">4 ➔ A</span>
-                        </div>
-                        <div className="p-2 bg-[#FAF6EF] rounded-lg border border-[#E7DED1]">
-                          <span className="block text-xs font-bold text-gray-400">STRING 2</span>
-                          <span className="block text-sm font-black text-[#2B2B2B]">2 ➔ C</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* FORWARD FLOW & REVERSE FLOW CARDS */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      
-                      {/* FORWARD FLOW */}
-                      <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-4 shadow-xs">
-                        <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                          <h5 className="font-bold text-sm text-[#2B2B2B] flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-green-500" /> Forward Flow (2 3 1 5 4 2)
-                          </h5>
-                          <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">To Strum</span>
-                        </div>
-
-                        {/* TOP ROW */}
-                        <div>
-                          <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">
-                            TOP ROW (2, 3, 1, 5)
-                          </span>
-                          <div className="grid grid-cols-4 gap-2">
-                            {[
-                              { num: '2', tuner: 'C' },
-                              { num: '3', tuner: 'D' },
-                              { num: '1', tuner: 'F' },
-                              { num: '5', tuner: 'G' }
-                            ].map((item, idx) => (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => playBegenaNote(item.num, undefined, 'selamta')}
-                                className={`p-3 rounded-lg border flex flex-col items-center justify-center font-mono cursor-pointer transition-all ${
-                                  activeSequenceIndex === idx
-                                    ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-sm'
-                                    : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
-                                }`}
-                              >
-                                {tunerDisplayMode !== 'tuner' && (
-                                  <span className="font-black text-base">{item.num}</span>
-                                )}
-                                {tunerDisplayMode !== 'no' && (
-                                  <span className={`text-xs font-bold ${activeSequenceIndex === idx ? 'text-amber-200' : 'text-[#C79A2B]'}`}>
-                                    ({item.tuner})
-                                  </span>
-                                )}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* BOTTOM ROW */}
-                        <div>
-                          <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">
-                            BOTTOM ROW (4, 2)
-                          </span>
-                          <div className="grid grid-cols-2 gap-2">
-                            {[
-                              { num: '4', tuner: 'A' },
-                              { num: '2', tuner: 'C' }
-                            ].map((item, idx) => (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => playBegenaNote(item.num, undefined, 'selamta')}
-                                className={`p-3 rounded-lg border flex flex-col items-center justify-center font-mono cursor-pointer transition-all ${
-                                  activeSequenceIndex === idx + 4
-                                    ? 'bg-[#6F4E37] text-white border-[#6F4E37] scale-105 shadow-sm'
-                                    : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#6F4E37]'
-                                }`}
-                              >
-                                {tunerDisplayMode !== 'tuner' && (
-                                  <span className="font-black text-base">{item.num}</span>
-                                )}
-                                {tunerDisplayMode !== 'no' && (
-                                  <span className={`text-xs font-bold ${activeSequenceIndex === idx + 4 ? 'text-amber-200' : 'text-[#C79A2B]'}`}>
-                                    ({item.tuner})
-                                  </span>
-                                )}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* BACKWARD / REVERSE FLOW */}
-                      <div className="bg-white p-5 rounded-xl border border-[#E7DED1] space-y-4 shadow-xs">
-                        <div className="flex justify-between items-center border-b border-gray-100 pb-2">
-                          <h5 className="font-bold text-sm text-[#2B2B2B] flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-amber-500" /> Reverse Flow (2 4 5 1 3 2)
-                          </h5>
-                          <span className="text-[10px] font-mono text-gray-400 font-bold uppercase">To Strum</span>
-                        </div>
-
-                        {/* TOP ROW */}
-                        <div>
-                          <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">
-                            TOP ROW (2, 4, 5, 1)
-                          </span>
-                          <div className="grid grid-cols-4 gap-2">
-                            {[
-                              { num: '2', tuner: 'C' },
-                              { num: '4', tuner: 'A' },
-                              { num: '5', tuner: 'G' },
-                              { num: '1', tuner: 'F' }
-                            ].map((item, idx) => (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => playBegenaNote(item.num, undefined, 'selamta')}
-                                className={`p-3 rounded-lg border flex flex-col items-center justify-center font-mono cursor-pointer transition-all ${
-                                  activeReverseSequenceIndex === idx
-                                    ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-sm'
-                                    : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#C79A2B]'
-                                }`}
-                              >
-                                {tunerDisplayMode !== 'tuner' && (
-                                  <span className="font-black text-base">{item.num}</span>
-                                )}
-                                {tunerDisplayMode !== 'no' && (
-                                  <span className={`text-xs font-bold ${activeReverseSequenceIndex === idx ? 'text-amber-100' : 'text-[#6F4E37]'}`}>
-                                    ({item.tuner})
-                                  </span>
-                                )}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* BOTTOM ROW */}
-                        <div>
-                          <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block mb-1.5">
-                            BOTTOM ROW (3, 2)
-                          </span>
-                          <div className="grid grid-cols-2 gap-2">
-                            {[
-                              { num: '3', tuner: 'D' },
-                              { num: '2', tuner: 'C' }
-                            ].map((item, idx) => (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => playBegenaNote(item.num, undefined, 'selamta')}
-                                className={`p-3 rounded-lg border flex flex-col items-center justify-center font-mono cursor-pointer transition-all ${
-                                  activeReverseSequenceIndex === idx + 4
-                                    ? 'bg-[#C79A2B] text-white border-[#C79A2B] scale-105 shadow-sm'
-                                    : 'bg-[#FAF6EF] text-[#2B2B2B] border-[#E7DED1] hover:border-[#C79A2B]'
-                                }`}
-                              >
-                                {tunerDisplayMode !== 'tuner' && (
-                                  <span className="font-black text-base">{item.num}</span>
-                                )}
-                                {tunerDisplayMode !== 'no' && (
-                                  <span className={`text-xs font-bold ${activeReverseSequenceIndex === idx + 4 ? 'text-amber-100' : 'text-[#6F4E37]'}`}>
-                                    ({item.tuner})
-                                  </span>
-                                )}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    {/* TEMPO CONTROL & PLAY BUTTONS */}
-                    <div className="bg-white p-4 rounded-xl border border-[#E7DED1] flex flex-col sm:flex-row items-center justify-between gap-4">
-                      <div className="flex items-center gap-3 w-full sm:w-auto">
-                        <span className="text-xs font-bold text-gray-600 font-mono">Tempo: {tempo} BPM</span>
-                        <input
-                          type="range"
-                          min="40"
-                          max="120"
-                          value={tempo}
-                          onChange={(e) => setTempo(Number(e.target.value))}
-                          className="w-32 accent-[#6F4E37]"
-                        />
-                      </div>
-
-                      <div className="flex gap-2 w-full sm:w-auto justify-end">
-                        <Button
-                          size="sm"
-                          variant="secondary"
-                          onClick={() => playNotationSequence('2 3 1 5 4 2', false, undefined, 'selamta')}
-                          disabled={isPlayingSequence}
-                          className="text-xs font-bold gap-1 text-[#6F4E37]"
-                        >
-                          <Play size={14} /> Forward
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="secondary"
-                          onClick={() => playNotationSequence('2 4 5 1 3 2', true, undefined, 'selamta')}
-                          disabled={isPlayingSequence}
-                          className="text-xs font-bold gap-1 text-[#C79A2B]"
-                        >
-                          <Play size={14} /> Reverse
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="primary"
-                          onClick={() => playCombinedSequence('2 3 1 5 4 2', '2 4 5 1 3 2', 'selamta')}
-                          disabled={isPlayingSequence}
-                          className="text-xs font-bold gap-1 bg-[#6F4E37]"
-                        >
-                          <RotateCw size={14} /> Both
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* MODULE 2: ሰላምታ ቅኝት ላይ ያሉ መዝሙሮች */}
-                {activeCh6Module === 'mezmurs' && (
-                  <div className="space-y-6">
-                    {/* SEARCH & TITLE BAR */}
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#FAF6EF]/50 p-4 rounded-xl border border-[#E7DED1]">
-                      <div>
-                        <h4 className="font-bold text-sm text-[#2B2B2B]">
-                          📌 ሰላምታ ቅኝት ላይ ያሉ መዝሙሮች ({SELAMTA_MEZMURS.length})
+                  {/* 10-DIGIT TEACHER CODE INPUT OR UNLOCKED CERTIFICATE */}
+                  {!isCertificateUnlocked ? (
+                    <div className="bg-[#FAF6EF]/70 border-2 border-[#E7DED1] p-6 rounded-2xl text-left space-y-4 max-w-md mx-auto">
+                      <div className="space-y-1">
+                        <h4 className="font-display font-black text-sm text-[#2B2B2B] uppercase flex items-center gap-2">
+                          <Lock size={16} className="text-[#C79A2B]" /> Enter 10-Digit Teacher Verification Code
                         </h4>
                         <p className="text-xs text-gray-500">
-                          በሰላምታ ቅኝት የተቀናበሩ የተቀደሱ የበገና መዝሙራት ሙሉ ጽሑፍና የድርደራ ቁጥሮች።
+                          Please enter the 10-digit code you received from your teacher after passing the exam and completing payments:
                         </p>
                       </div>
 
-                      <div className="relative w-full sm:w-64">
-                        <Search size={14} className="absolute left-3 top-3 text-gray-400" />
-                        <input
-                          type="text"
-                          placeholder="መዝሙር ፈልግ..."
-                          value={searchSelamtaQuery}
-                          onChange={(e) => setSearchSelamtaQuery(e.target.value)}
-                          className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-[#E7DED1] rounded-lg focus:outline-none focus:border-[#6F4E37]"
-                        />
-                      </div>
-                    </div>
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          const codeToTest = teacherCodeInput.trim();
+                          if (!codeToTest) {
+                            setTeacherCodeError('Please enter your verification code.');
+                            return;
+                          }
 
-                    {/* TWO-COLUMN MEZMUR VIEW */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                      
-                      {/* MEZMUR LIST RAIL */}
-                      <div className="lg:col-span-1 space-y-2 max-h-[600px] overflow-y-auto pr-1">
-                        {SELAMTA_MEZMURS.filter((m) =>
-                          m && ((m.title && m.title.includes(searchSelamtaQuery)) || (m.artist && m.artist.includes(searchSelamtaQuery)))
-                        ).map((m, idx) => {
-                          const isSelected = activeSelamtaMezmur?.id === m.id;
-                          return (
-                            <button
-                              key={m.id}
-                              type="button"
-                              onClick={() => setSelectedSelamtaMezmurId(m.id)}
-                              className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer ${
-                                isSelected
-                                  ? 'bg-[#6F4E37] text-white border-[#6F4E37] shadow-sm'
-                                  : 'bg-white text-[#2B2B2B] border-gray-200 hover:border-[#6F4E37]/50 hover:bg-[#FAF6EF]/50'
-                              }`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <span className={`text-[10px] font-mono font-bold ${isSelected ? 'text-amber-200' : 'text-gray-400'}`}>
-                                  #{idx + 1}
-                                </span>
-                                <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold ${
-                                  isSelected ? 'bg-white/20 text-white' : 'bg-[#FAF6EF] text-[#6F4E37]'
-                                }`}>
-                                  ሰላምታ
-                                </span>
-                              </div>
-                              <h5 className={`font-bold text-sm mt-1 ${isSelected ? 'text-white' : 'text-[#2B2B2B]'}`}>
-                                {m.title}
-                              </h5>
-                              <p className={`text-xs mt-0.5 ${isSelected ? 'text-amber-100/80' : 'text-gray-500'}`}>
-                                {m.artist}
-                              </p>
-                            </button>
-                          );
-                        })}
-                      </div>
+                          const res = verifyCertificateCodeForStudent({
+                            code: codeToTest,
+                            studentId: currentUser?.id || 'STU-2026-001',
+                            studentEmail: currentUser?.email,
+                            studentName: currentUser?.fullName
+                          });
 
-                      {/* ACTIVE MEZMUR DISPLAY PANEL */}
-                      <div className="lg:col-span-2 space-y-5 bg-white border border-[#E7DED1] p-6 rounded-2xl shadow-xs">
-                        
-                        {/* HEADER */}
-                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-4">
-                          <div>
-                            <span className="text-[10px] font-mono font-bold text-[#C79A2B] uppercase">SELECTED MEZMUR</span>
-                            <h4 className="font-display font-black text-lg text-[#2B2B2B]">
-                              {activeSelamtaMezmur?.title || ''}
-                            </h4>
-                            <p className="text-xs text-gray-500">{activeSelamtaMezmur?.artist || ''}</p>
-                          </div>
-
-                          {activeSelamtaMezmur?.notation && activeSelamtaMezmur.notation.length > 0 && activeSelamtaMezmur.notation[0] !== '22…' && (
-                            <Button
-                              size="sm"
-                              variant="primary"
-                              onClick={() => playNotationSequence(activeSelamtaMezmur.notation.join(' '), false, undefined, 'selamta')}
-                              disabled={isPlayingSequence}
-                              className="gap-1.5 text-xs bg-[#6F4E37]"
-                            >
-                              <Play size={14} /> Play Plucking Sound
-                            </Button>
-                          )}
+                          if (res.success && res.certificate) {
+                            setIsCertificateUnlocked(true);
+                            setTeacherCodeError('');
+                            addNotification(
+                              'Certificate Unlocked',
+                              `Verification code ${res.certificate.verificationCode} confirmed. Official certificate unlocked for ${res.certificate.studentName}!`,
+                              'system'
+                            );
+                          } else {
+                            setTeacherCodeError(res.error || 'Invalid verification code.');
+                          }
+                        }}
+                        className="space-y-3"
+                      >
+                        <div>
+                          <Input
+                            type="text"
+                            value={teacherCodeInput}
+                            onChange={(e) => {
+                              setTeacherCodeInput(e.target.value);
+                              if (teacherCodeError) setTeacherCodeError('');
+                            }}
+                            placeholder="e.g. AB-CERT-BEGE-2026-X8K9M2"
+                            className="font-mono text-center tracking-widest text-lg font-bold py-3 bg-white border-2 border-[#E7DED1] focus:border-[#6F4E37] uppercase"
+                          />
+                          <p className="text-[10px] text-gray-400 mt-1 text-center">
+                            Enter the unique code issued by your assigned instructor
+                          </p>
                         </div>
 
-                        {/* NOTATION CHORDS BOX */}
-                        {activeSelamtaMezmur?.notation && activeSelamtaMezmur.notation.length > 0 && (
-                          <div className="p-4 bg-[#FAF6EF] border border-[#E7DED1] rounded-xl space-y-2">
-                            <span className="text-[10px] font-mono font-bold text-[#6F4E37] uppercase block">
-                              🎵 PLUCKING NOTATION CHORDS (በቦርድ ቁጥሮች)
-                            </span>
-                            <div className="space-y-1.5 font-mono font-bold text-xs text-[#2B2B2B] leading-relaxed">
-                              {activeSelamtaMezmur.notation.map((line, idx) => (
-                                <div key={idx} className="p-2 bg-white rounded border border-[#E7DED1]/60 tracking-wider">
-                                  {line}
-                                </div>
-                              ))}
-                            </div>
+                        {teacherCodeError && (
+                          <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 rounded-xl text-xs flex items-center gap-2">
+                            <AlertCircle size={14} className="shrink-0" />
+                            <span>{teacherCodeError}</span>
                           </div>
                         )}
 
-                        {/* LYRICS DISPLAY */}
-                        <div className="space-y-3 pt-2">
-                          <span className="text-[10px] font-mono font-bold text-gray-400 uppercase block">
-                            📜 ቃላተ መዝሙር (FULL LYRICS)
-                          </span>
-                          <div className="p-5 bg-[#FAF6EF]/30 border border-[#E7DED1] rounded-xl text-sm leading-relaxed text-[#2B2B2B] whitespace-pre-wrap font-serif">
-                            {activeSelamtaMezmur?.lyrics || ''}
-                          </div>
-                        </div>
-
-                        {/* PREV / NEXT MEZMUR NAV */}
-                        <div className="flex justify-between items-center pt-4 border-t border-gray-100 text-xs">
-                          {(() => {
-                            const curIdx = SELAMTA_MEZMURS.findIndex((m) => m && m.id === activeSelamtaMezmur?.id);
-                            const prevM = curIdx > 0 ? SELAMTA_MEZMURS[curIdx - 1] : null;
-                            const nextM = curIdx < SELAMTA_MEZMURS.length - 1 ? SELAMTA_MEZMURS[curIdx + 1] : null;
-                            return (
-                              <>
-                                {prevM ? (
-                                  <button
-                                    type="button"
-                                    onClick={() => setSelectedSelamtaMezmurId(prevM.id)}
-                                    className="text-[#6F4E37] font-bold hover:underline cursor-pointer"
-                                  >
-                                    ← {prevM.title}
-                                  </button>
-                                ) : <div />}
-
-                                {nextM ? (
-                                  <button
-                                    type="button"
-                                    onClick={() => setSelectedSelamtaMezmurId(nextM.id)}
-                                    className="text-[#6F4E37] font-bold hover:underline cursor-pointer"
-                                  >
-                                    {nextM.title} →
-                                  </button>
-                                ) : <div />}
-                              </>
-                            );
-                          })()}
-                        </div>
-
-                      </div>
-
+                        <Button
+                          type="submit"
+                          variant="primary"
+                          size="md"
+                          className="w-full bg-[#6F4E37] text-white py-2.5 font-bold text-xs uppercase gap-2 hover:bg-[#5a3e2b] cursor-pointer shadow-sm"
+                        >
+                          <Award size={16} /> Get My Certificate →
+                        </Button>
+                      </form>
                     </div>
-                  </div>
-                )}
-
-                {/* Chapter Navigation Footer */}
-                {renderChapterNavFooter('assignments')}
-              </div>
-            )}
-
-            {/* ---------------- CHAPTER 7: BEGENA EXAM (FORMERLY CHAPTER 8) ---------------- */}
-            {activeSubTab === 'chapter-8' && (
-              <div className="bg-white border border-[#E7DED1] p-8 md:p-12 rounded-2xl shadow-xs space-y-8 text-center max-w-3xl mx-auto my-4 relative overflow-hidden">
-                {/* Background decorative ornament */}
-                <div className="absolute top-0 right-0 w-48 h-48 bg-[#FAF6EF] rounded-full blur-3xl -z-0 pointer-events-none opacity-60" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#E89B52]/10 rounded-full blur-3xl -z-0 pointer-events-none opacity-60" />
-
-                {/* HEADER BADGE */}
-                <div className="relative z-10 space-y-3">
-                  <span className="px-3.5 py-1 bg-[#FAF6EF] border border-[#E7DED1] rounded-full text-xs font-mono font-bold text-[#6F4E37] tracking-wider uppercase inline-flex items-center gap-2">
-                    <Award size={14} className="text-[#C79A2B]" /> CHAPTER 7 • BEGENA FINAL EXAMINATION
-                  </span>
-                  <h3 className="font-display font-black text-2xl md:text-3xl text-[#2B2B2B]">
-                    ምዕራፍ ሰባት ፡ የበገና መጨረሻ ፈተና እና ምዘና
-                  </h3>
-                  <p className="text-xs text-gray-500 font-mono">Official Final Examination Gateway</p>
-                </div>
-
-                {/* ELEGANT EXAM ANNOUNCEMENT CARD */}
-                <div className="relative z-10 bg-radial from-[#FAF6EF] to-[#F5EFE6] border-2 border-[#E7DED1] p-8 md:p-10 rounded-2xl shadow-sm text-left space-y-6">
-                  <div className="w-14 h-14 bg-[#6F4E37] text-[#C79A2B] rounded-2xl flex items-center justify-center mx-auto shadow-md border border-[#C79A2B]/40">
-                    <FileText size={28} />
-                  </div>
-
-                  <div className="text-center space-y-4">
-                    <p className="text-base md:text-lg text-[#2B2B2B] leading-relaxed font-serif font-medium italic">
-                      "እንኳን ደስ አለዎ! መሰረታዊ የበገና ትምህርቶትን በሚገባ ስላጠናቀቁ የሚቀርዎት ፈተና መውሰድ ነው። የተማሩትን ቅኝቶች መሰረታዊ ልዩነት እንዲሁም የተማሯቸውን መዝሙሮች በማስታወስ እና ልምምድ በማድረግ ለፈተናው ይዘጋጁ። ፈተናው በመማሪያ ክፍሎት ውስጥ የሚሰጥ ይሆናል።  አቤል በገና"
-                    </p>
-                  </div>
-
-                  {/* SIGNATURE & INSTRUCTOR CREDIT */}
-                  <div className="pt-6 border-t border-[#E7DED1] flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#6F4E37] text-white flex items-center justify-center font-bold text-sm font-display">
-                        AB
-                      </div>
-                      <div className="text-left">
-                        <span className="block font-bold text-sm text-[#2B2B2B]">Abel Begena</span>
-                        <span className="block text-[11px] text-[#C79A2B] font-mono font-bold">Master Instructor & Guide</span>
-                      </div>
-                    </div>
-
-                    <Button
-                      size="sm"
-                      variant="primary"
-                      onClick={() => markChapterCompletedAndAdvance('chapter-8')}
-                      className="bg-[#6F4E37] text-white px-5 py-2.5 rounded-xl font-bold text-xs gap-2 shadow-sm hover:bg-[#5a3e2b]"
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="p-6 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-[#C79A2B] rounded-2xl text-center space-y-4 shadow-md max-w-md mx-auto relative overflow-hidden"
                     >
-                      <Award size={16} /> Complete Chapter 7 & Proceed →
-                    </Button>
-                  </div>
-                </div>
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-[#C79A2B]/10 rounded-full blur-xl pointer-events-none" />
 
-                {/* Chapter Navigation Footer */}
-                <div className="relative z-10 text-left">
-                  {renderChapterNavFooter('chapter-8')}
-                </div>
-              </div>
-            )}
-
-            {/* ---------------- PRACTICE TRACKER SECTION -------- */}
-            {activeSubTab === 'practice-tracker' && (
-              <div className="bg-white border border-[#E7DED1] p-6 md:p-10 rounded-2xl shadow-xs space-y-8">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#E7DED1] pb-6">
-                  <div>
-                    <span className="px-3 py-1 bg-[#FAF6EF] border border-[#E7DED1] rounded-full text-xs font-mono font-bold text-[#6F4E37] tracking-wider uppercase inline-flex items-center gap-1.5 mb-2">
-                      <Award size={13} className="text-[#C79A2B]" /> PRACTICE TRACKER
-                    </span>
-                    <h3 className="font-display font-black text-2xl text-[#2B2B2B]">
-                      የበገና ልምምድ ከታወቀ ምዝገብ
-                    </h3>
-                    <p className="text-xs text-gray-500 font-mono mt-1">
-                      Daily practice tracking, performance logs, and masterclass solo renditions
-                    </p>
-                  </div>
-                </div>
-
-                {/* Practice Tracker Widgets */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="bg-[#FAF6EF] border border-[#E7DED1] p-6 rounded-2xl text-center space-y-2">
-                    <span className="text-3xl font-black text-[#6F4E37] font-display">{totalMinutesThisWeek} mins</span>
-                    <span className="block text-xs font-bold text-gray-500 uppercase">Total Practice This Week</span>
-                  </div>
-                  <div className="bg-[#FAF6EF] border border-[#E7DED1] p-6 rounded-2xl text-center space-y-2">
-                    <span className="text-3xl font-black text-[#C79A2B] font-display">{getPracticeStars(totalMinutesThisWeek)}</span>
-                    <span className="block text-xs font-bold text-gray-500 uppercase">Practice Rating Star</span>
-                  </div>
-                  <div className="bg-[#FAF6EF] border border-[#E7DED1] p-6 rounded-2xl text-center space-y-2">
-                    <span className="text-3xl font-black text-emerald-600 font-display">{practiceLogs.length} Sessions</span>
-                    <span className="block text-xs font-bold text-gray-500 uppercase">Logged Practice Entries</span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* -------- CERTIFICATE GATEWAY -------- */}
-            {activeSubTab === 'certificate-progress' && (
-              <div className="bg-white border border-[#E7DED1] p-6 md:p-8 rounded-2xl shadow-xs space-y-6 text-center max-w-2xl mx-auto">
-                <div className="space-y-2">
-                  <Award size={48} className="mx-auto text-[#C79A2B] animate-bounce" />
-                  <h3 className="font-display font-black text-lg text-[#2B2B2B] uppercase">
-                    Begena Proficiency Certificate Gateway
-                  </h3>
-                  <p className="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
-                    Verify your exam completion & instructor verification code to receive your official certificate.
-                  </p>
-                </div>
-
-                {/* MANDATORY NOTICE BANNER AS REQUESTED */}
-                <div className="bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 border-2 border-[#C79A2B] p-5 rounded-2xl text-left shadow-xs space-y-2">
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#6F4E37] text-amber-300 flex items-center justify-center shrink-0 font-bold mt-0.5">
-                      <Award size={20} />
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-[11px] font-bold text-[#6F4E37] uppercase tracking-wider block">
-                        Important Certificate Requirement / የምስክር ወረቀት መመሪያ
-                      </span>
-                      <p className="text-xs font-bold text-gray-800 leading-relaxed">
-                        To take you certificate, Please make sure you passed the exam you take by the teacher, Make sure to finish your all payments.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 10-DIGIT TEACHER CODE INPUT OR UNLOCKED CERTIFICATE */}
-                {!isCertificateUnlocked ? (
-                  <div className="bg-[#FAF6EF]/70 border-2 border-[#E7DED1] p-6 rounded-2xl text-left space-y-4 max-w-md mx-auto">
-                    <div className="space-y-1">
-                      <h4 className="font-display font-black text-sm text-[#2B2B2B] uppercase flex items-center gap-2">
-                        <Lock size={16} className="text-[#C79A2B]" /> Enter 10-Digit Teacher Verification Code
-                      </h4>
-                      <p className="text-xs text-gray-500">
-                        Please enter the 10-digit code you received from your teacher after passing the exam and completing payments:
-                      </p>
-                    </div>
-
-                    <form
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        const codeToTest = teacherCodeInput.trim();
-                        if (!codeToTest) {
-                          setTeacherCodeError('Please enter your verification code.');
-                          return;
-                        }
-
-                        const res = verifyCertificateCodeForStudent({
-                          code: codeToTest,
-                          studentId: currentUser?.id || 'STU-2026-001',
-                          studentEmail: currentUser?.email,
-                          studentName: currentUser?.fullName
-                        });
-
-                        if (res.success && res.certificate) {
-                          setIsCertificateUnlocked(true);
-                          setTeacherCodeError('');
-                          addNotification(
-                            'Certificate Unlocked',
-                            `Verification code ${res.certificate.verificationCode} confirmed. Official certificate unlocked for ${res.certificate.studentName}!`,
-                            'system'
-                          );
-                        } else {
-                          setTeacherCodeError(res.error || 'Invalid verification code.');
-                        }
-                      }}
-                      className="space-y-3"
-                    >
+                      <Sparkles className="text-[#C79A2B] mx-auto animate-spin" size={32} />
                       <div>
-                        <Input
-                          type="text"
-                          value={teacherCodeInput}
-                          onChange={(e) => {
-                            setTeacherCodeInput(e.target.value);
-                            if (teacherCodeError) setTeacherCodeError('');
-                          }}
-                          placeholder="e.g. AB-CERT-BEGE-2026-X8K9M2"
-                          className="font-mono text-center tracking-widest text-lg font-bold py-3 bg-white border-2 border-[#E7DED1] focus:border-[#6F4E37] uppercase"
-                        />
-                        <p className="text-[10px] text-gray-400 mt-1 text-center">
-                          Enter the unique code issued by your assigned instructor
+                        <h4 className="font-display font-black text-base uppercase text-[#2B2B2B] tracking-wide">
+                          Congratulations, Graduate!
+                        </h4>
+                        <p className="text-xs text-gray-500 leading-relaxed max-w-xs mx-auto">
+                          Your teacher verification code <span className="font-mono font-bold text-[#6F4E37]">{teacherCodeInput}</span> has been verified!
                         </p>
                       </div>
 
-                      {teacherCodeError && (
-                        <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 rounded-xl text-xs flex items-center gap-2">
-                          <AlertCircle size={14} className="shrink-0" />
-                          <span>{teacherCodeError}</span>
+                      {/* PRINT GRADUATE CERTIFICATE PREVIEW CONTAINER */}
+                      <div id="learning-cert-card" className="border-2 border-[#C79A2B]/40 bg-white p-6 rounded-xl text-left shadow-md relative font-serif text-[#2B2B2B] space-y-4">
+
+                        {/* Traditional Gold Seal */}
+                        <div className="absolute top-4 right-4 w-12 h-12 bg-amber-500/15 border-2 border-[#C79A2B] rounded-full flex items-center justify-center">
+                          <span className="text-[8px] font-mono font-bold text-[#C79A2B]">SEAL</span>
                         </div>
-                      )}
+
+                        <div className="text-center space-y-1">
+                          <h5 className="text-xs uppercase tracking-widest text-[#C79A2B] font-bold font-sans">
+                            Certificate of Traditional Proficiency
+                          </h5>
+                          <p className="text-[10px] text-gray-400">Awarded by Liora Begena Traditional Music School</p>
+                        </div>
+
+                        <div className="space-y-1.5 text-center pt-2">
+                          <span className="text-[10px] text-gray-400 block">This is to certify that</span>
+                          <span className="font-bold text-sm uppercase underline tracking-wider text-[#2B2B2B]">
+                            {currentUser?.fullName || 'ST_SANDBOX'}
+                          </span>
+                          <span className="text-[10px] text-gray-400 block">has successfully completed the complete curriculum for</span>
+                          <span className="font-bold text-xs text-[#6F4E37] block">
+                            BEGENA SACRED HARP - LEVEL 1
+                          </span>
+                        </div>
+
+                        <div className="flex justify-between items-end text-[9px] pt-4 border-t border-gray-100 font-sans uppercase">
+                          <div>
+                            <span className="text-gray-400 block">Teacher Verification Code:</span>
+                            <span className="font-mono font-bold text-gray-800">{teacherCodeInput || '1234567890'}</span>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-gray-400 block">Authorized Signature:</span>
+                            <span className="font-bold font-serif text-[#6F4E37]">Deacon Bruk Tesfaye</span>
+                          </div>
+                        </div>
+                      </div>
 
                       <Button
-                        type="submit"
                         variant="primary"
-                        size="md"
-                        className="w-full bg-[#6F4E37] text-white py-2.5 font-bold text-xs uppercase gap-2 hover:bg-[#5a3e2b] cursor-pointer shadow-sm"
+                        size="sm"
+                        onClick={async () => {
+                          const elem = document.getElementById('learning-cert-card');
+                          if (elem) {
+                            addNotification('Certificate Downloaded', 'Downloading official PDF certificate...', 'system');
+                            const name = currentUser?.fullName ? currentUser.fullName.replace(/\s+/g, '_') : 'Student';
+                            await exportElementToPDF(elem, `Begena_Certificate_${name}.pdf`);
+                          }
+                        }}
+                        className="w-full text-xs font-bold uppercase shadow-sm bg-[#6F4E37] hover:bg-[#5a3e2b]"
                       >
-                        <Award size={16} /> Get My Certificate →
+                        Download Certificate (PDF)
                       </Button>
-                    </form>
+                    </motion.div>
+                  )}
+
+                  {/* Certificate Chapter Navigation Footer */}
+                  {renderChapterNavFooter('certificate-progress')}
+                </div>
+              )}
+
+              {/* ---------------- TEACHER SIMULATOR ACTIONS SIDEBAR (Interactive reviews) ---------------- */}
+              {isSimulatorTeacherMode && (
+                <div className="bg-red-50/40 border border-red-200 p-6 rounded-2xl shadow-xs text-left space-y-4">
+                  <div>
+                    <h4 className="font-display font-black text-sm uppercase text-red-900 flex items-center gap-2">
+                      <UserCheck size={18} /> Instructor Assessment Terminal (Sandbox)
+                    </h4>
+                    <p className="text-xs text-red-800">
+                      Grade students' submitted assignments and pluck Mezmurs instantly.
+                    </p>
                   </div>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="p-6 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-[#C79A2B] rounded-2xl text-center space-y-4 shadow-md max-w-md mx-auto relative overflow-hidden"
-                  >
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-[#C79A2B]/10 rounded-full blur-xl pointer-events-none" />
-                    
-                    <Sparkles className="text-[#C79A2B] mx-auto animate-spin" size={32} />
-                    <div>
-                      <h4 className="font-display font-black text-base uppercase text-[#2B2B2B] tracking-wide">
-                        Congratulations, Graduate!
-                      </h4>
-                      <p className="text-xs text-gray-500 leading-relaxed max-w-xs mx-auto">
-                        Your teacher verification code <span className="font-mono font-bold text-[#6F4E37]">{teacherCodeInput}</span> has been verified!
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    {/* PENDING ASSIGNMENT EVALUATIONS */}
+                    <div className="p-3 bg-white border border-red-100 rounded-xl space-y-3">
+                      <span className="text-[10px] font-bold text-red-800 uppercase block">Pending Recitals</span>
+
+                      <div className="space-y-2">
+                        {assignments.filter((a) => a.status === 'Submitted').length === 0 ? (
+                          <p className="text-gray-400 text-[11px]">No pending assignment videos submitted. Use Student View to submit one.</p>
+                        ) : (
+                          assignments.filter((a) => a.status === 'Submitted').map((asg) => (
+                            <div key={asg.id} className="p-3 bg-red-50/30 rounded-lg space-y-2 text-xs">
+                              <h5 className="font-bold text-red-900">{asg.title}</h5>
+                              <p className="text-[11px] text-gray-500">Student note: "{asg.submissionNotes}"</p>
+
+                              <div className="pt-2 flex gap-1.5">
+                                <Button
+                                  variant="primary"
+                                  size="sm"
+                                  onClick={() => handleTeacherGrade(asg.id, true)}
+                                  className="text-[9px] py-1 h-7 bg-green-600 hover:bg-green-700"
+                                >
+                                  Approve (A)
+                                </Button>
+                                <Button
+                                  variant="destructive"
+                                  size="sm"
+                                  onClick={() => handleTeacherGrade(asg.id, false)}
+                                  className="text-[9px] py-1 h-7 bg-red-600 hover:bg-red-700"
+                                >
+                                  Request revision
+                                </Button>
+                              </div>
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    </div>
+
+                    {/* PENDING MEZMUR PLUCKING CHECKS */}
+                    <div className="p-3 bg-white border border-red-100 rounded-xl space-y-3">
+                      <span className="text-[10px] font-bold text-red-800 uppercase block">Pending Mezmur Chants</span>
+
+                      <div className="space-y-2">
+                        {mezmurs.filter((m) => m.status === 'Submitted for Review').length === 0 ? (
+                          <p className="text-gray-400 text-[11px]">No pending audio uploads in library. Use Student View to submit.</p>
+                        ) : (
+                          mezmurs.filter((m) => m.status === 'Submitted for Review').map((mez) => (
+                            <div key={mez.id} className="p-3 bg-red-50/30 rounded-lg space-y-2 text-xs">
+                              <h5 className="font-bold text-red-900">{mez.title}</h5>
+                              <div className="space-y-1">
+                                <label className="text-[9px] text-gray-400 uppercase">Devotional Score (0-100):</label>
+                                <Input
+                                  type="number"
+                                  value={teacherScoreInput}
+                                  onChange={(e) => setTeacherScoreInput(e.target.value)}
+                                  className="h-8 text-xs"
+                                />
+                              </div>
+
+                              <div className="space-y-1">
+                                <label className="text-[9px] text-gray-400 uppercase">Evaluation notes:</label>
+                                <Input
+                                  placeholder="e.g. Excellent buzzing rhythm"
+                                  value={teacherFeedbackInput}
+                                  onChange={(e) => setTeacherFeedbackInput(e.target.value)}
+                                  className="h-8 text-xs"
+                                />
+                              </div>
+
+                              <div className="pt-2 flex gap-1.5">
+                                <Button
+                                  variant="primary"
+                                  size="sm"
+                                  onClick={() => handleTeacherMezmurGrade(mez.id, true)}
+                                  className="text-[9px] py-1 h-7 bg-green-600 hover:bg-green-700"
+                                >
+                                  Verify & Approve
+                                </Button>
+                                <Button
+                                  variant="destructive"
+                                  size="sm"
+                                  onClick={() => handleTeacherMezmurGrade(mez.id, false)}
+                                  className="text-[9px] py-1 h-7 bg-red-600 hover:bg-red-700"
+                                >
+                                  Needs Work
+                                </Button>
+                              </div>
+                            </div>
+                          ))
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* BEGENA INFORMATION MODAL */}
+          <AnimatePresence>
+            {showBegenaInfo && (
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setShowBegenaInfo(false)}
+                  className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+                />
+
+                {/* Modal */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                  transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+                  className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl max-h-[90vh] bg-white rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col"
+                >
+                  {/* Header */}
+                  <div className="bg-gradient-to-r from-[#8B6F47] to-[#A0826D] text-white px-8 py-6 flex items-center justify-between border-b border-[#E7DED1]">
+                    <div className="flex items-center gap-3">
+                      <BookOpen size={24} className="text-yellow-200" />
+                      <div>
+                        <h2 className="text-2xl font-bold">{BEGENA_AMHARIC_INFO.title}</h2>
+                        <p className="text-xs text-yellow-100 mt-1">The Ancient Ethiopian Harp - Sacred Instrument of Kings</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => setShowBegenaInfo(false)}
+                      className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                      aria-label="Close modal"
+                    >
+                      <X size={24} className="text-white" />
+                    </button>
+                  </div>
+
+                  {/* Content */}
+                  <div className="overflow-y-auto flex-1 px-8 py-6 space-y-6 text-sm text-gray-700">
+                    {/* Definition */}
+                    <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
+                      <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
+                        <span className="text-[#E89B52]">📖</span> Definition
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed" dir="rtl">
+                        {BEGENA_AMHARIC_INFO.definition}
+                      </p>
+                      <p className="text-xs text-gray-500 italic">
+                        The Begena (በገና) is a traditional Ethiopian harp, distinguished from other stringed instruments by its unique trapezium shape and distinctive buzzing sound. Unlike the Krar or Masinko, it is primarily associated with spiritual and meditative music.
                       </p>
                     </div>
 
-                    {/* PRINT GRADUATE CERTIFICATE PREVIEW CONTAINER */}
-                    <div id="learning-cert-card" className="border-2 border-[#C79A2B]/40 bg-white p-6 rounded-xl text-left shadow-md relative font-serif text-[#2B2B2B] space-y-4">
-                      
-                      {/* Traditional Gold Seal */}
-                      <div className="absolute top-4 right-4 w-12 h-12 bg-amber-500/15 border-2 border-[#C79A2B] rounded-full flex items-center justify-center">
-                        <span className="text-[8px] font-mono font-bold text-[#C79A2B]">SEAL</span>
-                      </div>
-
-                      <div className="text-center space-y-1">
-                        <h5 className="text-xs uppercase tracking-widest text-[#C79A2B] font-bold font-sans">
-                          Certificate of Traditional Proficiency
-                        </h5>
-                        <p className="text-[10px] text-gray-400">Awarded by Abel Begena Traditional Music School</p>
-                      </div>
-
-                      <div className="space-y-1.5 text-center pt-2">
-                        <span className="text-[10px] text-gray-400 block">This is to certify that</span>
-                        <span className="font-bold text-sm uppercase underline tracking-wider text-[#2B2B2B]">
-                          {currentUser?.fullName || 'ST_SANDBOX'}
-                        </span>
-                        <span className="text-[10px] text-gray-400 block">has successfully completed the complete curriculum for</span>
-                        <span className="font-bold text-xs text-[#6F4E37] block">
-                          BEGENA SACRED HARP - LEVEL 1
-                        </span>
-                      </div>
-
-                      <div className="flex justify-between items-end text-[9px] pt-4 border-t border-gray-100 font-sans uppercase">
-                        <div>
-                          <span className="text-gray-400 block">Teacher Verification Code:</span>
-                          <span className="font-mono font-bold text-gray-800">{teacherCodeInput || '1234567890'}</span>
-                        </div>
-                        <div className="text-right">
-                          <span className="text-gray-400 block">Authorized Signature:</span>
-                          <span className="font-bold font-serif text-[#6F4E37]">Zemari Deacon Abel Tesfaye</span>
-                        </div>
-                      </div>
+                    {/* History */}
+                    <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
+                      <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
+                        <span className="text-[#E89B52]">🏛️</span> History & Origins
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed" dir="rtl">
+                        {BEGENA_AMHARIC_INFO.history}
+                      </p>
+                      <p className="text-xs text-gray-500 italic">
+                        Historical records suggest the Begena dates back to the 10th century, with connections to King David, King Solomon, and even the Queen of Sheba. It was featured prominently in the courts of ancient Ethiopian emperors and has been associated with spiritual music traditions for over a millennium.
+                      </p>
                     </div>
 
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      onClick={async () => {
-                        const elem = document.getElementById('learning-cert-card');
-                        if (elem) {
-                          addNotification('Certificate Downloaded', 'Downloading official PDF certificate...', 'system');
-                          const name = currentUser?.fullName ? currentUser.fullName.replace(/\s+/g, '_') : 'Student';
-                          await exportElementToPDF(elem, `Begena_Certificate_${name}.pdf`);
-                        }
-                      }}
-                      className="w-full text-xs font-bold uppercase shadow-sm bg-[#6F4E37] hover:bg-[#5a3e2b]"
+                    {/* Physical Structure */}
+                    <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
+                      <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
+                        <span className="text-[#E89B52]">🎵</span> Physical Construction
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed" dir="rtl">
+                        {BEGENA_AMHARIC_INFO.structure}
+                      </p>
+                      <p className="text-xs text-gray-500 italic">
+                        The Begena features a trapezium-shaped wooden frame (typically constructed from acacia or sycamore wood) with animal skin stretched across it. It has 10 nylon strings tuned in a pentatonic scale. The distinctive buzzing sound comes from small metal rings attached to the string tuners, creating the instrument's signature resonant quality.
+                      </p>
+                    </div>
+
+                    {/* Playing Technique */}
+                    <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
+                      <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
+                        <span className="text-[#E89B52]">🎶</span> Playing Technique & Scales
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed" dir="rtl">
+                        {BEGENA_AMHARIC_INFO.playingTechnique}
+                      </p>
+                      <p className="text-xs text-gray-500 italic">
+                        The Begena is played by plucking the strings with both hands in a pattern that creates melodic passages and rhythmic accompaniment. Traditional pentatonic scales form the basis of Begena music, with fingering patterns passed down through generations of master musicians. The technique emphasizes smooth, flowing transitions between notes and careful control of the buzzing effect.
+                      </p>
+                    </div>
+
+                    {/* Cultural Significance */}
+                    <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
+                      <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
+                        <span className="text-[#E89B52]">✨</span> Cultural & Spiritual Significance
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed" dir="rtl">
+                        {BEGENA_AMHARIC_INFO.culturalSignificance}
+                      </p>
+                      <p className="text-xs text-gray-500 italic">
+                        In Ethiopian Orthodox Christian tradition, the Begena holds sacred significance, often played during religious ceremonies and periods of fasting (particularly during Lent). It is considered a meditation instrument, used to enhance spiritual contemplation and prayer. Master Begena musicians (Zemari) are highly respected in Ethiopian society, recognized as keepers of an ancient musical and spiritual tradition that connects modern times with Ethiopia's royal and religious heritage.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="bg-[#FAF6EF]/50 border-t border-[#E7DED1] px-8 py-4 flex justify-end gap-3">
+                    <button
+                      onClick={() => setShowBegenaInfo(false)}
+                      className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-semibold transition-colors"
                     >
-                      Download Certificate (PDF)
-                    </Button>
-                  </motion.div>
-                )}
-
-                {/* Certificate Chapter Navigation Footer */}
-                {renderChapterNavFooter('certificate-progress')}
-              </div>
+                      Close
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowBegenaInfo(false);
+                        addNotification('Begena Knowledge', 'You have learned about the sacred Begena. Continue your practice!', 'lesson');
+                      }}
+                      className="px-4 py-2 bg-[#E89B52] hover:bg-[#d4863e] text-white rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
+                    >
+                      <Check size={16} /> Got It!
+                    </button>
+                  </div>
+                </motion.div>
+              </>
             )}
-
-            {/* ---------------- TEACHER SIMULATOR ACTIONS SIDEBAR (Interactive reviews) ---------------- */}
-            {isSimulatorTeacherMode && (
-              <div className="bg-red-50/40 border border-red-200 p-6 rounded-2xl shadow-xs text-left space-y-4">
-                <div>
-                  <h4 className="font-display font-black text-sm uppercase text-red-900 flex items-center gap-2">
-                    <UserCheck size={18} /> Instructor Assessment Terminal (Sandbox)
-                  </h4>
-                  <p className="text-xs text-red-800">
-                    Grade students' submitted assignments and pluck Mezmurs instantly.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  
-                  {/* PENDING ASSIGNMENT EVALUATIONS */}
-                  <div className="p-3 bg-white border border-red-100 rounded-xl space-y-3">
-                    <span className="text-[10px] font-bold text-red-800 uppercase block">Pending Recitals</span>
-                    
-                    <div className="space-y-2">
-                      {assignments.filter((a) => a.status === 'Submitted').length === 0 ? (
-                        <p className="text-gray-400 text-[11px]">No pending assignment videos submitted. Use Student View to submit one.</p>
-                      ) : (
-                        assignments.filter((a) => a.status === 'Submitted').map((asg) => (
-                          <div key={asg.id} className="p-3 bg-red-50/30 rounded-lg space-y-2 text-xs">
-                            <h5 className="font-bold text-red-900">{asg.title}</h5>
-                            <p className="text-[11px] text-gray-500">Student note: "{asg.submissionNotes}"</p>
-                            
-                            <div className="pt-2 flex gap-1.5">
-                              <Button
-                                variant="primary"
-                                size="sm"
-                                onClick={() => handleTeacherGrade(asg.id, true)}
-                                className="text-[9px] py-1 h-7 bg-green-600 hover:bg-green-700"
-                              >
-                                Approve (A)
-                              </Button>
-                              <Button
-                                variant="destructive"
-                                size="sm"
-                                onClick={() => handleTeacherGrade(asg.id, false)}
-                                className="text-[9px] py-1 h-7 bg-red-600 hover:bg-red-700"
-                              >
-                                Request revision
-                              </Button>
-                            </div>
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  </div>
-
-                  {/* PENDING MEZMUR PLUCKING CHECKS */}
-                  <div className="p-3 bg-white border border-red-100 rounded-xl space-y-3">
-                    <span className="text-[10px] font-bold text-red-800 uppercase block">Pending Mezmur Chants</span>
-
-                    <div className="space-y-2">
-                      {mezmurs.filter((m) => m.status === 'Submitted for Review').length === 0 ? (
-                        <p className="text-gray-400 text-[11px]">No pending audio uploads in library. Use Student View to submit.</p>
-                      ) : (
-                        mezmurs.filter((m) => m.status === 'Submitted for Review').map((mez) => (
-                          <div key={mez.id} className="p-3 bg-red-50/30 rounded-lg space-y-2 text-xs">
-                            <h5 className="font-bold text-red-900">{mez.title}</h5>
-                            <div className="space-y-1">
-                              <label className="text-[9px] text-gray-400 uppercase">Devotional Score (0-100):</label>
-                              <Input
-                                type="number"
-                                value={teacherScoreInput}
-                                onChange={(e) => setTeacherScoreInput(e.target.value)}
-                                className="h-8 text-xs"
-                              />
-                            </div>
-
-                            <div className="space-y-1">
-                              <label className="text-[9px] text-gray-400 uppercase">Evaluation notes:</label>
-                              <Input
-                                placeholder="e.g. Excellent buzzing rhythm"
-                                value={teacherFeedbackInput}
-                                onChange={(e) => setTeacherFeedbackInput(e.target.value)}
-                                className="h-8 text-xs"
-                              />
-                            </div>
-
-                            <div className="pt-2 flex gap-1.5">
-                              <Button
-                                variant="primary"
-                                size="sm"
-                                onClick={() => handleTeacherMezmurGrade(mez.id, true)}
-                                className="text-[9px] py-1 h-7 bg-green-600 hover:bg-green-700"
-                              >
-                                Verify & Approve
-                              </Button>
-                              <Button
-                                variant="destructive"
-                                size="sm"
-                                onClick={() => handleTeacherMezmurGrade(mez.id, false)}
-                                className="text-[9px] py-1 h-7 bg-red-600 hover:bg-red-700"
-                              >
-                                Needs Work
-                              </Button>
-                            </div>
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* BEGENA INFORMATION MODAL */}
-        <AnimatePresence>
-          {showBegenaInfo && (
-            <>
-              {/* Backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setShowBegenaInfo(false)}
-                className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
-              />
-
-              {/* Modal */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-                className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl max-h-[90vh] bg-white rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col"
-              >
-                {/* Header */}
-                <div className="bg-gradient-to-r from-[#8B6F47] to-[#A0826D] text-white px-8 py-6 flex items-center justify-between border-b border-[#E7DED1]">
-                  <div className="flex items-center gap-3">
-                    <BookOpen size={24} className="text-yellow-200" />
-                    <div>
-                      <h2 className="text-2xl font-bold">{BEGENA_AMHARIC_INFO.title}</h2>
-                      <p className="text-xs text-yellow-100 mt-1">The Ancient Ethiopian Harp - Sacred Instrument of Kings</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setShowBegenaInfo(false)}
-                    className="p-2 hover:bg-white/10 rounded-lg transition-colors"
-                    aria-label="Close modal"
-                  >
-                    <X size={24} className="text-white" />
-                  </button>
-                </div>
-
-                {/* Content */}
-                <div className="overflow-y-auto flex-1 px-8 py-6 space-y-6 text-sm text-gray-700">
-                  {/* Definition */}
-                  <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
-                    <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
-                      <span className="text-[#E89B52]">📖</span> Definition
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed" dir="rtl">
-                      {BEGENA_AMHARIC_INFO.definition}
-                    </p>
-                    <p className="text-xs text-gray-500 italic">
-                      The Begena (በገና) is a traditional Ethiopian harp, distinguished from other stringed instruments by its unique trapezium shape and distinctive buzzing sound. Unlike the Krar or Masinko, it is primarily associated with spiritual and meditative music.
-                    </p>
-                  </div>
-
-                  {/* History */}
-                  <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
-                    <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
-                      <span className="text-[#E89B52]">🏛️</span> History & Origins
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed" dir="rtl">
-                      {BEGENA_AMHARIC_INFO.history}
-                    </p>
-                    <p className="text-xs text-gray-500 italic">
-                      Historical records suggest the Begena dates back to the 10th century, with connections to King David, King Solomon, and even the Queen of Sheba. It was featured prominently in the courts of ancient Ethiopian emperors and has been associated with spiritual music traditions for over a millennium.
-                    </p>
-                  </div>
-
-                  {/* Physical Structure */}
-                  <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
-                    <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
-                      <span className="text-[#E89B52]">🎵</span> Physical Construction
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed" dir="rtl">
-                      {BEGENA_AMHARIC_INFO.structure}
-                    </p>
-                    <p className="text-xs text-gray-500 italic">
-                      The Begena features a trapezium-shaped wooden frame (typically constructed from acacia or sycamore wood) with animal skin stretched across it. It has 10 nylon strings tuned in a pentatonic scale. The distinctive buzzing sound comes from small metal rings attached to the string tuners, creating the instrument's signature resonant quality.
-                    </p>
-                  </div>
-
-                  {/* Playing Technique */}
-                  <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
-                    <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
-                      <span className="text-[#E89B52]">🎶</span> Playing Technique & Scales
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed" dir="rtl">
-                      {BEGENA_AMHARIC_INFO.playingTechnique}
-                    </p>
-                    <p className="text-xs text-gray-500 italic">
-                      The Begena is played by plucking the strings with both hands in a pattern that creates melodic passages and rhythmic accompaniment. Traditional pentatonic scales form the basis of Begena music, with fingering patterns passed down through generations of master musicians. The technique emphasizes smooth, flowing transitions between notes and careful control of the buzzing effect.
-                    </p>
-                  </div>
-
-                  {/* Cultural Significance */}
-                  <div className="border-l-4 border-[#E89B52] pl-4 space-y-2">
-                    <h3 className="font-bold text-lg text-[#8B6F47] flex items-center gap-2">
-                      <span className="text-[#E89B52]">✨</span> Cultural & Spiritual Significance
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed" dir="rtl">
-                      {BEGENA_AMHARIC_INFO.culturalSignificance}
-                    </p>
-                    <p className="text-xs text-gray-500 italic">
-                      In Ethiopian Orthodox Christian tradition, the Begena holds sacred significance, often played during religious ceremonies and periods of fasting (particularly during Lent). It is considered a meditation instrument, used to enhance spiritual contemplation and prayer. Master Begena musicians (Zemari) are highly respected in Ethiopian society, recognized as keepers of an ancient musical and spiritual tradition that connects modern times with Ethiopia's royal and religious heritage.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Footer */}
-                <div className="bg-[#FAF6EF]/50 border-t border-[#E7DED1] px-8 py-4 flex justify-end gap-3">
-                  <button
-                    onClick={() => setShowBegenaInfo(false)}
-                    className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-semibold transition-colors"
-                  >
-                    Close
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowBegenaInfo(false);
-                      addNotification('Begena Knowledge', 'You have learned about the sacred Begena. Continue your practice!', 'lesson');
-                    }}
-                    className="px-4 py-2 bg-[#E89B52] hover:bg-[#d4863e] text-white rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
-                  >
-                    <Check size={16} /> Got It!
-                  </button>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
+          </AnimatePresence>
         </>
       )}
     </div>

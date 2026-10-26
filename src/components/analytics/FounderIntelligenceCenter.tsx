@@ -41,7 +41,7 @@ export function FounderIntelligenceCenter({ lang, onNavigate }: FounderIntellige
             <span>Executive Founder Intelligence Portal</span>
           </div>
           <h1 className="font-display font-black text-2xl sm:text-3xl text-white tracking-wide uppercase">
-            ABEL BEGENA SCHOOL FOUNDER INTELLIGENCE CENTER
+            LIORA BEGENA SCHOOL FOUNDER INTELLIGENCE CENTER
           </h1>
           <p className="text-xs sm:text-sm text-gray-300">
             Real-time strategic operational health, cross-branch performance comparisons, total academy revenue streams, and AI-assisted insights.
@@ -64,15 +64,15 @@ export function FounderIntelligenceCenter({ lang, onNavigate }: FounderIntellige
         </div>
 
         <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl space-y-1 shadow-xs">
-          <span className="text-[10px] text-gray-500 font-mono uppercase block">Physical Campuses</span>
-          <span className="font-display font-black text-2xl text-[#2B2B2B]">3 Branches</span>
-          <span className="text-[10px] text-gray-500 block">Piazza • Megenagna • Lebu</span>
+          <span className="text-[10px] text-gray-500 font-mono uppercase block">Physical Campus</span>
+          <span className="font-display font-black text-2xl text-[#2B2B2B]">1 Main Branch</span>
+          <span className="text-[10px] text-gray-500 block">Hawassa (Center Point Tower)</span>
         </div>
 
         <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl space-y-1 shadow-xs">
           <span className="text-[10px] text-gray-500 font-mono uppercase block">Overall Attendance</span>
           <span className="font-display font-black text-2xl text-[#E89B52]">91.4%</span>
-          <span className="text-[10px] text-gray-500 block">3 Campuses Average</span>
+          <span className="text-[10px] text-gray-500 block">Hawassa Campus Average</span>
         </div>
 
         <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl space-y-1 shadow-xs col-span-2 lg:col-span-1">

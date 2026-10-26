@@ -27,6 +27,7 @@ export interface Course {
   schedule: string[];
   pricing: PricingOption[];
   registrationFee: number; // in ETB
+  isComingSoon?: boolean;
 }
 
 export interface PersistentTeacher {
@@ -179,7 +180,7 @@ export interface Product {
   id: string;
   name: string;
   price: number; // in ETB
-  availability: 'In Stock' | 'Low Stock' | 'Pre-Order' | 'Out of Stock';
+  availability: 'In Stock' | 'Low Stock' | 'Pre-Order' | 'Out of Stock' | 'Coming Soon';
   image: string;
   category: 'Instruments' | 'Strings' | 'Accessories' | 'Books';
   description: string;
@@ -1689,7 +1690,7 @@ export interface CertificateRecord {
   completionDate: string;
   issuedDate: string;
   issuedBy: string;
-  authorizedSignature: string; // Zemari Deacon Abel Tesfaye
+  authorizedSignature: string; // Deacon Bruk Tesfaye
   qrVerificationUrl: string;
   status: 'Pending Review' | 'Approved' | 'Issued' | 'Active' | 'Revoked' | 'Reissued';
   physicalStatus: 'Not Prepared' | 'Printed' | 'Prepared' | 'Ready for Pickup' | 'Collected' | 'Delivered';
@@ -1702,7 +1703,7 @@ export interface CertificateRecord {
 
 export interface GraduationCeremony {
   id: string;
-  title: string; // e.g. "Annual Abel Begena Class of 2026 Graduation & Sacred Recital"
+  title: string; // e.g. "Annual Liora Begena Class of 2026 Graduation & Sacred Recital"
   academicYear: string;
   date: string;
   time: string;

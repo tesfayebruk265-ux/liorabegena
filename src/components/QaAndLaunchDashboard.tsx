@@ -27,7 +27,7 @@ export const QaAndLaunchDashboard: React.FC<QaAndLaunchDashboardProps> = ({
     { phase: 'Phase 9', name: 'Parent Portal & Multi-Child Progress Monitoring', status: 'Passed', tests: '18/18', lead: 'Parent Liaison' },
     { phase: 'Phase 10', name: 'In-App Messaging, Community Forum & Notifications', status: 'Passed', tests: '25/25', lead: 'Community' },
     { phase: 'Phase 11', name: 'Interactive Music Practice Studio (Begena Audio Tuner & Metronome)', status: 'Passed', tests: '22/22', lead: 'Audio Eng' },
-    { phase: 'Phase 12', name: 'Multi-Branch Operations (Piazza, Megenagna, Lebu)', status: 'Passed', tests: '21/21', lead: 'Branch Ops' },
+    { phase: 'Phase 12', name: 'Branch Operations (Hawassa main Branch - Center Point Tower)', status: 'Passed', tests: '21/21', lead: 'Branch Ops' },
     { phase: 'Phase 13', name: 'Online Store, Product Inventory & Instrument Sales', status: 'Passed', tests: '19/19', lead: 'E-Commerce' },
     { phase: 'Phase 14', name: 'Advanced Analytics, Financial Forecasting & Founder Intelligence', status: 'Passed', tests: '24/24', lead: 'Data Science' },
     { phase: 'Phase 15', name: 'Events, Graduation Concerts & QR Certificate Verification Ledger', status: 'Passed', tests: '20/20', lead: 'Events' },
@@ -48,7 +48,7 @@ export const QaAndLaunchDashboard: React.FC<QaAndLaunchDashboardProps> = ({
 
   const walkthroughSteps = {
     student: [
-      '1. Visitor browses Abel Begena website & selects Begena Level 1 Course.',
+      '1. Visitor browses Liora Begena website & selects Begena Level 1 Course.',
       '2. Submits Registration form with photo, emergency contact, and instrument ownership.',
       '3. Pays registration and course fee via Telebirr or CBE screenshot upload.',
       '4. Accountant approves payment; Registration staff activates enrollment.',
@@ -68,8 +68,8 @@ export const QaAndLaunchDashboard: React.FC<QaAndLaunchDashboardProps> = ({
       '3. Click "Approve Payment" - automatically activates student enrollment and issues official digital tax receipt.'
     ],
     founder: [
-      '1. Founder Abel Girma opens Founder Command Center.',
-      '2. Reviews real-time enrollment metrics across Piazza, Megenagna, and Lebu branches.',
+      '1. Founder Bruk Girma opens Founder Command Center.',
+      '2. Reviews real-time enrollment metrics across Hawassa main Branch and online cohorts.',
       '3. Consults Founder AI for quarterly revenue forecasts and branch capacity expansion recommendations.'
     ]
   };
@@ -200,7 +200,7 @@ export const QaAndLaunchDashboard: React.FC<QaAndLaunchDashboardProps> = ({
                   <th className="p-3">Branch Mgr</th>
                   <th className="p-3">Accountant</th>
                   <th className="p-3">Admin</th>
-                  <th className="p-3">Founder Abel</th>
+                  <th className="p-3">Founder Bruk</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-stone-100 font-medium text-neutral-700">
@@ -293,7 +293,7 @@ export const QaAndLaunchDashboard: React.FC<QaAndLaunchDashboardProps> = ({
             <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-900 text-xs space-y-2">
               <p className="font-extrabold text-sm">Status: READY FOR LAUNCH 🚀</p>
               <p className="leading-relaxed">
-                All 19 phases of the Abel Begena School Digital Ecosystem have passed rigorous functional, security, financial, and UX testing. The platform is ready to serve students across Piazza, Megenagna, Lebu, and global online cohorts.
+                All 19 phases of the Liora Begena School Digital Ecosystem have passed rigorous functional, security, financial, and UX testing. The platform is ready to serve students across Hawassa main Branch (Center Point Tower) and global online cohorts.
               </p>
             </div>
           </div>

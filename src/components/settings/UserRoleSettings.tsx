@@ -14,7 +14,7 @@ export const UserRoleSettings: React.FC = () => {
     email: '',
     phone: '',
     role: 'Student',
-    branchScope: 'Megenagna',
+    branchScope: 'Hawassa Main Branch',
     status: 'Active',
     mfaEnabled: false
   });
@@ -160,9 +160,8 @@ export const UserRoleSettings: React.FC = () => {
                       className="bg-stone-50 border border-stone-300 rounded-lg px-2 py-1 font-medium text-xs text-neutral-800 focus:outline-none"
                     >
                       <option value="All Branches">All Branches</option>
-                      <option value="Piazza">Piazza</option>
-                      <option value="Megenagna">Megenagna</option>
-                      <option value="Lebu">Lebu</option>
+                      <option value="Hawassa Main Branch">Hawassa Main Branch</option>
+                      <option value="Online Campus">Online Campus</option>
                     </select>
                   </td>
                   <td className="p-3.5">
@@ -282,9 +281,8 @@ export const UserRoleSettings: React.FC = () => {
                     className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 focus:outline-none"
                   >
                     <option value="All Branches">All Branches</option>
-                    <option value="Piazza">Piazza</option>
-                    <option value="Megenagna">Megenagna</option>
-                    <option value="Lebu">Lebu</option>
+                    <option value="Hawassa Main Branch">Hawassa Main Branch</option>
+                    <option value="Online Campus">Online Campus</option>
                   </select>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-// Official Abel Begena Academy Certificate Verification Engine
+// Official Liora Begena Academy Certificate Verification Engine
 
 export interface OfficialCertificate {
   id: string;
@@ -46,7 +46,7 @@ export function getAllCertificates(): OfficialCertificate[] {
       issuedAt: c.issuedAt || (c as any).issuedDate || (c as any).completionDate || existing?.issuedAt || new Date().toISOString().split('T')[0],
       issuedByTeacherId: c.issuedByTeacherId || existing?.issuedByTeacherId || 'TEACHER-01',
       issuedByTeacherName: c.issuedByTeacherName || (c as any).issuedBy || (c as any).authorizedSignature || existing?.issuedByTeacherName || 'Faculty Instructor',
-      branch: c.branch || (c as any).branchName || existing?.branch || 'Piazza Headquarters',
+      branch: c.branch || (c as any).branchName || existing?.branch || 'Hawassa main Branch',
       status: (c.status === 'REVOKED' || (c as any).status === 'Revoked') ? 'REVOKED' : 'VERIFIED',
       gradeText: c.gradeText || existing?.gradeText || 'Passed with Distinction (100% Course Completion)',
       isUnlockedByStudent: Boolean(c.isUnlockedByStudent || existing?.isUnlockedByStudent || (c as any).certificateUnlocked),
@@ -102,7 +102,7 @@ export function getAllCertificates(): OfficialCertificate[] {
               issuedAt: e.certificateIssuedAt || new Date().toISOString().split('T')[0],
               issuedByTeacherId: e.teacherId || 'TEACHER-01',
               issuedByTeacherName: e.teacherName || 'Assigned Instructor',
-              branch: e.branch || 'Piazza Headquarters',
+              branch: e.branch || 'Hawassa main Branch',
               status: 'VERIFIED',
               gradeText: 'Passed with Distinction (100% Course Completion)',
               isUnlockedByStudent: Boolean(e.certificateUnlocked)
@@ -291,7 +291,7 @@ export function issueOfficialCertificate(params: {
     issuedAt: new Date().toISOString().split('T')[0],
     issuedByTeacherId: params.issuedByTeacherId,
     issuedByTeacherName: params.issuedByTeacherName,
-    branch: params.branch || 'Piazza Headquarters',
+    branch: params.branch || 'Hawassa main Branch',
     status: 'VERIFIED',
     gradeText: 'Passed with Distinction (100% Course Completion)',
     isUnlockedByStudent: false
@@ -339,7 +339,7 @@ export function verifyCertificateCodeForStudent(params: {
       level: 'Level 1 (Basic)',
       issuedByTeacherId: 'TEACHER-01',
       issuedByTeacherName: 'Assigned Academy Instructor',
-      branch: 'Piazza Headquarters'
+      branch: 'Hawassa main Branch'
     });
     // Link teacher's code
     cert.verificationCode = cleanCode;

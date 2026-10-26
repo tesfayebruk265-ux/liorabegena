@@ -82,7 +82,7 @@ export function GuidelinesSection() {
               <span>Project Vision & Visual Personality</span>
             </h4>
             <p className="text-sm text-[#666666] mt-1.5 leading-relaxed">
-              Abel Begena School in Addis Ababa preserves and teaches the ancient spiritual and cultural music of Ethiopia. The platform must represent a premium digital sanctuary of learning rather than a mechanical SaaS interface.
+              Liora Begena School in Addis Ababa preserves and teaches the ancient spiritual and cultural music of Ethiopia. The platform must represent a premium digital sanctuary of learning rather than a mechanical SaaS interface.
             </p>
           </div>
 
@@ -109,15 +109,13 @@ export function GuidelinesSection() {
           </div>
 
           <div className="p-4 border border-[#E7DED1] rounded-lg bg-[#FAF6EF]/30">
-            <h5 className="text-sm font-semibold text-[#2B2B2B] mb-2">Core Branches (Centralized Operations)</h5>
-            <div className="grid grid-cols-3 gap-3 text-center">
-              {['Piazza Branch', 'Megenagna Branch', 'Lebu Branch'].map((branch, idx) => (
-                <div key={idx} className="bg-white border border-[#E7DED1] p-3 rounded-md shadow-2xs">
-                  <MapPin size={16} className="text-[#C79A2B] mx-auto mb-1" />
-                  <p className="text-xs font-bold text-[#2B2B2B]">{branch}</p>
-                  <p className="text-[10px] text-[#666666] mt-0.5">Addis Ababa, ET</p>
-                </div>
-              ))}
+            <h5 className="text-sm font-semibold text-[#2B2B2B] mb-2">School Main Branch (Centralized Operations)</h5>
+            <div className="grid grid-cols-1 max-w-sm mx-auto text-center">
+              <div className="bg-white border border-[#E7DED1] p-3 rounded-md shadow-2xs">
+                <MapPin size={16} className="text-[#C79A2B] mx-auto mb-1" />
+                <p className="text-xs font-bold text-[#2B2B2B]">Hawassa main Branch</p>
+                <p className="text-[10px] text-[#666666] mt-0.5">Center Point Tower, 1st Floor, Hawassa, Ethiopia</p>
+              </div>
             </div>
           </div>
         </div>

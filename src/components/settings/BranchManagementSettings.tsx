@@ -55,7 +55,7 @@ export const BranchManagementSettings: React.FC = () => {
             <Building2 className="w-6 h-6 text-amber-700" /> Branch Operations & Physical Location Settings
           </h2>
           <p className="text-xs text-neutral-500 mt-1">
-            Configure Piazza, Megenagna, Lebu and additional school branches, capacity limits, and operational statuses.
+            Configure Hawassa Main Branch, capacity limits, and operational statuses.
           </p>
         </div>
 

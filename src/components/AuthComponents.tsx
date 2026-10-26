@@ -25,10 +25,14 @@ import {
   FileText,
   Building,
   Calculator,
-  Award
+  Award,
+  Smartphone,
+  ExternalLink,
+  CheckCircle2,
+  Bot
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth, normalizePhoneNumber } from '../context/AuthContext';
 import { useData } from '../context/DataContext';
 import { Button, Input } from './InteractiveComponents';
 import { TiletPattern } from './TiletPattern';
@@ -43,7 +47,7 @@ interface AuthComponentProps {
 const AUTH_TEXT = {
   en: {
     loginTitle: 'Log In',
-    loginSubtitle: 'Enter the Abel Begena sacred learning portals and dashboards.',
+    loginSubtitle: 'Enter the Liora Begena sacred learning portals and dashboards.',
     emailPhoneLabel: 'Email Address or Phone Number',
     passwordLabel: 'Security Password',
     rememberMe: 'Remember this device',
@@ -52,7 +56,7 @@ const AUTH_TEXT = {
     orContinue: 'Or explore our academy',
     noAccount: "Don't have an account?",
     createAccount: 'Create Account',
-    registerTitle: 'Welcome to Abel Begena School',
+    registerTitle: 'Welcome to Liora Begena School',
     registerSubtitle: 'Select how you want to join our traditional music academy.',
     studentCardTitle: 'STUDENT PORTAL',
     studentCardDesc: 'Learn Begena, Krar, Masenqo, Washint, or traditional vocals. Track your lessons, assignments, schedules, and certificate milestones.',
@@ -66,7 +70,7 @@ const AUTH_TEXT = {
   },
   am: {
     loginTitle: 'ወደ ዲጂታል መተግበሪያ ይግቡ',
-    loginSubtitle: 'የአቤል በገና ትምህርት ቤት መግቢያዎችን እና ዳሽቦርዶችን እዚህ ይክፈቱ።',
+    loginSubtitle: 'የሊዮራ በገና ትምህርት ቤት መግቢያዎችን እና ዳሽቦርዶችን እዚህ ይክፈቱ።',
     emailPhoneLabel: 'የኢሜል አድራሻ ወይም ስልክ ቁጥር',
     passwordLabel: 'የደህንነት የይለፍ ቃል',
     rememberMe: 'ይህንን መሳሪያ አስታውስ',
@@ -75,7 +79,7 @@ const AUTH_TEXT = {
     orContinue: 'ወይም ትምህርት ቤታችንን ይጎብኙ',
     noAccount: 'መለያ የለዎትም?',
     createAccount: 'አዲስ መለያ ፍጠር',
-    registerTitle: 'እንኳን ወደ አቤል በገና ትምህርት ቤት መጡ',
+    registerTitle: 'እንኳን ወደ ሊዮራ በገና ትምህርት ቤት መጡ',
     registerSubtitle: 'የባህል ሙዚቃ አካዳሚያችንን እንዴት መቀላቀል እንደሚፈልጉ ይምረጡ።',
     studentCardTitle: 'የተማሪ ፖርታል',
     studentCardDesc: 'በገና፣ ክራር፣ ማሲንቆ፣ ዋሽንት ወይም ባህላዊ ድምፅ ይማሩ። ትምህርቶችዎን፣ የክፍል መርሃግብሮችን እና የብቃት ደረጃዎችን ይከታተሉ።',
@@ -421,7 +425,7 @@ export function LoginPage({ onNavigate, lang }: AuthComponentProps) {
           
           <div className="space-y-3">
             <h3 className="font-display font-black text-xl tracking-wider text-[#E89B52] uppercase">
-              Abel Begena Traditional School
+              Liora Begena Traditional School
             </h3>
             <p className="font-serif italic text-sm lg:text-base text-gray-300 leading-relaxed px-2">
               "እኒስ ከ አስር አውታር ነው ሰላሜን የማገኝ"
@@ -430,7 +434,7 @@ export function LoginPage({ onNavigate, lang }: AuthComponentProps) {
               "በበገናዬ ድምጽ ዝምታ በሚሰኝ"
             </p>
             <p className="text-xs tracking-widest text-[#E89B52] uppercase font-bold">
-              - Lique Mezemer Abel Tesfaye
+              - Lique Mezemer Bruk Tesfaye
             </p>
           </div>
 
@@ -844,7 +848,7 @@ export function SteppedRegister({ onNavigate, lang, role }: SteppedRegisterProps
             className="text-center"
           >
             {/* Step 2 triggers standard Verification interface */}
-            <VerifyAccountPage onNavigate={onNavigate} lang={lang} />
+            <VerifyAccountPage onNavigate={onNavigate} lang={lang} params={{ email, phone }} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -1141,23 +1145,127 @@ export function ForgotPasswordPage({ onNavigate, lang }: AuthComponentProps) {
 // 5. ACCOUNT VERIFICATION EXPERIENCE COMPONENT
 // ==========================================
 export function VerifyAccountPage({ onNavigate, lang, params }: AuthComponentProps & { params?: any }) {
-  const { verifyCode, resendVerificationCode, currentUser, verificationEmailNotice } = useAuth();
+  const {
+    verifyCode,
+    resendVerificationCode,
+    sendTelegramVerificationCode,
+    getAuthoritativeUser,
+    currentUser,
+    verificationEmailNotice
+  } = useAuth();
 
+  // Verification method: 'email' | 'telegram'
+  const [verifyMethod, setVerifyMethod] = useState<'email' | 'telegram'>('email');
+
+  // Target Email state
   const [targetEmail, setTargetEmail] = useState<string>(() => {
     return (params?.email || currentUser?.email || localStorage.getItem('ab_pending_verify_email') || 'student@begena.com').trim();
   });
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [emailInput, setEmailInput] = useState(targetEmail);
 
+  // Target Phone state
+  const [targetPhone, setTargetPhone] = useState<string>(() => {
+    return (
+      params?.phone ||
+      currentUser?.phone ||
+      getAuthoritativeUser?.(targetEmail)?.phone ||
+      localStorage.getItem('ab_pending_verify_phone') ||
+      '+251 911 234 567'
+    ).trim();
+  });
+  const [isEditingPhone, setIsEditingPhone] = useState(false);
+  const [phoneInput, setPhoneInput] = useState(targetPhone);
+
+  // Telegram Bot simulation and live state
+  const [telegramStatus, setTelegramStatus] = useState<'idle' | 'checking' | 'matched' | 'mismatched'>('idle');
+  const [telegramMessages, setTelegramMessages] = useState<Array<{
+    id: string;
+    sender: 'bot' | 'user';
+    text: string;
+    code?: string;
+    isError?: boolean;
+    time: string;
+  }>>([
+    {
+      id: 'init-1',
+      sender: 'bot',
+      text: '👋 Selam! Welcome to Liora Begena Verification Bot (@liorabegenabot).\n\nTo verify your account, you can open @liorabegenabot on Telegram or click "Share Telegram Contact" below. We verify that your Telegram phone number matches your registered phone number before issuing your 6-digit verification code.',
+      time: 'Just now'
+    }
+  ]);
+  const [showMismatchTester, setShowMismatchTester] = useState(false);
+  const [testAltPhone, setTestAltPhone] = useState('+251 922 999 888');
+
+  // 6-digit code state
   const [codeDigits, setCodeDigits] = useState(['', '', '', '', '', '']);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [resendNotice, setResendNotice] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Resend Countdown timer (60 seconds)
   const [timer, setTimer] = useState(60);
   const [isTimerActive, setIsTimerActive] = useState(true);
+
+  // Register with backend & live-poll Telegram status when method is telegram
+  useEffect(() => {
+    if (verifyMethod !== 'telegram' || success) return;
+
+    // Register pending verification with backend
+    fetch('/api/telegram/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone: targetPhone, email: targetEmail })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.matched && data.code) {
+          setTelegramStatus('matched');
+          setCodeDigits(data.code.split(''));
+          setTelegramMessages((prev) => [
+            ...prev,
+            {
+              id: `auto-${Date.now()}`,
+              sender: 'bot',
+              text: `✅ Verified from Telegram app!\n\nYour 6-digit verification code:`,
+              code: data.code,
+              time: 'Just now'
+            }
+          ]);
+          setResendNotice('6-digit code received from @liorabegenabot! Click Verify Account below.');
+        }
+      })
+      .catch((err) => console.warn('Telegram register call:', err));
+
+    // Poll every 3 seconds for contact shared via native Telegram app
+    const pollInterval = setInterval(() => {
+      if (telegramStatus === 'matched' || codeDigits.join('').length === 6) return;
+
+      fetch(`/api/telegram/status?phone=${encodeURIComponent(targetPhone)}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.matched && data.code) {
+            setTelegramStatus('matched');
+            setCodeDigits(data.code.split(''));
+            setTelegramMessages((prev) => [
+              ...prev,
+              {
+                id: `poll-${Date.now()}`,
+                sender: 'bot',
+                text: `✅ Live match received from your Telegram app!\n\nHere is your official 6-digit code:`,
+                code: data.code,
+                time: 'Just now'
+              }
+            ]);
+            setResendNotice('6-digit code received from @liorabegenabot! Click Verify Account below.');
+          }
+        })
+        .catch(() => {});
+    }, 3000);
+
+    return () => clearInterval(pollInterval);
+  }, [verifyMethod, targetPhone, targetEmail, telegramStatus, success, codeDigits]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -1215,6 +1323,74 @@ export function VerifyAccountPage({ onNavigate, lang, params }: AuthComponentPro
     targetInput?.focus();
   };
 
+  // Telegram Contact Sharing & Phone Number Matching Handler
+  const handleShareTelegramContact = async (phoneToShare?: string) => {
+    const phone = (phoneToShare || targetPhone).trim();
+    setErrorMsg(null);
+    setResendNotice(null);
+    setIsLoading(true);
+    setTelegramStatus('checking');
+
+    // Add user bubble
+    const userMsgId = `user-${Date.now()}`;
+    setTelegramMessages((prev) => [
+      ...prev,
+      {
+        id: userMsgId,
+        sender: 'user',
+        text: `📱 Shared Telegram Contact: ${phone}`,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }
+    ]);
+
+    try {
+      const res = await sendTelegramVerificationCode(phone, targetEmail);
+      const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      if (res.matched && res.success && res.code) {
+        setTelegramStatus('matched');
+        // Bot sends successful match and the 6-digit code
+        setTelegramMessages((prev) => [
+          ...prev,
+          {
+            id: `bot-${Date.now()}`,
+            sender: 'bot',
+            text: `✅ Phone Number Verified!\n\nYour Telegram account (${phone}) matches your registration phone number (${targetPhone}).\n\nHere is your official 6-digit verification code:`,
+            code: res.code,
+            time: timeStr
+          }
+        ]);
+
+        // Auto-fill the 6 digits for user convenience
+        const digits = res.code.split('');
+        setCodeDigits(digits);
+        setResendNotice(`6-digit code received from @LioraBegenaBot! Click Verify Account below.`);
+      } else {
+        setTelegramStatus('mismatched');
+        // Bot sends phone number mismatch failure
+        const mismatchError =
+          res.error ||
+          `Phone number mismatch! Shared Telegram number (${phone}) does not match your registered phone number (${targetPhone}). Verification code cannot be issued.`;
+
+        setTelegramMessages((prev) => [
+          ...prev,
+          {
+            id: `bot-${Date.now()}`,
+            sender: 'bot',
+            text: `❌ Verification Failed: Phone Number Mismatch!\n\nYour shared Telegram account phone (${phone}) does NOT match your registered phone (${targetPhone}).\n\nFor security reasons, verification codes are only sent if both numbers match exactly. Please share your registered Telegram account or update your phone number.`,
+            isError: true,
+            time: timeStr
+          }
+        ]);
+        setErrorMsg(mismatchError);
+      }
+    } catch (err) {
+      setErrorMsg('Error contacting Telegram verification bot. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
@@ -1250,16 +1426,24 @@ export function VerifyAccountPage({ onNavigate, lang, params }: AuthComponentPro
     setIsLoading(true);
 
     try {
-      const res = await resendVerificationCode(targetEmail);
-      if (res.success) {
-        setResendNotice(`A new 6-digit verification code has been dispatched via email to ${targetEmail}.`);
+      if (verifyMethod === 'telegram') {
+        // Resend via Telegram bot
+        await handleShareTelegramContact(targetPhone);
         setTimer(60);
         setIsTimerActive(true);
       } else {
-        setErrorMsg(res.error || 'Failed to resend verification code.');
-        if (res.remainingSeconds) {
-          setTimer(res.remainingSeconds);
+        // Resend via EmailJS
+        const res = await resendVerificationCode(targetEmail);
+        if (res.success) {
+          setResendNotice(`A new 6-digit verification code has been dispatched via email to ${targetEmail}.`);
+          setTimer(60);
           setIsTimerActive(true);
+        } else {
+          setErrorMsg(res.error || 'Failed to resend verification code.');
+          if (res.remainingSeconds) {
+            setTimer(res.remainingSeconds);
+            setIsTimerActive(true);
+          }
         }
       }
     } catch (err) {
@@ -1275,14 +1459,37 @@ export function VerifyAccountPage({ onNavigate, lang, params }: AuthComponentPro
       setErrorMsg('Please enter a valid email address.');
       return;
     }
-    setTargetEmail(emailInput.trim().toLowerCase());
-    localStorage.setItem('ab_pending_verify_email', emailInput.trim().toLowerCase());
+    const clean = emailInput.trim().toLowerCase();
+    setTargetEmail(clean);
+    localStorage.setItem('ab_pending_verify_email', clean);
     setIsEditingEmail(false);
     setErrorMsg(null);
   };
 
+  const handleSavePhone = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phoneInput.trim() || phoneInput.replace(/\D/g, '').length < 9) {
+      setErrorMsg('Please enter a valid phone number (e.g., +251 911 234 567).');
+      return;
+    }
+    const clean = phoneInput.trim();
+    setTargetPhone(clean);
+    localStorage.setItem('ab_pending_verify_phone', clean);
+    setIsEditingPhone(false);
+    setErrorMsg(null);
+    setTelegramMessages((prev) => [
+      ...prev,
+      {
+        id: `phone-update-${Date.now()}`,
+        sender: 'bot',
+        text: `ℹ️ Registered phone number updated to ${clean}. Please tap "Share Contact" below to verify your Telegram account.`,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }
+    ]);
+  };
+
   return (
-    <div className="max-w-md mx-auto bg-white border border-[#E7DED1] rounded-2xl shadow-xl p-8 relative overflow-hidden my-4">
+    <div className="max-w-md mx-auto bg-white border border-[#E7DED1] rounded-2xl shadow-xl p-6 sm:p-8 relative overflow-hidden my-4">
       {/* Visual Tilet top accent bar */}
       <div className="absolute top-0 inset-x-0 h-1.5 bg-[#FAF6EF] flex">
         <div className="h-full bg-[#E89B52] w-full" />
@@ -1303,47 +1510,244 @@ export function VerifyAccountPage({ onNavigate, lang, params }: AuthComponentPro
               <h2 className="font-display font-black text-2xl text-[#2B2B2B] uppercase tracking-wide">
                 Account Verification
               </h2>
-              
-              {!isEditingEmail ? (
-                <div className="text-xs text-gray-500 flex flex-col items-center gap-1">
-                  <p>A 6-digit verification code was sent to:</p>
-                  <div className="flex items-center gap-2 font-bold text-[#2B2B2B] bg-[#FAF6EF] px-3 py-1 rounded-lg border border-[#E7DED1]">
-                    <Mail size={14} className="text-[#E89B52]" />
-                    <span>{targetEmail}</span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setEmailInput(targetEmail);
-                        setIsEditingEmail(true);
-                      }}
-                      className="text-[10px] text-[#C79A2B] hover:underline uppercase ml-1"
-                    >
-                      Change
-                    </button>
-                  </div>
+              <p className="text-xs text-gray-500">
+                Choose how you want to receive your 6-digit verification code
+              </p>
+
+              {/* VERIFICATION METHOD SELECTOR: EMAIL OR TELEGRAM */}
+              <div className="grid grid-cols-2 gap-2 pt-2 pb-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setVerifyMethod('email');
+                    setErrorMsg(null);
+                    setResendNotice(null);
+                  }}
+                  className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-xs font-bold transition-all ${
+                    verifyMethod === 'email'
+                      ? 'bg-[#FAF6EF] border-[#E89B52] text-[#2B2B2B] shadow-sm ring-2 ring-[#E89B52]/20'
+                      : 'bg-white border-gray-200 text-gray-500 hover:border-gray-300'
+                  }`}
+                >
+                  <Mail size={15} className={verifyMethod === 'email' ? 'text-[#E89B52]' : 'text-gray-400'} />
+                  <span>Email (EmailJS)</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setVerifyMethod('telegram');
+                    setErrorMsg(null);
+                    setResendNotice(null);
+                  }}
+                  className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-xs font-bold transition-all ${
+                    verifyMethod === 'telegram'
+                      ? 'bg-[#229ED9]/10 border-[#229ED9] text-[#229ED9] shadow-sm ring-2 ring-[#229ED9]/20'
+                      : 'bg-white border-gray-200 text-gray-500 hover:border-gray-300'
+                  }`}
+                >
+                  <Bot size={15} className={verifyMethod === 'telegram' ? 'text-[#229ED9]' : 'text-gray-400'} />
+                  <span>Telegram Bot</span>
+                </button>
+              </div>
+
+              {/* METHOD 1: EMAIL VERIFICATION */}
+              {verifyMethod === 'email' && (
+                <div className="space-y-2 pt-1">
+                  {!isEditingEmail ? (
+                    <div className="text-xs text-gray-500 flex flex-col items-center gap-1">
+                      <p>A 6-digit verification code was sent to:</p>
+                      <div className="flex items-center gap-2 font-bold text-[#2B2B2B] bg-[#FAF6EF] px-3 py-1 rounded-lg border border-[#E7DED1]">
+                        <Mail size={14} className="text-[#E89B52]" />
+                        <span>{targetEmail}</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setEmailInput(targetEmail);
+                            setIsEditingEmail(true);
+                          }}
+                          className="text-[10px] text-[#C79A2B] hover:underline uppercase ml-1"
+                        >
+                          Change
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSaveEmail} className="p-3 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-2">
+                      <label className="text-[10px] font-bold text-gray-600 uppercase block">Update Target Verification Email:</label>
+                      <div className="flex gap-2">
+                        <Input
+                          type="email"
+                          required
+                          value={emailInput}
+                          onChange={(e) => setEmailInput(e.target.value)}
+                          className="text-xs py-1.5"
+                        />
+                        <Button type="submit" variant="primary" className="text-xs py-1 px-3">
+                          Save
+                        </Button>
+                      </div>
+                    </form>
+                  )}
+
+                  {verificationEmailNotice && (
+                    <div className="p-3 bg-blue-50 border border-blue-200 text-xs text-blue-800 rounded-xl flex items-center justify-center gap-2">
+                      <Mail size={14} className="shrink-0" />
+                      <span>{verificationEmailNotice}</span>
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <form onSubmit={handleSaveEmail} className="p-3 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-2">
-                  <label className="text-[10px] font-bold text-gray-600 uppercase block">Update Target Verification Email:</label>
-                  <div className="flex gap-2">
-                    <Input
-                      type="email"
-                      required
-                      value={emailInput}
-                      onChange={(e) => setEmailInput(e.target.value)}
-                      className="text-xs py-1.5"
-                    />
-                    <Button type="submit" variant="primary" className="text-xs py-1 px-3">
-                      Save
-                    </Button>
-                  </div>
-                </form>
               )}
 
-              {verificationEmailNotice && (
-                <div className="p-3 bg-blue-50 border border-blue-200 text-xs text-blue-800 rounded-xl flex items-center justify-center gap-2">
-                  <Mail size={14} className="shrink-0" />
-                  <span>{verificationEmailNotice}</span>
+              {/* METHOD 2: TELEGRAM BOT VERIFICATION */}
+              {verifyMethod === 'telegram' && (
+                <div className="space-y-3 pt-1 text-left">
+                  {/* Registered Phone Bar */}
+                  {!isEditingPhone ? (
+                    <div className="text-xs text-gray-500 flex flex-col items-center gap-1">
+                      <p>Registered Phone Number:</p>
+                      <div className="flex items-center gap-2 font-bold text-[#2B2B2B] bg-[#FAF6EF] px-3 py-1 rounded-lg border border-[#E7DED1]">
+                        <Smartphone size={14} className="text-[#229ED9]" />
+                        <span>{targetPhone}</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setPhoneInput(targetPhone);
+                            setIsEditingPhone(true);
+                          }}
+                          className="text-[10px] text-[#229ED9] hover:underline uppercase ml-1"
+                        >
+                          Change
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSavePhone} className="p-3 bg-[#FAF6EF] rounded-xl border border-[#E7DED1] space-y-2">
+                      <label className="text-[10px] font-bold text-gray-600 uppercase block">Update Registered Phone Number:</label>
+                      <div className="flex gap-2">
+                        <Input
+                          type="text"
+                          required
+                          value={phoneInput}
+                          onChange={(e) => setPhoneInput(e.target.value)}
+                          placeholder="+251 911 234 567"
+                          className="text-xs py-1.5"
+                        />
+                        <Button type="submit" variant="primary" className="text-xs py-1 px-3">
+                          Save
+                        </Button>
+                      </div>
+                    </form>
+                  )}
+
+                  {/* LIORA BEGENA TELEGRAM BOT CARD */}
+                  <div className="rounded-xl border border-sky-200 bg-[#F4F8FA] overflow-hidden shadow-sm">
+                    {/* Bot Top Header */}
+                    <div className="bg-[#229ED9] text-white px-3 py-2 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 rounded-full bg-white text-[#229ED9] flex items-center justify-center font-bold text-xs shadow-inner">
+                          <Bot size={16} />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-1">
+                            <span className="font-bold text-xs">Liora Begena Bot</span>
+                            <CheckCircle2 size={12} className="text-sky-200" />
+                          </div>
+                          <span className="text-[10px] text-sky-100 block">@liorabegenabot • Official Bot</span>
+                        </div>
+                      </div>
+                      <a
+                        href="https://t.me/liorabegenabot"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[10px] bg-white/20 hover:bg-white/30 text-white px-2 py-1 rounded flex items-center gap-1 transition-all"
+                      >
+                        <span>Open Bot</span>
+                        <ExternalLink size={10} />
+                      </a>
+                    </div>
+
+                    {/* Bot Messages Window */}
+                    <div className="p-3 max-h-52 overflow-y-auto space-y-2.5 text-xs bg-[#EBF2F7]/50">
+                      {telegramMessages.map((msg) => (
+                        <div
+                          key={msg.id}
+                          className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
+                        >
+                          <div
+                            className={`p-2.5 rounded-2xl max-w-[85%] whitespace-pre-line shadow-xs ${
+                              msg.sender === 'user'
+                                ? 'bg-[#229ED9] text-white rounded-br-xs'
+                                : msg.isError
+                                ? 'bg-red-50 text-red-900 border border-red-200 rounded-bl-xs'
+                                : 'bg-white text-gray-800 border border-gray-200 rounded-bl-xs'
+                            }`}
+                          >
+                            <p className="leading-relaxed">{msg.text}</p>
+                            {msg.code && (
+                              <div className="mt-2 p-2 bg-[#FAF6EF] border border-[#E89B52] rounded-lg text-center">
+                                <span className="text-[10px] uppercase font-bold text-gray-500 block mb-0.5">Your Verification Code:</span>
+                                <span className="text-xl font-mono font-black text-[#E89B52] tracking-widest">{msg.code}</span>
+                                <span className="text-[10px] text-green-700 font-semibold block mt-1">✨ Auto-filled in boxes below</span>
+                              </div>
+                            )}
+                          </div>
+                          <span className="text-[9px] text-gray-400 mt-0.5 px-1">{msg.time}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Bot Action Bar */}
+                    <div className="p-2.5 bg-white border-t border-sky-100 space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => handleShareTelegramContact(targetPhone)}
+                        disabled={isLoading}
+                        className="w-full bg-[#229ED9] hover:bg-[#1E8BC0] text-white py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer disabled:opacity-50"
+                      >
+                        <Smartphone size={14} />
+                        <span>Share Telegram Contact ({targetPhone})</span>
+                      </button>
+
+                      {/* Mismatch Testing Tool for Testing/Verification */}
+                      <div className="pt-1">
+                        <button
+                          type="button"
+                          onClick={() => setShowMismatchTester(!showMismatchTester)}
+                          className="text-[10px] text-gray-400 hover:text-gray-600 underline flex items-center gap-1 mx-auto"
+                        >
+                          <span>{showMismatchTester ? 'Hide Mismatch Test Simulation' : '🧪 Test Phone Number Mismatch Check'}</span>
+                        </button>
+
+                        {showMismatchTester && (
+                          <div className="mt-2 p-2.5 bg-amber-50/70 border border-amber-200 rounded-lg text-[11px] text-amber-900 space-y-1.5">
+                            <p className="font-semibold text-[10px] uppercase text-amber-800">
+                              Security Verification Test:
+                            </p>
+                            <p className="text-[10px] text-amber-700">
+                              Simulate sharing a different Telegram number to verify that the bot detects mismatch and blocks the code.
+                            </p>
+                            <div className="flex gap-1.5">
+                              <input
+                                type="text"
+                                value={testAltPhone}
+                                onChange={(e) => setTestAltPhone(e.target.value)}
+                                className="bg-white border border-amber-300 rounded px-2 py-1 text-xs flex-1 text-gray-800"
+                                placeholder="+251 922 999 888"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => handleShareTelegramContact(testAltPhone)}
+                                className="bg-amber-600 hover:bg-amber-700 text-white text-[10px] font-bold px-2.5 py-1 rounded"
+                              >
+                                Test Mismatch
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -1451,7 +1855,7 @@ export function VerifyAccountPage({ onNavigate, lang, params }: AuthComponentPro
                 Account Verified!
               </h2>
               <p className="text-sm text-gray-600 max-w-xs mx-auto">
-                Your email <span className="font-semibold text-[#2B2B2B]">{targetEmail}</span> has been verified successfully. Redirecting you to login...
+                Your account <span className="font-semibold text-[#2B2B2B]">{targetEmail}</span> has been verified successfully. Redirecting you to login...
               </p>
             </div>
 

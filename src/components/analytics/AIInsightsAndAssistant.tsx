@@ -46,7 +46,7 @@ export function AIInsightsAndAssistant({ lang, onNavigate }: AIInsightsAndAssist
     } else {
       setCurrentResult({
         keywords: ['custom'],
-        answer: `Query answered based on school database audit: Abel Begena School operates 3 physical campuses and 1 online platform serving active enrolled students.`,
+        answer: `Query answered based on school database audit: Liora Begena School operates 3 physical campuses and 1 online platform serving active enrolled students.`,
         metrics: [
           { label: 'Active Students', value: '1,280' },
           { label: 'Total Revenue', value: '820,000 ETB' },

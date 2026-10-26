@@ -38,7 +38,7 @@ export const ManagementAiAssistant: React.FC<ManagementAiAssistantProps> = ({ ro
     {
       id: 'MGT-01',
       role: 'assistant',
-      content: `Selam! I am your ${role} AI Strategic & Operational Assistant. I provide real-time data analysis, strategic briefings, and operational recommendations across all Abel Begena branches.`,
+      content: `Selam! I am your ${role} AI Strategic & Operational Assistant. I provide real-time data analysis, strategic briefings, and operational recommendations across all Liora Begena branches.`,
       timestamp: '08:00 AM',
       isAiGenerated: true,
       confidence: 'High'

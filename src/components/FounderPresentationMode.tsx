@@ -13,13 +13,13 @@ export const FounderPresentationMode: React.FC<FounderPresentationModeProps> = (
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
           <div className="space-y-2">
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-amber-800/80 rounded-full text-xs font-bold text-amber-200 border border-amber-700">
-              <Crown className="w-4 h-4 text-amber-300" /> Abel Begena School Executive Command Center
+              <Crown className="w-4 h-4 text-amber-300" /> Liora Begena School Executive Command Center
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Welcome, Founder Abel Girma
+              Welcome, Founder Bruk Girma
             </h1>
             <p className="text-xs text-amber-200 max-w-2xl leading-relaxed">
-              The digital ecosystem is fully integrated across all 3 physical branches (Piazza, Megenagna, Lebu) and our global online learning studio.
+              The digital ecosystem is fully integrated across our physical Hawassa main Branch (Center Point Tower) and our global online learning studio.
             </p>
           </div>
 
@@ -66,11 +66,11 @@ export const FounderPresentationMode: React.FC<FounderPresentationModeProps> = (
 
         <div className="bg-white p-5 rounded-2xl border border-amber-100 shadow-sm space-y-1">
           <div className="flex justify-between items-center text-xs font-bold text-neutral-500">
-            <span>Active Physical Branches</span>
+            <span>Active Campus</span>
             <Building2 className="w-4 h-4 text-amber-700" />
           </div>
-          <div className="text-2xl font-extrabold text-neutral-900">3 Branches</div>
-          <p className="text-[10px] text-neutral-600 font-bold">Piazza, Megenagna, Lebu</p>
+          <div className="text-2xl font-extrabold text-neutral-900">1 Main Branch</div>
+          <p className="text-[10px] text-neutral-600 font-bold">Hawassa (Center Point Tower)</p>
         </div>
 
         <div className="bg-white p-5 rounded-2xl border border-amber-100 shadow-sm space-y-1">

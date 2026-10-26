@@ -347,7 +347,7 @@ export const roleTokens: RoleToken[] = [
   { name: 'Parent', description: 'Guardians monitoring attendance of under-age students, tracking progress, viewing grades/feedback, and paying tuition.', primaryDashboard: 'Parent Portal' },
   { name: 'Teacher', description: 'Instructors taking digital attendance, creating video/audio lessons, reviewing submissions, giving grades, tracking student practice timers.', primaryDashboard: 'Teacher Portal' },
   { name: 'Registration Staff', description: 'Admissions team verifying initial applications, managing branches, enrolling students, verifying initial credentials.', primaryDashboard: 'Registration Desk System' },
-  { name: 'Branch Manager', description: 'Local administrators overseeing Piazza, Megenagna, or Lebu. Tracking branch attendance, staff check-ins, local student counts.', primaryDashboard: 'Branch Console' },
+  { name: 'Branch Manager', description: 'Local administrators overseeing Hawassa main Branch (Center Point Tower). Tracking branch attendance, staff check-ins, local student counts.', primaryDashboard: 'Branch Console' },
   { name: 'Accountant', description: 'Financial officer verifying receipt screenshots, recording cash payments, issuing electronic invoices, generating balance sheets.', primaryDashboard: 'Accounting Core' },
   { name: 'Admin', description: 'Academic coordinators managing course curricula, assigning instructors, scheduling full cohorts, tracking master certificates.', primaryDashboard: 'Administration Suite' },
   { name: 'Super Admin', description: 'Operations leaders configuring global settings, managing branches, system configurations, and master databases.', primaryDashboard: 'Global Control Center' },

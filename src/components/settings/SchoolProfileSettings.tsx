@@ -143,6 +143,52 @@ export const SchoolProfileSettings: React.FC = () => {
             </div>
           </div>
 
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-bold text-neutral-700 mb-1">Instagram Profile</label>
+              <input
+                type="text"
+                value={profile.instagram || ''}
+                onChange={(e) => handleChange('instagram', e.target.value)}
+                placeholder="https://www.instagram.com/..."
+                className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-neutral-700 mb-1">TikTok Profile</label>
+              <input
+                type="text"
+                value={profile.tiktok || ''}
+                onChange={(e) => handleChange('tiktok', e.target.value)}
+                placeholder="https://www.tiktok.com/@..."
+                className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-bold text-neutral-700 mb-1">YouTube Channel (Optional)</label>
+              <input
+                type="text"
+                value={profile.youtube || ''}
+                onChange={(e) => handleChange('youtube', e.target.value)}
+                placeholder="(Leave empty if none)"
+                className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-neutral-700 mb-1">Facebook Page (Optional)</label>
+              <input
+                type="text"
+                value={profile.facebook || ''}
+                onChange={(e) => handleChange('facebook', e.target.value)}
+                placeholder="(Leave empty if none)"
+                className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs focus:outline-none"
+              />
+            </div>
+          </div>
+
           <div>
             <label className="block text-xs font-bold text-neutral-700 mb-1">Headquarters Physical Address</label>
             <input

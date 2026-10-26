@@ -266,7 +266,7 @@ export function QuizAndAssessmentCenter({ lang, onNavigate }: QuizAndAssessmentC
           <div className="bg-white border border-[#E7DED1] rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl relative">
             <h3 className="font-display font-black text-lg text-[#2B2B2B]">Request Advanced Placement Assessment</h3>
             <p className="text-xs text-gray-500 leading-relaxed">
-              If you have previous experience playing Ethiopian traditional instruments, request an evaluation with Teacher Abel to be assigned directly to Level 2 or Level 3.
+              If you have previous experience playing Ethiopian traditional instruments, request an evaluation with Teacher Bruk to be assigned directly to Level 2 or Level 3.
             </p>
 
             {!placementSubmitted ? (
@@ -312,7 +312,7 @@ export function QuizAndAssessmentCenter({ lang, onNavigate }: QuizAndAssessmentC
                 <CheckCircle2 size={24} className="mx-auto text-green-600" />
                 <span className="font-bold text-green-900 block">Placement Request Received</span>
                 <p className="text-green-800">
-                  Teacher Abel will review your profile and contact you for a 15-minute live audio evaluation.
+                  Teacher Bruk will review your profile and contact you for a 15-minute live audio evaluation.
                 </p>
                 <Button variant="primary" size="sm" className="w-full mt-2" onClick={() => setShowPlacementModal(false)}>
                   Close

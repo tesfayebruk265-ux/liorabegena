@@ -73,13 +73,13 @@ export function AnalyticsCenter({ lang, onNavigate, subPath }: AnalyticsCenterPr
         <div className="relative z-10 space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E89B52]/20 border border-[#E89B52]/40 text-[#E89B52] text-xs font-bold uppercase tracking-widest">
             <BarChart3 size={14} className="text-[#E89B52]" />
-            <span>Abel Begena School Analytics & Intelligence Center</span>
+            <span>Liora Begena School Analytics & Intelligence Center</span>
           </div>
           <h1 className="font-display font-black text-2xl sm:text-3xl text-white tracking-wide uppercase">
             EXECUTIVE ANALYTICS & REPORTING HUB
           </h1>
           <p className="text-xs sm:text-sm text-gray-300">
-            Role-permissioned analytics for students, teachers, branch managers, accountants, administrators, and Founder Abel Begena.
+            Role-permissioned analytics for students, teachers, branch managers, accountants, administrators, and Founder Liora Begena.
           </p>
         </div>
       </div>
@@ -159,7 +159,7 @@ export function AnalyticsCenter({ lang, onNavigate, subPath }: AnalyticsCenterPr
           </div>
           <h4 className="font-display font-black text-base uppercase">Founder Intelligence Center</h4>
           <p className="text-xs text-gray-600">
-            Executive strategic overview, cross-branch matrix, and critical operational alerts for Founder Abel.
+            Executive strategic overview, cross-branch matrix, and critical operational alerts for Founder Bruk.
           </p>
         </div>
       </div>

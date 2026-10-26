@@ -87,8 +87,7 @@ export function AdminStoreManagement({ lang, onNavigate }: AdminStoreManagementP
       condition: 'New',
       stockQuantity: Number(newProductStock),
       branchStock: [
-        { branchId: 'b-piazza', branchName: 'Piazza Branch', quantity: Math.floor(newProductStock / 2) },
-        { branchId: 'b-megenagna', branchName: 'Megenagna Branch', quantity: Math.ceil(newProductStock / 2) }
+        { branchId: 'b-hawassa', branchName: 'Hawassa main Branch', quantity: Number(newProductStock) }
       ],
       images: [STORE_IMAGE_DEFAULT],
       specifications: { Material: 'Traditional Aged Hardwood', Origin: 'Addis Ababa' },
@@ -358,18 +357,14 @@ export function AdminStoreManagement({ lang, onNavigate }: AdminStoreManagementP
           <h3 className="font-display font-black text-base text-[#2B2B2B] uppercase">COMMERCIAL SALES & FOUNDER OVERVIEW</h3>
 
           <div className="p-5 bg-[#FAF6EF] border border-[#E7DED1] rounded-2xl space-y-3 text-xs">
-            <h4 className="font-bold text-[#2B2B2B]">Best Performing Campus for Store Sales:</h4>
+            <h4 className="font-bold text-[#2B2B2B]">Store Sales Performance:</h4>
             <div className="space-y-2 font-mono">
               <div className="flex justify-between bg-white p-2.5 rounded-xl border">
-                <span>1. Piazza Campus Workshop</span>
-                <span className="font-bold text-emerald-700">185,000 ETB (62%)</span>
+                <span>1. Hawassa main Branch Workshop (Center Point Tower)</span>
+                <span className="font-bold text-emerald-700">260,000 ETB (87%)</span>
               </div>
               <div className="flex justify-between bg-white p-2.5 rounded-xl border">
-                <span>2. Megenagna Campus Store</span>
-                <span className="font-bold text-emerald-700">75,000 ETB (25%)</span>
-              </div>
-              <div className="flex justify-between bg-white p-2.5 rounded-xl border">
-                <span>3. Lebu Campus Store</span>
+                <span>2. Online Store Direct Deliveries</span>
                 <span className="font-bold text-emerald-700">38,000 ETB (13%)</span>
               </div>
             </div>

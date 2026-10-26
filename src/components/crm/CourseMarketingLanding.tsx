@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Course, Language, PageId } from '../../types';
-import { COURSES_DATA } from '../../data/websiteData';
+import { COURSES_DATA, isCourseComingSoon } from '../../data/websiteData';
 
 interface CourseMarketingLandingProps {
   lang: Language;
@@ -43,7 +43,7 @@ export function CourseMarketingLanding({
             <span>Traditional Ethiopian Music Curriculum</span>
           </div>
           <h1 className="font-display font-black text-2xl sm:text-3xl text-[#2B2B2B]">
-            Abel Begena Course Offerings & Comparison
+            Liora Begena Course Offerings & Comparison
           </h1>
           <p className="text-xs text-[#666666] max-w-2xl leading-relaxed">
             Explore authentic 10-string Begena, Krar, Masenqo, Washint, and Vocal courses. Compare levels, schedules, pricing, and register online or at any branch.
@@ -61,19 +61,29 @@ export function CourseMarketingLanding({
       {/* COURSE SELECTOR BUTTONS */}
       {!isCompareView && (
         <div className="flex flex-wrap items-center gap-2">
-          {COURSES_DATA.map((c) => (
-            <button
-              key={c.id}
-              onClick={() => setSelectedCourse(c)}
-              className={`px-4 py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
-                selectedCourse.id === c.id
-                  ? 'bg-[#E89B52] text-white border-[#E89B52] shadow-2xs'
-                  : 'bg-white text-[#666666] border-[#E7DED1] hover:bg-[#FAF6EF]'
-              }`}
-            >
-              {c.name}
-            </button>
-          ))}
+          {COURSES_DATA.map((c) => {
+            const isSoon = isCourseComingSoon(c.id);
+            return (
+              <button
+                key={c.id}
+                onClick={() => setSelectedCourse(c)}
+                className={`px-4 py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  selectedCourse.id === c.id
+                    ? 'bg-[#E89B52] text-white border-[#E89B52] shadow-2xs'
+                    : 'bg-white text-[#666666] border-[#E7DED1] hover:bg-[#FAF6EF]'
+                }`}
+              >
+                <span>{c.name}</span>
+                {isSoon && (
+                  <span className={`text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${
+                    selectedCourse.id === c.id ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-800'
+                  }`}>
+                    Soon
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
 
@@ -82,9 +92,15 @@ export function CourseMarketingLanding({
         <div className="bg-white border border-[#E7DED1] rounded-2xl p-6 sm:p-8 shadow-xs space-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-4">
-              <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase bg-[#E89B52]/10 text-[#E89B52]">
-                {selectedCourse.difficulty || selectedCourse.level} Level
-              </span>
+              {isCourseComingSoon(selectedCourse.id) ? (
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase bg-amber-100 text-amber-800 border border-amber-300 inline-flex items-center gap-1">
+                  <Sparkles size={11} /> Curriculum In Development • Coming Soon
+                </span>
+              ) : (
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase bg-[#E89B52]/10 text-[#E89B52]">
+                  {selectedCourse.difficulty || selectedCourse.level} Level
+                </span>
+              )}
               <h2 className="font-display font-black text-3xl text-[#2B2B2B]">{selectedCourse.name}</h2>
               <p className="text-xs text-[#666666] leading-relaxed">{selectedCourse.description}</p>
 
@@ -124,31 +140,54 @@ export function CourseMarketingLanding({
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  onClick={() => onNavigate('stepped-register', { courseId: selectedCourse.id })}
-                  className="px-6 py-3 bg-[#E89B52] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-2xs hover:bg-[#d68a41] cursor-pointer flex items-center gap-2"
-                >
-                  <span>Enroll in Course</span>
-                  <ChevronRight size={14} />
-                </button>
+              {isCourseComingSoon(selectedCourse.id) ? (
+                <div className="space-y-3 pt-2">
+                  <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 leading-relaxed">
+                    🌟 <b>Admissions Opening Soon:</b> The comprehensive curriculum for {selectedCourse.name} is currently in progress. You can join the early-access waitlist or register for Begena and Krar right now.
+                  </div>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      onClick={() => onOpenInquiryModal(selectedCourse.name)}
+                      className="px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-2xs hover:from-amber-700 hover:to-amber-800 cursor-pointer flex items-center gap-2"
+                    >
+                      <Sparkles size={14} />
+                      <span>Join Early Access Waitlist</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate('stepped-register', { courseId: 'begena' })}
+                      className="px-4 py-3 bg-white border border-[#E7DED1] text-[#2B2B2B] font-bold text-xs rounded-xl hover:bg-[#FAF6EF] cursor-pointer"
+                    >
+                      Enroll in Begena Instead
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <button
+                    onClick={() => onNavigate('stepped-register', { courseId: selectedCourse.id })}
+                    className="px-6 py-3 bg-[#E89B52] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-2xs hover:bg-[#d68a41] cursor-pointer flex items-center gap-2"
+                  >
+                    <span>Enroll in Course</span>
+                    <ChevronRight size={14} />
+                  </button>
 
-                <button
-                  onClick={() => onOpenInquiryModal(selectedCourse.name)}
-                  className="px-4 py-3 bg-white border border-[#E7DED1] text-[#2B2B2B] font-bold text-xs rounded-xl hover:bg-[#FAF6EF] cursor-pointer flex items-center gap-1.5"
-                >
-                  <MessageSquare size={14} className="text-[#E89B52]" />
-                  <span>Ask a Question</span>
-                </button>
+                  <button
+                    onClick={() => onOpenInquiryModal(selectedCourse.name)}
+                    className="px-4 py-3 bg-white border border-[#E7DED1] text-[#2B2B2B] font-bold text-xs rounded-xl hover:bg-[#FAF6EF] cursor-pointer flex items-center gap-1.5"
+                  >
+                    <MessageSquare size={14} className="text-[#E89B52]" />
+                    <span>Ask a Question</span>
+                  </button>
 
-                <button
-                  onClick={() => onBookTrial(selectedCourse.name)}
-                  className="px-4 py-3 bg-[#6F4E37] text-white font-bold text-xs rounded-xl hover:bg-[#5a3f2c] cursor-pointer flex items-center gap-1.5"
-                >
-                  <UserCheck size={14} />
-                  <span>Book Free Trial Session</span>
-                </button>
-              </div>
+                  <button
+                    onClick={() => onBookTrial(selectedCourse.name)}
+                    className="px-4 py-3 bg-[#6F4E37] text-white font-bold text-xs rounded-xl hover:bg-[#5a3f2c] cursor-pointer flex items-center gap-1.5"
+                  >
+                    <UserCheck size={14} />
+                    <span>Book Free Trial Session</span>
+                  </button>
+                </div>
+              )}
             </div>
 
             <div className="lg:col-span-5">

@@ -79,11 +79,11 @@ export function NotificationsCenter({ onNavigate, lang, initialTab = 'inbox' }: 
   };
 
   const handleTestSMS = () => {
-    addNotification('Test SMS sent to +251 91 123 4567: "Abel Begena: Your notification channels are active."', 'system');
+    addNotification('Test SMS sent to +251 91 123 4567: "Liora Begena: Your notification channels are active."', 'system');
   };
 
   const handleTestTelegram = () => {
-    addNotification('Test Telegram alert sent to @AbelBegenaBot successfully.', 'system');
+    addNotification('Test Telegram alert sent to @liyora_begena successfully.', 'system');
   };
 
   return (
@@ -210,7 +210,7 @@ export function NotificationsCenter({ onNavigate, lang, initialTab = 'inbox' }: 
                   </div>
                   <div>
                     <h3 className="font-bold text-sm text-stone-900">Telegram Bot Notifications</h3>
-                    <p className="text-[11px] text-stone-500">@AbelBegenaSchoolBot</p>
+                    <p className="text-[11px] text-stone-500">@liyora_begena</p>
                   </div>
                 </div>
 
@@ -226,7 +226,7 @@ export function NotificationsCenter({ onNavigate, lang, initialTab = 'inbox' }: 
               <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 space-y-1">
                 <div className="text-stone-500 text-[10px]">Verification Code:</div>
                 <div className="font-mono font-bold text-amber-900 text-sm tracking-wider">{telegramCode}</div>
-                <p className="text-[10px] text-stone-400">Send this code to `@AbelBegenaSchoolBot` on Telegram to link.</p>
+                <p className="text-[10px] text-stone-400">Send this code to `@liyora_begena` on Telegram to link.</p>
               </div>
 
               <button

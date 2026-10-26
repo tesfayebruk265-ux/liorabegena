@@ -237,7 +237,7 @@ export function CrmCenter({ lang, onNavigate, initialTab = 'dashboard' }: CrmCen
         <div className="max-w-4xl space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E7DED1] text-xs font-bold text-[#E89B52] shadow-3xs">
             <TrendingUp size={14} className="text-[#E89B52]" />
-            <span>Abel Begena Student Acquisition & CRM Engine</span>
+            <span>Liora Begena Student Acquisition & CRM Engine</span>
           </div>
           <h1 className="font-display font-black text-3xl sm:text-4xl text-[#2B2B2B] tracking-tight">
             Customer Relationship Management & Growth Portal

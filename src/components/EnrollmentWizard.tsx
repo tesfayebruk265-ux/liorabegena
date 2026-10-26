@@ -30,7 +30,7 @@ import { useAuth } from '../context/AuthContext';
 import { useData } from '../context/DataContext';
 import { compressImageFile, safeSetItem } from '../utils/storage';
 import { Button, Input } from './InteractiveComponents';
-import { COURSES_DATA } from '../data/websiteData';
+import { COURSES_DATA, isCourseComingSoon } from '../data/websiteData';
 import { PageId, Course } from '../types';
 
 interface EnrollmentWizardProps {
@@ -134,7 +134,7 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
   );
   const [selectedLevelName, setSelectedLevelName] = useState('');
   const [learningMode, setLearningMode] = useState<'In-Person' | 'Online'>('In-Person');
-  const [selectedBranch, setSelectedBranch] = useState('Piazza HQ');
+  const [selectedBranch, setSelectedBranch] = useState('Hawassa Campus');
   const [selectedDurationIndex, setSelectedDurationIndex] = useState(0); // index in pricing array
   const [selectedScheduleDays, setSelectedScheduleDays] = useState<string[]>([]);
   const [selectedClassTime, setSelectedClassTime] = useState('Morning (9:00 AM - 12:00 PM)');
@@ -221,7 +221,7 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
           }
           setSelectedLevelName(draft.selectedLevelName || '');
           setLearningMode(draft.learningMode || 'In-Person');
-          setSelectedBranch(draft.selectedBranch || 'Piazza HQ');
+          setSelectedBranch(draft.selectedBranch || 'Hawassa Campus');
           setSelectedDurationIndex(draft.selectedDurationIndex || 0);
           setSelectedScheduleDays(draft.selectedScheduleDays || []);
           setSelectedClassTime(draft.selectedClassTime || 'Morning (9:00 AM - 12:00 PM)');
@@ -526,10 +526,10 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
     const finalAppId = generatedAppId || `APP-${Math.floor(100000 + Math.random() * 900000)}`;
     setGeneratedAppId(finalAppId);
 
-    const priceDetails = selectedCourse.pricing[selectedDurationIndex];
+    const priceDetails = selectedCourse.pricing[selectedDurationIndex] || selectedCourse.pricing[0];
     const totalCourseFee = priceDetails.price;
     const isMonthly = priceDetails.period === 'per month';
-    const totalDue = selectedCourse.registrationFee + (isMonthly ? totalCourseFee * 3 : totalCourseFee);
+    const totalDue = selectedCourse.registrationFee + totalCourseFee;
 
     const newApplication = {
       id: finalAppId,
@@ -644,7 +644,7 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
     try {
       const savedTxns = JSON.parse(localStorage.getItem('ab_transactions_v3') || '[]');
       const studentFullName = `${firstName} ${middleName} ${lastName}`.trim() || currentUser?.fullName || 'New Student';
-      const branchName = learningMode === 'In-Person' ? (selectedBranch === 'Piazza HQ' ? 'Piazza Branch' : selectedBranch) : 'Piazza Branch';
+      const branchName = learningMode === 'In-Person' ? (selectedBranch || 'Hawassa Campus') : 'Online';
       
       const newTxn = {
         id: `TXN-${finalAppId}`,
@@ -652,8 +652,8 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
         studentId: currentUser?.id || finalAppId,
         course: selectedCourse.name,
         level: selectedLevelName,
-        branch: branchName.includes('Megenagna') ? 'Megenagna Branch' : branchName.includes('Lebu') ? 'Lebu Branch' : 'Piazza Branch',
-        paymentType: 'Full Course Fee',
+        branch: branchName,
+        paymentType: 'Course Registration & Tuition',
         amount: Number(amountPaid) || totalDue,
         paymentMethod: paymentMethod,
         date: paymentDate || new Date().toISOString().split('T')[0],
@@ -677,7 +677,7 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
 
     // 1. Create/Update Persistent Student in DataContext
     const studentFullName = `${firstName} ${middleName} ${lastName}`.trim() || currentUser?.fullName || 'New Student';
-    const branchName = learningMode === 'In-Person' ? (selectedBranch === 'Piazza HQ' ? 'Piazza Branch' : selectedBranch) : 'Piazza Branch';
+    const branchName = learningMode === 'In-Person' ? (selectedBranch || 'Hawassa Campus') : 'Online';
     
     try {
       addStudentRegistration({
@@ -699,12 +699,12 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
         level: selectedLevelName || 'Level 1: Basic Foundation',
         branch: branchName,
         learningMode: learningMode,
-        scheduleFrequency: selectedDurationIndex === 2 ? '5 Days' : selectedDurationIndex === 1 ? '3 Days' : '2 Days',
-        scheduleDays: selectedScheduleDays.length > 0 ? selectedScheduleDays : (selectedDurationIndex === 2 ? ['Monday', 'Tuesday', 'Wednesday', 'Friday', 'Saturday'] : ['Monday', 'Wednesday', 'Friday']),
-        scheduleDayTime: `${(selectedScheduleDays.length > 0 ? selectedScheduleDays : (selectedDurationIndex === 2 ? ['Mon', 'Tue', 'Wed', 'Fri', 'Sat'] : ['Mon', 'Wed', 'Fri'])).map(d => d.slice(0, 3)).join('/')} - ${selectedClassTime || 'Morning (9:00 AM - 12:00 PM)'}`,
-        schedule: `${(selectedScheduleDays.length > 0 ? selectedScheduleDays : (selectedDurationIndex === 2 ? ['Mon', 'Tue', 'Wed', 'Fri', 'Sat'] : ['Mon', 'Wed', 'Fri'])).map(d => d.slice(0, 3)).join('/')} - ${selectedClassTime || 'Morning (9:00 AM - 12:00 PM)'}`,
+        scheduleFrequency: selectedDurationIndex === 0 ? '5 Days' : selectedDurationIndex === 1 ? '3 Days' : '2 Days',
+        scheduleDays: selectedScheduleDays.length > 0 ? selectedScheduleDays : (selectedDurationIndex === 0 ? ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] : selectedDurationIndex === 1 ? ['Monday', 'Wednesday', 'Friday'] : ['Tuesday', 'Thursday']),
+        scheduleDayTime: `${(selectedScheduleDays.length > 0 ? selectedScheduleDays : (selectedDurationIndex === 0 ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] : selectedDurationIndex === 1 ? ['Mon', 'Wed', 'Fri'] : ['Tue', 'Thu'])).map(d => d.slice(0, 3)).join('/')} - ${selectedClassTime || 'Morning (9:00 AM - 12:00 PM)'}`,
+        schedule: `${(selectedScheduleDays.length > 0 ? selectedScheduleDays : (selectedDurationIndex === 0 ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] : selectedDurationIndex === 1 ? ['Mon', 'Wed', 'Fri'] : ['Tue', 'Thu'])).map(d => d.slice(0, 3)).join('/')} - ${selectedClassTime || 'Morning (9:00 AM - 12:00 PM)'}`,
         classTime: selectedClassTime || 'Morning (9:00 AM - 12:00 PM)',
-        durationMonths: priceDetails.duration === '3 Months' || selectedDurationIndex === 2 ? 3 : priceDetails.duration === '6 Months' || selectedDurationIndex === 1 ? 6 : 9,
+        durationMonths: selectedDurationIndex === 0 ? 3 : selectedDurationIndex === 1 ? 4 : 6,
         registrationFeeETB: selectedCourse.registrationFee,
         courseFeeETB: totalCourseFee,
         totalFeeETB: totalDue,
@@ -783,9 +783,9 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
 
   // Duration dictates schedule frequency
   const getRequiredDaysCount = () => {
-    if (selectedDurationIndex === 2) return 5; // 3 months = 5 days
-    if (selectedDurationIndex === 1) return 3; // 6 months = 3 days
-    return 2; // 9 months = 2 days
+    if (selectedDurationIndex === 0) return 5; // Package 1: 3 months = 5 days/wk (1 hr/day)
+    if (selectedDurationIndex === 1) return 3; // Package 2: 4 months = 3 days/wk (1.5 hrs/day)
+    return 2; // Package 3: 6 months = 2 days/wk (2 hrs/day)
   };
 
   // Schedule status indicators generator
@@ -861,11 +861,11 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
   // ----------------------------------------------------
   const getPricingSummary = () => {
     if (!selectedCourse) return { registrationFee: 0, courseFee: 0, total: 0, isMonthly: false };
-    const priceDetails = selectedCourse.pricing[selectedDurationIndex];
+    const priceDetails = selectedCourse.pricing[selectedDurationIndex] || selectedCourse.pricing[0];
     const courseFee = priceDetails.price;
     const registrationFee = selectedCourse.registrationFee;
     const isMonthly = priceDetails.period === 'per month';
-    const total = registrationFee + (isMonthly ? courseFee * 3 : courseFee);
+    const total = registrationFee + courseFee;
     return { registrationFee, courseFee, total, isMonthly };
   };
 
@@ -881,7 +881,7 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
         </div>
         <div className="space-y-1">
           <span className="text-[10px] tracking-widest text-[#E89B52] uppercase font-bold">
-            Abel Begena School Onboarding
+            Liora Begena School Onboarding
           </span>
           <h2 className="font-display font-black text-xl text-[#2B2B2B]">
             STUDENT ENROLLMENT REGISTER
@@ -1680,13 +1680,27 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {COURSES_DATA.map((course) => {
+                      const isComingSoon = isCourseComingSoon(course.id);
                       const isSelected = selectedCourse?.id === course.id;
                       return (
                         <div
                           key={course.id}
-                          onClick={() => setSelectedCourse(course)}
-                          className={`border rounded-xl overflow-hidden cursor-pointer transition-all flex flex-col justify-between group ${
-                            isSelected
+                          onClick={() => {
+                            if (isComingSoon) {
+                              addNotification(
+                                `${course.name} - Coming Soon`,
+                                `Admissions for ${course.name} are currently under preparation. Active admissions are available for Begena and Krar!`,
+                                'system'
+                              );
+                              alert(`Admissions for ${course.name} are coming soon! Currently only Begena and Krar have active registrations open.`);
+                              return;
+                            }
+                            setSelectedCourse(course);
+                          }}
+                          className={`border rounded-xl overflow-hidden cursor-pointer transition-all flex flex-col justify-between group relative ${
+                            isComingSoon
+                              ? 'border-amber-200/80 bg-amber-50/20 hover:border-amber-400'
+                              : isSelected
                               ? 'border-[#E89B52] ring-2 ring-[#E89B52]/20 bg-[#FAF6EF]/30 shadow-xs'
                               : 'border-[#E7DED1] hover:border-[#C79A2B] bg-white hover:shadow-2xs'
                           }`}
@@ -1698,10 +1712,16 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               referrerPolicy="no-referrer"
                             />
-                            <div className="absolute top-2 right-2 bg-black/60 text-white px-2 py-0.5 rounded-full text-[9px] font-bold backdrop-blur-xs">
-                              ★ {course.rating}
-                            </div>
-                            {isSelected && (
+                            {isComingSoon ? (
+                              <div className="absolute top-2 right-2 bg-gradient-to-r from-amber-600 to-amber-700 text-white px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider shadow-sm border border-amber-500/40">
+                                Coming Soon
+                              </div>
+                            ) : (
+                              <div className="absolute top-2 right-2 bg-black/60 text-white px-2 py-0.5 rounded-full text-[9px] font-bold backdrop-blur-xs">
+                                ★ {course.rating}
+                              </div>
+                            )}
+                            {isSelected && !isComingSoon && (
                               <div className="absolute inset-0 bg-[#E89B52]/20 backdrop-blur-[1px] flex items-center justify-center">
                                 <span className="bg-[#E89B52] text-white p-2 rounded-full shadow-md">
                                   <Check size={20} />
@@ -1711,15 +1731,22 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
                           </div>
                           <div className="p-3.5 space-y-2 text-left flex-1 flex flex-col justify-between">
                             <div className="space-y-1">
-                              <h4 className="text-xs font-bold text-[#2B2B2B] group-hover:text-[#E89B52] transition-colors">{course.name}</h4>
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <h4 className="text-xs font-bold text-[#2B2B2B] group-hover:text-[#E89B52] transition-colors">{course.name}</h4>
+                                {isComingSoon && (
+                                  <span className="text-[8px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100 border border-amber-300 px-1 py-0.2 rounded">
+                                    Soon
+                                  </span>
+                                )}
+                              </div>
                               <p className="text-[10px] text-gray-500 line-clamp-2 leading-relaxed">
                                 {course.shortDescription}
                               </p>
                             </div>
                             <div className="flex justify-between items-center text-[9px] font-mono font-bold text-gray-400 pt-2 border-t border-[#FAF6EF]">
                               <span>Reg Fee: {course.registrationFee} ETB</span>
-                              <span className="text-[#E89B52] font-sans">
-                                {course.pricing[0].price} ETB
+                              <span className="text-[#E89B52] font-sans font-bold">
+                                {isComingSoon ? 'Coming Soon' : `${course.pricing[0].price} ETB`}
                               </span>
                             </div>
                           </div>
@@ -1778,7 +1805,7 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
                           }`}
                         >
                           <p className="text-xs font-bold uppercase">Physical / In-Person</p>
-                          <p className="text-[10px] text-gray-400 mt-1">Study inside real classrooms with teachers at Addis Ababa branches.</p>
+                          <p className="text-[10px] text-gray-400 mt-1">Study inside real classrooms with teachers at our Hawassa campus.</p>
                         </div>
 
                         <div
@@ -1808,9 +1835,7 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
                           onChange={(e) => setSelectedBranch(e.target.value)}
                           className="w-full h-10 px-3 bg-white border border-[#E7DED1] rounded-md text-sm outline-none focus:border-[#C79A2B]"
                         >
-                          <option value="Piazza HQ">Piazza HQ (Near St. George - Traditional Campus)</option>
-                          <option value="Megenagna Hub">Megenagna Hub (Silassie Building - Modern Hub)</option>
-                          <option value="Lebu Annex">Lebu Annex (Near Varnero Roundabout - Community Annex)</option>
+                          <option value="Hawassa Campus">Hawassa Campus (Center Point Tower, 1st Floor)</option>
                         </select>
                       </motion.div>
                     )}
@@ -1864,16 +1889,16 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
                     <p className="font-bold text-[#6F4E37] uppercase">Weekly Frequency Allocation Rule:</p>
                     <div className="grid grid-cols-3 gap-2 text-[11px] pt-1 text-gray-500">
                       <div>
-                        <span className="font-bold text-[#E89B52]">3 Months Package:</span>
-                        <p>5 class days / week</p>
+                        <span className="font-bold text-[#E89B52]">Package 1 (3 Months):</span>
+                        <p>5 class days / week (1 hr/day)</p>
                       </div>
                       <div>
-                        <span className="font-bold text-[#E89B52]">6 Months Package:</span>
-                        <p>3 class days / week</p>
+                        <span className="font-bold text-[#E89B52]">Package 2 (4 Months):</span>
+                        <p>3 class days / week (1.5 hrs/day)</p>
                       </div>
                       <div>
-                        <span className="font-bold text-[#E89B52]">9 Months Package:</span>
-                        <p>2 class days / week</p>
+                        <span className="font-bold text-[#E89B52]">Package 3 (6 Months):</span>
+                        <p>2 class days / week (2 hrs/day)</p>
                       </div>
                     </div>
                   </div>
@@ -2005,22 +2030,15 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
 
                     <div className="flex justify-between items-center py-1">
                       <span className="text-gray-500">
-                        {selectedCourse?.name} Tuition Fee ({selectedCourse?.pricing[selectedDurationIndex].duration}):
+                        {selectedCourse?.name} Monthly Tuition ({selectedCourse?.pricing[selectedDurationIndex]?.duration}):
                       </span>
                       <span className="font-bold">
-                        {courseFee} ETB {isMonthly ? ' / month' : ''}
+                        {courseFee} ETB / month
                       </span>
                     </div>
 
-                    {isMonthly && (
-                      <div className="flex justify-between items-center py-1 bg-[#FAF6EF]/50 p-2.5 rounded-lg text-[11px] text-amber-700 font-medium">
-                        <span>Intensive package estimated total (3 months tuition):</span>
-                        <span className="font-bold">{courseFee * 3} ETB</span>
-                      </div>
-                    )}
-
                     <div className="flex justify-between items-center py-2 border-t font-bold text-sm text-[#6F4E37]">
-                      <span>TOTAL INITIAL DUE AMOUNT:</span>
+                      <span>INITIAL PAYMENT DUE (REGISTRATION + FIRST MONTH):</span>
                       <span className="text-lg font-black text-[#E89B52]">
                         {total} ETB
                       </span>
@@ -2105,9 +2123,9 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
                     <h4 className="font-bold text-[#6F4E37] uppercase tracking-wider">OFFICIAL INSTRUCTIONS</h4>
                     
                     <p className="leading-relaxed">
-                      {paymentMethod === 'CBE' && 'Please complete your transfer to: CBE Account Name: Abel Begena Traditional School • Account No: [Configure in Admin Settings] (Branch: Piazza).'}
-                      {paymentMethod === 'Telebirr' && 'Open your Telebirr application. Pay to Merchant / Merchant Number: [Configure in Admin Settings] (Abel Begena Traditional School).'}
-                      {paymentMethod === 'Cash' && 'Your registration will reside in "Pending Cash Verification" status. Visit our offices at Piazza HQ, Megenagna Hub, or Lebu Annex to settle transaction in person.'}
+                      {paymentMethod === 'CBE' && 'Please complete your transfer to: CBE Account Name: Liora Begena Traditional School • Account No: [Configure in Admin Settings] (Branch: Hawassa).'}
+                      {paymentMethod === 'Telebirr' && 'Open your Telebirr application. Pay to Merchant / Merchant Number: [Configure in Admin Settings] (Liora Begena Traditional School).'}
+                      {paymentMethod === 'Cash' && 'Your registration will reside in "Pending Cash Verification" status. Visit our office at Center Point Tower, 1st floor, Hawassa to settle transaction in person.'}
                     </p>
 
                     <div className="p-3 bg-white rounded-lg border flex gap-2.5 items-center font-bold text-[#C79A2B]">
@@ -2133,7 +2151,7 @@ export function EnrollmentWizard({ lang, onNavigate, initialCourseId }: Enrollme
                       <span className="text-3xl">💵</span>
                       <h4 className="text-sm font-bold uppercase text-[#2B2B2B]">Physical Cash Settle</h4>
                       <p className="text-xs text-gray-500 leading-relaxed">
-                        You selected physical cash. Simply proceed to the final submission. Settle your payment of <b>{total} ETB</b> at your chosen branch desk (Piazza, Megenagna, or Lebu) to complete activation.
+                        You selected physical cash. Simply proceed to the final submission. Settle your payment of <b>{total} ETB</b> at our Hawassa Campus desk (Center Point Tower, 1st floor) to complete activation.
                       </p>
                     </div>
                   ) : (

@@ -1,10 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* -------------------------------------------------------------
+   BENAIAH FONT DEFINITIONS (For Amharic / Ethiopic Typography)
+   ------------------------------------------------------------- */
+@font-face {
+  font-family: 'Benaiah';
+  src: url('/fonts/Benaiah.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Automatic unicode range assignment for Ethiopic / Ge'ez characters */
+@font-face {
+  font-family: 'EthiopicBenaiah';
+  src: url('/fonts/Benaiah.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+1200-137F, U+1380-139F, U+2D80-2DDF, U+AB00-AB2F, U+0020-007E;
+}
+
 @theme {
-  --font-sans: "Inter", "Noto Sans Ethiopic", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Coolvetica", "Inter", sans-serif;
-  --font-ethiopic: "Noto Sans Ethiopic", sans-serif;
+  --font-sans: "Inter", "Benaiah", "Noto Sans Ethiopic", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Benaiah", "Coolvetica", "Inter", sans-serif;
+  --font-ethiopic: "Benaiah", "Noto Sans Ethiopic", sans-serif;
+  --font-benaiah: "Benaiah", "Noto Sans Ethiopic", sans-serif;
+  --font-amharic: "Benaiah", "Noto Sans Ethiopic", sans-serif;
 
   /* Foundation Brand & Cultural Colors */
   --color-brand-orange: #E89B52;
@@ -62,12 +85,57 @@ body {
   max-width: 100vw;
   background-color: #FFFDF8;
   color: #2B2B2B;
-  font-family: "Inter", "Noto Sans Ethiopic", sans-serif;
+  font-family: "Inter", "Benaiah", "Noto Sans Ethiopic", sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
   padding: 0;
+}
+
+/* =============================================================
+   AMHARIC TRANSLATION TYPOGRAPHY (BENAIAH FONT INTEGRATION)
+   ============================================================= */
+html[lang="am"],
+html[lang="am"] body,
+html.lang-am,
+html.lang-am body,
+body.lang-am,
+.font-amharic,
+.font-benaiah,
+.font-ethiopic,
+[data-lang="am"],
+:lang(am) {
+  font-family: "Benaiah", "Noto Sans Ethiopic", sans-serif !important;
+}
+
+html[lang="am"] h1,
+html[lang="am"] h2,
+html[lang="am"] h3,
+html[lang="am"] h4,
+html[lang="am"] h5,
+html[lang="am"] h6,
+html[lang="am"] p,
+html[lang="am"] span,
+html[lang="am"] button,
+html[lang="am"] input,
+html[lang="am"] select,
+html[lang="am"] textarea,
+html[lang="am"] a,
+html.lang-am h1,
+html.lang-am h2,
+html.lang-am h3,
+html.lang-am h4,
+html.lang-am h5,
+html.lang-am h6,
+html.lang-am p,
+html.lang-am span,
+html.lang-am button,
+html.lang-am input,
+html.lang-am select,
+html.lang-am textarea,
+html.lang-am a {
+  font-family: "Benaiah", "Noto Sans Ethiopic", sans-serif;
 }
 
 #root {
@@ -586,7 +654,7 @@ html.dark ::-webkit-scrollbar-thumb:hover {
 }
 
 /* Reduce specific instrument image sizes by 50% for better visibility in cards */
-img[src*="begena"]:not([src*="New_begena"]),
+img[src*="begena"]:not([src*="New_begena"]):not([src*="hero_bruk_begena"]),
 img[src*="krar"],
 img[src*="washint"],
 img[src*="kebero"],
@@ -599,12 +667,14 @@ img[src*="vocal"] {
   margin-right: auto !important;
 }
 
-/* Keep New_begena at full hero container fill */
-img[src*="New_begena.jpg"] {
+/* Keep New_begena and hero_bruk_begena at full hero container fill */
+img[src*="New_begena.jpg"],
+img[src*="hero_bruk_begena.jpg"] {
   max-width: 100% !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
+  object-position: center 20% !important;
   display: block;
 }
 
@@ -632,7 +702,7 @@ img[src*="New_begena.jpg"] {
   background-size: 14px 14px;
 }
 
-/* Responsive Abel Begena Grid System Utilities */
+/* Responsive Liora Begena Grid System Utilities */
 @utility ab-grid-responsive {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

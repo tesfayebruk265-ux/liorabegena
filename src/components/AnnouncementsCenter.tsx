@@ -61,7 +61,7 @@ export function AnnouncementsCenter({ onNavigate, lang }: AnnouncementsCenterPro
           School & Branch Announcements
         </h1>
         <p className="text-sm text-stone-600 mt-0.5">
-          Important operational, academic, and event announcements from Abel Begena School leadership.
+          Important operational, academic, and event announcements from Liora Begena School leadership.
         </p>
       </div>
 

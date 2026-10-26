@@ -40,7 +40,7 @@ export function BranchOrderDashboard({
 }: BranchOrderDashboardProps) {
   const { currentUser, addNotification } = useAuth();
 
-  const [selectedBranch, setSelectedBranch] = useState<'All' | 'Piazza' | 'Megenagna' | 'Lebu'>('Piazza');
+  const [selectedBranch, setSelectedBranch] = useState<'All' | 'Hawassa'>('Hawassa');
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -143,7 +143,7 @@ export function BranchOrderDashboard({
       <div className="bg-white border border-[#E7DED1] rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 shadow-xs">
         <div className="flex flex-wrap items-center gap-3">
           <span className="text-xs font-bold text-gray-600">Active Campus:</span>
-          {(['Piazza', 'Megenagna', 'Lebu', 'All'] as const).map((b) => (
+          {(['Hawassa', 'All'] as const).map((b) => (
             <button
               key={b}
               onClick={() => setSelectedBranch(b)}
@@ -151,7 +151,7 @@ export function BranchOrderDashboard({
                 selectedBranch === b ? 'bg-[#2B2B2B] text-white' : 'bg-[#FAF6EF] text-gray-700 hover:bg-[#E7DED1]'
               }`}
             >
-              {b} Campus
+              {b === 'Hawassa' ? 'Hawassa main Branch' : 'All Orders'}
             </button>
           ))}
         </div>

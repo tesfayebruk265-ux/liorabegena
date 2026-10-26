@@ -228,15 +228,15 @@ interface DataContextType {
 }
 
 const DEFAULT_SETTINGS: SystemSettings = {
-  schoolName: 'Abel Begena School',
-  schoolAmharicName: 'አቤል በገና ትምህርት ቤት',
-  founderName: 'Zemari Deacon Abel Tesfaye',
+  schoolName: 'Liora Begena School',
+  schoolAmharicName: 'ሊዮራ በገና ትምህርት ቤት',
+  founderName: 'Deacon Bruk Tesfaye',
   contactPhone: '+251 911 000 000',
-  contactEmail: 'info@abelbegena.com',
-  primaryBranch: 'Piazza Branch',
-  registrationFeeETB: 500,
+  contactEmail: 'info@liorabegena.com',
+  primaryBranch: 'Hawassa Campus',
+  registrationFeeETB: 200,
   heroHeadline: 'Preserving Ethiopia Classical Sacred Music Heritage',
-  heroSubheadline: 'Comprehensive traditional instruction in Begena, Krar, Masenqo, Washint, Vocal, and Kebero across Addis Ababa and online globally.',
+  heroSubheadline: 'Comprehensive traditional instruction in Begena, Krar, Masenqo, Washint, Vocal, and Kebero in Hawassa and online globally.',
   enableTelebirrAutoCheck: true,
   enableSmsNotifications: true
 };
@@ -263,25 +263,7 @@ export const DEFAULT_MEDIA_CATEGORIES = [
   'Other'
 ];
 
-const INITIAL_MEDIA_ASSETS: PersistentMediaAsset[] = LOCAL_GALLERY_IMAGES.map((imageUrl, index) => {
-  const photoDate = new Date(2026, 6, index + 1).toISOString().split('T')[0];
-  return {
-    id: `gallery_${index + 1}`,
-    url: imageUrl,
-    title: `Gallery Image ${index + 1}`,
-    caption: `Newly uploaded gallery image ${index + 1}`,
-    category: index % 2 === 0 ? 'School Life' : 'Begena',
-    placement: 'Gallery',
-    altText: `Gallery image ${index + 1}`,
-    status: 'Published',
-    isPublished: true,
-    uploadedBy: 'founder@begena.com',
-    uploadedAt: new Date(2026, 6, index + 1).toISOString(),
-    photoDate,
-    location: 'Abel Begena School',
-    fileSizeKB: 320 + index
-  };
-});
+const INITIAL_MEDIA_ASSETS: PersistentMediaAsset[] = [];
 
 const INITIAL_STUDENTS: PersistentStudent[] = [];
 const INITIAL_PAYMENTS: PersistentPayment[] = [];
@@ -290,11 +272,11 @@ const INITIAL_TEACHERS: PersistentTeacher[] = [
   {
     id: 'tch_abel',
     email: 'teacher@begena.com',
-    fullName: 'Lique Mezemer Abel Tesfaye',
+    fullName: 'Lique Mezemer Bruk Tesfaye',
     phone: '+251 911 123 456',
     photo: '',
     specializations: ['Begena', 'Vocal', 'Zema'],
-    branches: ['Piazza Branch', 'Bole Branch', 'Megenagna Branch'],
+    branches: ['Hawassa main Branch'],
     supportsOnline: true,
     supportsInPerson: true,
     capacity: 50,
@@ -305,32 +287,47 @@ const INITIAL_TEACHERS: PersistentTeacher[] = [
   {
     id: 'tch_alex',
     email: 'alex@begena.com',
-    fullName: 'Alex T',
+    fullName: 'Seyfu T.',
     phone: '+251 922 234 567',
     photo: '',
     specializations: ['Krar', 'Kirar', 'Vocal', 'Kebero'],
-    branches: ['Piazza Branch', 'Bole Branch'],
+    branches: ['Hawassa main Branch'],
     supportsOnline: true,
     supportsInPerson: true,
     capacity: 40,
     status: 'Active',
     bio: 'Virtuoso Krar player and traditional vocal coach specializing in pentatonic modes.',
-    telegramUsername: 'alex_krar'
+    telegramUsername: 'seyfu_krar'
   },
   {
     id: 'tch_hayle',
     email: 'hayle@begena.com',
-    fullName: 'Hayle Melekot',
+    fullName: 'Abel Betsegaw',
     phone: '+251 933 345 678',
     photo: '',
     specializations: ['Masenqo', 'Masinqo', 'Washint'],
-    branches: ['Piazza Branch', 'Megenagna Branch'],
+    branches: ['Hawassa main Branch'],
     supportsOnline: true,
     supportsInPerson: true,
     capacity: 35,
     status: 'Active',
     bio: 'Acclaimed Masenqo bowed-lute master and traditional improvisational artist.',
-    telegramUsername: 'hayle_masenqo'
+    telegramUsername: 'abel_betsegaw'
+  },
+  {
+    id: 'tch_hana',
+    email: 'hana@begena.com',
+    fullName: 'Hana Derese',
+    phone: '+251 966 678 901',
+    photo: '',
+    specializations: ['Begena', 'Vocal', 'Zema'],
+    branches: ['Hawassa main Branch'],
+    supportsOnline: true,
+    supportsInPerson: true,
+    capacity: 35,
+    status: 'Active',
+    bio: 'Accomplished Begena instructor and traditional vocal coach specializing in sacred chants.',
+    telegramUsername: 'hana_derese'
   },
   {
     id: 'tch_bruk',
@@ -339,7 +336,7 @@ const INITIAL_TEACHERS: PersistentTeacher[] = [
     phone: '+251 944 456 789',
     photo: '',
     specializations: ['Begena', 'Washint'],
-    branches: ['Bole Branch', 'Piazza Branch'],
+    branches: ['Hawassa main Branch'],
     supportsOnline: true,
     supportsInPerson: true,
     capacity: 35,
@@ -354,7 +351,7 @@ const INITIAL_TEACHERS: PersistentTeacher[] = [
     phone: '+251 955 567 890',
     photo: '',
     specializations: ['Kebero', 'Vocal', 'Zema'],
-    branches: ['Piazza Branch', 'Bole Branch', 'Megenagna Branch'],
+    branches: ['Hawassa main Branch'],
     supportsOnline: true,
     supportsInPerson: true,
     capacity: 30,
@@ -367,7 +364,7 @@ const INITIAL_TEACHERS: PersistentTeacher[] = [
 const EXPECTED_TEACHER_IDS = new Set(INITIAL_TEACHERS.map((teacher) => teacher.id));
 
 function loadSavedTeachers(): PersistentTeacher[] {
-  const saved = localStorage.getItem('ab_teachers_v4');
+  const saved = localStorage.getItem('ab_teachers_v5') || localStorage.getItem('ab_teachers_v4');
   if (!saved) return INITIAL_TEACHERS;
 
   try {
@@ -375,11 +372,21 @@ function loadSavedTeachers(): PersistentTeacher[] {
     if (Array.isArray(parsed) && parsed.length > 0) {
       const storedHasExpected = parsed.some((item: any) => EXPECTED_TEACHER_IDS.has(item?.id));
       if (storedHasExpected) {
-        return parsed;
+        // Normalize names for Seyfu T. and Abel Betsegaw and ensure Hana Derese exists
+        const updated = parsed.map((t: any) => {
+          if (t.id === 'tch_alex' && t.fullName === 'Alex T') return { ...t, fullName: 'Seyfu T.' };
+          if (t.id === 'tch_hayle' && t.fullName === 'Hayle Melekot') return { ...t, fullName: 'Abel Betsegaw' };
+          return t;
+        });
+        if (!updated.some((t: any) => t.id === 'tch_hana')) {
+          const hana = INITIAL_TEACHERS.find(t => t.id === 'tch_hana');
+          if (hana) updated.push(hana);
+        }
+        return updated;
       }
     }
   } catch (e) {
-    console.warn('Failed to parse ab_teachers_v4. Using INITIAL_TEACHERS.', e);
+    console.warn('Failed to parse ab_teachers. Using INITIAL_TEACHERS.', e);
   }
 
   return INITIAL_TEACHERS;
@@ -469,7 +476,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [mediaAssets, setMediaAssets] = useState<PersistentMediaAsset[]>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('ab_media_assets_v4');
+      try {
+        localStorage.removeItem('ab_media_assets_v4');
+      } catch (e) {}
+      const saved = localStorage.getItem('ab_media_assets_v5');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
@@ -521,7 +531,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
               studentEmail: r.studentEmail || '',
               enrollmentId: r.enrollmentId,
               courseName: r.courseName || r.instrument || r.className || 'Begena Course',
-              branch: r.branch || 'Piazza Main Branch',
+              branch: r.branch || 'Hawassa main Branch',
               date: r.date || new Date().toISOString().split('T')[0],
               status,
               recordedBy: r.markedByName || r.markedByRole || r.recordedBy || 'Campus Staff',
@@ -583,7 +593,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [payments]);
 
   useEffect(() => {
-    safeSetItem('ab_media_assets_v4', JSON.stringify(mediaAssets));
+    safeSetItem('ab_media_assets_v5', JSON.stringify(mediaAssets));
   }, [mediaAssets]);
 
   useEffect(() => {
@@ -710,9 +720,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return teacher.branches.some(b => {
       const tbNorm = b.toLowerCase().trim();
       return tbNorm.includes(branchNorm) || branchNorm.includes(tbNorm) ||
-             (branchNorm.includes('piazza') && tbNorm.includes('piazza')) ||
-             (branchNorm.includes('bole') && tbNorm.includes('bole')) ||
-             (branchNorm.includes('megenagna') && tbNorm.includes('megenagna'));
+             (branchNorm.includes('hawassa') && tbNorm.includes('hawassa')) ||
+             (branchNorm.includes('piazza') && tbNorm.includes('hawassa')) ||
+             (branchNorm.includes('bole') && tbNorm.includes('hawassa')) ||
+             (branchNorm.includes('megenagna') && tbNorm.includes('hawassa'));
     });
   };
 
@@ -823,7 +834,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         instrument: st.instrument || st.courseName || '',
         level: st.level || 'Basic 1',
         learningMode: st.learningMode || 'In-Person',
-        branch: st.branch || 'Piazza Branch',
+        branch: st.branch || 'Hawassa main Branch',
         status: 'Active',
         assignmentStatus: 'Pending Teacher Assignment',
         progressPercent: 0,
@@ -1176,7 +1187,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           instrument: stu.instrument || 'Begena',
           level: stu.level || 'Basic 1',
           learningMode: stu.learningMode || 'In-Person',
-          branch: stu.branch || 'Piazza Branch',
+          branch: stu.branch || 'Hawassa main Branch',
           status: 'Active',
           assignmentStatus: 'Pending Teacher Assignment',
           progressPercent: 0,
@@ -1509,7 +1520,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           instrument: inst,
           level: targetStudent.level || prev[existingIdx].level || 'Basic 1',
           learningMode: targetStudent.learningMode || prev[existingIdx].learningMode || 'In-Person',
-          branch: targetStudent.branch || prev[existingIdx].branch || 'Piazza Branch'
+          branch: targetStudent.branch || prev[existingIdx].branch || 'Hawassa main Branch'
         };
         return updated;
       }
@@ -1524,7 +1535,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         instrument: inst,
         level: targetStudent.level || 'Basic 1',
         learningMode: targetStudent.learningMode || 'In-Person',
-        branch: targetStudent.branch || 'Piazza Branch',
+        branch: targetStudent.branch || 'Hawassa main Branch',
         enrollmentDate: new Date().toISOString().split('T')[0],
         status: 'Active',
         progressPercent: 0,
@@ -1555,7 +1566,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           verified: true,
           enrolledInstrument: inst,
           enrolledCourse: courseTitle,
-          branch: targetStudent.branch || 'Piazza Branch',
+          branch: targetStudent.branch || 'Hawassa main Branch',
           password: 'Password123!',
           ...savedAccounts[cleanEmail]
         };
@@ -1629,7 +1640,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       studentEmail: matchedPayment.studentEmail || '',
       studentPhone: matchedPayment.studentPhone || '',
       courseName: matchedPayment.courseName || '',
-      branch: matchedPayment.branch || 'Piazza Branch',
+      branch: matchedPayment.branch || 'Hawassa main Branch',
       amountETB: matchedPayment.amountETB || 0,
       paymentMethod: matchedPayment.paymentMethod || 'CBE',
       referenceNumber: matchedPayment.referenceNumber || '',
@@ -1971,6 +1982,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem('ab_teachers_v4');
     localStorage.removeItem('ab_enrollments_v4');
     localStorage.removeItem('ab_media_assets_v4');
+    localStorage.removeItem('ab_media_assets_v5');
     localStorage.removeItem('ab_media_categories_v4');
     localStorage.removeItem('ab_audit_logs_v4');
     localStorage.removeItem('ab_system_settings_v4');

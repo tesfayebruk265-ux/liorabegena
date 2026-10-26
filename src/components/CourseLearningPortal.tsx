@@ -284,7 +284,7 @@ function EmptyCoursePortal({ enrollment, teacher, lang, onNavigate }: EmptyCours
               {courseTitle}
             </h1>
             <p className="text-xs text-amber-100/80 max-w-xl">
-              Official student portal for {instrumentName} classical instruction at Abel Begena Traditional Music School.
+              Official student portal for {instrumentName} classical instruction at Liora Begena Traditional Music School.
             </p>
           </div>
 

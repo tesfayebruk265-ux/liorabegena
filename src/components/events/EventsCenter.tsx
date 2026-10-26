@@ -92,7 +92,7 @@ export function EventsCenter({ lang, onNavigate, initialEventId }: EventsCenterP
   const [newLocation, setNewLocation] = useState('');
   const [newStartDate, setNewStartDate] = useState('');
   const [newStartTime, setNewStartTime] = useState('10:00 AM');
-  const [newOrganizer, setNewOrganizer] = useState('Abel Begena Event Team');
+  const [newOrganizer, setNewOrganizer] = useState('Liora Begena Event Team');
   const [newMaxCapacity, setNewMaxCapacity] = useState(200);
   const [newDescription, setNewDescription] = useState('');
 
@@ -196,7 +196,7 @@ export function EventsCenter({ lang, onNavigate, initialEventId }: EventsCenterP
     const created: ComprehensiveEvent = {
       id: `evt-${Date.now()}`,
       title: newTitle,
-      description: newDescription || 'Special Abel Begena School cultural event.',
+      description: newDescription || 'Special Liora Begena School cultural event.',
       fullDescription: newDescription,
       coverImage: begenaPlayingImg,
       eventType: newType,
@@ -233,7 +233,7 @@ export function EventsCenter({ lang, onNavigate, initialEventId }: EventsCenterP
         <div className="max-w-4xl space-y-3 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E7DED1] text-xs font-bold text-[#E89B52] shadow-3xs">
             <Sparkles size={14} className="text-[#C79A2B]" />
-            <span>Abel Begena Events, Concerts & Performance Hub</span>
+            <span>Liora Begena Events, Concerts & Performance Hub</span>
           </div>
           <h1 className="font-display font-black text-3xl sm:text-4xl text-[#2B2B2B] tracking-tight">
             Sacred Recitals, Competitions & Graduation Center
@@ -852,7 +852,7 @@ export function EventsCenter({ lang, onNavigate, initialEventId }: EventsCenterP
             >
               <div className="flex items-center justify-between border-b border-[#E7DED1] pb-3">
                 <h3 className="font-display font-bold text-lg text-[#2B2B2B]">
-                  Create New Abel Begena Event
+                  Create New Liora Begena Event
                 </h3>
                 <button
                   onClick={() => setIsCreateEventModalOpen(false)}

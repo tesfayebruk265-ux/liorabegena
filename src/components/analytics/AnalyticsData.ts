@@ -78,9 +78,9 @@ export const SAMPLE_OPERATIONAL_ALERTS: OperationalAlertItem[] = [
   {
     id: 'alt-1',
     type: 'Critical',
-    title: 'Piazza Branch Begena Gut String Low Stock',
-    description: 'Ox gut string 0.8mm stock at Piazza Campus has dropped to 3 units (threshold: 10 units). High weekend demand expected.',
-    affectedBranch: 'Piazza Campus',
+    title: 'Hawassa Campus Begena Gut String Low Stock',
+    description: 'Ox gut string 0.8mm stock at Hawassa Campus has dropped to 3 units (threshold: 10 units). High weekend demand expected.',
+    affectedBranch: 'Hawassa Campus',
     timestamp: '2026-07-21 09:30',
     actionRequired: 'Approve Purchase Order #PO-9912 to supplier Addis Artisans.'
   },
@@ -97,7 +97,7 @@ export const SAMPLE_OPERATIONAL_ALERTS: OperationalAlertItem[] = [
     id: 'alt-3',
     type: 'Important',
     title: 'Outstanding Course Fee Follow-ups',
-    description: '42 active students have payments overdue by 10+ days totaling 84,000 ETB across all 3 campuses.',
+    description: '42 active students have payments overdue by 10+ days totaling 84,000 ETB at Hawassa campus & online.',
     affectedBranch: 'All Campuses',
     timestamp: '2026-07-21 08:00',
     actionRequired: 'Accountant team to trigger automated Telebirr SMS reminder notifications.'
@@ -106,7 +106,7 @@ export const SAMPLE_OPERATIONAL_ALERTS: OperationalAlertItem[] = [
     id: 'alt-4',
     type: 'Informational',
     title: 'July Student Enrollment Surpass (+14% Target)',
-    description: 'Total active student enrollments reached 1,280 across Piazza, Megenagna, and Lebu campuses.',
+    description: 'Total active student enrollments reached 1,280 across Hawassa campus and online cohorts.',
     affectedBranch: 'All Campuses',
     timestamp: '2026-07-19 18:00'
   }
@@ -117,7 +117,7 @@ export const SAMPLE_AI_INSIGHTS: AIInsightItem[] = [
   {
     id: 'ins-1',
     category: 'Student Growth & Enrollment',
-    text: 'Student enrollment increased by 14.2% between June and July 2026, driven primarily by online Begena courses and Megenagna weekend batches.',
+    text: 'Student enrollment increased by 14.2% between June and July 2026, driven primarily by online Begena courses and Hawassa weekend batches.',
     badge: 'Verified Data',
     confidenceLevel: '99% Data Match',
     supportingData: 'June 2026: 1,120 active students → July 2026: 1,280 active students (+160 students).',
@@ -139,13 +139,13 @@ export const SAMPLE_AI_INSIGHTS: AIInsightItem[] = [
   {
     id: 'ins-3',
     category: 'Capacity & Teacher Demand Forecast',
-    text: 'Projected Q3 enrollment growth suggests Piazza and Megenagna campuses will reach 98% room capacity by September 2026 if 2 new teachers are not onboarded.',
+    text: 'Projected Q3 enrollment growth suggests Hawassa campus will reach 98% room capacity by September 2026 if 2 new teachers are not onboarded.',
     badge: 'Forecast',
     confidenceLevel: '85% Predictive Confidence',
     supportingData: 'Historical 3-year growth model + current waiting list of 65 applicants.',
     dateGenerated: '2026-07-21',
     source: 'Predictive Analytics Engine & HR Recruitment Pipeline',
-    recommendedAction: 'Initiate recruitment for 1 Begena and 1 Krar instructor for Megenagna branch.'
+    recommendedAction: 'Initiate recruitment for 1 Begena and 1 Krar instructor for Hawassa campus.'
   },
   {
     id: 'ins-4',
@@ -163,10 +163,10 @@ export const SAMPLE_AI_INSIGHTS: AIInsightItem[] = [
 export const SAMPLE_STRATEGIC_RECOMMENDATIONS: StrategicRecommendation[] = [
   {
     id: 'rec-101',
-    title: 'Open Additional Begena Level 1 Weekend Batch at Piazza Campus',
-    recommendationText: 'Schedule a Saturday 2:00 PM - 4:00 PM Begena Level 1 batch in Piazza Room 3.',
-    reason: 'Piazza morning classes are operating at 100% capacity with 28 students on the waitlist.',
-    supportingData: 'Piazza Campus Begena demand: 120 enrolled, 28 waitlisted. Projected monthly revenue gain: +42,000 ETB.',
+    title: 'Open Additional Begena Level 1 Weekend Batch at Hawassa Campus',
+    recommendationText: 'Schedule a Saturday 2:00 PM - 4:00 PM Begena Level 1 batch in Hawassa Room 3.',
+    reason: 'Hawassa morning classes are operating at 100% capacity with 28 students on the waitlist.',
+    supportingData: 'Hawassa Campus Begena demand: 120 enrolled, 28 waitlisted. Projected monthly revenue gain: +42,000 ETB.',
     confidenceScore: 94,
     requiresHumanApproval: true,
     status: 'Pending Review',
@@ -176,8 +176,8 @@ export const SAMPLE_STRATEGIC_RECOMMENDATIONS: StrategicRecommendation[] = [
     id: 'rec-102',
     title: 'Bulk Order Ox Gut Strings (0.8mm & 1.0mm) from Master Artisan Workroom',
     recommendationText: 'Place purchase order for 200 string sets at 15% volume discount.',
-    reason: 'Combined branch inventory is projected to deplete within 12 days based on current student sales velocity.',
-    supportingData: 'Current stock: 18 sets. Daily consumption rate: 1.5 sets/day across 3 campuses.',
+    reason: 'Hawassa branch inventory is projected to deplete within 12 days based on current student sales velocity.',
+    supportingData: 'Current stock: 18 sets. Daily consumption rate: 1.5 sets/day at Hawassa campus.',
     confidenceScore: 91,
     requiresHumanApproval: true,
     status: 'Pending Review',
@@ -199,7 +199,7 @@ export const SAMPLE_REPORT_CONFIGS: ReportConfig[] = [
     visualization: 'Table',
     exportFormat: 'PDF',
     scheduledFrequency: 'Monthly',
-    recipients: ['Founder Abel Begena', 'Lead Accountant'],
+    recipients: ['Founder Liora Begena', 'Lead Accountant'],
     createdBy: 'Chief Accountant',
     createdAt: '2026-07-01'
   },
@@ -215,7 +215,7 @@ export const SAMPLE_REPORT_CONFIGS: ReportConfig[] = [
     visualization: 'Bar Chart',
     exportFormat: 'Excel',
     scheduledFrequency: 'Weekly',
-    recipients: ['Founder Abel Begena', 'Branch Managers'],
+    recipients: ['Founder Liora Begena', 'Branch Managers'],
     createdBy: 'System Administrator',
     createdAt: '2026-07-05'
   }
@@ -225,7 +225,7 @@ export const SAMPLE_REPORT_HISTORY: GeneratedReportRecord[] = [
   {
     id: 'rh-1001',
     reportTitle: 'Q2 2026 Comprehensive School Performance Audit',
-    generatedBy: 'Founder Abel Begena',
+    generatedBy: 'Founder Liora Begena',
     generatedRole: 'Founder',
     generatedDate: '2026-07-01 10:15',
     reportType: 'Executive Summary',
@@ -276,11 +276,9 @@ export interface QAItem {
 export const FOUNDER_QA_DATABASE: QAItem[] = [
   {
     keywords: ['active', 'students', 'how many', 'total students', 'count'],
-    answer: 'Abel Begena School currently has 1,280 total active students across all 3 physical campuses and the global online platform.',
+    answer: 'Liora Begena School currently has 1,280 total active students across the Hawassa main Branch and the global online platform.',
     metrics: [
-      { label: 'Piazza Campus', value: '540 Students (42%)' },
-      { label: 'Megenagna Campus', value: '380 Students (30%)' },
-      { label: 'Lebu Campus', value: '180 Students (14%)' },
+      { label: 'Hawassa Main Branch', value: '1,100 Students (86%)' },
       { label: 'Online Global LMS', value: '180 Students (14%)' }
     ],
     timePeriod: 'Current Active Term (July 2026)',
@@ -289,15 +287,14 @@ export const FOUNDER_QA_DATABASE: QAItem[] = [
   },
   {
     keywords: ['branch grew', 'fastest growth', 'highest growth', 'grew the most', 'campus growth'],
-    answer: 'Megenagna Campus experienced the highest percentage student growth this month, expanding by +18.5% year-to-date.',
+    answer: 'Hawassa Main Branch experienced strong student growth this month, expanding by +18.5% year-to-date.',
     metrics: [
-      { label: 'Megenagna Growth', value: '+18.5% MoM' },
-      { label: 'Piazza Growth', value: '+11.2% MoM' },
-      { label: 'Lebu Growth', value: '+8.4% MoM' }
+      { label: 'Hawassa Main Branch', value: '+18.5% MoM' },
+      { label: 'Online Global Cohort', value: '+14.2% MoM' }
     ],
     timePeriod: 'June 2026 vs July 2026',
     source: 'Branch Enrollment Comparison System',
-    details: 'The surge at Megenagna is attributed to new weekend Begena and Krar introductory classes.'
+    details: 'The surge is attributed to new weekend Begena introductory classes at Center Point Tower.'
   },
   {
     keywords: ['course', 'popular', 'highest enrollment', 'enrolled course', 'most students'],
@@ -316,9 +313,7 @@ export const FOUNDER_QA_DATABASE: QAItem[] = [
     keywords: ['attendance', 'trending', 'attendance rate', 'absences'],
     answer: 'Overall student attendance is strong at 91.4% school-wide, up 2.1% from last month.',
     metrics: [
-      { label: 'Piazza Attendance', value: '93.2%' },
-      { label: 'Megenagna Attendance', value: '89.8%' },
-      { label: 'Lebu Attendance', value: '91.0%' },
+      { label: 'Hawassa Attendance', value: '93.2%' },
       { label: 'Online Live Classes', value: '88.5%' }
     ],
     timePeriod: 'July 2026 (Last 30 Days)',
@@ -339,15 +334,14 @@ export const FOUNDER_QA_DATABASE: QAItem[] = [
   },
   {
     keywords: ['teachers', 'need teachers', 'teacher capacity', 'overload', 'workload'],
-    answer: 'Megenagna Campus urgently needs 1 additional Begena teacher due to 95% room/class capacity on weekends.',
+    answer: 'Hawassa Campus is adding 1 additional Begena teacher due to 95% room/class capacity on weekends.',
     metrics: [
-      { label: 'Megenagna Teacher Hours', value: '38 hrs/week (Overload)' },
-      { label: 'Piazza Teacher Hours', value: '32 hrs/week (Balanced)' },
-      { label: 'Lebu Teacher Hours', value: '24 hrs/week (Available Capacity)' }
+      { label: 'Hawassa Campus Teacher Hours', value: '34 hrs/week (Optimal)' },
+      { label: 'Online Teacher Hours', value: '28 hrs/week (Available Capacity)' }
     ],
     timePeriod: 'Current Staffing Model (July 2026)',
     source: 'Teacher Roster & Class Schedule Analytics',
-    details: 'Lebu Campus has available capacity to absorb weekday students or host remote hybrid sessions.'
+    details: 'Online hybrid sessions have available capacity to absorb additional students.'
   }
 ];
 

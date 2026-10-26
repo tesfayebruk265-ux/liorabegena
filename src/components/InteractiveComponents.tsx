@@ -391,7 +391,7 @@ export function CourseCard({
         {/* Footer & CTA */}
         <div className="mt-auto pt-2 flex items-center justify-between">
           <div className="text-xs text-[#666666]">
-            By Abel Begena Masters
+            By Liora Begena Masters
           </div>
           <button
             onClick={onActionClick}
@@ -834,7 +834,7 @@ export function DecorativeCertificateDemo() {
       {/* Inner thin gold borders */}
       <div className="border border-[#C79A2B] p-6 h-full flex flex-col items-center">
         <span className="text-[10px] font-bold uppercase tracking-widest text-[#C79A2B] font-display">
-          ABEL BEGENA SCHOOL
+          LIORA BEGENA SCHOOL
         </span>
         <span className="text-[8px] font-bold uppercase tracking-widest text-[#2B2B2B] mt-0.5">
           Traditional Music Academy · Addis Ababa
@@ -865,7 +865,7 @@ export function DecorativeCertificateDemo() {
         {/* QR Verification Row */}
         <div className="flex items-center justify-between w-full mt-6 pt-4 border-t border-[#FAF6EF] text-left">
           <div>
-            <p className="text-[8px] uppercase font-bold text-[#2B2B2B]">Dean Abel Begena</p>
+            <p className="text-[8px] uppercase font-bold text-[#2B2B2B]">Dean Liora Begena</p>
             <p className="text-[7px] text-[#666666]">Founder & Master Instructor</p>
           </div>
           <div className="flex items-center gap-2">

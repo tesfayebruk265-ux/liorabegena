@@ -24,7 +24,7 @@ const SAMPLE_MAKEUP_REQUESTS: MakeupClassRecord[] = [
     parentName: 'Tadesse Worku',
     courseName: 'Begena - Level 1',
     teacherId: 't-1',
-    teacherName: 'Abel Begena',
+    teacherName: 'Liora Begena',
     originalClassDate: '2026-07-19',
     reason: 'Student Absence',
     newDate: '2026-07-28',
@@ -48,8 +48,8 @@ const SAMPLE_MAKEUP_REQUESTS: MakeupClassRecord[] = [
     reason: 'Teacher Absence',
     newDate: '2026-07-27',
     newTime: '02:00 PM',
-    branchId: 'b-[#2B2B2B]e',
-    branchName: 'Megenagna Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     googleMeetUrl: 'https://meet.google.com/makeup-session-02',
     status: 'Under Review'
   }
@@ -67,7 +67,7 @@ export function MakeupClassesCenter({ lang, onNavigate }: MakeupClassesCenterPro
   const [showModal, setShowModal] = useState(false);
   const [studentName, setStudentName] = useState('Dawit Hailu');
   const [courseName, setCourseName] = useState('Begena - Level 1');
-  const [teacherName, setTeacherName] = useState('Abel Begena');
+  const [teacherName, setTeacherName] = useState('Liora Begena');
   const [reason, setReason] = useState<any>('Student Absence');
   const [newDate, setNewDate] = useState('2026-07-29');
   const [newTime, setNewTime] = useState('04:00 PM');

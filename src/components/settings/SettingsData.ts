@@ -9,6 +9,8 @@ export interface SchoolProfile {
   telegram: string;
   facebook: string;
   youtube: string;
+  instagram?: string;
+  tiktok?: string;
   address: string;
   googleMapsLocation: string;
   workingHours: string;
@@ -41,8 +43,9 @@ export interface CoursePricingConfig {
   level: string;
   monthlyFee: number;
   threeMonthOption: number;
+  fourMonthOption: number;
   sixMonthOption: number;
-  nineMonthOption: number;
+  nineMonthOption?: number;
   registrationFee: number;
   onlinePricing: number;
   inPersonPricing: number;
@@ -55,7 +58,7 @@ export interface UserAccountItem {
   email: string;
   phone: string;
   role: 'Visitor' | 'Student' | 'Parent' | 'Teacher' | 'Registration Staff' | 'Branch Manager' | 'Accountant' | 'Admin' | 'Super Admin' | 'Founder';
-  branchScope: 'All Branches' | 'Piazza' | 'Megenagna' | 'Lebu';
+  branchScope: 'All Branches' | 'Hawassa Main Branch' | 'Online Campus';
   status: 'Active' | 'Pending' | 'Suspended' | 'Deactivated' | 'Archived';
   mfaEnabled: boolean;
   lastLogin: string;
@@ -133,21 +136,23 @@ export interface BackgroundJobItem {
 }
 
 export const INITIAL_SCHOOL_PROFILE: SchoolProfile = {
-  name: 'Abel Begena Traditional Sacred Music School',
+  name: 'Liora Begena Traditional Sacred Music School',
   logo: '/src/assets/images/logo.jpg',
   favicon: '/src/assets/images/logo.jpg',
   officialDescription: 'Ethiopian traditional sacred music institute dedicated to Begena, Kebero, Washint, and Krar excellence since 2012.',
   phone: '+251 911 234 567 / +251 911 888 999',
   email: 'info@abelbegena.com',
   website: 'https://abelbegena.com',
-  telegram: '@AbelBegenaSchool',
-  facebook: 'facebook.com/abelbegena',
-  youtube: 'youtube.com/@abelbegenaschool',
-  address: 'Bole Medhanealem Road, Addis Ababa, Ethiopia',
+  telegram: 'https://t.me/liyora_begena',
+  facebook: '',
+  youtube: '',
+  instagram: 'https://www.instagram.com/liyora_begena?xtok=MWxxbTJ5eWJ1MTBpeA==',
+  tiktok: 'https://www.tiktok.com/@liora_begena?is_from_webapp=1&sender_device=pc',
+  address: 'Center Point Tower, first floor, Hawassa, Ethiopia',
   googleMapsLocation: '9.0012° N, 38.7833° E',
   workingHours: 'Mon - Sat: 8:00 AM - 7:00 PM | Sun: 1:00 PM - 6:00 PM',
   foundedDate: 'September 11, 2012',
-  founderInfo: 'Girma Mamo & Abel Girma - Preservationists of Ethiopian Sacred Music Heritage',
+  founderInfo: 'Bruk Tesfaye - Founder of Liora Begena, Musician, Teacher & Technology Enthusiast',
   mission: 'To preserve, teach, and modernize traditional Ethiopian sacred acoustic instruments with spiritual reverence and academic rigor.',
   vision: 'To be the global center of excellence for Ethiopian liturgical and traditional musical heritage.',
   values: ['Spiritual Reverence', 'Cultural Authenticity', 'Academic Excellence', 'Community Trust', 'Global Accessibility']
@@ -155,45 +160,17 @@ export const INITIAL_SCHOOL_PROFILE: SchoolProfile = {
 
 export const INITIAL_BRANCHES: BranchItem[] = [
   {
-    id: 'BR-PIAZZA',
-    name: 'Piazza Central Branch',
-    code: 'PZ-01',
-    address: 'Near St. George Church, Piazza, Addis Ababa',
-    phone: '+251 911 111 222',
-    manager: 'Tewodros Kassahun',
-    openingHours: 'Mon-Sat 8:00 AM - 6:00 PM',
-    availableCourses: ['Begena Level 1', 'Begena Level 2', 'Kebero Masterclass', 'Washint'],
-    availableTeachers: 8,
-    classrooms: 6,
-    capacity: 250,
-    status: 'Active'
-  },
-  {
-    id: 'BR-MEGENAGNA',
-    name: 'Megenagna Branch',
-    code: 'MG-02',
-    address: 'Zefmesh Grand Mall 4th Floor, Megenagna, Addis Ababa',
-    phone: '+251 911 333 444',
-    manager: 'Bethlehem Tadesse',
-    openingHours: 'Mon-Sat 8:30 AM - 7:00 PM',
-    availableCourses: ['Begena Level 1', 'Begena Level 2', 'Begena Level 3', 'Krar', 'Voice & Zema'],
-    availableTeachers: 10,
+    id: 'BR-HAWASSA',
+    name: 'Hawassa Main Branch',
+    code: 'HW-01',
+    address: 'Center Point Tower, first floor, Hawassa, Ethiopia',
+    phone: '+251 912 67 4600',
+    manager: 'Bruk Tesfaye',
+    openingHours: 'Mon-Sat 8:30 AM - 6:30 PM',
+    availableCourses: ['Begena Level 1', 'Begena Level 2', 'Begena Level 3'],
+    availableTeachers: 24,
     classrooms: 8,
-    capacity: 320,
-    status: 'Active'
-  },
-  {
-    id: 'BR-LEBU',
-    name: 'Lebu Branch',
-    code: 'LB-03',
-    address: 'Varnero Square, Lebu, Addis Ababa',
-    phone: '+251 911 555 666',
-    manager: 'Solomon Worku',
-    openingHours: 'Tue-Sat 9:00 AM - 6:00 PM',
-    availableCourses: ['Begena Level 1', 'Washint', 'Kebero'],
-    availableTeachers: 5,
-    classrooms: 4,
-    capacity: 180,
+    capacity: 720,
     status: 'Active'
   }
 ];
@@ -206,8 +183,8 @@ export const INITIAL_PRICING_CONFIG: CoursePricingConfig[] = [
     level: 'Beginner',
     monthlyFee: 1500,
     threeMonthOption: 4000,
+    fourMonthOption: 5200,
     sixMonthOption: 7500,
-    nineMonthOption: 11000,
     registrationFee: 300,
     onlinePricing: 1200,
     inPersonPricing: 1500,
@@ -220,8 +197,8 @@ export const INITIAL_PRICING_CONFIG: CoursePricingConfig[] = [
     level: 'Intermediate',
     monthlyFee: 1800,
     threeMonthOption: 4800,
+    fourMonthOption: 6200,
     sixMonthOption: 9000,
-    nineMonthOption: 13000,
     registrationFee: 300,
     onlinePricing: 1500,
     inPersonPricing: 1800,
@@ -234,8 +211,8 @@ export const INITIAL_PRICING_CONFIG: CoursePricingConfig[] = [
     level: 'All Levels',
     monthlyFee: 1400,
     threeMonthOption: 3800,
+    fourMonthOption: 4900,
     sixMonthOption: 7000,
-    nineMonthOption: 10000,
     registrationFee: 250,
     onlinePricing: 1100,
     inPersonPricing: 1400,
@@ -246,7 +223,7 @@ export const INITIAL_PRICING_CONFIG: CoursePricingConfig[] = [
 export const INITIAL_USERS: UserAccountItem[] = [
   {
     id: 'USR-101',
-    fullName: 'Abel Girma',
+    fullName: 'Bruk Girma',
     email: 'abel@abelbegena.com',
     phone: '+251 911 223 344',
     role: 'Founder',
@@ -286,7 +263,7 @@ export const INITIAL_USERS: UserAccountItem[] = [
     email: 'yohannes@student.com',
     phone: '+251 922 112 233',
     role: 'Student',
-    branchScope: 'Megenagna',
+    branchScope: 'Hawassa Main Branch',
     status: 'Active',
     mfaEnabled: false,
     lastLogin: '2026-07-22 07:45 AM',
@@ -306,7 +283,7 @@ export const INITIAL_INTEGRATIONS: IntegrationStatus[] = [
   },
   {
     id: 'INT-02',
-    name: 'Abel Begena Telegram Bot',
+    name: 'Liora Begena Telegram Bot',
     category: 'Communication',
     status: 'Connected',
     lastSync: '2 mins ago',

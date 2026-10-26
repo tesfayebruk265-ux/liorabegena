@@ -15,6 +15,14 @@ import {
   saveChatAttachment,
   ChatUserRole
 } from "./server/chatStore";
+import dotenv from "dotenv";
+import {
+  startTelegramBot,
+  registerPendingVerification,
+  verifyTelegramMatch,
+  getVerificationStatus,
+  handleTelegramUpdate
+} from "./server/telegramBot";
 
 dotenv.config();
 
@@ -47,10 +55,10 @@ async function startServer() {
       if (!ai) {
         // Fallback response if GEMINI_API_KEY is not set yet
         return res.json({
-          text: `[Abel Begena AI Assistant - ${role}]\n\nThank you for asking: "${prompt}".\n\n` +
+          text: `[Liora Begena AI Assistant - ${role}]\n\nThank you for asking: "${prompt}".\n\n` +
             `The Begena is a sacred 10-string Ethiopian box lyre traditionally associated with King David. ` +
             `Its signature buzzing sound comes from the leather 'Sera' sliders placed on the bridge ('Birama').\n\n` +
-            `*Source Citation: Abel Begena Curriculum - Level 1, Module 2 (Verified).*`,
+            `*Source Citation: Liora Begena Curriculum - Level 1, Module 2 (Verified).*`,
           isAiGenerated: true,
           confidence: "High",
         });
@@ -60,7 +68,7 @@ async function startServer() {
         model: "gemini-3.6-flash",
         contents: prompt,
         config: {
-          systemInstruction: systemInstruction || `You are the Abel Begena Traditional Music School AI Assistant for ${role}. Provide clear, warm, culturally authentic, and academically accurate answers.`,
+          systemInstruction: systemInstruction || `You are the Liora Begena Traditional Music School AI Assistant for ${role}. Provide clear, warm, culturally authentic, and academically accurate answers.`,
           temperature: 0.7,
         },
       });
@@ -295,6 +303,68 @@ async function startServer() {
     });
   });
 
+  // ========================================================
+  // TELEGRAM BOT VERIFICATION API ENDPOINTS
+  // ========================================================
+
+  // 1. Register pending verification when user arrives at verification page
+  app.post("/api/telegram/register", async (req, res) => {
+    try {
+      const { phone, email } = req.body;
+      if (!phone) {
+        return res.status(400).json({ success: false, error: "Phone number is required" });
+      }
+      const result = await registerPendingVerification(phone, email);
+      return res.json(result);
+    } catch (err: any) {
+      console.error("[API] Telegram register error:", err);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
+  // 2. Verify shared Telegram account phone matches registered phone number
+  app.post("/api/telegram/verify", async (req, res) => {
+    try {
+      const { registeredPhone, sharedPhone, email } = req.body;
+      if (!registeredPhone || !sharedPhone) {
+        return res.status(400).json({
+          success: false,
+          matched: false,
+          error: "registeredPhone and sharedPhone are required"
+        });
+      }
+      const result = await verifyTelegramMatch(registeredPhone, sharedPhone, email);
+      return res.json(result);
+    } catch (err: any) {
+      console.error("[API] Telegram verify error:", err);
+      return res.status(500).json({ success: false, matched: false, error: err.message });
+    }
+  });
+
+  // 3. Check status (polling endpoint for when user taps Share Contact inside Telegram app)
+  app.get("/api/telegram/status", (req, res) => {
+    try {
+      const phone = String(req.query.phone || "");
+      if (!phone) {
+        return res.status(400).json({ matched: false, error: "Phone parameter is required" });
+      }
+      const status = getVerificationStatus(phone);
+      return res.json(status);
+    } catch (err: any) {
+      return res.status(500).json({ matched: false, error: err.message });
+    }
+  });
+
+  // 4. Webhook support (optional if webhook is set up instead of polling)
+  app.post("/api/telegram/webhook", async (req, res) => {
+    try {
+      await handleTelegramUpdate(req.body);
+      return res.json({ ok: true });
+    } catch (err) {
+      return res.status(200).json({ ok: false });
+    }
+  });
+
   // Serve runtime public assets and uploaded chat files
   app.use(express.static(path.join(process.cwd(), 'public')));
 
@@ -316,6 +386,11 @@ async function startServer() {
 
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
+  });
+
+  // Start Telegram Bot polling service in the background
+  startTelegramBot().catch((err) => {
+    console.error("[TelegramBot] Polling initialization error:", err);
   });
 }
 

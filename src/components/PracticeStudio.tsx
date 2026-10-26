@@ -269,7 +269,7 @@ const MOCK_PRACTICE_SESSIONS: PracticeSessionRecord[] = [
     lessonTitle: 'Hand Position & Left Thumb Plucking',
     durationMinutes: 45,
     practiceGoal: 'Master clean thumb plucking on string 1 and 2',
-    notes: 'Focused on keeping my wrist relaxed as requested by Teacher Abel.',
+    notes: 'Focused on keeping my wrist relaxed as requested by Teacher Bruk.',
     recordingType: 'audio',
     visibility: 'Teacher Only',
     feedbackStatus: 'Reviewed',
@@ -540,7 +540,7 @@ export function PracticeStudio({ lang, onNavigate, initialTab = 'virtual-begena'
     const updatedStats = computePracticeStats(updated, currentUser?.id || 'std-1');
     addNotification(
       'Practice Recording Submitted',
-      `Submitted ${mediaType} recording to Teacher Abel! Streak updated: ${updatedStats.streakDays} days.`,
+      `Submitted ${mediaType} recording to Teacher Bruk! Streak updated: ${updatedStats.streakDays} days.`,
       'feedback'
     );
   };
@@ -883,7 +883,7 @@ export function PracticeStudio({ lang, onNavigate, initialTab = 'virtual-begena'
                 <p className="text-xs text-gray-600 leading-relaxed italic bg-amber-50/50 p-3 rounded-xl border border-amber-100">
                   "Maintain a relaxed posture. When plucking traditional strings, let the wrist rest gently without tension. Quality focused practice beats long fatigued sessions."
                 </p>
-                <span className="text-[10px] font-bold text-amber-800 block text-right">— Teacher Abel Begena</span>
+                <span className="text-[10px] font-bold text-amber-800 block text-right">— Teacher Liora Begena</span>
               </div>
             </div>
           </motion.div>
@@ -1019,7 +1019,7 @@ export function PracticeStudio({ lang, onNavigate, initialTab = 'virtual-begena'
                       onClick={handleSaveRecordingToTeacher}
                     >
                       <Share2 size={16} />
-                      <span>Submit Recording to Teacher Abel</span>
+                      <span>Submit Recording to Teacher Bruk</span>
                     </Button>
                   ) : (
                     <div className="p-3 bg-green-100 text-green-900 rounded-xl text-xs font-bold text-center flex items-center justify-center gap-2">

@@ -16,7 +16,7 @@ export const GlobalSystemSearch: React.FC<GlobalSystemSearchProps> = ({
   // Unified Search Index Data
   const sampleSearchRecords = [
     { id: 'STU-101', name: 'Yohannes Girma', category: 'Student', details: 'Begena Level 1 (Megenagna Branch)', route: 'student-ai' },
-    { id: 'TEA-201', name: 'Teacher Abel Girma', category: 'Teacher', details: 'Master Instructor (Begena & Zema)', route: 'teacher-ai' },
+    { id: 'TEA-201', name: 'Teacher Bruk Girma', category: 'Teacher', details: 'Master Instructor (Begena & Zema)', route: 'teacher-ai' },
     { id: 'PAR-301', name: 'Girma Tadesse', category: 'Parent', details: 'Linked Student: Yohannes Girma', route: 'parent-ai' },
     { id: 'CRS-401', name: 'Begena Level 1 Acoustic', category: 'Course', details: 'Module 4: Octave Tuning & Muting', route: 'learning-center' },
     { id: 'PAY-501', name: 'Receipt #REC-4091 (1,500 ETB)', category: 'Payment', details: 'Telebirr Verified - Approved', route: 'accountant-ai' },

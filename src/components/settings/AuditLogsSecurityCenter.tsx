@@ -10,7 +10,7 @@ export const AuditLogsSecurityCenter: React.FC = () => {
   // Soft Delete Recovery Queue State
   const [softDeletedItems, setSoftDeletedItems] = useState([
     { id: 'DEL-8812', type: 'Student Enrollment Record', name: 'Yared Tadesse (Begena L1)', deletedBy: 'Registration Staff', deletedAt: '2026-07-20 03:14 PM' },
-    { id: 'DEL-8813', type: 'Archived Course Document', name: 'Zema Notation Sheet #4', deletedBy: 'Teacher Abel', deletedAt: '2026-07-19 11:20 AM' }
+    { id: 'DEL-8813', type: 'Archived Course Document', name: 'Zema Notation Sheet #4', deletedBy: 'Teacher Bruk', deletedAt: '2026-07-19 11:20 AM' }
   ]);
 
   const [restoredMessage, setRestoredMessage] = useState<string | null>(null);

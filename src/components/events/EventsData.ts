@@ -27,7 +27,7 @@ export const SAMPLE_COMPREHENSIVE_EVENTS: ComprehensiveEvent[] = [
     id: 'evt-2026-01',
     title: 'Annual Sacred Begena Recital & Heritage Concert',
     description: 'A grand celebration featuring 150+ student string players and master performers in Addis Ababa.',
-    fullDescription: 'Join the Abel Begena School for our premier annual concert. Experience classical Ethiopian spiritual hymns performed live on ten-string Begena, six-string Krar, and Masenqo, accompanied by St. Yared Liturgical Choir.',
+    fullDescription: 'Join the Liora Begena School for our premier annual concert. Experience classical Ethiopian spiritual hymns performed live on ten-string Begena, six-string Krar, and Masenqo, accompanied by St. Yared Liturgical Choir.',
     coverImage: begenaPlayingImg,
     eventType: 'Concert',
     branchId: 'b-piazza',
@@ -37,7 +37,7 @@ export const SAMPLE_COMPREHENSIVE_EVENTS: ComprehensiveEvent[] = [
     endDate: '2026-08-15',
     startTime: '02:00 PM',
     endTime: '06:30 PM',
-    organizer: 'Zemari Deacon Abel Tesfaye & Event Committee',
+    organizer: 'Deacon Bruk Tesfaye & Event Committee',
     maxCapacity: 400,
     registeredCount: 342,
     waitlistCount: 12,
@@ -46,15 +46,15 @@ export const SAMPLE_COMPREHENSIVE_EVENTS: ComprehensiveEvent[] = [
     status: 'Upcoming',
     agenda: [
       { id: 'ag-1', time: '02:00 PM', activity: 'Opening Liturgical Prayer & Blessing', speakerOrPerformer: 'Abba Yohannes & Choir', location: 'Main Stage', durationMinutes: 20 },
-      { id: 'ag-2', time: '02:20 PM', activity: 'Welcome Address & School Heritage Vision', speakerOrPerformer: 'Zemari Deacon Abel Tesfaye', location: 'Main Stage', durationMinutes: 25 },
+      { id: 'ag-2', time: '02:20 PM', activity: 'Welcome Address & School Heritage Vision', speakerOrPerformer: 'Deacon Bruk Tesfaye', location: 'Main Stage', durationMinutes: 25 },
       { id: 'ag-3', time: '02:45 PM', activity: 'Begena Level 1 Ensemble Performance (12-String Harmonies)', speakerOrPerformer: 'Begena Beginner Graduates', location: 'Main Stage', durationMinutes: 35 },
       { id: 'ag-4', time: '03:20 PM', activity: 'Krar & Masenqo Dialogue Solo Showcase', speakerOrPerformer: 'Top Competition Medalists', location: 'Main Stage', durationMinutes: 40 },
       { id: 'ag-5', time: '04:00 PM', activity: 'Interval & Ethiopian Coffee & Heritage Exhibition', speakerOrPerformer: 'All Guests', location: 'Courtyard Exhibition Hall', durationMinutes: 30 },
-      { id: 'ag-6', time: '04:30 PM', activity: 'Masterclass Solo Recital & St. Yared Hymnology', speakerOrPerformer: 'Master Abel Begena & Teachers', location: 'Main Stage', durationMinutes: 60 },
+      { id: 'ag-6', time: '04:30 PM', activity: 'Masterclass Solo Recital & St. Yared Hymnology', speakerOrPerformer: 'Master Liora Begena & Teachers', location: 'Main Stage', durationMinutes: 60 },
       { id: 'ag-7', time: '05:30 PM', activity: 'Certificate & Award Presentation Ceremony', speakerOrPerformer: 'School Admin & Guests of Honor', location: 'Main Stage', durationMinutes: 60 }
     ],
     performers: [
-      { id: 'pf-1', order: 1, performerName: 'Abel Begena Ensemble', instrument: 'Begena (10-String)', songOrMezmurTitle: 'Nefse Wosibhat', durationMinutes: 15, notes: 'Opening solo harmonic' },
+      { id: 'pf-1', order: 1, performerName: 'Liora Begena Ensemble', instrument: 'Begena (10-String)', songOrMezmurTitle: 'Nefse Wosibhat', durationMinutes: 15, notes: 'Opening solo harmonic' },
       { id: 'pf-2', order: 2, performerName: 'Piazza Youth Krar Band', instrument: 'Krar & Kebero', songOrMezmurTitle: 'Begena Yaredawi Melody', durationMinutes: 20, notes: 'Group ensemble' },
       { id: 'pf-3', order: 3, performerName: 'Dawit Solomon (Student Winner)', instrument: 'Begena', songOrMezmurTitle: 'Semayat Yenegrun', durationMinutes: 12, notes: 'Solo recital winner' },
       { id: 'pf-4', order: 4, performerName: 'Teacher Yared & Masenqo Trio', instrument: 'Masenqo', songOrMezmurTitle: 'Kene Zema Variations', durationMinutes: 18, notes: 'Faculty performance' }
@@ -79,12 +79,12 @@ export const SAMPLE_COMPREHENSIVE_EVENTS: ComprehensiveEvent[] = [
     id: 'evt-2026-02',
     title: 'National Begena & Krar Youth Competition 2026',
     description: 'Competitive showcase judging technique, tuning accuracy, posture, and traditional hymn expression.',
-    fullDescription: 'Students across Piazza, Megenagna, and Lebu branches compete in front of distinguished judges and traditional music scholars.',
+    fullDescription: 'Students from Hawassa main Branch and our global online cohort compete in front of distinguished judges and traditional music scholars.',
     coverImage: krarImg,
     eventType: 'Competition',
-    branchId: 'b-megenagna',
-    branchName: 'Megenagna Hub',
-    location: 'Megenagna Silassie Hall & Online Stream',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
+    location: 'Center Point Tower Hall, Hawassa & Online Stream',
     startDate: '2026-09-01',
     endDate: '2026-09-02',
     startTime: '09:00 AM',
@@ -108,12 +108,12 @@ export const SAMPLE_COMPREHENSIVE_EVENTS: ComprehensiveEvent[] = [
     id: 'evt-2026-03',
     title: 'Class of 2026 Formal Graduation & Sacred Recital',
     description: 'Official diploma and certificate presentation for students completing Begena, Krar, and Vocal courses.',
-    fullDescription: 'Celebrating 280 graduating students with formal signatures from Abel Begena, QR-verified digital certificates, and family celebrations.',
+    fullDescription: 'Celebrating 280 graduating students with formal signatures from Liora Begena, QR-verified digital certificates, and family celebrations.',
     coverImage: abelBegenaPhoto,
     eventType: 'Graduation',
     branchId: 'b-lebu',
     branchName: 'Lebu Annex',
-    location: 'Abel Begena Lebu Cultural Amphitheater',
+    location: 'Liora Begena Lebu Cultural Amphitheater',
     startDate: '2026-09-20',
     endDate: '2026-09-20',
     startTime: '10:00 AM',
@@ -127,7 +127,7 @@ export const SAMPLE_COMPREHENSIVE_EVENTS: ComprehensiveEvent[] = [
     status: 'Upcoming',
     agenda: [
       { id: 'ag-301', time: '10:00 AM', activity: 'Academic Processional & Guest Check-In', speakerOrPerformer: 'Graduates & Faculty', location: 'Main Entrance', durationMinutes: 30 },
-      { id: 'ag-302', time: '10:30 AM', activity: 'Graduation Keynote & Sacred Hymn', speakerOrPerformer: 'Zemari Deacon Abel Tesfaye', location: 'Amphitheater', durationMinutes: 45 },
+      { id: 'ag-302', time: '10:30 AM', activity: 'Graduation Keynote & Sacred Hymn', speakerOrPerformer: 'Deacon Bruk Tesfaye', location: 'Amphitheater', durationMinutes: 45 },
       { id: 'ag-303', time: '11:15 AM', activity: 'Awarding of Digital & Physical Certificates', speakerOrPerformer: 'Deans & Branch Managers', location: 'Amphitheater', durationMinutes: 90 }
     ],
     performers: [],
@@ -147,7 +147,7 @@ export const SAMPLE_COMPREHENSIVE_EVENTS: ComprehensiveEvent[] = [
     endDate: '2026-07-15',
     startTime: '09:00 AM',
     endTime: '01:00 PM',
-    organizer: 'Master Craftsman Solomon & Abel Begena',
+    organizer: 'Master Craftsman Solomon & Liora Begena',
     maxCapacity: 30,
     registeredCount: 30,
     waitlistCount: 8,
@@ -218,7 +218,7 @@ export const SAMPLE_EVENT_TICKETS: EventRegistrationTicket[] = [
 export const SAMPLE_COMPETITIONS: CompetitionItem[] = [
   {
     id: 'comp-2026-01',
-    title: 'Abel Begena Youth Harp Championship 2026',
+    title: 'Liora Begena Youth Harp Championship 2026',
     description: 'Showcase your Begena pluck precision, steady rhythm, sacred hymn accuracy, and posture.',
     instrumentCategory: 'Begena',
     levelCategory: 'Open',
@@ -239,7 +239,7 @@ export const SAMPLE_COMPETITIONS: CompetitionItem[] = [
       '3rd Place: Bronze Medal, Begena Tuning Accessory Kit'
     ],
     judges: [
-      { id: 'jdg-1', name: 'Zemari Deacon Abel Tesfaye', titleOrRole: 'Founder & Principal Master', expertise: 'Begena & Liturgical Music', avatar: ABEL_BEGENA_PHOTO },
+      { id: 'jdg-1', name: 'Deacon Bruk Tesfaye', titleOrRole: 'Founder & Principal Master', expertise: 'Begena & Liturgical Music', avatar: ABEL_BEGENA_PHOTO },
       { id: 'jdg-2', name: 'Teacher Yared Teklu', titleOrRole: 'Senior Instructor', expertise: 'Kene & String Harmonies', avatar: '' }
     ],
     criteria: [
@@ -263,7 +263,7 @@ export const SAMPLE_COMPETITION_SUBMISSIONS: CompetitionSubmission[] = [
     branchName: 'Piazza Headquarters',
     instrument: 'Begena',
     level: 'Intermediate',
-    teacherName: 'Zemari Deacon Abel Tesfaye',
+    teacherName: 'Deacon Bruk Tesfaye',
     performanceTitle: 'Semayat Yenegrun (The Heavens Declare)',
     videoUrl: 'https://www.youtube.com/watch?v=sample-video-1',
     description: 'Solo Begena recital performed on Wanza wood instrument tuned in Anchihoye scale.',
@@ -272,7 +272,7 @@ export const SAMPLE_COMPETITION_SUBMISSIONS: CompetitionSubmission[] = [
     scores: [
       {
         judgeId: 'jdg-1',
-        judgeName: 'Zemari Deacon Abel Tesfaye',
+        judgeName: 'Deacon Bruk Tesfaye',
         scoresByCriterion: { 'cr-1': 24, 'cr-2': 23, 'cr-3': 25, 'cr-4': 24 },
         totalScore: 96,
         comments: 'Outstanding hand posture and deep spiritual reverence. Excellent resonance.'
@@ -307,7 +307,7 @@ export const SAMPLE_COMPETITION_SUBMISSIONS: CompetitionSubmission[] = [
     scores: [
       {
         judgeId: 'jdg-1',
-        judgeName: 'Zemari Deacon Abel Tesfaye',
+        judgeName: 'Deacon Bruk Tesfaye',
         scoresByCriterion: { 'cr-1': 23, 'cr-2': 23, 'cr-3': 23, 'cr-4': 23 },
         totalScore: 92,
         comments: 'Very strong performance.'
@@ -357,7 +357,7 @@ export const SAMPLE_ACHIEVEMENT_BADGES: AchievementBadge[] = [
     id: 'badge-004',
     name: 'Competition Medalist',
     code: 'ACH-COMP-WIN',
-    description: 'Won 1st, 2nd, or 3rd place in an official Abel Begena School music competition.',
+    description: 'Won 1st, 2nd, or 3rd place in an official Liora Begena School music competition.',
     requirement: 'Place in top 3 in any official school competition.',
     category: 'Competition',
     icon: 'Trophy',
@@ -413,7 +413,7 @@ export const SAMPLE_EARNED_BADGES: EarnedStudentBadge[] = [
     icon: 'Trophy',
     earnedDate: '2026-07-16',
     awardedBy: 'Admin Manual Award',
-    awardReason: '1st Place Winner of Abel Begena Youth Harp Championship 2026'
+    awardReason: '1st Place Winner of Liora Begena Youth Harp Championship 2026'
   }
 ];
 
@@ -460,8 +460,8 @@ export const SAMPLE_CERTIFICATES: CertificateRecord[] = [
     branchName: 'Piazza Headquarters',
     completionDate: '2026-06-30',
     issuedDate: '2026-07-01',
-    issuedBy: 'Abel Begena Academic Board',
-    authorizedSignature: 'Zemari Deacon Abel Tesfaye',
+    issuedBy: 'Liora Begena Academic Board',
+    authorizedSignature: 'Deacon Bruk Tesfaye',
     qrVerificationUrl: '/verify/certificate/ABS-CERT-2026-000123',
     status: 'Active',
     physicalStatus: 'Ready for Pickup'
@@ -479,8 +479,8 @@ export const SAMPLE_CERTIFICATES: CertificateRecord[] = [
     branchName: 'Megenagna Hub',
     completionDate: '2026-05-15',
     issuedDate: '2026-05-20',
-    issuedBy: 'Abel Begena Academic Board',
-    authorizedSignature: 'Zemari Deacon Abel Tesfaye',
+    issuedBy: 'Liora Begena Academic Board',
+    authorizedSignature: 'Deacon Bruk Tesfaye',
     qrVerificationUrl: '/verify/certificate/ABS-CERT-2026-000124',
     status: 'Active',
     physicalStatus: 'Collected'
@@ -490,19 +490,19 @@ export const SAMPLE_CERTIFICATES: CertificateRecord[] = [
 export const SAMPLE_GRADUATIONS: GraduationCeremony[] = [
   {
     id: 'grad-2026',
-    title: 'Annual Abel Begena Class of 2026 Graduation & Sacred Recital',
+    title: 'Annual Liora Begena Class of 2026 Graduation & Sacred Recital',
     academicYear: '2025/2026 Academic Year',
     date: '2026-09-20',
     time: '10:00 AM',
-    location: 'Abel Begena Lebu Cultural Amphitheater & Gardens',
-    branchName: 'All Branches (Piazza, Megenagna, Lebu)',
+    location: 'Liora Begena Hawassa Cultural Hall (Center Point Tower)',
+    branchName: 'Hawassa main Branch',
     coverImage: abelBegenaPhoto,
-    organizer: 'Zemari Deacon Abel Tesfaye & Board of Deans',
+    organizer: 'Deacon Bruk Tesfaye & Board of Deans',
     expectedGraduatesCount: 280,
     guestCapacity: 600,
     programAgenda: [
       { time: '10:00 AM', item: 'Liturgical Processional & Opening Anthem', presenter: 'St. Yared Choir' },
-      { time: '10:30 AM', item: 'Founder Speech & Heritage Preservation Charge', presenter: 'Zemari Deacon Abel Tesfaye' },
+      { time: '10:30 AM', item: 'Founder Speech & Heritage Preservation Charge', presenter: 'Deacon Bruk Tesfaye' },
       { time: '11:15 AM', item: 'Presentation of Certificates & Honors', presenter: 'Branch Managers & Faculty' },
       { time: '01:00 PM', item: 'Graduation Solo & Ensemble Concert', presenter: 'Graduating Class' }
     ],
@@ -561,7 +561,7 @@ export const SAMPLE_ALUMNI: AlumniProfile[] = [
     branchName: 'Piazza Headquarters',
     biography: 'Graduated in 2025. Performs sacred hymns at St. George Cathedral and mentors junior Begena students.',
     currentOccupation: 'Acoustics Specialist & Church Musician',
-    musicalJourney: 'Began with 0 experience in 2024. Completed 12 months under Abel Begena.',
+    musicalJourney: 'Began with 0 experience in 2024. Completed 12 months under Liora Begena.',
     featuredPerformanceUrl: 'https://www.youtube.com/watch?v=sample-alumni-1',
     socialLinks: { telegram: '@yonas_begena', youtube: 'https://youtube.com/yonasbegena' },
     isPublicConsent: true,

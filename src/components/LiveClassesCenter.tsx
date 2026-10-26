@@ -34,8 +34,8 @@ const MOCK_LIVE_CLASSES: LiveClassSession[] = [
     courseId: 'c1',
     courseName: 'Begena - Level 1',
     instrument: 'Begena',
-    teacherName: 'Abel Begena',
-    branchName: 'Online Portal / Bole Branch',
+    teacherName: 'Liora Begena',
+    branchName: 'Online Portal / Hawassa main Branch',
     date: '2026-07-26',
     time: '09:00 AM - 10:30 AM EAT',
     durationMinutes: 90,
@@ -55,7 +55,7 @@ const MOCK_LIVE_CLASSES: LiveClassSession[] = [
     courseName: 'Krar Fundamentals',
     instrument: 'Krar',
     teacherName: 'Bethlehem Tadesse',
-    branchName: 'Megenagna Branch',
+    branchName: 'Hawassa main Branch',
     date: '2026-07-27',
     time: '02:00 PM - 03:30 PM EAT',
     durationMinutes: 90,
@@ -70,7 +70,7 @@ const MOCK_LIVE_CLASSES: LiveClassSession[] = [
     courseId: 'c1',
     courseName: 'Begena - Level 1',
     instrument: 'Begena',
-    teacherName: 'Abel Begena',
+    teacherName: 'Liora Begena',
     branchName: 'Global Virtual Class',
     date: '2026-07-19',
     time: '09:00 AM',
@@ -281,7 +281,7 @@ export function LiveClassesCenter({ lang, onNavigate }: LiveClassesCenterProps) 
                 <CheckCircle size={32} className="mx-auto text-green-600" />
                 <h4 className="font-bold text-green-900 text-sm">Makeup Request Submitted</h4>
                 <p className="text-green-800">
-                  Your instructor Abel Begena has been notified and will send your private Google Meet link.
+                  Your instructor Liora Begena has been notified and will send your private Google Meet link.
                 </p>
               </div>
             )}

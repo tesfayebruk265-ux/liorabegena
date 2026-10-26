@@ -95,13 +95,13 @@ export function AchievementsCenter({ lang, onNavigate }: AchievementsCenterProps
         <div className="max-w-4xl space-y-3 relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E7DED1] text-xs font-bold text-[#E89B52] shadow-3xs">
             <Sparkles size={14} className="text-[#C79A2B]" />
-            <span>Abel Begena Sacred Music Achievement Engine</span>
+            <span>Liora Begena Sacred Music Achievement Engine</span>
           </div>
           <h1 className="font-display font-black text-3xl sm:text-4xl text-[#2B2B2B] tracking-tight">
             Student Ranks, Badges & Honor Roll Showcase
           </h1>
           <p className="text-sm text-[#666666] leading-relaxed max-w-2xl">
-            Track student practice devotion, competition medals, and course milestones. Earn cultural rank points and unlock legendary Abel Begena achievement badges.
+            Track student practice devotion, competition medals, and course milestones. Earn cultural rank points and unlock legendary Liora Begena achievement badges.
           </p>
         </div>
       </div>
@@ -240,7 +240,7 @@ export function AchievementsCenter({ lang, onNavigate }: AchievementsCenterProps
         <div className="space-y-6">
           <div className="text-center max-w-xl mx-auto space-y-2">
             <Trophy size={36} className="text-[#C79A2B] mx-auto" />
-            <h2 className="font-display font-bold text-2xl text-[#2B2B2B]">Abel Begena Top Performers Honor Roll</h2>
+            <h2 className="font-display font-bold text-2xl text-[#2B2B2B]">Liora Begena Top Performers Honor Roll</h2>
             <p className="text-xs text-[#666666]">
               Recognizing exemplary dedication, practice consistency, and musical mastery.
             </p>

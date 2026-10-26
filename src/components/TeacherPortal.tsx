@@ -153,7 +153,7 @@ export function TeacherPortal({ onNavigate, lang }: TeacherPortalProps) {
       phone: currentUser.phone || '+251 911 000 000',
       photo: currentUser.avatar || '',
       specializations: [currentUser.enrolledInstrument || 'Begena'],
-      branches: [currentUser.branch || 'Piazza Branch'],
+      branches: [currentUser.branch || 'Hawassa main Branch'],
       supportsOnline: true,
       supportsInPerson: true,
       capacity: 25,
@@ -316,7 +316,7 @@ export function TeacherPortal({ onNavigate, lang }: TeacherPortalProps) {
         course: enr.courseName || `${inst} ${lvl}`,
         instrument: inst,
         level: lvl,
-        branch: enr.branch || 'Piazza Branch',
+        branch: enr.branch || 'Hawassa main Branch',
         mode: enr.learningMode || 'In-Person',
         status: enr.status || 'Active',
         paymentStatus: enr.paymentStatus || 'Approved',
@@ -993,7 +993,7 @@ export function TeacherPortal({ onNavigate, lang }: TeacherPortalProps) {
             <Sparkles className="text-[#E89B52]" size={20} />
           </div>
           <div>
-            <h1 className="font-display font-black text-lg tracking-tight uppercase text-gray-900">Abel Begena Faculty Portal</h1>
+            <h1 className="font-display font-black text-lg tracking-tight uppercase text-gray-900">Liora Begena Faculty Portal</h1>
             <p className="text-[10px] tracking-wider text-[#E89B52] font-bold uppercase">Real Instructional Management System</p>
           </div>
         </div>
@@ -1119,7 +1119,7 @@ export function TeacherPortal({ onNavigate, lang }: TeacherPortalProps) {
               </div>
               <div className="flex justify-between border-b border-gray-100 pb-1.5">
                 <span className="text-gray-400">Assigned Branch:</span>
-                <span className="font-bold text-gray-800">{teacherProfile?.branches?.[0] || 'Piazza Branch'}</span>
+                <span className="font-bold text-gray-800">{teacherProfile?.branches?.[0] || 'Hawassa main Branch'}</span>
               </div>
               <div className="flex justify-between border-b border-gray-100 pb-1.5">
                 <span className="text-gray-400">Telegram Handle:</span>
@@ -2071,7 +2071,7 @@ export function TeacherPortal({ onNavigate, lang }: TeacherPortalProps) {
                                     <div className="border-2 border-[#E89B52] bg-gradient-to-br from-[#FFFBF5] to-[#FAF3E8] p-6 rounded-2xl space-y-5 relative overflow-hidden shadow-sm">
                                       <div className="flex items-start justify-between">
                                         <div>
-                                          <span className="text-[10px] font-mono tracking-widest text-[#E89B52] font-black uppercase">ABEL BEGENA & KRAR ACADEMY</span>
+                                          <span className="text-[10px] font-mono tracking-widest text-[#E89B52] font-black uppercase">LIORA BEGENA & KRAR ACADEMY</span>
                                           <h3 className="font-display font-black text-xl text-gray-900">OFFICIAL CERTIFICATE OF COMPLETION</h3>
                                           <p className="text-xs text-gray-600 mt-1">This verifies that <strong className="text-gray-900">{existingCert.studentName}</strong> has successfully completed the full curriculum for <strong className="text-[#E89B52]">{existingCert.courseName}</strong>.</p>
                                         </div>
@@ -2965,7 +2965,7 @@ export function TeacherPortal({ onNavigate, lang }: TeacherPortalProps) {
                 </div>
                 <div>
                   <h3 className="font-display font-black text-base text-gray-900 uppercase">OFFICIAL CERTIFICATE VERIFICATION</h3>
-                  <p className="text-xs text-gray-500">Verify authenticity of Abel Begena & Krar Academy certificates</p>
+                  <p className="text-xs text-gray-500">Verify authenticity of Liora Begena & Krar Academy certificates</p>
                 </div>
               </div>
               <button

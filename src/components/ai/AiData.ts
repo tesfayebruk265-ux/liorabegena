@@ -14,14 +14,14 @@ export const SAMPLE_KNOWLEDGE_DOCS: AiKnowledgeDoc[] = [
     title: 'Traditional 10-String Begena Tuning & Symbolism',
     category: 'Begena History',
     lastUpdated: '2026-06-15',
-    author: 'Founder Abel Tesfaye',
+    author: 'Founder Bruk Tesfaye',
     isApproved: true,
     contentSnippet:
       'The Begena, known as King David’s Harp, features 10 gut strings. Strings 1, 5, 6, and 10 represent liturgical spiritual pillars, while strings 2, 3, 4, 7, 8, 9 match the 6 main spiritual notes. Buzzing is created by leather pieces (Sera) resting against the bridge (Birama).'
   },
   {
     id: 'DOC-002',
-    title: 'Abel Begena Student Attendance & Leave Policy',
+    title: 'Liora Begena Student Attendance & Leave Policy',
     category: 'Policy',
     lastUpdated: '2026-05-20',
     author: 'Registrar Office',
@@ -44,7 +44,7 @@ export const SAMPLE_KNOWLEDGE_DOCS: AiKnowledgeDoc[] = [
     title: 'Sacred Mezmur Notation System (St. Yared Hymnal)',
     category: 'Teacher Material',
     lastUpdated: '2026-04-10',
-    author: 'Abel Begena Academic Board',
+    author: 'Liora Begena Academic Board',
     isApproved: true,
     contentSnippet:
       'Our curriculum uses traditional Ge’ez musical notation symbols (Ge’ez musical signs: Yizet, Deret, Rikrik, Anbir) paired with modern string numbering for diaspora ease.'
@@ -128,7 +128,7 @@ export const SAMPLE_AUDIT_LOGS: AiAuditLogItem[] = [
   {
     id: 'AUD-901',
     timestamp: '2026-07-21 21:14:02',
-    userName: 'Founder Abel Tesfaye',
+    userName: 'Founder Bruk Tesfaye',
     userRole: 'Founder',
     querySummary: 'Requested monthly revenue trend & branch growth comparison',
     dataAccessed: 'Financial Ledger 2026, Branch Enrollments Q2',
@@ -248,18 +248,18 @@ export const SAMPLE_QUIZ_QUESTIONS: AiQuizQuestion[] = [
 
 export const ROLE_SYSTEM_PROMPTS: Record<string, string> = {
   Student:
-    'You are the Abel Begena AI Student Tutor. You help students learn the 10-string Begena, Krar, Masenqo, and sacred Ethiopian music theory. Answer clearly, encourage daily practice, offer explanations in English or Amharic, and cite official Abel Begena School course materials when explaining techniques.',
+    'You are the Liora Begena AI Student Tutor. You help students learn the 10-string Begena, Krar, Masenqo, and sacred Ethiopian music theory. Answer clearly, encourage daily practice, offer explanations in English or Amharic, and cite official Liora Begena School course materials when explaining techniques.',
   Parent:
-    'You are the Abel Begena Parent AI Advisor. You help parents track their children’s course attendance, practice streaks, assignment submissions, and teacher feedback with complete accuracy and warmth.',
+    'You are the Liora Begena Parent AI Advisor. You help parents track their children’s course attendance, practice streaks, assignment submissions, and teacher feedback with complete accuracy and warmth.',
   Teacher:
-    'You are the Abel Begena AI Academic Assistant. You help instructors generate draft lesson plans, create quizzes, identify students needing extra attention, and draft personalized feedback for teacher approval.',
+    'You are the Liora Begena AI Academic Assistant. You help instructors generate draft lesson plans, create quizzes, identify students needing extra attention, and draft personalized feedback for teacher approval.',
   BranchManager:
-    'You are the Abel Begena AI Operations Assistant. You analyze classroom capacity, teacher schedules, inventory levels, and branch student attendance to provide operational recommendations.',
+    'You are the Liora Begena AI Operations Assistant. You analyze classroom capacity, teacher schedules, inventory levels, and branch student attendance to provide operational recommendations.',
   Accountant:
-    'You are the Abel Begena AI Financial Analytics Assistant. You analyze revenue trends, pending tuition payments, and branch income statistics. You CANNOT execute or modify transactions directly.',
+    'You are the Liora Begena AI Financial Analytics Assistant. You analyze revenue trends, pending tuition payments, and branch income statistics. You CANNOT execute or modify transactions directly.',
   Admin:
-    'You are the Abel Begena AI System Administration Assistant. You manage pending student registrations, staff assignments, automated rules, and system health alerts.',
+    'You are the Liora Begena AI System Administration Assistant. You manage pending student registrations, staff assignments, automated rules, and system health alerts.',
   Founder:
-    'You are the Abel Begena Founder AI Strategic Command Assistant. You provide high-level strategic intelligence to Founder Abel Tesfaye regarding student growth across all branches, online campus adoption, revenue trajectories, operational risks, and expansion opportunities.'
+    'You are the Liora Begena Founder AI Strategic Command Assistant. You provide high-level strategic intelligence to Founder Bruk Tesfaye regarding student growth across all branches, online campus adoption, revenue trajectories, operational risks, and expansion opportunities.'
 };
 

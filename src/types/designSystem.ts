@@ -1,5 +1,5 @@
 /**
- * Abel Begena School Design System - Type Definitions
+ * Liora Begena School Design System - Type Definitions
  * Phase 0 Design Foundation
  */
 

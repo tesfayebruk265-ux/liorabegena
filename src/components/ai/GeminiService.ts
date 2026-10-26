@@ -30,7 +30,7 @@ export async function askAiAssistant(
         isAiGenerated: true,
         confidence: data.confidence || 'High',
         sourceCitations: [
-          { title: 'Abel Begena Traditional Music Curriculum', module: 'Verified Source' },
+          { title: 'Liora Begena Traditional Music Curriculum', module: 'Verified Source' },
           { title: 'Ethiopian Orthodox Music Tradition - St. Yared', module: 'Liturgical Heritage' }
         ],
       };
@@ -98,7 +98,7 @@ function generateLocalAiResponse(prompt: string, role: string): AiChatMessage {
   const lower = prompt.toLowerCase();
   let text = '';
   let citations = [
-    { title: 'Abel Begena Student Handbook (Vol. 1)', module: 'School Policy & Curriculum' },
+    { title: 'Liora Begena Student Handbook (Vol. 1)', module: 'School Policy & Curriculum' },
     { title: 'Heritage of King David Lyre', module: 'Cultural Archives' }
   ];
 
@@ -127,7 +127,7 @@ function generateLocalAiResponse(prompt: string, role: string): AiChatMessage {
   } else {
     text = `[AI Generated Response for ${role}]\n\n` +
       `Regarding "${prompt}":\n\n` +
-      `The Abel Begena School emphasizes authentic traditional mastery paired with structured modern pedagogy. ` +
+      `The Liora Begena School emphasizes authentic traditional mastery paired with structured modern pedagogy. ` +
       `Our curriculum combines Ge'ez musical notation, hands-on instrument tuning, and liturgical heritage. ` +
       `Let me know if you would like me to generate a study summary, practice exercise, or quiz on this topic!`;
   }

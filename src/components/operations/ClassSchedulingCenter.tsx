@@ -25,14 +25,14 @@ import { Button, Input } from '../InteractiveComponents';
 export const MOCK_SCHEDULE_ITEMS: ClassScheduleItem[] = [
   {
     id: 'cs-1',
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     courseId: 'c1',
     courseName: 'Begena - Level 1',
     instrument: 'Begena',
     level: 'Beginner',
     teacherId: 't1',
-    teacherName: 'Abel Begena',
+    teacherName: 'Liora Begena',
     roomId: 'r-101',
     roomName: 'Room 101 - Begena Sanctuary',
     date: '2026-07-26',
@@ -48,8 +48,8 @@ export const MOCK_SCHEDULE_ITEMS: ClassScheduleItem[] = [
   },
   {
     id: 'cs-2',
-    branchId: 'b-[#2B2B2B]e',
-    branchName: 'Megenagna Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     courseId: 'c2',
     courseName: 'Krar Fundamentals',
     instrument: 'Krar',
@@ -71,8 +71,8 @@ export const MOCK_SCHEDULE_ITEMS: ClassScheduleItem[] = [
   },
   {
     id: 'cs-3',
-    branchId: 'b-lebu',
-    branchName: 'Lebu Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     courseId: 'c3',
     courseName: 'Masenqo Level 1',
     instrument: 'Masenqo',
@@ -105,9 +105,9 @@ export function ClassSchedulingCenter({ lang, onNavigate }: ClassSchedulingCente
 
   // Create Class Modal
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [newBranch, setNewBranch] = useState('Piazza Branch');
+  const [newBranch, setNewBranch] = useState('Hawassa main Branch');
   const [newCourse, setNewCourse] = useState('Begena - Level 1');
-  const [newTeacher, setNewTeacher] = useState('Abel Begena');
+  const [newTeacher, setNewTeacher] = useState('Liora Begena');
   const [newRoom, setNewRoom] = useState('Room 101 - Begena Sanctuary');
   const [newDate, setNewDate] = useState('2026-07-27');
   const [newStartTime, setNewStartTime] = useState('09:00 AM');
@@ -141,8 +141,8 @@ export function ClassSchedulingCenter({ lang, onNavigate }: ClassSchedulingCente
 
     const newClass: ClassScheduleItem = {
       id: `cs-${Date.now()}`,
-      branchId: newBranch === 'Piazza Branch' ? 'b-piazza' : newBranch === 'Megenagna Branch' ? 'b-[#2B2B2B]e' : 'b-lebu',
-      branchName: newBranch,
+      branchId: 'b-hawassa',
+      branchName: newBranch || 'Hawassa main Branch',
       courseId: 'c-custom',
       courseName: newCourse,
       instrument: newCourse.split(' ')[0],
@@ -206,7 +206,7 @@ export function ClassSchedulingCenter({ lang, onNavigate }: ClassSchedulingCente
             ACADEMIC CLASS SCHEDULING CENTER
           </h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">
-            Manage physical and hybrid class timetables across Piazza, Megenagna, and Lebu campuses with automated room conflict validation and capacity waiting lists.
+            Manage physical and hybrid class timetables for Hawassa main Branch (Center Point Tower) with automated room conflict validation and capacity waiting lists.
           </p>
         </div>
       </div>
@@ -234,10 +234,8 @@ export function ClassSchedulingCenter({ lang, onNavigate }: ClassSchedulingCente
             value={selectedBranch}
             onChange={(e) => setSelectedBranch(e.target.value)}
           >
-            <option value="all">All Branches</option>
-            <option value="Piazza Branch">Piazza Branch</option>
-            <option value="Megenagna Branch">Megenagna Branch</option>
-            <option value="Lebu Branch">Lebu Branch</option>
+            <option value="all">All Timetables</option>
+            <option value="Hawassa main Branch">Hawassa main Branch (Center Point Tower)</option>
           </select>
         </div>
       </div>
@@ -336,9 +334,7 @@ export function ClassSchedulingCenter({ lang, onNavigate }: ClassSchedulingCente
                   value={newBranch}
                   onChange={(e) => { setNewBranch(e.target.value); checkConflict(); }}
                 >
-                  <option value="Piazza Branch">Piazza Branch</option>
-                  <option value="Megenagna Branch">Megenagna Branch</option>
-                  <option value="Lebu Branch">Lebu Branch</option>
+                  <option value="Hawassa main Branch">Hawassa main Branch (Center Point Tower)</option>
                 </select>
               </div>
 

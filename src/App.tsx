@@ -53,7 +53,7 @@ import { TokenViewer } from './components/TokenViewer';
 import { ComponentPlayground } from './components/ComponentPlayground';
 import { GuidelinesSection } from './components/GuidelinesSection';
 import { PageId, Language, UserRole } from './types';
-import { TRANSLATIONS, COURSES_DATA } from './data/websiteData';
+import { TRANSLATIONS, COURSES_DATA, isCourseComingSoon, getLocalizedCourse, tr } from './data/websiteData';
 import { Homepage } from './components/Homepage';
 import {
   AboutAbelPage,
@@ -124,6 +124,7 @@ import { StaffAndAvailabilityCenter } from './components/operations/StaffAndAvai
 import { AttendanceManagementCenter } from './components/operations/AttendanceManagementCenter';
 
 // Phase 13 Online Store & Order Management Integrations
+import { StoreComingSoonPage } from './components/StoreComingSoonPage';
 import { StoreFront } from './components/store/StoreFront';
 import { StoreCartView } from './components/store/StoreCartView';
 import { StoreCheckoutView } from './components/store/StoreCheckoutView';
@@ -210,6 +211,18 @@ function AppContent() {
     setActivePage('home');
     setPageParams(null);
   }, []);
+
+  // Synchronize document language and Benaiah font class for Amharic translation
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    if (lang === 'am') {
+      document.documentElement.classList.add('lang-am');
+      document.body.classList.add('lang-am');
+    } else {
+      document.documentElement.classList.remove('lang-am');
+      document.body.classList.remove('lang-am');
+    }
+  }, [lang]);
 
   // Interactive controls
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -519,6 +532,8 @@ function AppContent() {
     'event-detail',
     'contact',
     'donate',
+    'store',
+    'store-categories',
     'help-center',
     'login',
     'register',
@@ -621,7 +636,7 @@ function AppContent() {
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFFDF8] text-[#2B2B2B] antialiased select-none font-sans max-w-full overflow-x-hidden">
+    <div className={`min-h-screen flex flex-col bg-[#FFFDF8] text-[#2B2B2B] antialiased select-none ${lang === 'am' ? 'font-benaiah font-amharic' : 'font-sans'} max-w-full overflow-x-hidden`}>
       
       {/* Tilet Pattern */}
       <TiletPattern variant="gold-warm" height={10} opacity={0.95} />
@@ -648,12 +663,12 @@ function AppContent() {
                 className="flex items-center gap-1.5 sm:gap-3 cursor-pointer text-left shrink-0 min-w-0"
                 onClick={() => navigateTo('home')}
               >
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[#2B2B2B] flex items-center justify-center border border-[#C79A2B]/30 relative overflow-hidden shadow-xs shrink-0">
-                  <img src={logoImg} alt="Abel Begena School Logo" className="w-full h-full object-cover" />
+                <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-white flex items-center justify-center border border-[#C79A2B]/40 relative overflow-hidden shadow-xs shrink-0 p-0.5">
+                  <img src={logoImg} alt="Liora Begena School Logo" className="w-full h-full object-contain" />
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="text-xs sm:text-sm lg:text-base font-black tracking-tighter text-[#2B2B2B] font-display truncate">
-                    ABEL BEGENA SCHOOL
+                    LIORA BEGENA SCHOOL
                   </span>
                   <span className="text-[8px] sm:text-[9px] uppercase tracking-wider text-[#6F4E37] font-bold -mt-0.5 hidden sm:block">
                     Traditional Ethiopian Begena
@@ -688,8 +703,8 @@ function AppContent() {
                             exit={{ opacity: 0, y: 5 }}
                             className="absolute top-full left-0 mt-1 bg-white border border-[#E7DED1] rounded-lg shadow-lg py-2 w-48 text-left normal-case font-medium z-50"
                           >
-                            <button onClick={() => handleDropdownItemClick('about-abel')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">About Abel</button>
-                            <button onClick={() => handleDropdownItemClick('about-begena')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">Begena History</button>
+                            <button onClick={() => handleDropdownItemClick('about-abel')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{lang === 'am' ? 'ስለ ብሩክ' : 'About Bruk'}</button>
+                            <button onClick={() => handleDropdownItemClick('about-begena')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{lang === 'am' ? 'የበገና ታሪክ' : 'Begena History'}</button>
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -712,17 +727,26 @@ function AppContent() {
                             exit={{ opacity: 0, y: 5 }}
                             className="absolute top-full left-0 mt-1 bg-white border border-[#E7DED1] rounded-lg shadow-lg py-2 w-56 text-left normal-case font-medium z-50"
                           >
-                            {COURSES_DATA.map((course) => (
-                              <button
-                                key={course.id}
-                                onClick={() => handleDropdownItemClick('course-detail', { courseId: course.id })}
-                                className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold"
-                              >
-                                {course.name}
-                              </button>
-                            ))}
+                            {COURSES_DATA.map((course) => {
+                              const localizedCourse = getLocalizedCourse(course, lang);
+                              const isSoon = isCourseComingSoon(course.id);
+                              return (
+                                <button
+                                  key={course.id}
+                                  onClick={() => handleDropdownItemClick('course-detail', { courseId: course.id })}
+                                  className="flex items-center justify-between w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold"
+                                >
+                                  <span>{localizedCourse.name}</span>
+                                  {isSoon && (
+                                    <span className="text-[9px] font-bold text-amber-700 bg-amber-100 border border-amber-300 px-1.5 py-0.5 rounded uppercase">
+                                      {lang === 'am' ? 'በቅርቡ' : 'Soon'}
+                                    </span>
+                                  )}
+                                </button>
+                              );
+                            })}
                             <div className="border-t border-[#E7DED1] mt-1 pt-1">
-                              <button onClick={() => handleDropdownItemClick('courses')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#E89B52] font-bold uppercase">View All Courses</button>
+                              <button onClick={() => handleDropdownItemClick('courses')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#E89B52] font-bold uppercase">{lang === 'am' ? 'ሁሉንም ትምህርቶች ይመልከቱ' : 'View All Courses'}</button>
                             </div>
                           </motion.div>
                         )}
@@ -739,7 +763,7 @@ function AppContent() {
                         onClick={() => setActiveDropdown(activeDropdown === 'learning' ? null : 'learning')}
                         className="px-2.5 py-1.5 rounded-md hover:text-[#E89B52] transition-colors flex items-center gap-1 cursor-pointer"
                       >
-                        <span>Learning</span>
+                        <span>{t.nav.learning}</span>
                         <ChevronDown size={12} />
                       </button>
                       <AnimatePresence>
@@ -750,16 +774,16 @@ function AppContent() {
                             exit={{ opacity: 0, y: 5 }}
                             className="absolute top-full left-0 mt-1 bg-white border border-[#E7DED1] rounded-lg shadow-lg py-2 w-52 text-left normal-case font-medium z-50"
                           >
-                            <button onClick={() => handleDropdownItemClick('home')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">How It Works</button>
-                            <button onClick={() => handleDropdownItemClick('courses')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">Online Learning Mode</button>
-                            <button onClick={() => handleDropdownItemClick('contact')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">Physical Branches</button>
+                            <button onClick={() => handleDropdownItemClick('home')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{t.nav.howItWorks}</button>
+                            <button onClick={() => handleDropdownItemClick('courses')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{lang === 'am' ? 'የኦንላይን ትምህርት' : 'Online Learning Mode'}</button>
+                            <button onClick={() => handleDropdownItemClick('contact')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{lang === 'am' ? 'የአካል ቅርንጫፎች' : 'Physical Branches'}</button>
                           </motion.div>
                         )}
                       </AnimatePresence>
                     </div>
 
                     <button onClick={() => navigateTo('gallery')} className={`px-2.5 py-1.5 rounded-md hover:text-[#E89B52] transition-colors cursor-pointer ${activePage === 'gallery' ? 'text-[#E89B52]' : ''}`}>
-                      Media
+                      {lang === 'am' ? 'ሚዲያ' : 'Media'}
                     </button>
 
                     {/* Events Dropdown */}
@@ -779,10 +803,10 @@ function AppContent() {
                             exit={{ opacity: 0, y: 5 }}
                             className="absolute top-full left-0 mt-1 bg-white border border-[#E7DED1] rounded-lg shadow-lg py-2 w-56 text-left normal-case font-medium z-50"
                           >
-                            <button onClick={() => handleDropdownItemClick('events')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">Nagen</button>
-                            <button onClick={() => handleDropdownItemClick('competitions')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">Youth Begena Competitions</button>
-                            <button onClick={() => handleDropdownItemClick('graduation')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">Graduation Ceremony</button>
-                            <button onClick={() => handleDropdownItemClick('alumni')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">Alumni & Mentorship</button>
+                            <button onClick={() => handleDropdownItemClick('events')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{lang === 'am' ? 'የናጌን ኮንሰርት' : 'Nagen'}</button>
+                            <button onClick={() => handleDropdownItemClick('competitions')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{lang === 'am' ? 'የወጣቶች በገና ውድድር' : 'Youth Begena Competitions'}</button>
+                            <button onClick={() => handleDropdownItemClick('graduation')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{lang === 'am' ? 'የምረቃ ስነ-ስርዓት' : 'Graduation Ceremony'}</button>
+                            <button onClick={() => handleDropdownItemClick('alumni')} className="block w-full text-left px-4 py-2 hover:bg-[#FAF6EF] text-xs text-[#2B2B2B] font-semibold">{lang === 'am' ? 'የምሩቃን ህብረት' : 'Alumni & Mentorship'}</button>
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -790,7 +814,7 @@ function AppContent() {
 
                     {/* Contact Us link directly for public visitors */}
                     <button onClick={() => navigateTo('contact')} className={`px-2.5 py-1.5 rounded-md hover:text-[#E89B52] transition-colors cursor-pointer ${activePage === 'contact' ? 'text-[#E89B52] font-black' : ''}`}>
-                      Contact Us
+                      {t.nav.contact}
                     </button>
                   </>
                 )}
@@ -1190,7 +1214,7 @@ function AppContent() {
                         onClick={() => setActiveDropdown(activeDropdown === 'start-learning' ? null : 'start-learning')}
                         className="bg-[#E89B52] hover:bg-[#d4863e] text-white px-3.5 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition-all shadow-3xs flex items-center gap-1.5 whitespace-nowrap"
                       >
-                        <span>Get started</span>
+                        <span>{lang === 'am' ? 'መማር ይጀምሩ' : 'Get started'}</span>
                         <ChevronDown size={12} />
                       </button>
 
@@ -1203,8 +1227,8 @@ function AppContent() {
                             className="absolute top-full right-0 mt-2 bg-white border border-[#E7DED1] rounded-xl shadow-xl py-2 w-64 text-left normal-case font-medium z-50 overflow-hidden"
                           >
                             <div className="px-4 py-2.5 bg-[#FAF6EF] border-b border-gray-100">
-                              <span className="block font-bold text-xs text-[#2B2B2B]">Join Abel Begena School</span>
-                              <span className="block text-[10px] text-gray-500">Choose registration track</span>
+                              <span className="block font-bold text-xs text-[#2B2B2B]">{lang === 'am' ? 'ሊዮራ በገና ትምህርት ቤትን ይቀላቀሉ' : 'Join Liora Begena School'}</span>
+                              <span className="block text-[10px] text-gray-500">{lang === 'am' ? 'የመመዝገቢያ መንገድ ይምረጡ' : 'Choose registration track'}</span>
                             </div>
 
                             <button
@@ -1212,7 +1236,7 @@ function AppContent() {
                               className="w-full text-left px-4 py-2.5 hover:bg-[#FAF6EF] text-xs font-semibold text-gray-800 flex items-center gap-2 cursor-pointer"
                             >
                               <span className="w-2 h-2 rounded-full bg-[#E89B52]" />
-                              <span>Student Portal Registration</span>
+                              <span>{lang === 'am' ? 'የተማሪዎች ምዝገባ' : 'Student Portal Registration'}</span>
                             </button>
 
                             <button
@@ -1220,7 +1244,7 @@ function AppContent() {
                               className="w-full text-left px-4 py-2.5 hover:bg-[#FAF6EF] text-xs font-semibold text-gray-800 flex items-center gap-2 cursor-pointer"
                             >
                               <span className="w-2 h-2 rounded-full bg-blue-500" />
-                              <span>Parent / Guardian Portal</span>
+                              <span>{lang === 'am' ? 'የወላጆች / አሳዳጊዎች ምዝገባ' : 'Parent / Guardian Portal'}</span>
                             </button>
 
                             <button
@@ -1228,7 +1252,7 @@ function AppContent() {
                               className="w-full text-left px-4 py-2.5 hover:bg-[#FAF6EF] text-xs font-semibold text-gray-800 flex items-center gap-2 cursor-pointer"
                             >
                               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                              <span>Teacher Application</span>
+                              <span>{lang === 'am' ? 'የመምህራን ማመልከቻ' : 'Teacher Application'}</span>
                             </button>
                           </motion.div>
                         )}
@@ -1261,23 +1285,23 @@ function AppContent() {
               >
                 <div className="px-6 py-6 space-y-4 text-left text-xs font-bold text-[#666666] uppercase">
                   <div className="flex items-center justify-between pb-3 border-b border-[#E7DED1]">
-                    <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">Appearance Mode</span>
+                    <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">{lang === 'am' ? 'የገጽታ ቀለም' : 'Appearance Mode'}</span>
                     <ThemeToggle variant="pill" />
                   </div>
                   {!currentUser ? (
                     <>
                       <div className="grid grid-cols-2 gap-3">
-                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('home'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">Home</button>
-                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('courses'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">Courses</button>
-                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('teachers'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">Teachers</button>
-                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('gallery'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">Media Gallery</button>
-                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('events'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">Events</button>
-                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('contact'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">Contact</button>
+                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('home'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">{t.nav.home}</button>
+                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('courses'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">{t.nav.courses}</button>
+                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('teachers'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">{t.nav.teachers}</button>
+                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('gallery'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">{t.nav.gallery}</button>
+                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('events'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">{t.nav.events}</button>
+                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('contact'); }} className="p-3 bg-[#FAF6EF] rounded-xl text-center">{t.nav.contact}</button>
                       </div>
 
                       <div className="border-t border-[#E7DED1] pt-3 flex flex-col gap-2">
-                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('about-abel'); }} className="text-left py-2 border-b border-[#FAF6EF]">About Abel</button>
-                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('about-begena'); }} className="text-left py-2 border-b border-[#FAF6EF]">Begena History</button>
+                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('about-abel'); }} className="text-left py-2 border-b border-[#FAF6EF]">{lang === 'am' ? 'ስለ ብሩክ' : 'About Bruk'}</button>
+                        <button onClick={() => { setIsMobileMenuOpen(false); navigateTo('about-begena'); }} className="text-left py-2 border-b border-[#FAF6EF]">{lang === 'am' ? 'የበገና ታሪክ' : 'Begena History'}</button>
                       </div>
 
                       <div className="flex flex-col gap-2 pt-3 border-t border-[#E7DED1]">
@@ -1285,13 +1309,13 @@ function AppContent() {
                           onClick={() => { setIsMobileMenuOpen(false); navigateTo('login'); }}
                           className="w-full bg-[#2B2B2B] text-white py-3 text-center rounded-lg cursor-pointer font-bold"
                         >
-                          Login
+                          {t.nav.login}
                         </button>
                         <button
                           onClick={() => { setIsMobileMenuOpen(false); navigateTo('register'); }}
                           className="w-full bg-[#E89B52] text-white py-3 text-center rounded-lg cursor-pointer font-bold"
                         >
-                          Start Learning (Register)
+                          {lang === 'am' ? 'መማር ይጀምሩ (ይመዝገቡ)' : 'Start Learning (Register)'}
                         </button>
                       </div>
                     </>
@@ -1585,7 +1609,7 @@ function AppContent() {
               )}
               {activePage === 'verify-account' && (
                 <motion.div key="verify-account" className="w-full max-w-md mx-auto">
-                  <VerifyAccountPage lang={lang} onNavigate={navigateTo} />
+                  <VerifyAccountPage lang={lang} onNavigate={navigateTo} params={pageParams} />
                 </motion.div>
               )}
 
@@ -1893,88 +1917,10 @@ function AppContent() {
                   />
                 </motion.div>
               )}
-              {/* PHASE 13 COMPLETE ONLINE STORE & ORDER MANAGEMENT ROUTES */}
-              {activePage === 'store' && (
-                <motion.div key="store" className="w-full">
-                  {!currentUser ? (
-                    <div className="max-w-xl mx-auto py-16 px-4 text-center">
-                      <div className="bg-white border border-[#E7DED1] rounded-3xl p-8 sm:p-10 shadow-xl space-y-6 text-center">
-                        <div className="w-16 h-16 bg-amber-100 text-[#E89B52] rounded-2xl flex items-center justify-center mx-auto shadow-xs">
-                          <Lock className="w-8 h-8" />
-                        </div>
-                        <div className="space-y-2">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#E89B52] bg-[#FAF6EF] border border-[#E7DED1] px-3 py-1 rounded-full">
-                            Members Only
-                          </span>
-                          <h2 className="text-2xl font-black text-[#2B2B2B] font-display">Sign In to Access Store</h2>
-                          <p className="text-gray-600 text-xs sm:text-sm leading-relaxed max-w-md mx-auto">
-                            The Official Abel Begena Store is available exclusively to authenticated members to order hand-carved Begenas, Krars, Washints, accessories, and textbook materials.
-                          </p>
-                        </div>
-                        <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                          <button
-                            onClick={() => navigateTo('login')}
-                            className="flex-1 py-3 bg-[#E89B52] hover:bg-[#d4863e] text-white font-bold text-xs rounded-xl transition-all cursor-pointer"
-                          >
-                            Sign In to Account
-                          </button>
-                          <button
-                            onClick={() => navigateTo('register')}
-                            className="flex-1 py-3 bg-[#FAF6EF] hover:bg-[#E7DED1]/50 border border-[#E7DED1] text-[#2B2B2B] font-bold text-xs rounded-xl transition-all cursor-pointer"
-                          >
-                            Create Account
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <StoreFront
-                      lang={lang}
-                      onNavigate={navigateTo}
-                      cartItems={cartItems}
-                      wishlistItems={wishlistItems}
-                      onAddToCart={handleAddToCart}
-                      onToggleWishlist={handleToggleWishlist}
-                    />
-                  )}
-                </motion.div>
-              )}
-              {activePage === 'store-categories' && (
-                <motion.div key="store-categories" className="w-full">
-                  <StoreFront
-                    lang={lang}
-                    onNavigate={navigateTo}
-                    cartItems={cartItems}
-                    wishlistItems={wishlistItems}
-                    onAddToCart={handleAddToCart}
-                    onToggleWishlist={handleToggleWishlist}
-                    initialCategory={pageParams?.category}
-                  />
-                </motion.div>
-              )}
-              {activePage === 'store-cart' && (
-                <motion.div key="store-cart" className="w-full">
-                  <StoreCartView
-                    lang={lang}
-                    onNavigate={navigateTo}
-                    cartItems={cartItems}
-                    appliedCoupon={appliedCoupon}
-                    onUpdateQuantity={handleUpdateQuantity}
-                    onRemoveItem={handleRemoveCartItem}
-                    onToggleSaveForLater={handleToggleSaveForLater}
-                    onApplyCoupon={(coupon) => setAppliedCoupon(coupon)}
-                  />
-                </motion.div>
-              )}
-              {activePage === 'store-checkout' && (
-                <motion.div key="store-checkout" className="w-full">
-                  <StoreCheckoutView
-                    lang={lang}
-                    onNavigate={navigateTo}
-                    cartItems={cartItems}
-                    appliedCoupon={appliedCoupon}
-                    onOrderCreated={handleOrderCreated}
-                  />
+              {/* PHASE 13 STORE COMING SOON EXPERIENCE */}
+              {(activePage === 'store' || activePage === 'store-categories' || activePage === 'store-cart' || activePage === 'store-checkout' || activePage === 'store-wishlist') && (
+                <motion.div key="store-coming-soon" className="w-full">
+                  <StoreComingSoonPage lang={lang} onNavigate={navigateTo} />
                 </motion.div>
               )}
               {activePage === 'store-orders' && (
@@ -2274,24 +2220,23 @@ function AppContent() {
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 relative z-10">
               <div className="md:col-span-5 space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center border border-[#C79A2B]/40 overflow-hidden">
-                    <img src={logoImg} alt="Abel Begena School Logo" className="w-full h-full object-cover" />
+                  <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center border border-[#C79A2B]/40 overflow-hidden shrink-0 p-0.5 shadow-sm">
+                    <img src={logoImg} alt="Liora Begena School Logo" className="w-full h-full object-contain" />
                   </div>
                   <div>
-                    <h4 className="font-display font-bold text-lg text-white">ABEL BEGENA Traditional Music School</h4>
-                    <p className="text-[10px] uppercase font-semibold text-[#C79A2B] tracking-wider">Addis Ababa, Ethiopia</p>
+                    <h4 className="font-display font-bold text-lg text-white">{t.footer.schoolName}</h4>
+                    <p className="text-[10px] uppercase font-semibold text-[#C79A2B] tracking-wider">{t.footer.location}</p>
                   </div>
                 </div>
                 <p className="text-xs text-[#FAF6EF]/90 max-w-sm leading-relaxed">
-                  Keeping ancient Ethiopian musical legacy alive by combining centuries-old church/folk methodologies with modern accessible designs.
+                  {t.footer.desc}
                 </p>
 
                 {/* Social links */}
-                <div className="flex gap-3 text-xs pt-2">
-                  <a href="https://www.instagram.com/abel_begena?igsh=a3QwOWk0dXphZzY4" target="_blank" rel="noreferrer noopener" className="bg-white/10 hover:bg-[#E89B52] p-2 rounded-full border border-white/10 text-white transition-colors">Instagram</a>
-                  <a href="https://t.me/abelbegena" target="_blank" rel="noreferrer noopener" className="bg-white/10 hover:bg-[#E89B52] p-2 rounded-full border border-white/10 text-white transition-colors">Telegram</a>
-                  <a href="https://www.tiktok.com/@abelbegena?_r=1&_t=ZS-98FHp1r75eO" target="_blank" rel="noreferrer noopener" className="bg-white/10 hover:bg-[#E89B52] p-2 rounded-full border border-white/10 text-white transition-colors">TikTok</a>
-                  <a href="https://youtu.be/0UZyHXWIOr8" target="_blank" rel="noreferrer noopener" className="bg-white/10 hover:bg-[#E89B52] p-2 rounded-full border border-white/10 text-white transition-colors">YouTube</a>
+                <div className="flex flex-wrap gap-2.5 text-xs pt-2">
+                  <a href="https://www.instagram.com/liyora_begena?xtok=MWxxbTJ5eWJ1MTBpeA==" target="_blank" rel="noreferrer noopener" className="bg-white/10 hover:bg-[#E89B52] px-3.5 py-1.5 rounded-full border border-white/10 text-white transition-colors font-medium">Instagram</a>
+                  <a href="https://t.me/liyora_begena" target="_blank" rel="noreferrer noopener" className="bg-white/10 hover:bg-[#E89B52] px-3.5 py-1.5 rounded-full border border-white/10 text-white transition-colors font-medium">Telegram</a>
+                  <a href="https://www.tiktok.com/@liora_begena?is_from_webapp=1&sender_device=pc" target="_blank" rel="noreferrer noopener" className="bg-white/10 hover:bg-[#E89B52] px-3.5 py-1.5 rounded-full border border-white/10 text-white transition-colors font-medium">TikTok</a>
                 </div>
               </div>
 
@@ -2300,18 +2245,18 @@ function AppContent() {
                 <div className="flex items-center justify-between border-b border-white/15 pb-2">
                   <h5 className="font-display font-black text-xs uppercase tracking-widest text-[#C79A2B] flex items-center gap-2">
                     <Sparkles size={14} className="text-[#E89B52]" />
-                    <span>Quick Navigation Hub</span>
+                    <span>{lang === 'am' ? 'ፈጣን ማውጫ' : 'Quick Navigation Hub'}</span>
                   </h5>
-                  <span className="text-[10px] font-mono text-[#FAF6EF]/60 uppercase tracking-wider">Fast Access</span>
+                  <span className="text-[10px] font-mono text-[#FAF6EF]/60 uppercase tracking-wider">{lang === 'am' ? 'ቀጥታ አገናኞች' : 'Fast Access'}</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                   {[
-                    { id: 'home', label: 'Home Portal', icon: Home, desc: 'School overview & main entry' },
-                    { id: 'courses', label: 'Instrument Courses', icon: Music, desc: 'Begena, Krar, Masenqo & Zema' },
-                    { id: 'teachers', label: 'Faculty Profiles', icon: GraduationCap, desc: 'Master instructors & Zemari' },
-                    { id: 'certificates', label: 'Certificates & Lookup', icon: Award, desc: 'Digital QR credentials' },
-                    { id: 'help', label: 'Help & Support', icon: HelpCircle, desc: 'Admissions, fees & contact' },
+                    { id: 'home', label: lang === 'am' ? 'ዋና ገጽ' : 'Home Portal', icon: Home, desc: lang === 'am' ? 'የትምህርት ቤቱ መግቢያና አጠቃላይ እይታ' : 'School overview & main entry' },
+                    { id: 'courses', label: lang === 'am' ? 'የትምህርት ዓይነቶች' : 'Instrument Courses', icon: Music, desc: lang === 'am' ? 'በገና፣ ክራር፣ ማሲንቆና የዜማ ስልጠና' : 'Begena, Krar, Masenqo & Zema' },
+                    { id: 'teachers', label: lang === 'am' ? 'የመምህራን መገለጫ' : 'Faculty Profiles', icon: GraduationCap, desc: lang === 'am' ? 'አንጋፋ መምህራንና ዘማሪዎች' : 'Master instructors & Zemari' },
+                    { id: 'certificates', label: lang === 'am' ? 'የምስክር ወረቀቶች' : 'Certificates & Lookup', icon: Award, desc: lang === 'am' ? 'ዲጂታል የትምህርት ምስክር ወረቀቶች' : 'Digital QR credentials' },
+                    { id: 'help', label: lang === 'am' ? 'እርዳታና ድጋፍ' : 'Help & Support', icon: HelpCircle, desc: lang === 'am' ? 'ምዝገባ፣ ክፍያና አድራሻዎቻችን' : 'Admissions, fees & contact' },
                   ].map((link) => {
                     const IconComp = link.icon;
                     return (
@@ -2350,7 +2295,7 @@ function AppContent() {
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-8">
           <div className="flex justify-between items-center pb-4 border-b border-[#E7DED1] mb-8">
             <div className="text-left">
-              <h1 className="font-display font-black text-2xl text-[#2B2B2B]">ABEL BEGENA SYSTEM LAB</h1>
+              <h1 className="font-display font-black text-2xl text-[#2B2B2B]">LIORA BEGENA SYSTEM LAB</h1>
               <p className="text-xs text-gray-500">Inspect system foundations, interactive guidelines, and components.</p>
             </div>
             <div className="flex border border-[#E7DED1] rounded-lg overflow-hidden bg-white shadow-3xs">

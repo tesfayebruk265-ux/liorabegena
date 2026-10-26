@@ -46,7 +46,7 @@ const SAMPLE_BRANCH_STAFF: BranchStaffMember[] = [
     id: 's-2',
     branchId: 'b-piazza',
     branchName: 'Piazza Branch',
-    name: 'Abel Begena',
+    name: 'Liora Begena',
     role: 'Teacher',
     email: 'abel@abelbegena.com',
     phone: '+251 911 111 222',

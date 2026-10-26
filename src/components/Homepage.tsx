@@ -17,15 +17,18 @@ import {
   Send,
   MessageSquare,
   HelpCircle,
-  FileText
+  FileText,
+  Music
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Course, Teacher, Event, Product, Article, Testimonial, Branch, GalleryItem, PageId, Language } from '../types';
-import { COURSES_DATA, TEACHERS_DATA, EVENTS_DATA, PRODUCTS_DATA, ARTICLES_DATA, TESTIMONIALS_DATA, BRANCHES_DATA, GALLERY_DATA, TRANSLATIONS, ABEL_BEGENA_PHOTO } from '../data/websiteData';
+import { COURSES_DATA, TEACHERS_DATA, EVENTS_DATA, PRODUCTS_DATA, ARTICLES_DATA, TESTIMONIALS_DATA, BRANCHES_DATA, GALLERY_DATA, TRANSLATIONS, ABEL_BEGENA_PHOTO, isCourseComingSoon, getLocalizedCourse, getLocalizedTeacher } from '../data/websiteData';
 import newBegenaPhoto from '../assets/images/New_begena.jpg';
 import begenatogetherPhoto from '../assets/images/begenatogether.jpg';
 import { Button } from './InteractiveComponents';
 import { useAuth } from '../context/AuthContext';
+import { CourseComingSoonModal } from './CourseComingSoonModal';
+import { StoreComingSoonModal } from './StoreComingSoonModal';
 
 interface HomepageProps {
   lang: Language;
@@ -39,6 +42,8 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+  const [comingSoonCourse, setComingSoonCourse] = useState<Course | null>(null);
+  const [isStoreComingSoonOpen, setIsStoreComingSoonOpen] = useState(false);
 
   const handleStartLearningClick = () => {
     if (!currentUser) {
@@ -61,7 +66,32 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
     }, 2000);
   };
 
-  const faqItems = [
+  const faqItems = lang === 'am' ? [
+    {
+      q: 'ምን ምን የዜማ መሣሪያዎችን መማር እችላለሁ?',
+      a: 'በገና (የዳዊት በገና)፣ ክራር (ባህላዊና ኤሌክትሪክ)፣ ማሲንቆ፣ የቀርከሃ ዋሽንት፣ የቅዱስ ያሬድ ዜማ (ድምፅ) እና ባህላዊ ከበሮን መማር ይችላሉ።'
+    },
+    {
+      q: 'የቀደመ የሙዚቃ ልምድ ያስፈልገኛል?',
+      a: 'በፍጹም አያስፈልግም! ሁሉም ትምህርቶቻችን ቀደም ሲል ምንም ዓይነት የሙዚቃ ልምድ ለሌላቸው ሙሉ ጀማሪዎች ተብለው ከተዘጋጁ ከመሰረታዊ ደረጃ 1 ይጀምራሉ።'
+    },
+    {
+      q: 'ሙሉ በሙሉ በኦንላይን መማር ይቻላል?',
+      a: 'አዎ! ጥራት ባላቸው የተቀረጹ የቪዲዮ ትምህርቶች፣ በሚወርዱ የኖታ ማስታወሻዎች እና በየሳምንቱ ከአስተማሪዎች ጋር በሚደረግ የቀጥታ ግንኙነት በኦንላይን መማር ይችላሉ።'
+    },
+    {
+      q: 'የአካል ቅርንጫፋችሁ የት ይገኛል?',
+      a: 'ዋና ቅርንጫፋችን የሚገኘው በሐዋሳ፣ ሴንተር ፖይንት ታወር አንደኛ ፎቅ (Center Point Tower, First Floor, Hawassa) ላይ ነው። እንዲሁም ዓለም አቀፍ ተማሪዎቻችንን በኦንላይን ካምፓሳችን እናስተናግዳለን።'
+    },
+    {
+      q: 'የትምህርቱ ቆይታ ምን ያህል ጊዜ ነው?',
+      a: 'የትምህርቶቻችን የቆይታ ጊዜያት 3፣ 4 እና 6 ወራት ብቻ ናቸው። እንደ መረጡት ፍጥነትና መርሃ ግብር (ጥቅል 1፡ 3 ወራት፣ ጥቅል 2፡ 4 ወራት ወይም ጥቅል 3፡ 6 ወራት) ተመዝግበው መማር ይችላሉ።'
+    },
+    {
+      q: 'ስመረቅ ህጋዊ የምስክር ወረቀት ይሰጠኛል?',
+      a: 'አዎ! የንድፈ-ሀሳብና የተግባር ፈተናዎችን እንዲሁም የግል የብቃት አቀራረብ ካጠናቀቁ በኋላ በዲያቆን ብሩክ ተስፋዬ የተፈረመበትና ማህተም ያረፈበት ይፋዊ የምስክር ወረቀት ይሰጥዎታል።'
+    }
+  ] : [
     {
       q: 'What instruments can I learn?',
       a: 'You can study Begena (Harp of David), Krar (Acoustic and Electric Bowl Lyre), Masenqo (Single-String Lute), Washint (Bamboo Flute), Traditional Vocals (St. Yared Hymnology), and Kebero (Liturgical/Secular Percussion).'
@@ -75,18 +105,45 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
       a: 'Yes! We have designed a highly effective digital learning portal that provides HD recorded video tutorials, downloadable PDF worksheets, and weekly 1-on-1 live feedback sessions over Google Meet/Zoom with certified instructors.'
     },
     {
-      q: 'Where are the physical branches located?',
-      a: 'We have three beautiful physical campuses in Addis Ababa: Piazza (near St. George Church - HQ), Megenagna (Silassie Building - Modern Hub), and Lebu (near Varnero Roundabout - Community Annex).'
+      q: 'Where is the physical branch located?',
+      a: 'We have our main physical branch in Hawassa at Center Point Tower, first floor (Hawassa, Ethiopia). We also serve students across the globe through our dedicated Online Campus.'
     },
     {
       q: 'How long are the courses?',
-      a: 'Our courses range from intensive 3-month basic certificates to full 9-month and 12-month traditional master diplomas, depending on your preferred pacing and instrument complexity.'
+      a: 'Our available learning durations are 3, 4, and 6 months only, structured to fit your preferred pacing (Package 1: 3 months, Package 2: 4 months, and Package 3: 6 months).'
     },
     {
       q: 'Do I receive a certified credential upon graduation?',
-      a: 'Yes, upon successful completion of your practical exams and solo recitals, you will receive a beautiful, formal Certificate of Accomplishment stamped and signed by Zemari Deacon Abel Tesfaye.'
+      a: 'Yes, upon successful completion of your practical exams and solo recitals, you will receive a beautiful, formal Certificate of Accomplishment stamped and signed by Deacon Bruk Tesfaye.'
     }
   ];
+
+  const localizedTestimonials = lang === 'am' ? [
+    {
+      id: 't1',
+      name: 'ሰሎሞን ግርማ',
+      course: 'የበገና ትምህርት',
+      branchOrOnline: 'የዋሽንግተን ዲሲ ዳያስፖራ (ኦንላይን)',
+      text: 'በዳያስፖራ ውስጥ እየኖርኩ ጥንታዊውን የዳዊት በገና መማር እችላለሁ ብዬ አስቤ አላውቅም ነበር። የኦንላይን ትምህርቱና የአስተማሪዎቹ ክትትል እጅግ አስደናቂ ነው።',
+      avatar: ''
+    },
+    {
+      id: 't2',
+      name: 'መርዓዊ ተፈራ',
+      course: 'የክራር ትምህርት',
+      branchOrOnline: 'የሐዋሳ ዋና ቅርንጫፍ',
+      text: 'በሐዋሳ ዋና ቅርንጫፍ በሴንተር ፖይንት ታወር በአካል በመማሬ በሶስት ወር ውስጥ አራቱንም ቅኝቶች መደርደር ችያለሁ። ትምህርት ቤቱን ለሁሉም ወዳጆቼ እመክራለሁ።',
+      avatar: ''
+    },
+    {
+      id: 't3',
+      name: 'ሄለን ታደሰ',
+      course: 'የያሬዳዊ ዜማ ስልጠና',
+      branchOrOnline: 'የሐዋሳ ዋና ቅርንጫፍ',
+      text: 'በሐዋሳ ዋና ቅርንጫፍ የቅዱስ ያሬድን የዜማ ስልቶችና የድምፅ አወጣጥ ከሊቃውንቱ መማር መንፈሳዊ እርካታን ሰጥቶኛል።',
+      avatar: ''
+    }
+  ] : TESTIMONIALS_DATA;
 
   return (
     <div className="space-y-20 pb-16">
@@ -135,18 +192,22 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative rounded-2xl overflow-hidden border-2 border-[#C79A2B] shadow-lg h-96 img-zoom-wrapper img-lift bg-[#121212]">
-              {/* Authentically captured representation of a Begena player with warm natural lighting */}
+            <div className="relative rounded-2xl overflow-hidden border-2 border-[#C79A2B] shadow-lg h-96 sm:h-[440px] img-zoom-wrapper img-lift bg-[#121212]">
+              {/* Authentically captured representation of Deacon Bruk Tesfaye playing Begena */}
               <img
                 src={newBegenaPhoto}
-                alt="Ethiopian Traditional Begena"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out opacity-100 block"
+                alt="Deacon Bruk Tesfaye - Liora Begena"
+                className="w-full h-full object-cover object-[center_20%] transition-transform duration-700 ease-out opacity-100 block"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-[#1A1A1E]/95 backdrop-blur-xs p-4 rounded-xl border border-[#E7DED1] dark:border-[#2E2E36] shadow-md transition-all">
-                <p className="text-xs font-bold text-[#2B2B2B] dark:text-[#F8F9FA]">“Meditation of the Strings”</p>
-                <p className="text-[10px] text-[#666666] dark:text-[#A1A1AA] mt-0.5">Shot in Addis Ababa, Ethiopia.</p>
+                <p className="text-xs font-bold text-[#2B2B2B] dark:text-[#F8F9FA]">
+                  {lang === 'am' ? 'ዲያቆን ብሩክ ተስፋዬ — ሊዮራ በገና' : 'Deacon Bruk Tesfaye — Liora Begena'}
+                </p>
+                <p className="text-[10px] text-[#666666] dark:text-[#A1A1AA] mt-0.5">
+                  {lang === 'am' ? 'የዳዊት በገና ድርደራና የዜማ ጥበብ' : 'Mastering the Sacred Harp of David'}
+                </p>
               </div>
             </div>
 
@@ -156,8 +217,8 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
               <p className="text-[10px] text-[#666666]">Global Students</p>
             </div>
             <div className="absolute -bottom-4 -left-4 bg-[#2B2B2B] text-white border border-[#C79A2B]/40 px-3.5 py-2 rounded-xl shadow-md text-xs animate-floatGently" style={{ animationDelay: '1.5s' }}>
-              <p className="font-bold text-[#E89B52]">3 Branches</p>
-              <p className="text-[10px] text-gray-300">In Addis Ababa</p>
+              <p className="font-bold text-[#E89B52]">Hawassa main Branch</p>
+              <p className="text-[10px] text-gray-300">Center Point Tower</p>
             </div>
           </motion.div>
         </div>
@@ -172,7 +233,7 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
             <p className="text-xs text-[#666666] font-semibold uppercase tracking-wider">{t.stats.students}</p>
           </div>
           <div className="space-y-1.5 p-2 pt-6 md:pt-2 transform-gpu animate-fadeIn hover:-translate-y-1 hover:shadow-xl transition-all duration-300" style={{ animationDelay: '0.1s' }}>
-            <h3 className="text-2xl sm:text-3xl font-black text-[#2B2B2B] font-display">3</h3>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#2B2B2B] font-display">1</h3>
             <p className="text-xs text-[#666666] font-semibold uppercase tracking-wider">{t.stats.branches}</p>
           </div>
           <div className="space-y-1.5 p-2 pt-6 md:pt-2 transform-gpu animate-fadeIn hover:-translate-y-1 hover:shadow-xl transition-all duration-300" style={{ animationDelay: '0.2s' }}>
@@ -223,7 +284,7 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
             <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-[#C79A2B] shadow-md">
               <img
                 src={ABEL_BEGENA_PHOTO}
-                alt="Abel - Founder"
+                alt="Bruk - Founder"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -256,45 +317,86 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
-          {COURSES_DATA.map((course) => (
-            <div
-              key={course.id}
-              className="bg-white border border-[#E7DED1] rounded-2xl overflow-hidden shadow-2xs card-interactive flex flex-col justify-between group h-full text-left"
-            >
-              <div>
-                <div className="aspect-[3/4] w-full overflow-hidden relative img-zoom-wrapper bg-[#FAF6EF]">
-                  <img
-                    src={course.image}
-                    alt={course.name}
-                    className="w-full h-full object-cover transition-transform duration-500 ease-out"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute top-2.5 right-2.5 bg-white/95 backdrop-blur-xs px-2 py-0.5 rounded-full text-[10px] font-bold text-[#C79A2B] border border-[#E7DED1] shadow-2xs">
-                    ★ {course.rating}
+          {COURSES_DATA.map((course) => {
+            const locCourse = getLocalizedCourse(course, lang);
+            const isComingSoon = isCourseComingSoon(course.id);
+            return (
+              <div
+                key={course.id}
+                onClick={() => {
+                  if (isComingSoon) {
+                    setComingSoonCourse(locCourse);
+                  } else {
+                    onNavigate('course-detail', { courseId: course.id });
+                  }
+                }}
+                className={`bg-white border rounded-2xl overflow-hidden shadow-2xs card-interactive flex flex-col justify-between group h-full text-left cursor-pointer transition-all ${
+                  isComingSoon
+                    ? 'border-amber-200/90 hover:border-amber-400 hover:shadow-md'
+                    : 'border-[#E7DED1] hover:border-[#C79A2B]'
+                }`}
+              >
+                <div>
+                  <div className="aspect-[3/4] w-full overflow-hidden relative img-zoom-wrapper bg-[#FAF6EF]">
+                    <img
+                      src={course.image}
+                      alt={locCourse.name}
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out"
+                      referrerPolicy="no-referrer"
+                    />
+                    {isComingSoon ? (
+                      <div className="absolute top-2.5 right-2.5 bg-gradient-to-r from-amber-600 to-amber-700 text-white backdrop-blur-xs px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider shadow-sm flex items-center gap-1 border border-amber-500/40">
+                        {lang === 'am' ? 'በቅርቡ' : 'Coming Soon'}
+                      </div>
+                    ) : (
+                      <div className="absolute top-2.5 right-2.5 bg-white/95 backdrop-blur-xs px-2 py-0.5 rounded-full text-[10px] font-bold text-[#C79A2B] border border-[#E7DED1] shadow-2xs">
+                        ★ {course.rating}
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-3.5 space-y-1.5">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <h3 className="text-xs sm:text-sm font-bold text-[#2B2B2B] group-hover:text-[#E89B52] transition-colors leading-snug">
+                        {locCourse.name}
+                      </h3>
+                      {isComingSoon && (
+                        <span className="text-[8px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100/80 border border-amber-300 px-1.5 py-0.5 rounded">
+                          {t.common.soon}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[11px] text-[#666666] leading-relaxed line-clamp-2">{locCourse.shortDescription}</p>
                   </div>
                 </div>
-                <div className="p-3.5 space-y-1.5">
-                  <h3 className="text-xs sm:text-sm font-bold text-[#2B2B2B] group-hover:text-[#E89B52] transition-colors leading-snug">{course.name}</h3>
-                  <p className="text-[11px] text-[#666666] leading-relaxed line-clamp-2">{course.shortDescription}</p>
-                </div>
-              </div>
 
-              <div className="p-3.5 pt-0 border-t border-[#FAF6EF] flex flex-col gap-2.5">
-                <div className="flex justify-between items-center text-[10px] text-[#666666] py-1">
-                  <span className="font-semibold bg-[#FAF6EF] px-1.5 py-0.5 rounded border border-[#E7DED1] text-[9px]">{course.difficulty}</span>
-                  <span className="text-[9px] font-medium">{course.duration}</span>
+                <div className="p-3.5 pt-0 border-t border-[#FAF6EF] flex flex-col gap-2.5">
+                  <div className="flex justify-between items-center text-[10px] text-[#666666] py-1">
+                    <span className="font-semibold bg-[#FAF6EF] px-1.5 py-0.5 rounded border border-[#E7DED1] text-[9px]">{locCourse.difficulty}</span>
+                    <span className="text-[9px] font-medium">{locCourse.duration}</span>
+                  </div>
+                  <Button
+                    variant={isComingSoon ? "ghost" : "secondary"}
+                    size="sm"
+                    className={`w-full text-[10px] font-bold uppercase py-1.5 transition-all cursor-pointer ${
+                      isComingSoon
+                        ? 'bg-amber-50/90 text-amber-900 border border-amber-300 hover:bg-amber-100 hover:border-amber-400 font-extrabold shadow-2xs'
+                        : ''
+                    }`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (isComingSoon) {
+                        setComingSoonCourse(locCourse);
+                      } else {
+                        onNavigate('course-detail', { courseId: course.id });
+                      }
+                    }}
+                  >
+                    {isComingSoon ? (lang === 'am' ? 'በቅርቡ ይጠብቁን' : 'COMING SOON') : (lang === 'am' ? 'ትምህርቱን ይመልከቱ' : 'VIEW COURSE')}
+                  </Button>
                 </div>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="w-full text-[10px] font-bold uppercase py-1.5"
-                  onClick={() => onNavigate('course-detail', { courseId: course.id })}
-                >
-                  VIEW COURSE
-                </Button>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="pt-4 text-center">
@@ -311,40 +413,40 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
       {/* 6. FEATURED BEGENA JOURNEY MAP */}
       <section className="bg-[#FAF6EF]/55 dark:bg-[#111318]/85 border border-[#E7DED1] dark:border-[#2E2E36] rounded-3xl p-6 sm:p-10 max-w-7xl mx-auto text-left space-y-8">
         <div className="max-w-2xl space-y-2">
-          <span className="text-[9px] font-bold uppercase tracking-wider text-[#C79A2B]">Traditional Curriculum Timeline</span>
-          <h3 className="text-xl sm:text-2xl font-black text-[#2B2B2B] dark:text-[#F8F9FA] font-display">Featured Begena Learning Journey</h3>
-          <p className="text-xs text-[#666666] dark:text-[#A1A1AA]">Explore our structured multi-semester timeline designed to take complete novices to advanced solo performers.</p>
+          <span className="text-[9px] font-bold uppercase tracking-wider text-[#C79A2B]">{t.journey.badge}</span>
+          <h3 className="text-xl sm:text-2xl font-black text-[#2B2B2B] dark:text-[#F8F9FA] font-display">{t.journey.title}</h3>
+          <p className="text-xs text-[#666666] dark:text-[#A1A1AA]">{t.journey.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
           {/* Timeline steps */}
           <div className="bg-white dark:bg-[#111318] dark:border-[#2E2E36] border border-[#E7DED1] p-5 rounded-2xl relative space-y-3">
             <span className="text-xs font-extrabold text-[#E89B52] bg-[#FAF6EF] dark:bg-[#1D1F27] dark:border-[#2E2E36] border border-[#E7DED1] px-2 py-0.5 rounded-full uppercase tracking-wider">
-              Basic Phase 1
+              {t.journey.phase1Tag}
             </span>
-            <h4 className="font-bold text-[#2B2B2B] dark:text-[#F8F9FA] text-sm">Introduction & Foundations</h4>
+            <h4 className="font-bold text-[#2B2B2B] dark:text-[#F8F9FA] text-sm">{t.journey.phase1Title}</h4>
             <p className="text-xs text-[#666666] dark:text-[#A1A1AA] leading-relaxed">
-              Master proper sitting posture, learn the acoustic history of the Harp of David, set up finger placements, and align your basic tuning using ears and buzzed strings.
+              {t.journey.phase1Desc}
             </p>
           </div>
 
           <div className="bg-white dark:bg-[#111318] dark:border-[#2E2E36] border border-[#E7DED1] p-5 rounded-2xl relative space-y-3">
             <span className="text-xs font-extrabold text-[#E89B52] bg-[#FAF6EF] dark:bg-[#1D1F27] dark:border-[#2E2E36] border border-[#E7DED1] px-2 py-0.5 rounded-full uppercase tracking-wider">
-              Basic Phase 2
+              {t.journey.phase2Tag}
             </span>
-            <h4 className="font-bold text-[#2B2B2B] dark:text-[#F8F9FA] text-sm">Mezmur & Hand Positions</h4>
+            <h4 className="font-bold text-[#2B2B2B] dark:text-[#F8F9FA] text-sm">{t.journey.phase2Title}</h4>
             <p className="text-xs text-[#666666] dark:text-[#A1A1AA] leading-relaxed">
-              Introduce intermediate hand pluck mechanics, tune in traditional Qenet intervals, and perform initial spiritual accompaniment melodies with basic vocal alignment.
+              {t.journey.phase2Desc}
             </p>
           </div>
 
           <div className="bg-white dark:bg-[#111318] dark:border-[#2E2E36] border border-[#E7DED1] p-5 rounded-2xl relative space-y-3">
             <span className="text-xs font-extrabold text-[#E89B52] bg-[#FAF6EF] dark:bg-[#1D1F27] dark:border-[#2E2E36] border border-[#E7DED1] px-2 py-0.5 rounded-full uppercase tracking-wider">
-              Basic Phase 3
+              {t.journey.phase3Tag}
             </span>
-            <h4 className="font-bold text-[#2B2B2B] dark:text-[#F8F9FA] text-sm">Advanced Ornamentations</h4>
+            <h4 className="font-bold text-[#2B2B2B] dark:text-[#F8F9FA] text-sm">{t.journey.phase3Title}</h4>
             <p className="text-xs text-[#666666] dark:text-[#A1A1AA] leading-relaxed">
-              Explore advanced vibrato (buzz calibration), memorize traditional Ge'ez notations, and deliver certified solo public performances before academic peers.
+              {t.journey.phase3Desc}
             </p>
           </div>
         </div>
@@ -354,7 +456,7 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
             variant="secondary"
             onClick={() => onNavigate('courses', { instrument: 'begena' })}
           >
-            EXPLORE BEGENA SYLLABUS DETAIL
+            {t.journey.cta}
           </Button>
         </div>
       </section>
@@ -363,7 +465,7 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
       <section className="space-y-10 max-w-7xl mx-auto text-center">
         <div className="space-y-2">
           <h2 className="font-display font-black text-3xl text-[#2B2B2B] tracking-tight">{t.howItWorksSection.title}</h2>
-          <p className="text-xs sm:text-sm text-[#666666] max-w-sm mx-auto">Five simple milestones to begin practicing traditional instruments with certified masters.</p>
+          <p className="text-xs sm:text-sm text-[#666666] max-w-sm mx-auto">{t.howItWorksSection.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-6 text-left">
@@ -379,7 +481,7 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
           </div>
           <div className="space-y-2">
             <span className="text-2xl font-black text-[#E89B52] font-mono">03</span>
-            <h4 className="text-xs font-bold uppercase">Learning Mode</h4>
+            <h4 className="text-xs font-bold uppercase">{t.howItWorksSection.step3Title}</h4>
             <p className="text-[11px] text-[#666666] leading-relaxed">{t.howItWorksSection.step3Desc}</p>
           </div>
           <div className="space-y-2">
@@ -401,40 +503,39 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
           <div className="lg:col-span-7 space-y-5">
             <span className="text-[9px] font-bold text-[#E89B52] border border-[#E89B52]/30 px-2.5 py-1 rounded-full uppercase tracking-wider">
-              Accessible Globally
+              {t.onlineSection.badge}
             </span>
-            <h3 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">Learn Online with Live Feedback</h3>
+            <h3 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">{t.onlineSection.title}</h3>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              Living outside Addis Ababa or abroad? Our high-end virtual portal delivers professional recorded sessions, downloadable PDFs of Yaredic notations, and live group training via Google Meet. Submit your homework logs and receive personalized, detailed critiques from certified teachers.
+              {t.onlineSection.desc}
             </p>
             <div className="grid grid-cols-2 gap-4 text-xs">
               <div className="flex gap-2 items-center">
-                <span className="text-green-400">✔</span> <span>Weekly Google Meet Rooms</span>
+                <span className="text-green-400">✔</span> <span>{t.onlineSection.f1}</span>
               </div>
               <div className="flex gap-2 items-center">
-                <span className="text-green-400">✔</span> <span>Practice Video Assessments</span>
+                <span className="text-green-400">✔</span> <span>{t.onlineSection.f2}</span>
               </div>
               <div className="flex gap-2 items-center">
-                <span className="text-green-400">✔</span> <span>Notation PDF Downloads</span>
+                <span className="text-green-400">✔</span> <span>{t.onlineSection.f3}</span>
               </div>
               <div className="flex gap-2 items-center">
-                <span className="text-green-400">✔</span> <span>Global Diaspora Alumni Network</span>
+                <span className="text-green-400">✔</span> <span>{t.onlineSection.f4}</span>
               </div>
             </div>
             <Button
               variant="primary"
               onClick={() => onNavigate('courses')}
             >
-              EXPLORE ONLINE CLASSES
+              {t.onlineSection.cta}
             </Button>
           </div>
           <div className="lg:col-span-5 h-64 sm:h-72 rounded-2xl overflow-hidden border border-white/10 shadow-lg relative">
-            {/* Visual representation of online dashboard */}
             <div className="absolute inset-0 bg-gradient-to-tr from-[#6F4E37]/50 via-transparent to-[#E89B52]/20" />
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6 space-y-2">
               <Video size={40} className="text-[#E89B52] animate-pulse" />
-              <p className="font-bold text-sm">Virtual Classroom Demo</p>
-              <p className="text-[11px] text-gray-400">Access streaming tutorials from any browser tab.</p>
+              <p className="font-bold text-sm">{t.onlineSection.demoTitle}</p>
+              <p className="text-[11px] text-gray-400">{t.onlineSection.demoDesc}</p>
             </div>
           </div>
         </div>
@@ -443,54 +544,56 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
       {/* 9. TEACHERS SHOWCASE PREVIEW */}
       <section className="space-y-8 max-w-7xl mx-auto">
         <div className="text-center space-y-2">
-          <h2 className="font-display font-black text-3xl text-[#2B2B2B] tracking-tight">Meet Our Key Instructors</h2>
-          <p className="text-xs sm:text-sm text-[#666666]">Our faculty includes active research authors, classical recital vocalists, and liturgical deacons.</p>
+          <h2 className="font-display font-black text-3xl text-[#2B2B2B] tracking-tight">{t.teachersSection.title}</h2>
+          <p className="text-xs sm:text-sm text-[#666666]">{t.teachersSection.subtitle}</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TEACHERS_DATA.slice(0, 3).map((t) => (
-            <div
-              key={t.id}
-              className="bg-white border border-[#E7DED1] rounded-2xl overflow-hidden shadow-xs card-interactive flex flex-col group text-left justify-between h-full"
-            >
-              <div>
-                <div className="h-44 overflow-hidden relative img-zoom-wrapper">
-                  {t.photo ? (
-                    <img
-                      src={t.photo}
-                      alt={t.name}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out"
-                      referrerPolicy="no-referrer"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-[#3B2818] text-[#E89B52] font-black text-2xl flex items-center justify-center">
-                      {t.name?.charAt(0) || 'T'}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {TEACHERS_DATA.slice(0, 4).map((teacher) => {
+            const locTeacher = getLocalizedTeacher(teacher, lang);
+            return (
+              <div
+                key={teacher.id}
+                className="bg-white border border-[#E7DED1] rounded-2xl overflow-hidden shadow-xs card-interactive flex flex-col group text-left justify-between h-full"
+              >
+                <div>
+                  <div className="h-44 overflow-hidden relative img-zoom-wrapper">
+                    {locTeacher.photo ? (
+                      <img
+                        src={locTeacher.photo}
+                        alt={locTeacher.name}
+                        className="w-full h-full object-cover transition-transform duration-500 ease-out"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-[#3B2818] text-[#E89B52] font-black text-2xl flex items-center justify-center">
+                        {locTeacher.name?.charAt(0) || 'T'}
+                      </div>
+                    )}
+                    <div className="absolute top-3 right-3 bg-[#2B2B2B]/90 backdrop-blur-xs text-white px-2.5 py-0.5 rounded-full text-[9px] font-bold border border-[#C79A2B]/40 uppercase tracking-wider shadow-sm">
+                      {locTeacher.instrument}
                     </div>
-                  )}
-                  <div className="absolute top-3 right-3 bg-[#2B2B2B]/90 backdrop-blur-xs text-white px-2.5 py-0.5 rounded-full text-[9px] font-bold border border-[#C79A2B]/40 uppercase tracking-wider shadow-sm">
-                    {t.instrument}
+                  </div>
+                  <div className="p-5 space-y-2">
+                    <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-[#E89B52] transition-colors">{locTeacher.name}</h3>
+                    <p className="text-[10px] text-[#E89B52] font-bold uppercase">{locTeacher.specialization.split(',')[0]}</p>
+                    <p className="text-xs text-[#666666] leading-relaxed line-clamp-3">{locTeacher.bio}</p>
                   </div>
                 </div>
-                <div className="p-5 space-y-2">
-                  <h3 className="text-sm font-bold text-[#2B2B2B] group-hover:text-[#E89B52] transition-colors">{t.name}</h3>
-                  <p className="text-[10px] text-[#E89B52] font-bold uppercase">{t.specialization.split(',')[0]}</p>
-                  <p className="text-xs text-[#666666] leading-relaxed line-clamp-3">{t.bio}</p>
+
+                <div className="p-5 pt-0 border-t border-[#FAF6EF]">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="w-full text-xs font-bold uppercase mt-2"
+                    onClick={() => onNavigate('teacher-profile', { teacherId: locTeacher.id })}
+                  >
+                    {t.teachersSection.viewProfile}
+                  </Button>
                 </div>
               </div>
-
-
-              <div className="p-5 pt-0 border-t border-[#FAF6EF]">
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="w-full text-xs font-bold uppercase mt-2"
-                  onClick={() => onNavigate('teacher-profile', { teacherId: t.id })}
-                >
-                  VIEW PROFILE
-                </Button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="text-center">
@@ -498,7 +601,7 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
             variant="secondary"
             onClick={() => onNavigate('teachers')}
           >
-            MEET ALL FACULTY MEMBERS
+            {t.teachersSection.viewAll}
           </Button>
         </div>
       </section>
@@ -506,12 +609,12 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
       {/* 10. REALISTIC DIASPORA TESTIMONIALS */}
       <section className="bg-white border border-[#E7DED1] rounded-3xl p-6 sm:p-10 max-w-7xl mx-auto text-left space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="font-display font-black text-2xl sm:text-3xl text-[#2B2B2B]">Student Success Journeys</h2>
-          <p className="text-xs sm:text-sm text-[#666666]">Read verified reviews from local and international diaspora pupils studying under our deans.</p>
+          <h2 className="font-display font-black text-2xl sm:text-3xl text-[#2B2B2B]">{t.testimonialsSection.title}</h2>
+          <p className="text-xs sm:text-sm text-[#666666]">{t.testimonialsSection.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TESTIMONIALS_DATA.map((test) => (
+          {localizedTestimonials.map((test) => (
             <div key={test.id} className="border border-[#E7DED1] p-5 rounded-2xl bg-[#FAF6EF]/10 space-y-4 flex flex-col justify-between h-full">
               <p className="text-xs text-[#666666] italic leading-relaxed">
                 “{test.text}”
@@ -538,8 +641,8 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
       <section className="space-y-6 max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-center text-left gap-4">
           <div>
-            <h2 className="font-display font-black text-2xl sm:text-3xl text-[#2B2B2B] tracking-tight">Our Media Gallery</h2>
-            <p className="text-xs text-[#666666]">Visual moments from inside our practice workshops, instrument setups, and local festivals.</p>
+            <h2 className="font-display font-black text-2xl sm:text-3xl text-[#2B2B2B] tracking-tight">{t.gallerySection.title}</h2>
+            <p className="text-xs text-[#666666]">{t.gallerySection.subtitle}</p>
           </div>
           <Button
             variant="secondary"
@@ -547,60 +650,86 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
             onClick={() => onNavigate('gallery')}
             rightIcon={<ChevronRight size={12} />}
           >
-            VIEW FULL media GALLERY
+            {t.gallerySection.viewAll}
           </Button>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {GALLERY_DATA.slice(0, 4).map((item) => (
-            <div
-              key={item.id}
-              onClick={() => onNavigate('gallery')}
-              className="h-44 sm:h-52 rounded-xl overflow-hidden border border-[#E7DED1] cursor-pointer relative group"
-            >
-              <img
-                src={item.url}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-200"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 text-left" />
-            </div>
-          ))}
-        </div>
+        {GALLERY_DATA.length === 0 ? (
+          <div className="text-center py-12 px-4 bg-white border border-[#E7DED1] rounded-2xl space-y-2">
+            <p className="font-display font-bold text-sm text-[#2B2B2B]">
+              {lang === 'am' ? 'የማዕከለ-ስዕላት ፎቶዎች በቅርቡ ይጫናሉ' : 'Media Gallery Pictures Coming Soon'}
+            </p>
+            <p className="text-xs text-[#666666]">
+              {lang === 'am' ? 'አዳዲስ የተቀረጹ ፎቶዎችና የክንዋኔ ምስሎች በማዕከለ-ስዕላቱ ይካተታሉ' : 'Fresh recital and classroom moments will be featured here soon'}
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {GALLERY_DATA.slice(0, 4).map((item) => (
+              <div
+                key={item.id}
+                onClick={() => onNavigate('gallery')}
+                className="h-44 sm:h-52 rounded-xl overflow-hidden border border-[#E7DED1] cursor-pointer relative group"
+              >
+                <img
+                  src={item.url}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-200"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 text-left" />
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* 12. STORE PREVIEW PANEL */}
       <section className="bg-[#FAF6EF]/60 border border-[#E7DED1] rounded-3xl p-6 sm:p-10 max-w-7xl mx-auto text-left space-y-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="space-y-1">
-            <span className="text-[9px] font-bold uppercase text-[#C79A2B] tracking-widest">Handcrafted Instruments</span>
-            <h3 className="font-display font-black text-xl sm:text-2xl text-[#2B2B2B]">Abel Signature Store Preview</h3>
-            <p className="text-xs text-[#666666]">Aquire certified traditional gut strings, sustainably harvested bamboo flutes, and hand-carved olive wood lyres.</p>
+            <span className="text-[9px] font-bold uppercase text-[#C79A2B] tracking-widest">{t.storeSection.badge}</span>
+            <h3 className="font-display font-black text-xl sm:text-2xl text-[#2B2B2B]">{t.storeSection.title}</h3>
+            <p className="text-xs text-[#666666]">{t.storeSection.subtitle}</p>
           </div>
           <div className="bg-yellow-100 text-yellow-800 border border-yellow-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-            Store Launching Soon
+            {t.storeSection.status}
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {PRODUCTS_DATA.slice(0, 3).map((p) => (
-            <div key={p.id} className="bg-white border border-[#E7DED1] rounded-2xl p-4 space-y-3 shadow-3xs text-left">
-              <div className="h-40 rounded-xl overflow-hidden border border-[#FAF6EF] flex items-center justify-center bg-white">
-                <img src={p.image} alt={p.name} className="w-full h-full object-contain object-center" referrerPolicy="no-referrer" />
+            <div
+              key={p.id}
+              onClick={() => setIsStoreComingSoonOpen(true)}
+              className="bg-white border border-[#E7DED1] rounded-2xl p-4 space-y-3 shadow-3xs text-left cursor-pointer hover:border-[#6F4E37]/60 hover:shadow-sm transition-all group"
+            >
+              <div className="h-40 rounded-xl overflow-hidden border border-[#FAF6EF] flex flex-col items-center justify-center bg-gradient-to-br from-[#FAF6EF] via-white to-[#F5ECE0] relative p-4 text-center">
+                <div className="w-14 h-14 rounded-2xl bg-amber-100/90 text-[#E89B52] flex items-center justify-center mb-2 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                  <Music size={26} className="text-[#E89B52]" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#6F4E37]">
+                  {lang === 'am' ? 'በእደ-ጥበብ ዝግጅት ላይ' : 'Handcrafted Sacred Instrument'}
+                </span>
+                <span className="absolute top-2 right-2 text-[9px] font-extrabold uppercase bg-amber-100 text-amber-800 border border-amber-300 px-2 py-0.5 rounded-full shadow-2xs">
+                  {lang === 'am' ? 'በቅርቡ' : 'Soon'}
+                </span>
               </div>
-              <div className="space-y-1">
-                <h4 className="text-xs font-bold text-[#2B2B2B] line-clamp-1">{p.name}</h4>
-                <p className="text-xs text-[#C79A2B] font-black">{p.price} ETB</p>
-                <p className="text-[10px] text-gray-400">{p.availability}</p>
+              <div className="py-2.5 text-center flex items-center justify-center">
+                <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50/80 border border-amber-200">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                  <span className="text-xs font-black uppercase tracking-wider text-[#6F4E37]">
+                    {lang === 'am' ? 'በቅርቡ ይጠብቁን' : 'Coming Soon'}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         <div className="pt-2 text-center">
-          <Button variant="ghost" className="text-xs font-bold uppercase text-gray-500" onClick={() => onNavigate('store')}>
-            VIEW FULL INVENTORY (PREVIEW)
+          <Button variant="ghost" className="text-xs font-bold uppercase text-gray-500 hover:text-[#6F4E37]" onClick={() => setIsStoreComingSoonOpen(true)}>
+            {t.storeSection.viewAll}
           </Button>
         </div>
       </section>
@@ -608,8 +737,8 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
       {/* 13. FREQUENTLY ASKED QUESTIONS */}
       <section className="max-w-4xl mx-auto text-left space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="font-display font-black text-2xl sm:text-3xl text-[#2B2B2B] tracking-tight">Frequently Asked Questions</h2>
-          <p className="text-xs sm:text-sm text-[#666666]">Common inquiries regarding admission timelines, payment methods, and virtual support classes.</p>
+          <h2 className="font-display font-black text-2xl sm:text-3xl text-[#2B2B2B] tracking-tight">{t.faqSection.title}</h2>
+          <p className="text-xs sm:text-sm text-[#666666]">{t.faqSection.subtitle}</p>
         </div>
 
         <div className="space-y-3.5">
@@ -637,13 +766,13 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
         <div className="absolute inset-0 opacity-[0.05] bg-dot-pattern pointer-events-none" />
         <div className="max-w-2xl mx-auto space-y-6 relative z-10">
           <span className="text-[10px] font-bold text-[#E89B52] uppercase tracking-widest bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full inline-block">
-            Traditional Musical Heritage Foundation
+            {t.ctaSection.badge}
           </span>
           <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight leading-tight">
-            Your Master Class Journey Begins Here.
+            {t.ctaSection.title}
           </h2>
           <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-md mx-auto">
-            Learn the sound of ancient saints. Master your traditional instruments. Connect with global pupils and preserve Ethiopian musical heritage.
+            {t.ctaSection.subtitle}
           </p>
           <div className="flex flex-wrap gap-4 justify-center pt-2">
             <Button
@@ -651,7 +780,7 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
               size="lg"
               onClick={handleStartLearningClick}
             >
-              {t.hero.primaryCTA}
+              {t.ctaSection.primaryCTA}
             </Button>
             <Button
               variant="secondary"
@@ -659,11 +788,28 @@ export function Homepage({ lang, onNavigate, onOpenAuth }: HomepageProps) {
               className="bg-white text-[#2B2B2B] border border-[#E7DED1] hover:bg-[#FAF6EF] hover:text-[#2B2B2B]"
               onClick={() => onNavigate('courses')}
             >
-              {t.hero.secondaryCTA}
+              {t.ctaSection.secondaryCTA}
             </Button>
           </div>
         </div>
       </section>
+
+      {/* Course Coming Soon Modal */}
+      <CourseComingSoonModal
+        course={comingSoonCourse}
+        isOpen={Boolean(comingSoonCourse)}
+        onClose={() => setComingSoonCourse(null)}
+        onSelectActiveCourse={(id) => onNavigate('course-detail', { courseId: id })}
+        lang={lang}
+      />
+
+      {/* Store Coming Soon Modal */}
+      <StoreComingSoonModal
+        isOpen={isStoreComingSoonOpen}
+        onClose={() => setIsStoreComingSoonOpen(false)}
+        onNavigateCourses={() => onNavigate('courses')}
+        lang={lang}
+      />
     </div>
   );
 }

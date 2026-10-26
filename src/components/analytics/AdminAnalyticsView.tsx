@@ -91,7 +91,7 @@ export function AdminAnalyticsView({ lang, onNavigate }: AdminAnalyticsViewProps
             <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl space-y-1 shadow-xs">
               <span className="text-[10px] text-gray-500 font-mono uppercase block">Active Instructors</span>
               <span className="font-display font-black text-2xl text-[#2B2B2B]">24 Teachers</span>
-              <span className="text-[10px] text-gray-500 block">3 Campuses + Online</span>
+              <span className="text-[10px] text-gray-500 block">Hawassa Main Branch + Online</span>
             </div>
 
             <div className="bg-white border border-[#E7DED1] p-4 rounded-2xl space-y-1 shadow-xs">

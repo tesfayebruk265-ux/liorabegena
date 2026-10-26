@@ -1119,7 +1119,7 @@ export function getAllProgressEvaluations(): StudentProgressEvaluation[] {
       studentName: 'Kirar Student',
       enrollmentId: 'ENR-001',
       teacherId: 't1',
-      teacherName: 'Alex T',
+      teacherName: 'Seyfu T.',
       courseId: 'krar',
       instrument: 'Kirar',
       level: 'Basic Level 1',

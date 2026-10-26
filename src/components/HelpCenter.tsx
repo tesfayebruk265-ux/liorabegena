@@ -22,12 +22,12 @@ export const HelpCenter: React.FC<HelpCenterProps> = ({ onNavigate }) => {
     {
       id: 'FAQ-01',
       question: 'How do I register and enroll in a Begena or Kebero course?',
-      answer: 'Click "Enroll Now" or "Student Registration" on the homepage. Complete the student information form, select your course level and preferred branch (Piazza, Megenagna, or Lebu), choose your class schedule, and submit payment via Telebirr, CBE, or Cash.',
+      answer: 'Click "Enroll Now" or "Student Registration" on the homepage. Complete the student information form, select your course level and learning mode (Hawassa main Branch or Online Campus), choose your class schedule, and submit payment via Telebirr, CBE, or Cash.',
       category: 'Registration & Enrollment'
     },
     {
       id: 'FAQ-02',
-      question: 'What payment options are accepted by Abel Begena School?',
+      question: 'What payment options are accepted by Liora Begena School?',
       answer: 'We accept Telebirr instant checkout, Commercial Bank of Ethiopia (CBE) direct transfers, and Cash payments at any of our branch cashier offices. Payment receipts are verified by our accounting team within 2 hours.',
       category: 'Payments & Tuition'
     },
@@ -74,7 +74,7 @@ export const HelpCenter: React.FC<HelpCenterProps> = ({ onNavigate }) => {
       {/* Help Hero Header */}
       <div className="bg-amber-900 text-amber-50 rounded-2xl p-8 shadow-md border border-amber-800 text-center space-y-3 relative overflow-hidden">
         <span className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-amber-800/80 rounded-full text-xs font-bold text-amber-200 border border-amber-700">
-          <HelpCircle className="w-4 h-4 text-amber-300" /> Abel Begena Student & Staff Help Center
+          <HelpCircle className="w-4 h-4 text-amber-300" /> Liora Begena Student & Staff Help Center
         </span>
         <h1 className="text-3xl font-extrabold text-white">How Can We Support Your Musical & Academic Journey?</h1>
         <p className="text-xs text-amber-200 max-w-2xl mx-auto">

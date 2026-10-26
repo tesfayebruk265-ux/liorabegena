@@ -296,7 +296,7 @@ export function StoreOrdersView({
             <div className="bg-white border border-[#E7DED1] rounded-3xl max-w-2xl w-full p-8 space-y-6 shadow-2xl relative my-8">
               <div className="flex justify-between items-start border-b border-[#E7DED1] pb-4">
                 <div>
-                  <h2 className="font-display font-black text-2xl text-[#2B2B2B]">ABEL BEGENA SCHOOL</h2>
+                  <h2 className="font-display font-black text-2xl text-[#2B2B2B]">LIORA BEGENA SCHOOL</h2>
                   <p className="text-xs text-gray-500 font-mono">OFFICIAL ACADEMY STORE INVOICE & RECEIPT</p>
                 </div>
                 <button

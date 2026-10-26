@@ -31,8 +31,8 @@ const SAMPLE_INVENTORY: InventoryItem[] = [
     category: 'Instruments',
     instrumentType: 'Begena',
     serialNumber: 'AB-BEG-2026-001',
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     condition: 'Excellent',
     quantity: 12,
     minThreshold: 3,
@@ -44,8 +44,8 @@ const SAMPLE_INVENTORY: InventoryItem[] = [
     name: 'Gut String Set for 10-String Begena',
     category: 'Strings',
     instrumentType: 'Begena',
-    branchId: 'b-[#2B2B2B]e',
-    branchName: 'Megenagna Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     condition: 'Excellent',
     quantity: 2,
     minThreshold: 5,
@@ -58,8 +58,8 @@ const SAMPLE_INVENTORY: InventoryItem[] = [
     category: 'Instruments',
     instrumentType: 'Krar',
     serialNumber: 'AB-KRR-2026-014',
-    branchId: 'b-lebu',
-    branchName: 'Lebu Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     condition: 'Needs Maintenance',
     quantity: 8,
     minThreshold: 2,
@@ -77,8 +77,8 @@ const SAMPLE_STORE_PRODUCTS: StoreProduct[] = [
     description: 'Authentic traditional ox-gut strings prepared by master craftsmen for optimal sacred resonance.',
     priceETB: 450,
     stockQuantity: 25,
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     imageUrl: STORE_IMAGE_2,
     status: 'In Stock'
   },
@@ -90,8 +90,8 @@ const SAMPLE_STORE_PRODUCTS: StoreProduct[] = [
     description: 'Carved from seasoned Wanza wood with traditional leather soundboard membrane.',
     priceETB: 18500,
     stockQuantity: 4,
-    branchId: 'b-piazza',
-    branchName: 'Piazza Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     imageUrl: STORE_IMAGE_1,
     status: 'Low Stock'
   },
@@ -103,8 +103,8 @@ const SAMPLE_STORE_PRODUCTS: StoreProduct[] = [
     description: 'High-tension nylon string set designed for clear, articulate Krar melodies.',
     priceETB: 280,
     stockQuantity: 40,
-    branchId: 'b-[#2B2B2B]e',
-    branchName: 'Megenagna Branch',
+    branchId: 'b-hawassa',
+    branchName: 'Hawassa main Branch',
     imageUrl: STORE_IMAGE_3,
     status: 'In Stock'
   }
@@ -177,7 +177,7 @@ export function InventoryAndStoreCenter({ lang, onNavigate, activeMode = 'invent
           </div>
 
           <h1 className="font-display font-black text-2xl sm:text-3xl text-white tracking-wide uppercase">
-            {mode === 'inventory' ? 'SCHOOL INVENTORY & INSTRUMENT ASSET CONTROL' : 'ABEL BEGENA OFFICIAL STORE'}
+            {mode === 'inventory' ? 'SCHOOL INVENTORY & INSTRUMENT ASSET CONTROL' : 'LIORA BEGENA OFFICIAL STORE'}
           </h1>
           <p className="text-xs sm:text-sm text-gray-300 max-w-2xl leading-relaxed">
             {mode === 'inventory'

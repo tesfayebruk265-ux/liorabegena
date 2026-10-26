@@ -1127,10 +1127,8 @@ export function AttendanceManagementCenter({
                   onChange={e => setSelectedBranch(e.target.value)}
                   className="w-full p-2.5 border border-[#E7DED1] rounded-xl bg-white font-bold text-xs"
                 >
-                  <option value="All">All Campus Branches</option>
-                  <option value="Piazza Branch">Piazza Branch</option>
-                  <option value="Megenagna Branch">Megenagna Branch</option>
-                  <option value="Lebu Branch">Lebu Branch</option>
+                  <option value="All">All Locations</option>
+                  <option value="Hawassa main Branch">Hawassa main Branch (Center Point Tower)</option>
                   <option value="Online">Online / Virtual Gate</option>
                 </select>
               </div>
@@ -1164,7 +1162,7 @@ export function AttendanceManagementCenter({
                   className="w-full p-2.5 border border-[#E7DED1] rounded-xl bg-white font-bold text-xs"
                 >
                   <option value="All">All Teachers</option>
-                  <option value="Abel">Lique Mezemer Abel</option>
+                  <option value="Bruk">Lique Mezemer Bruk</option>
                   <option value="Samuel">Teacher Samuel</option>
                   <option value="Tigist">Teacher Tigist</option>
                   <option value="Bruk">Teacher Bruk</option>

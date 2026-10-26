@@ -132,7 +132,7 @@ export function StoreFront({
     setDetailProduct(p);
     setSelectedImageIndex(0);
     setSelectedVariantId(p.variants?.[0]?.id || '');
-    setSelectedBranchId(p.branchStock.find((b) => b.quantity > 0)?.branchId || 'b-piazza');
+    setSelectedBranchId(p.branchStock.find((b) => b.quantity > 0)?.branchId || 'b-hawassa');
     setQuantity(1);
   };
 
@@ -184,7 +184,7 @@ export function StoreFront({
         <div className="relative z-10 space-y-4 max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E89B52]/20 border border-[#E89B52]/40 text-[#E89B52] text-xs font-bold uppercase tracking-widest">
             <ShoppingBag size={14} />
-            <span>Abel Begena Official Instrument & Supply Store</span>
+            <span>Liora Begena Official Instrument & Supply Store</span>
           </div>
 
           <h1 className="font-display font-black text-2xl sm:text-4xl text-white tracking-wide uppercase leading-tight">
@@ -202,7 +202,7 @@ export function StoreFront({
             </div>
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/20 text-amber-200">
               <Building2 size={14} className="text-amber-400" />
-              <span>Pickup at Piazza, Megenagna & Lebu</span>
+              <span>Pickup at Hawassa Main Branch</span>
             </div>
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 border border-white/20 text-amber-200">
               <Truck size={14} className="text-amber-400" />
@@ -311,10 +311,8 @@ export function StoreFront({
                 onChange={(e) => setSelectedBranch(e.target.value)}
                 className="bg-transparent font-medium border-none text-[#2B2B2B] focus:ring-0 text-xs p-0 cursor-pointer"
               >
-                <option value="All">All Campuses & Warehouse</option>
-                <option value="Piazza">Piazza Campus</option>
-                <option value="Megenagna">Megenagna Campus</option>
-                <option value="Lebu">Lebu Campus</option>
+                <option value="All">All Locations & Warehouse</option>
+                <option value="Hawassa">Hawassa Main Branch</option>
               </select>
             </div>
 
@@ -407,68 +405,31 @@ export function StoreFront({
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-[10px] text-gray-500 font-mono">
                       <span className="uppercase text-[#E89B52] font-bold">{p.category}</span>
-                      <span>SKU: {p.sku}</span>
-                    </div>
+                      </div>
 
                     <h3 className="font-display font-black text-base text-[#2B2B2B] leading-tight line-clamp-2">
-                      {p.name}
+                      {lang === 'am' ? 'በቅርቡ ይጠብቁን' : 'Coming Soon'}
                     </h3>
 
                     <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
                       {p.description}
                     </p>
 
-                    {/* RATING */}
-                    <div className="flex items-center gap-1.5 text-xs text-amber-500">
-                      <Star size={14} className="fill-current" />
-                      <span className="font-black text-[#2B2B2B]">{p.rating.toFixed(1)}</span>
-                      <span className="text-gray-400 text-[10px]">({p.reviewCount} reviews)</span>
-                    </div>
-
-                    {/* BRANCH STOCK BADGES */}
+                    {/* STATUS */}
                     <div className="pt-2 flex flex-wrap gap-1.5 text-[10px]">
-                      {p.branchStock.map((b) => (
-                        <span
-                          key={b.branchId}
-                          className={`px-2 py-0.5 rounded-md font-mono font-bold ${
-                            b.quantity > 0
-                              ? 'bg-emerald-50 text-emerald-900 border border-emerald-200'
-                              : 'bg-stone-100 text-stone-400 border border-stone-200 line-through'
-                          }`}
-                        >
-                          {b.branchName.replace(' Branch', '')}: {b.quantity > 0 ? `${b.quantity} in stock` : 'Out'}
-                        </span>
-                      ))}
+                      <span className="px-2 py-0.5 rounded-md font-mono font-bold bg-amber-50 text-amber-900 border border-amber-200">
+                        {lang === 'am' ? 'በቅርቡ የሚቀርብ' : 'Coming Soon'}
+                      </span>
                     </div>
                   </div>
 
                   {/* PRICE & ACTION */}
                   <div className="pt-3 border-t border-[#E7DED1] flex items-center justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] text-gray-400 uppercase font-mono block">Price</span>
-                      <span className="font-display font-black text-lg text-[#2B2B2B]">
-                        {p.priceETB.toLocaleString()} <span className="text-xs font-bold text-[#E89B52]">ETB</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                      <span className="font-display font-black text-xs text-[#E89B52] uppercase tracking-wider">
+                        {lang === 'am' ? 'በቅርቡ ይጠብቁን' : 'Coming Soon'}
                       </span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => handleOpenDetail(p)}
-                        className="p-2.5 rounded-xl bg-[#FAF6EF] hover:bg-[#E7DED1] text-[#2B2B2B] transition cursor-pointer"
-                        title="View Full Specifications"
-                      >
-                        <Eye size={16} />
-                      </button>
-
-                      <Button
-                        variant="primary"
-                        size="sm"
-                        onClick={() => onAddToCart(p, 1)}
-                        className="flex items-center gap-1.5 text-xs"
-                      >
-                        <ShoppingBag size={14} />
-                        <span>Add</span>
-                      </Button>
                     </div>
                   </div>
                 </div>
@@ -533,10 +494,10 @@ export function StoreFront({
                   <div className="p-3 bg-white rounded-xl border border-[#E7DED1] text-[11px] text-gray-600 space-y-1">
                     <div className="font-bold text-[#2B2B2B] flex items-center gap-1.5">
                       <ShieldCheck size={14} className="text-emerald-600" />
-                      <span>Certified Abel Begena Guarantee</span>
+                      <span>Certified Liora Begena Guarantee</span>
                     </div>
                     <p className="text-gray-500">
-                      Hand-inspected at our Piazza master workshop before release.
+                      Hand-inspected at our Hawassa master workshop before release.
                     </p>
                   </div>
                 </div>

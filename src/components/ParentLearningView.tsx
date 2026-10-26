@@ -78,13 +78,13 @@ export function ParentLearningView({ lang, onNavigate }: ParentLearningViewProps
         <div className="p-5 bg-white border border-[#E7DED1] rounded-2xl space-y-1">
           <span className="text-[10px] font-bold text-gray-500 uppercase block">Class Attendance</span>
           <div className="font-display font-black text-2xl text-green-700">100%</div>
-          <span className="text-[10px] text-gray-500">Bole Branch & Online</span>
+          <span className="text-[10px] text-gray-500">Hawassa main Branch & Online</span>
         </div>
 
         <div className="p-5 bg-white border border-[#E7DED1] rounded-2xl space-y-1">
           <span className="text-[10px] font-bold text-gray-500 uppercase block">Teacher Feedback Score</span>
           <div className="font-display font-black text-2xl text-[#E89B52]">92 / 100</div>
-          <span className="text-[10px] text-gray-500">Evaluated by Abel Begena</span>
+          <span className="text-[10px] text-gray-500">Evaluated by Liora Begena</span>
         </div>
       </div>
 
@@ -97,7 +97,7 @@ export function ParentLearningView({ lang, onNavigate }: ParentLearningViewProps
         <p className="text-xs text-gray-700 leading-relaxed italic bg-[#FAF6EF] p-4 rounded-2xl border border-[#E7DED1]">
           "Yonas is demonstrating exceptional discipline with his Begena practice! His left thumb placement is steady and his string tuning is remarkably accurate. Keep encouraging his daily 30-minute sessions."
         </p>
-        <span className="text-[10px] font-bold text-gray-500 block text-right">— Teacher Abel Begena</span>
+        <span className="text-[10px] font-bold text-gray-500 block text-right">— Teacher Liora Begena</span>
       </div>
     </div>
   );
