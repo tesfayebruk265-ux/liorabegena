@@ -403,6 +403,7 @@ export type PageId =
   | 'profile'
   | 'notifications'
   | 'student-registration'
+  | 'explore-begena'
   | 'student'
   | 'parent'
   | 'teacher'

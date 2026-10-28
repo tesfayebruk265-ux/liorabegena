@@ -110,6 +110,7 @@ import { QuizAndAssessmentCenter } from './components/QuizAndAssessmentCenter';
 import { LiveClassesCenter } from './components/LiveClassesCenter';
 import { LmsTeacherAdminCenter } from './components/LmsTeacherAdminCenter';
 import { ParentLearningView } from './components/ParentLearningView';
+import { ExploreBegenaPage } from './components/begena/ExploreBegenaPage';
 
 // Phase 12 Operations Integrations
 import { OperationsCenter } from './components/operations/OperationsCenter';
@@ -428,6 +429,17 @@ function AppContent() {
       addNotification(
         'Authentication Required',
         'Please log in to access the protected dashboard portals.',
+        'system'
+      );
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (targetPage === 'explore-begena' && !activeUser) {
+      setActivePage('login');
+      addNotification(
+        'Authentication Required',
+        'Please log in to access the Explore Begena 3D explorer.',
         'system'
       );
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -824,6 +836,9 @@ function AppContent() {
                   <>
                     <button onClick={() => navigateTo('student')} className={`px-2.5 py-1.5 rounded-md hover:text-[#E89B52] transition-colors cursor-pointer ${activePage === 'student' ? 'text-[#E89B52] font-black' : ''}`}>
                       Dashboard
+                    </button>
+                    <button onClick={() => navigateTo('explore-begena')} className={`px-2.5 py-1.5 rounded-md hover:text-[#E89B52] transition-colors cursor-pointer ${activePage === 'explore-begena' ? 'text-[#E89B52] font-black' : ''}`}>
+                      {lang === 'am' ? 'በገናን ያስሱ' : 'Explore Begena'}
                     </button>
                     <button onClick={() => navigateTo('learn')} className={`px-2.5 py-1.5 rounded-md hover:text-[#E89B52] transition-colors cursor-pointer ${activePage === 'learn' ? 'text-[#E89B52] font-black' : ''}`}>
                       My Learning
@@ -1646,6 +1661,11 @@ function AppContent() {
               {activePage === 'student' && (
                 <motion.div key="student" className="w-full">
                   <StudentDashboard lang={lang} onNavigate={navigateTo} />
+                </motion.div>
+              )}
+              {activePage === 'explore-begena' && (
+                <motion.div key="explore-begena" className="w-full">
+                  <ExploreBegenaPage lang={lang} onNavigate={navigateTo} />
                 </motion.div>
               )}
               {activePage === 'parent' && (

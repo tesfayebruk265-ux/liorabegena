@@ -33,7 +33,8 @@ export const TRANSLATIONS = {
       login: 'Login',
       register: 'Get started',
       search: 'Search...',
-      designSystem: 'Design System Portal'
+      designSystem: 'Design System Portal',
+      exploreBegena: 'Explore the Begena'
     },
     hero: {
       eyebrow: 'TRADITIONAL ETHIOPIAN BEGENA SCHOOL',
@@ -385,7 +386,8 @@ export const TRANSLATIONS = {
       login: 'ግባ',
       register: 'መማር ይጀምሩ',
       search: 'ይፈልጉ...',
-      designSystem: 'የዲዛይን ስርዓት'
+      designSystem: 'የዲዛይን ስርዓት',
+      exploreBegena: 'በገናን ያስሱ'
     },
     hero: {
       eyebrow: 'የኢትዮጵያ ታላቅ የበገና ትምህርት ቤት',

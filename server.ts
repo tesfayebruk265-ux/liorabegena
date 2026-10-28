@@ -15,7 +15,6 @@ import {
   saveChatAttachment,
   ChatUserRole
 } from "./server/chatStore";
-import dotenv from "dotenv";
 import {
   startTelegramBot,
   registerPendingVerification,

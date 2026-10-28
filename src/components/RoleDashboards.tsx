@@ -376,6 +376,13 @@ export function StudentDashboard({ onNavigate, lang }: DashboardProps) {
               <div className="flex flex-wrap items-center gap-1.5 pt-1 justify-start sm:justify-end w-full">
                 <ThemeToggle variant="pill" />
                 <button
+                  onClick={() => onNavigate('explore-begena')}
+                  className="px-2.5 py-1 bg-amber-700 hover:bg-amber-800 text-white rounded text-[11px] font-bold transition shadow-xs flex items-center gap-1 cursor-pointer"
+                  title="Explore the Begena | በገናን ያስሱ"
+                >
+                  <span>✨ {lang === 'am' ? 'በገናን ያስሱ' : 'Explore the Begena'}</span>
+                </button>
+                <button
                   onClick={() => onNavigate('learn')}
                   className="px-2.5 py-1 bg-[#E89B52] hover:bg-amber-600 text-white rounded text-[11px] font-bold transition shadow-xs cursor-pointer"
                 >
@@ -440,12 +447,19 @@ export function StudentDashboard({ onNavigate, lang }: DashboardProps) {
               { id: 'overview', label: 'Ecosystem Status' },
               { id: 'courses', label: 'Classroom & Lessons', locked: !isPaymentVerified },
               { id: 'practice', label: 'Practice Tracker', locked: !isPaymentVerified },
+              { id: 'explore-begena', label: lang === 'am' ? 'በገናን ያስሱ' : 'Explore the Begena' },
               { id: 'payments', label: 'Tuition & Billing' },
               { id: 'certificates', label: 'Certificates' }
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => {
+                  if (tab.id === 'explore-begena') {
+                    onNavigate('explore-begena');
+                  } else {
+                    setActiveTab(tab.id as any);
+                  }
+                }}
                 className={`px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all border-b-2 whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
                   activeTab === tab.id
                     ? 'border-[#E89B52] text-[#2B2B2B] dark:text-[#F8F9FA] bg-[#FAF6EF]/50 dark:bg-[#1E1E24]'
